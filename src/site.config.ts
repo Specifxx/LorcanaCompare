@@ -12,7 +12,7 @@ export const SITE: SiteConfig = {
   wordmark: ["LORCANA", "COMPARE"],
   game: "Disney Lorcana",
   gameShort: "Lorcana",
-  domain: "lorcanacompare.app",
+  domain: "lorcanacompare.com",
   tagline: "Compare Disney Lorcana card prices across every store",
   description:
     "Free Disney Lorcana price comparison: live prices for every Lorcana card and sealed product across TCGplayer, eBay and local game stores in the US, UK, Canada, Australia and the EU.",
@@ -66,7 +66,7 @@ export const SITE: SiteConfig = {
   sisterSites: [
     { name: "Rift Compare", url: "https://riftcompare.com", game: "Riftbound" },
     { name: "OP Compare", url: "https://opcompare.app", game: "One Piece" },
-    { name: "Gundam Compare", url: "https://gundamcompare.app", game: "Gundam" },
+    { name: "Gundam Compare", url: "https://gundamcompare.com", game: "Gundam" },
     { name: "DexCompare", url: "https://www.dexcompare.app", game: "Pokémon" },
     { name: "MTG Compare", url: "https://mtgcompare.app", game: "Magic" },
   ],

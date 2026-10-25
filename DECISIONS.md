@@ -112,3 +112,17 @@ store's own country (`countryOf`, eurozone → ES as on Rift Compare).
 Not yet covered: big non-Shopify US stores (CoolStuffInc, Star City Games,
 Troll and Toad, GameNerdz). Each needs its own scraper, and several sit behind
 Cloudflare challenges.
+
+## Domains are .com; eBay account deletion is a real endpoint — 2026-10-25
+
+**Owner:** "Lorcanacompare.com and Gundam compare.com are both domains that I
+just now bought in Vercel." `SITE.domain` and every link moved from the
+planned `.app` names. The sister-site links point at the .com domains; Rift
+Compare's own footer was not touched (owner: don't edit Rift Compare).
+
+eBay disables a production keyset until the app handles Marketplace Account
+Deletion notifications. Rather than file the exemption, both sites serve
+`/api/ebay/account-deletion`: GET answers eBay's challenge with
+sha256(challenge_code + EBAY_VERIFICATION_TOKEN + endpoint URL), POST
+acknowledges a notice with 200. No eBay user data is stored, so there is
+nothing to delete. The shared app registers the Lorcana site's endpoint only.

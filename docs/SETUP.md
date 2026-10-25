@@ -4,15 +4,17 @@ The fast path is `docs/CHROME-SETUP-PROMPT.md`: paste it into Claude in Chrome
 and it does steps 2–10 for both sites. This file is the same list, written for a
 human.
 
-1. **Domains.** Buy `lorcanacompare.app` and `gundamcompare.app`. If you choose
-   other names, set `NEXT_PUBLIC_SITE_URL` (Vercel) and the `SITE_URL` variable
-   (GitHub), or change `domain` in `src/site.config.ts`.
+1. **Domains.** `lorcanacompare.com` and `gundamcompare.com` were bought in
+   Vercel (2026-10-25), so DNS is Vercel's: add each to its project under
+   Settings → Domains, with www redirecting to the apex.
 2. **Merge** `claude/hopeful-bardeen-d4cuq3` into `main` in both repos.
    GitHub → Settings → Actions → Workflow permissions → Read and write.
 3. **Neon:** one free project per site. Copy the pooled URL as `DATABASE_URL`.
 4. **eBay keys:** the production keyset must be enabled. A new one stays
-   disabled until Marketplace Account Deletion notifications are set up or you
-   file the "I don't store eBay user data" exemption. On 2026-10-25 the key
+   disabled until Marketplace Account Deletion notifications are set up. The
+   Lorcana site serves the endpoint at `/api/ebay/account-deletion`: register
+   that URL on the eBay developer page with the same `EBAY_VERIFICATION_TOKEN`
+   as the Lorcana Vercel project. On 2026-10-25 the key
    pair returned `invalid_client`, so re-copy the Cert ID from the developer
    portal.
 5. **GitHub secrets** (both repos): `EBAY_CLIENT_ID`, `EBAY_CLIENT_SECRET`,
