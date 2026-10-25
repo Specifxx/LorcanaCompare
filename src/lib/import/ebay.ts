@@ -170,8 +170,28 @@ const FOREIGN_LISTING = /\b(japanese|japan|jpn|jp|ja|chinese|simplified chinese|
 export function queryFor(p: Product): string {
   // Variant words in parentheses ("(LR+)", "(Enchanted)") are left out: sellers
   // word them differently, and listingMatches() tells the variants apart.
-  const name = shortName(p.name).replace(/\([^)]*\)/g, " ").replace(/[[\]:,]/g, " ");
+  const name = shortName(p.name).replace(/\([^)]*\)/g, " ").replace(/[[\]:,]/g, " ").replace(/['’]/g, "");
   return `${SITE.ebay.query} ${name} ${p.kind === "card" ? p.number ?? "" : ""}`.replace(/\s+/g, " ").trim();
+}
+
+// Bracketed qualifiers name a specific version: "(Store Tournament Winner
+// Pack 01)", "(SDCC 2026)", "(Disney Cruise Promo)", "(Trans-Am)". At least
+// half of their words must be in the listing, or a participation card (or a
+// magazine promo) takes the winner card's price. Card numbers, rarity markers
+// and finish words don't count; markersAgree() handles rarities.
+const QUAL_SKIP = new Set(["foil", "holo", "holofoil", "cold", "enchanted", "iconic", "epic", "promo", "alt", "art", "parallel", "sp", "the", "of", "and", "a"]);
+const ABBREV: Record<string, string[]> = { ntc: ["newtype", "challenge"], wcs: ["world", "championship"], wc: ["world", "championship"], stw: ["store", "tournament", "winner"] };
+export function qualifiersAgree(productName: string, title: Set<string>): boolean {
+  const have = new Set(title);
+  for (const t of title) for (const w of ABBREV[t] ?? []) have.add(w);
+  for (const m of productName.matchAll(/\(([^)]*)\)/g)) {
+    // Pure numbers ("2026", "Pack 01", "Season 1") vary in how sellers write
+    // them, so only words count.
+    const words = tokens(m[1]).filter((t) => !QUAL_SKIP.has(t) && !/\d/.test(t) && !/^(lr|r|u|c)\+*$/.test(t) && !/\+/.test(t));
+    if (!words.length) continue;
+    if (words.filter((w) => have.has(w)).length / words.length < 0.5) return false;
+  }
+  return true;
 }
 
 /** Does an eBay listing title describe this product? */
@@ -187,11 +207,17 @@ export function listingMatches(p: Product, title: string): boolean {
     // Lorcana sellers often write only "207" — accept "#207" or " 207 " when the
     // set's total is absent, but never a different fraction.
     const bare = SITE.numberStyle === "fraction" ? p.number.split("/")[0] : null;
-    const numOk = nums.length ? nums.includes(want) : !!bare && new RegExp(`(^|[#\\s])0*${bare}($|\\s)`).test(title);
+    // Promos are numbered "14" on TCGplayer and "14/P3", "14/D23" or "6/CC1"
+    // by sellers: for a product number with no total, any fraction with the
+    // same numerator counts.
+    const promoStyle = SITE.numberStyle === "fraction" && !p.number.includes("/");
+    const numOk = nums.length
+      ? nums.includes(want) || (promoStyle && nums.some((n) => parseInt(n, 10) === parseInt(p.number!, 10)))
+      : !!bare && new RegExp(`(^|[#\\s])0*${bare}($|\\s)`).test(title);
     if (!numOk) return false;
     const base = tokens(p.name.replace(/\([^)]*\)/g, " ")).filter((t) => t.length > 1);
     const ok = base.filter((t) => have.has(t)).length / Math.max(1, base.length);
-    return ok >= 0.6 && markersAgree(p.name, p.rarity, title);
+    return ok >= 0.6 && markersAgree(p.name, p.rarity, title) && qualifiersAgree(p.name, have);
   }
   if (sealedTypeOf(title) !== sealedTypeOf(p.name)) return false;
   const need = tokens(shortName(p.name)).filter((t) => t.length > 1 && !["disney", "the", "of"].includes(t));

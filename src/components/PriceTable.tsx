@@ -7,6 +7,7 @@ import { CURRENCY, MARKET_LABEL, type Offer } from "@/lib/site-types";
 import { money } from "@/lib/format";
 import { goHref } from "@/lib/affiliate";
 import { useMarket } from "./ClientPrefs";
+import { EbayWord } from "./EbayCallout";
 
 const NAMES: Record<string, string> = {
   tcgplayer: "TCGplayer",
@@ -50,9 +51,13 @@ export function PriceTable({ offers, fx, productId, page, compact = false }: { o
             const c = conv(o);
             const best = o === cheapest;
             return (
-              <tr key={i} className={`border-t border-ink-800 ${best ? "bg-buy/10" : ""} ${o.inStock ? "" : "opacity-60"}`}>
+              <tr key={i} className={`border-t border-ink-800 ${best ? "bg-buy/10" : o.source === "ebay" ? "bg-[#0064d2]/[0.07]" : ""} ${o.inStock ? "" : "opacity-60"}`}>
                 <td className="px-3 py-2.5">
-                  <span className="font-medium text-fg">{sourceName(o)}</span>
+                  {o.source === "ebay" ? (
+                    <span className="font-medium"><EbayWord className="text-[15px]" />{o.market !== "US" && <span className="ml-1 text-xs text-muted">{o.market}</span>}</span>
+                  ) : (
+                    <span className="font-medium text-fg">{sourceName(o)}</span>
+                  )}
                   {best && <span className="ml-2 rounded bg-buy px-1.5 py-0.5 text-[10px] font-bold uppercase text-white">Cheapest</span>}
                 </td>
                 <td className="hidden px-3 py-2.5 text-xs text-muted sm:table-cell">
@@ -67,8 +72,8 @@ export function PriceTable({ offers, fx, productId, page, compact = false }: { o
                   {c != null && <span className="block text-xs font-normal text-muted">≈ {money(c, cur)}</span>}
                 </td>
                 <td className="px-3 py-2.5 text-right">
-                  <a href={goHref(o, productId, page)} rel="sponsored nofollow noopener" target="_blank" className="btn-buy">
-                    {o.inStock ? "Buy" : "View"}
+                  <a href={goHref(o, productId, page)} rel="sponsored nofollow noopener" target="_blank" className={o.source === "ebay" ? "btn bg-[#0064d2] px-3 py-1.5 text-white hover:bg-[#0053ad]" : "btn-buy"}>
+                    {o.source === "ebay" ? "Buy on eBay" : o.inStock ? "Buy" : "View"}
                   </a>
                 </td>
               </tr>
