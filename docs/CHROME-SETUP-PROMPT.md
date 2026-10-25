@@ -26,7 +26,16 @@ Ground rules:
 - Secrets go ONLY into the secret / environment-variable fields named below.
 - For random values, run crypto.randomUUID().replaceAll("-","") in the browser console
   (32 hex characters; join two of them for 64).
-- Keep a checklist, and finish with a summary: what was done, what failed, and what I must do.
+- NEVER STOP ON A BLOCKER. If any step needs me (a login, a 2FA code, a CAPTCHA, a plan
+  upgrade, an approval, a page that won't load, or anything you're unsure about), leave that
+  tab OPEN exactly where you got stuck, note it, and move straight on to the next step. Later
+  steps that depend on a skipped one: do whatever parts you still can, and note the rest.
+  Don't close tabs you got stuck on.
+- Keep a checklist as you go. At the very end, give me:
+    1. DONE: every step completed.
+    2. NEEDS YOU: every step you got stuck on, in order, each with the open tab's name and
+       exactly what I need to do there (and any value I must paste, e.g. which secret).
+    3. Then switch to the first "needs you" tab, so I can work through them one by one.
 
 === 1. Merge the code (GitHub) ===
 For each repo:
@@ -194,7 +203,7 @@ start at partner.tcgplayer.com. Then Vercel → that project → Analytics → E
 "buy_click" within a few minutes (filter by retailer). Open /premium, click Plus → Monthly and confirm Stripe Checkout opens, then close it
 without paying.
 
-Finish by listing: Neon project names, which secrets and variables were set where, the Stripe
+Then give me the DONE / NEEDS YOU summary from the ground rules, also listing: Neon project names, which secrets and variables were set where, the Stripe
 price ids and webhook endpoints, the eBay keyset status and account-deletion verification, the
 EPN campaign ids, whether Web Analytics and the buy_click events are showing, Google/Bing/AdSense status, and anything that failed or needs me.
 ```
