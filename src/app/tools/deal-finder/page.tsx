@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SITE } from "@/site.config";
+import { canon } from "@/lib/site";
 import { dealRows } from "@/lib/tools";
 import { shortName } from "@/lib/names";
 import { DealFinder } from "./DealFinder";
@@ -8,7 +9,7 @@ export const revalidate = 21600;
 export const metadata: Metadata = {
   title: `${SITE.gameShort} Deal Finder — cards selling below market`,
   description: `Every in-stock ${SITE.game} card and sealed product listed below its TCGplayer market price at stores and on eBay, in the US, UK, Canada, Australia and Europe. Free, updated daily.`,
-  alternates: { canonical: "/tools/deal-finder" },
+  ...canon("/tools/deal-finder"),
 };
 
 export default function Page() {

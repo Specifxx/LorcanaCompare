@@ -321,3 +321,20 @@ boxes 14/16, Troves 14/15, collections 17/18, starter decks 38/47, cases
 24/59). Gundam: cards $10+ 396 of 458, sealed 77 of 134 (booster boxes 7/7,
 booster packs 25/26, cases 7/29). Cases are the weak spot: there are few
 English Buy It Now case listings.
+
+## 2026-10-25 — SEO hygiene: www is canonical, hub pages, breadcrumbs
+
+- **Canonical host is `www.`** (`SITE_URL` in `src/lib/site.ts`). Canonicals,
+  og:url, the sitemap and robots.txt all use it. The apex → www 301 is a Vercel
+  domain setting (Domains: www primary, apex "Redirect to www", 301), not code:
+  a code redirect would loop while Vercel still sends www to the apex. If
+  `NEXT_PUBLIC_SITE_URL` is set in Vercel it overrides this; keep it unset or www.
+- **og:url follows the canonical.** The layout used to set og:url to the site
+  root, so every page shared the homepage's. `canon(path)` sets both.
+- **Hub pages:** `/cards/rarity/<rarity>` and `/sealed/<type>` (`src/lib/hubs.ts`),
+  only for rarities/types that have products, so the sitemap never lists an
+  empty hub. "+" becomes "-plus" in slugs (LR+ and LR++ must not collide).
+- **Breadcrumbs** (`components/Breadcrumbs.tsx`, with BreadcrumbList schema) on
+  card, set, hub and guide pages; set pages link to neighbouring sets.
+- The sitemap was already clean (only 200, self-canonical, no parameters);
+  checked with curl over every non-card URL and a sample of card pages.

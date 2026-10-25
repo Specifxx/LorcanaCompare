@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { SITE } from "@/site.config";
+import { canon } from "@/lib/site";
 import { StaticPage } from "@/components/StaticPage";
 
 export const revalidate = 86400;
-export const metadata: Metadata = { title: "Privacy policy", alternates: { canonical: "/privacy" } };
+export const metadata: Metadata = { title: "Privacy policy", ...canon("/privacy") };
 
 export default function Privacy() {
   return (

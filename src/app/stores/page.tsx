@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { SITE } from "@/site.config";
+import { canon } from "@/lib/site";
 import { meta } from "@/lib/data";
 import { MARKET_LABEL } from "@/lib/site-types";
 import { StaticPage } from "@/components/StaticPage";
 
 export const revalidate = 86400;
-export const metadata: Metadata = { title: `${SITE.gameShort} stores we compare`, description: `Every online ${SITE.game} store ${SITE.name} compares, by country.`, alternates: { canonical: "/stores" } };
+export const metadata: Metadata = { title: `${SITE.gameShort} stores we compare`, description: `Every online ${SITE.game} store ${SITE.name} compares, by country.`, ...canon("/stores") };
 
 export default function Stores() {
   const m = meta();

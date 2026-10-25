@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { meta, products, refCents, sets } from "@/lib/data";
 import { posts } from "@/lib/posts";
+import { rarityHubs, sealedHubs } from "@/lib/hubs";
 import { SITE_URL } from "@/lib/site";
 
 export const revalidate = 86400;
@@ -14,6 +15,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...fixed.map((p) => ({ url: `${SITE_URL}${p}`, lastModified: at, changeFrequency: "daily" as const, priority: p === "" ? 1 : 0.8 })),
     ...posts().map((p) => ({ url: `${SITE_URL}/blog/${p.slug}`, lastModified: new Date(p.updated ?? p.date), priority: 0.7 })),
+    ...rarityHubs().map((h) => ({ url: `${SITE_URL}/cards/rarity/${h.slug}`, lastModified: at, priority: 0.6 })),
+    ...sealedHubs().map((h) => ({ url: `${SITE_URL}/sealed/${h.slug}`, lastModified: at, priority: 0.6 })),
     ...sets().filter((s) => s.productCount > 0).map((s) => ({ url: `${SITE_URL}/sets/${s.slug}`, lastModified: at, priority: 0.7 })),
     ...products()
       .filter((p) => p.kind === "sealed" || (refCents(p.id) ?? 0) >= 50)

@@ -13,7 +13,7 @@ export const post: Post = {
 <h2>United States</h2>
 <ul>
 <li><b>TCGplayer</b> has the deepest singles market and sets the "market price" everyone quotes. For a single card it is usually the cheapest or close to it.</li>
-<li><b>eBay</b> wins more often than you'd think on expensive cards ($100+), where sellers undercut to move a card quickly. We check eBay for every card worth $20 or more.</li>
+<li><b>eBay</b> wins more often than you'd think on expensive cards ($100+), where sellers undercut to move a card quickly. We check eBay for every card worth $10 or more and every sealed product.</li>
 <li><b>Local game stores' webshops</b> are often cheapest on <a href="/sealed">sealed product</a> — booster boxes at or under MSRP — and on singles they have just restocked.</li>
 </ul>
 

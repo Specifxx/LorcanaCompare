@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
 import { SITE } from "@/site.config";
+import { canon } from "@/lib/site";
 import { byValue, products, setById } from "@/lib/data";
+import { SEALED_ORDER as ORDER, SEALED_PLURAL as PLURAL, sealedHref } from "@/lib/hubs";
+import Link from "next/link";
 import { TileGrid } from "@/components/ProductTile";
 
 export const revalidate = 21600;
 export const metadata: Metadata = {
   title: `${SITE.gameShort} booster box prices — cheapest sealed product`,
   description: `Compare ${SITE.game} booster box, booster pack, starter deck and sealed product prices across TCGplayer, eBay and ${SITE.stores.length} stores.`,
-  alternates: { canonical: "/sealed" },
+  ...canon("/sealed"),
 };
 
-const ORDER = ["Booster Box", "Case", "Illumineer's Trove", "Booster Pack", "Sleeved Pack", "Starter Deck", "Collection", "Prerelease", "Deck", "Other"];
-
-const PLURAL: Record<string, string> = { "Booster Box": "Booster boxes", Case: "Cases", "Illumineer's Trove": "Illumineer's Troves", "Booster Pack": "Booster packs", "Sleeved Pack": "Sleeved packs", "Starter Deck": "Starter decks", Collection: "Collections and gift sets", Prerelease: "Prerelease kits", Deck: "Decks", Other: "Other sealed" };
 
 export default function Sealed() {
   const sealed = products().filter((p) => p.kind === "sealed");
@@ -25,7 +25,7 @@ export default function Sealed() {
       </header>
       {groups.map((g) => (
         <section key={g.t}>
-          <h2 className="mb-3 text-xl font-bold">{PLURAL[g.t] ?? g.t}</h2>
+          <h2 className="mb-3 text-xl font-bold">{sealedHref(g.t) ? <Link className="hover:underline" href={sealedHref(g.t)!}>{PLURAL[g.t] ?? g.t} →</Link> : PLURAL[g.t] ?? g.t}</h2>
           <TileGrid items={g.items.sort((a, b) => (setById(b.setId)?.releasedOn ?? "").localeCompare(setById(a.setId)?.releasedOn ?? "")).slice(0, 24)} />
         </section>
       ))}

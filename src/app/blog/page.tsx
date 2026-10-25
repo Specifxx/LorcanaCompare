@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE } from "@/site.config";
+import { canon } from "@/lib/site";
 import { posts } from "@/lib/posts";
 
 export const revalidate = 86400;
 export const metadata: Metadata = {
   title: `${SITE.gameShort} guides and price analysis`,
   description: `Guides to buying ${SITE.game} cards: set price guides, most valuable cards, where to buy and pre-order advice.`,
-  alternates: { canonical: "/blog" },
+  ...canon("/blog"),
 };
 
 export default function Blog() {

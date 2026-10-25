@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { SITE } from "@/site.config";
+import { canon } from "@/lib/site";
 import { Basket } from "./Basket";
 
 export const revalidate = 86400;
 export const metadata: Metadata = {
   title: `${SITE.gameShort} Best Basket — price a whole deck or want list`,
   description: `Paste a ${SITE.game} deck list or want list and get the cheapest price for every card across ${SITE.stores.length} stores, TCGplayer and eBay, plus which store can fill most of it. Free.`,
-  alternates: { canonical: "/tools/best-basket" },
+  ...canon("/tools/best-basket"),
 };
 
 export default function Page() {

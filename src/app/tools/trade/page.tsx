@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { SITE } from "@/site.config";
+import { canon } from "@/lib/site";
 import { Trade } from "./Trade";
 
 export const revalidate = 86400;
 export const metadata: Metadata = {
   title: `${SITE.gameShort} trade calculator — is your trade fair?`,
   description: `Value both sides of a ${SITE.game} trade at today's TCGplayer market price. Free, no account.`,
-  alternates: { canonical: "/tools/trade" },
+  ...canon("/tools/trade"),
 };
 
 export default function Page() {

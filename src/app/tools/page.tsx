@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE } from "@/site.config";
+import { canon } from "@/lib/site";
 import { TOOLS } from "@/lib/tool-list";
 
 export const revalidate = 86400;
 export const metadata: Metadata = {
   title: `Free ${SITE.gameShort} price tools`,
   description: `Free ${SITE.game} tools: Deal Finder, Rising Cards, Demand Finder, Best Basket, a trade calculator and a selling-fee calculator. No account needed.`,
-  alternates: { canonical: "/tools" },
+  ...canon("/tools"),
 };
 
 
