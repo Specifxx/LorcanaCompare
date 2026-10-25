@@ -11,6 +11,7 @@ import { posts } from "@/lib/posts";
 import { shortName } from "@/lib/names";
 import { JsonLd } from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/site";
+import { TOOLS } from "@/lib/tool-list";
 
 export const revalidate = 21600;
 
@@ -55,7 +56,7 @@ export default function Home() {
 
       {topDeals.length > 0 && (
         <section>
-          <Header title="Today's top deals" href="/deals" sub="In-stock listings below TCGplayer market" />
+          <Header title="Today's top deals" href="/tools/deal-finder" sub="In-stock listings below TCGplayer market" />
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {topDeals.map((d) => (
               <Link key={`${d.p.id}${d.offer.source}`} href={`/card/${d.p.slug}`} className="card-surface flex items-center gap-3 p-3 hover:border-brand/60">
@@ -70,6 +71,18 @@ export default function Home() {
           </div>
         </section>
       )}
+
+      <section>
+        <Header title="Free price tools" href="/tools" sub="Everything that's Premium on other sites, free here. No account needed." />
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {TOOLS.map((t) => (
+            <Link key={t.href} href={t.href} className="card-surface p-4 hover:border-brand/60">
+              <p className="font-semibold">{t.name}</p>
+              <p className="mt-1 text-sm text-muted">{t.text}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
 
       {upcoming && (
         <section className="card-surface flex flex-col items-start gap-3 p-6 md:flex-row md:items-center">
@@ -89,10 +102,13 @@ export default function Home() {
         </section>
       )}
 
-      <section className="grid gap-6 md:grid-cols-2">
-        <MoverList title="Biggest risers (7 days)" rows={mv.up.slice(0, 8)} />
-        <MoverList title="Biggest fallers (7 days)" rows={mv.down.slice(0, 8)} />
-      </section>
+      {/* Hidden until there is a week of daily history to compare against. */}
+      {(mv.up.length > 0 || mv.down.length > 0) && (
+        <section className="grid gap-6 md:grid-cols-2">
+          <MoverList title="Biggest risers (7 days)" rows={mv.up.slice(0, 8)} />
+          <MoverList title="Biggest fallers (7 days)" rows={mv.down.slice(0, 8)} />
+        </section>
+      )}
 
       <section>
         <Header title="Set price guides" href="/sets" />

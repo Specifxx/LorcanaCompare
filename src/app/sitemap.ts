@@ -10,7 +10,7 @@ export const revalidate = 86400;
 // sitemap (Rift Compare: thin pages in the sitemap slow indexing of the rest).
 export default function sitemap(): MetadataRoute.Sitemap {
   const at = meta()?.updatedAt ? new Date(meta()!.updatedAt) : new Date();
-  const fixed = ["", "/cards", "/sets", "/sealed", "/movers", "/deals", "/preorders", "/blog", "/about", "/methodology", "/stores"];
+  const fixed = ["", "/cards", "/sets", "/sealed", "/movers", "/tools", "/tools/deal-finder", "/tools/rising", "/tools/demand", "/tools/best-basket", "/tools/trade", "/tools/selling-fees", "/preorders", "/blog", "/about", "/methodology", "/stores"];
   return [
     ...fixed.map((p) => ({ url: `${SITE_URL}${p}`, lastModified: at, changeFrequency: "daily" as const, priority: p === "" ? 1 : 0.8 })),
     ...posts().map((p) => ({ url: `${SITE_URL}/blog/${p.slug}`, lastModified: new Date(p.updated ?? p.date), priority: 0.7 })),

@@ -33,8 +33,9 @@ GitHub Actions, daily 06:17 UTC (refresh-prices.yml)
 
 Card and sealed pages with a price row per store (cheapest in-stock first,
 affiliate buy links through `/go`, each click a Vercel `buy_click` event),
-price history charts, set price guides, movers, below-market deals, a
-pre-order tracker and guides with live price tables. Dark theme by default with
+price history charts, set price guides, movers, a pre-order tracker, guides
+with live price tables, and free tools: Deal Finder, Rising Cards, Demand
+Finder, Best Basket, a trade calculator and a selling-fee calculator. Dark theme by default with
 a light toggle, and a Halloween theme that switches itself off at the
 visitor's midnight on 31 October.
 

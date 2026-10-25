@@ -15,6 +15,9 @@ module.exports = {
       "/**": ["./data/public/**/*", "./data/history/**/*"],
     },
   },
+  async redirects() {
+    return [{ source: "/deals", destination: "/tools/deal-finder", permanent: true }];
+  },
   async headers() {
     return [
       {

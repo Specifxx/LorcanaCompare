@@ -16,7 +16,10 @@ export function Footer() {
             <li><Link href="/sets">Set price guides</Link></li>
             <li><Link href="/sealed">Booster box prices</Link></li>
             <li><Link href="/movers">Price movers</Link></li>
-            <li><Link href="/deals">Below-market deals</Link></li>
+            <li><Link href="/tools/deal-finder">Deal Finder</Link></li>
+            <li><Link href="/tools/rising">Rising cards</Link></li>
+            <li><Link href="/tools/demand">Demand Finder</Link></li>
+            <li><Link href="/tools/best-basket">Best Basket</Link></li>
             <li><Link href="/preorders">Pre-orders</Link></li>
           </ul>
         </div>

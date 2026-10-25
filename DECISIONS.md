@@ -217,3 +217,44 @@ monitor fails its workflow run instead of sending email: GitHub notifies the
 owner. This supersedes the account, Premium, founding-member, Google sign-in
 and Neon entries above. The eBay Marketplace Account Deletion endpoint stays
 (eBay requires it, and it stores nothing).
+
+## Rift Compare's Premium tools are free here; new logo and link thumbnail — 2026-10-25
+
+**Owner:** "a lot of the features that we have on Rift Compare, like Deal
+Finder, Rising Cards, Demand Finder … let's just make it all free … any users
+can use it for free."
+
+`/tools` hosts them, free and account-less, all computed from the daily
+summary (`src/lib/tools.ts`):
+
+* **Deal Finder:** every in-stock store or eBay offer 8–60% under TCGplayer
+  market, in every market (converted to USD for the comparison), capped at the
+  1,200 biggest savings. Filters are client-side. `/deals` 308s here.
+* **Rising Cards:** up more than 2% in 7 days and not down over 30, weighted
+  by the size of the rise, the 30-day trend and how few stores still have stock.
+* **Demand Finder:** cards listed at 10+ stores, ranked by the share sold out.
+* **Best Basket:** paste a list and get the cheapest in-stock price per card
+  in your market (US TCGplayer/eBay as fallback), plus the stores that can
+  fill most of it. A plain name matches the base printing; add the number for
+  a variant. Postage is not included (Rift Compare's measured postage was not
+  ported).
+* **Trade Calculator** and **Selling Fee Calculator** (TCGplayer 10.75% +
+  2.5% + $0.30; eBay 13.25% + $0.40, labelled as estimates).
+
+Not ported: Box EV (no reliable pull rates yet, and a wrong EV misleads
+buyers) and the pull tracker (it needs accounts).
+
+**Logo:** original marks, not trademarks. Lorcana is a faceted hexagonal ink
+crystal with an ink drop and sparkles. Gundam is a mecha head with V-fin, eyes
+and red chin. `src/content/logo.tsx` is the source; `icon.svg`, `apple-icon.png`
+and the header use it. **Link thumbnail** (`opengraph-image.jpg` /
+`twitter-image.jpg`, 2400×1260) is built like Rift Compare's: headline, logo
+and bullets on the left, real screenshots of a card page's price table and a
+set page in browser frames on the right. Blog posts set it explicitly, because
+their own `openGraph` would otherwise drop it.
+
+**eBay matching tightened** after the first production runs put a Japanese
+"Set of 3" and PSA/TAG-graded slabs on English raw cards: graded and
+non-English listings are rejected, the price floor rose from 40% to 50% of
+market, and each import re-checks saved results against the current rules,
+so a tightened rule purges old matches without spending calls.

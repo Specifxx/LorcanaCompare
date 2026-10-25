@@ -21,6 +21,7 @@ import {
   ebayCredentials,
   ebayRemaining,
   ebayToken,
+  listingMatches,
   planEbayRefresh,
   searchLowest,
   type EbayState,
@@ -208,6 +209,17 @@ async function main() {
       console.log(`[ebay] refreshed ${refreshed}`);
     } catch (e) {
       console.warn(`[ebay] skipped: ${(e as Error).message}`);
+    }
+  }
+  // Re-check saved eBay results against today's rules (and price floor), so a
+  // tightened rule purges old matches without spending calls.
+  for (const [id, markets] of Object.entries(ebayState)) {
+    const p = byId.get(Number(id));
+    const ref = refUsd.get(Number(id));
+    for (const [mk, e] of Object.entries(markets ?? {}) as [Market, { at: string; offer: Offer | null }][]) {
+      if (!p || !e?.offer) continue;
+      const usd = e.offer.cents / (fx[e.offer.currency] ?? 1);
+      if (!listingMatches(p, e.offer.title) || (ref != null && usd < ref * 0.5)) markets![mk] = { at: e.at, offer: null };
     }
   }
   // Drop state for products that left the catalogue.
