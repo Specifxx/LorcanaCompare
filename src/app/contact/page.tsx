@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { SITE } from "@/site.config";
+import { canon } from "@/lib/site";
 import { StaticPage } from "@/components/StaticPage";
 
 export const revalidate = 86400;
-export const metadata: Metadata = { title: "Contact", description: `Contact ${SITE.name}, report a price or list your store.`, alternates: { canonical: "/contact" } };
+export const metadata: Metadata = { title: "Contact", description: `Contact ${SITE.name}, report a price or list your store.`, ...canon("/contact") };
 
 export default function Contact() {
   return (

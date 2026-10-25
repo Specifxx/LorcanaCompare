@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE } from "@/site.config";
+import { canon } from "@/lib/site";
 import { movers } from "@/lib/data";
 import { money, pct } from "@/lib/format";
 import { shortName } from "@/lib/names";
@@ -9,7 +10,7 @@ export const revalidate = 21600;
 export const metadata: Metadata = {
   title: `${SITE.gameShort} price movers — biggest risers and fallers`,
   description: `The ${SITE.game} cards whose prices moved most this week and this month, from daily TCGplayer market prices.`,
-  alternates: { canonical: "/movers" },
+  ...canon("/movers"),
 };
 
 export default function Movers() {

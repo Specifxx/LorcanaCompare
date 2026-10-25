@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE } from "@/site.config";
+import { canon } from "@/lib/site";
 import { productsInSet, refCents, sets } from "@/lib/data";
 import { money } from "@/lib/format";
 
@@ -8,7 +9,7 @@ export const revalidate = 86400;
 export const metadata: Metadata = {
   title: `${SITE.gameShort} set price guides`,
   description: `Price guides for every ${SITE.game} set: each card's value, the most valuable cards and the set's total value.`,
-  alternates: { canonical: "/sets" },
+  ...canon("/sets"),
 };
 
 export default function Sets() {

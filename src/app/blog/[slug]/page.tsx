@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SITE } from "@/site.config";
 import { postBySlug, posts } from "@/lib/posts";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/AdSlot";
 import { abs } from "@/lib/site";
@@ -15,7 +16,7 @@ export const generateStaticParams = () => posts().map((p) => ({ slug: p.slug }))
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const p = postBySlug(params.slug);
   if (!p) return {};
-  return { title: p.title, description: p.description, keywords: p.keywords, alternates: { canonical: `/blog/${p.slug}` }, openGraph: { type: "article", title: p.title, description: p.description, publishedTime: p.date, images: ["/opengraph-image.jpg"] }, twitter: { card: "summary_large_image", images: ["/opengraph-image.jpg"] } };
+  return { title: p.title, description: p.description, keywords: p.keywords, alternates: { canonical: `/blog/${p.slug}` }, openGraph: { type: "article", siteName: SITE.name, url: `/blog/${p.slug}`, title: p.title, description: p.description, publishedTime: p.date, images: ["/opengraph-image.jpg"] }, twitter: { card: "summary_large_image", images: ["/opengraph-image.jpg"] } };
 }
 
 export default function PostPage({ params }: { params: { slug: string } }) {
@@ -25,7 +26,8 @@ export default function PostPage({ params }: { params: { slug: string } }) {
     <article className="mx-auto max-w-3xl">
       <JsonLd data={{ "@context": "https://schema.org", "@type": "Article", headline: p.title, description: p.description, datePublished: p.date, dateModified: p.updated ?? p.date, author: { "@type": "Organization", name: SITE.name }, publisher: { "@type": "Organization", name: SITE.name }, mainEntityOfPage: abs(`/blog/${p.slug}`) }} />
       {p.faq && <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: p.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }} />}
-      <p className="text-xs text-muted"><Link href="/blog">Guides</Link> · {p.updated ? `Updated ${p.updated}` : p.date}</p>
+      <Breadcrumbs items={[{ name: "Guides", href: "/blog" }, { name: p.title }]} />
+      <p className="text-xs text-muted">{p.updated ? `Updated ${p.updated}` : p.date}</p>
       <h1 className="mt-2 font-display text-3xl font-black md:text-4xl">{p.title}</h1>
       <p className="mt-3 text-lg text-muted">{p.description}</p>
       <div className="prose-site mt-6 overflow-x-auto" dangerouslySetInnerHTML={{ __html: renderPost(p.html) }} />

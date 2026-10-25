@@ -15,6 +15,8 @@ import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/AdSlot";
 import { amazonSearchUrl, goHref } from "@/lib/affiliate";
 import { abs } from "@/lib/site";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { rarityHref, sealedHref } from "@/lib/hubs";
 
 export const revalidate = 21600;
 // Empty list = nothing prerendered at build, but each page is cached (ISR)
@@ -36,7 +38,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
     title,
     description,
     alternates: { canonical: `/card/${p.slug}` },
-    openGraph: { title, description, images: p.image ? [imageAt(p.image, "in_1000x1000")!] : undefined },
+    openGraph: { type: "website", siteName: SITE.name, url: `/card/${p.slug}`, title, description, images: p.image ? [imageAt(p.image, "in_1000x1000")!] : undefined },
   };
 }
 
@@ -77,28 +79,15 @@ export default function CardPage({ params }: { params: { slug: string } }) {
             : undefined,
         }}
       />
-      <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Sets", item: abs("/sets") },
-            set && { "@type": "ListItem", position: 2, name: set.name, item: abs(`/sets/${set.slug}`) },
-            { "@type": "ListItem", position: 3, name },
-          ].filter(Boolean),
-        }}
-      />
-      <nav className="text-xs text-muted" aria-label="Breadcrumb">
-        <Link href="/sets">Sets</Link> / {set && <Link href={`/sets/${set.slug}`}>{set.name}</Link>} / <span>{name}</span>
-      </nav>
+      <Breadcrumbs items={[{ name: p.kind === "sealed" ? "Sealed" : "Cards", href: p.kind === "sealed" ? "/sealed" : "/cards" }, ...(set ? [{ name: set.name, href: `/sets/${set.slug}` }] : []), { name }]} />
       <div className="grid gap-8 md:grid-cols-[minmax(0,320px)_1fr]">
         <div className="flex flex-col gap-4">
           {p.image && <img src={imageAt(p.image, "400w")!} alt={`${name} ${SITE.gameShort} card`} className="w-full rounded-xl" width={400} height={560} />}
           <dl className="card-surface grid grid-cols-2 gap-x-3 gap-y-1.5 p-4 text-sm">
             {set && (<><dt className="text-muted">Set</dt><dd><Link className="link" href={`/sets/${set.slug}`}>{set.name}</Link></dd></>)}
             {p.number && (<><dt className="text-muted">Number</dt><dd>{p.number}</dd></>)}
-            {p.rarity && (<><dt className="text-muted">Rarity</dt><dd>{p.rarity}</dd></>)}
-            {p.sealedType && (<><dt className="text-muted">Type</dt><dd>{p.sealedType}</dd></>)}
+            {p.rarity && (<><dt className="text-muted">Rarity</dt><dd>{rarityHref(p.rarity) ? <Link className="link" href={rarityHref(p.rarity)!}>{p.rarity}</Link> : p.rarity}</dd></>)}
+            {p.sealedType && (<><dt className="text-muted">Type</dt><dd>{sealedHref(p.sealedType) ? <Link className="link" href={sealedHref(p.sealedType)!}>{p.sealedType}</Link> : p.sealedType}</dd></>)}
             {Object.entries(p.attrs).slice(0, 8).map(([k, v]) => (<Fragment key={k}><dt className="text-muted">{k.replace(/([a-z])([A-Z])/g, "$1 $2")}</dt><dd>{v}</dd></Fragment>))}
           </dl>
         </div>

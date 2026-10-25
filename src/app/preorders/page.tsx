@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE } from "@/site.config";
+import { canon } from "@/lib/site";
 import { byValue, meta, priceOf, productsInSet, refCents, sets } from "@/lib/data";
 import { PREORDER_COPY } from "@/content/preorders";
 import { PriceTable } from "@/components/PriceTable";
@@ -25,7 +26,7 @@ export function generateMetadata(): Metadata {
   return {
     title: `${name} pre-orders — cheapest booster box prices compared`,
     description: `Where to pre-order ${name}: every store's booster box, pack and sealed price compared, cheapest first, with release date and what's in the box. Updated daily.`,
-    alternates: { canonical: "/preorders" },
+    ...canon("/preorders"),
   };
 }
 

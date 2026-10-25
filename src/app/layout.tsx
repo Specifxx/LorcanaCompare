@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   description: SITE.description,
   keywords: SITE.keywords,
   applicationName: SITE.name,
-  openGraph: { type: "website", siteName: SITE.name, url: SITE_URL },
+  openGraph: { type: "website", siteName: SITE.name, url: "/" },
   twitter: { card: "summary_large_image" },
   alternates: { canonical: "/", types: { "application/rss+xml": "/feed.xml" } },
   verification: {

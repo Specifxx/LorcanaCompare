@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { SITE } from "@/site.config";
+import { canon } from "@/lib/site";
 import { Fees } from "./Fees";
 
 export const revalidate = 86400;
 export const metadata: Metadata = {
   title: `${SITE.gameShort} selling fee calculator — TCGplayer and eBay`,
   description: `How much you keep when you sell a ${SITE.game} card on TCGplayer or eBay, after fees. Free calculator.`,
-  alternates: { canonical: "/tools/selling-fees" },
+  ...canon("/tools/selling-fees"),
 };
 
 export default function Page() {

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SITE } from "@/site.config";
+import { canon } from "@/lib/site";
 import { demandRows } from "@/lib/tools";
 import { money } from "@/lib/format";
 import { ToolTable } from "@/components/ToolTable";
@@ -8,7 +9,7 @@ export const revalidate = 21600;
 export const metadata: Metadata = {
   title: `${SITE.gameShort} Demand Finder — the cards selling out`,
   description: `Which ${SITE.game} cards are selling out: listed at the most stores but in stock at the fewest. Free, updated daily from ${SITE.stores.length} stores.`,
-  alternates: { canonical: "/tools/demand" },
+  ...canon("/tools/demand"),
 };
 
 export default function Page() {
