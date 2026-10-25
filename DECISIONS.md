@@ -164,3 +164,18 @@ demand signal), contact/newsletter rows and Stripe webhook idempotency. Built
 and served with `DATABASE_URL` unset on 2026-10-25, every public page, search,
 the sitemap and the affiliate redirect still worked. `tests/no-db-on-public-pages.test.ts`
 fails if a public page or component imports the database or session reader.
+
+## Paid plans "coming soon"; the first 50 accounts get Premium free — 2026-10-25
+
+**Owner:** "for the premium features, we'll just say coming soon. And we'll
+just give the first 50 accounts that register premium … I can't be bothered to
+set up Stripe right now."
+
+Sign-up gives the first 50 non-admin accounts per site `foundingMember`,
+`tier: premium` and `premiumUntil: 2100-01-01` (Premium for good). /premium
+shows the founding offer with places left (`/api/founding`, one count query
+cached five minutes at the edge) and "Coming soon" on Plus and Premium. The
+checkout API refuses until `PAYMENTS_ENABLED=1` and a Stripe key are set; the
+Stripe code is complete and documented in docs/SETUP.md ("Turning payments
+on"). Tested 2026-10-25 against a local Postgres: accounts 1–50 founding
+Premium, 51–52 free, the counter at 0, checkout answering "coming soon".

@@ -18,7 +18,7 @@ Both domains were just bought in my Vercel account, so their DNS is managed by V
 They are Next.js sites that copy riftcompare.com's setup.
 
 Ground rules:
-- I am signed in to GitHub, Vercel, Neon, Stripe, eBay Developers, eBay Partner Network, Impact
+- I am signed in to GitHub, Vercel, Neon, eBay Developers, eBay Partner Network, Impact
   (TCGplayer affiliate), Google Search Console, Bing Webmaster Tools, Google AdSense and Resend.
   If a site asks me to log in, treat it as a blocker (below): leave the tab open and move on.
 - Never buy anything or enter payment details. Never delete existing projects, keys, domains
@@ -109,25 +109,13 @@ Settings → Secrets and variables → Actions → New repository secret:
   INDEXNOW_KEY            = the same value as that site's Vercel INDEXNOW_KEY
   RESEND_API_KEY          = from step 7 (come back to it)
   EMAIL_FROM              = Lorcana Compare <alerts@lorcanacompare.com>   /   Gundam Compare <alerts@gundamcompare.com>
-  STRIPE_SECRET_KEY       = from step 6 (come back to it; used by the health monitor)
 Variables tab → New repository variable:
   SITE_URL = https://lorcanacompare.com   (Gundam repo: https://gundamcompare.com)
 
-=== 6. Stripe (dashboard.stripe.com, live mode) ===
-a) Product catalog → create four products, each with two recurring USD prices:
-     "Lorcana Compare Plus"    $2.99 / month and $23.99 / year
-     "Lorcana Compare Premium" $9.99 / month and $79.99 / year
-     "Gundam Compare Plus"     $2.99 / month and $23.99 / year
-     "Gundam Compare Premium"  $9.99 / month and $79.99 / year
-   In each Vercel project set STRIPE_PRICE_PLUS_MONTHLY, STRIPE_PRICE_PLUS_YEARLY,
-   STRIPE_PRICE_PREMIUM_MONTHLY, STRIPE_PRICE_PREMIUM_YEARLY to that site's price ids (price_...).
-b) Developers → API keys → Secret key → STRIPE_SECRET_KEY in both Vercel projects and both GitHub repos.
-c) Developers → Webhooks → Add endpoint, one per site:
-     https://lorcanacompare.com/api/stripe/webhook
-     https://gundamcompare.com/api/stripe/webhook
-   Events: customer.subscription.created, customer.subscription.updated, customer.subscription.deleted.
-   Copy each endpoint's signing secret (whsec_...) into that project's STRIPE_WEBHOOK_SECRET.
-d) Settings → Billing → Customer portal: activate it (allow cancelling and switching plans). Save.
+=== 6. Stripe: SKIP FOR NOW ===
+Paid plans are "coming soon" on both sites (the first 50 accounts on each get Premium free),
+so do nothing in Stripe. Leave STRIPE_* unset everywhere. (When I'm ready to charge, the steps
+are in docs/SETUP.md, "Turning payments on".)
 
 === 7. Email (resend.com) ===
 Domains → Add domain: lorcanacompare.com, then gundamcompare.com. Add the DNS records Resend shows
@@ -200,10 +188,10 @@ On each site: create an account with bill.jyang101@gmail.com (any password). Con
 shows top-right and /admin loads. Open a card, click Buy on a store row and confirm it opens the
 store. Check the store URL: an eBay link must contain "campid=", and a TCGplayer link must
 start at partner.tcgplayer.com. Then Vercel → that project → Analytics → Events should show
-"buy_click" within a few minutes (filter by retailer). Open /premium, click Plus → Monthly and confirm Stripe Checkout opens, then close it
-without paying.
+"buy_click" within a few minutes (filter by retailer). Because this is one of the first 50 accounts, /account must show
+"★ Founding member: Premium is free for you" and the plan "premium". Open /premium and
+confirm it shows the founding-members offer and "Coming soon" on the paid plans.
 
-Then give me the DONE / NEEDS YOU summary from the ground rules, also listing: Neon project names, which secrets and variables were set where, the Stripe
-price ids and webhook endpoints, the eBay keyset status and account-deletion verification, the
+Then give me the DONE / NEEDS YOU summary from the ground rules, also listing: Neon project names, which secrets and variables were set where, the eBay keyset status and account-deletion verification, the
 EPN campaign ids, whether Web Analytics and the buy_click events are showing, Google/Bing/AdSense status, and anything that failed or needs me.
 ```

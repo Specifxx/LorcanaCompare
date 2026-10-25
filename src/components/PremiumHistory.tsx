@@ -11,7 +11,7 @@ export function PremiumHistory({ productId }: { productId: number }) {
     <div className="mt-3">
       {state && state !== "locked" && <PriceChart series={state.series} days={state.days} />}
       {state === "locked" ? (
-        <p className="text-sm text-muted">Full price history is part of <a className="link" href="/premium">Plus and Premium</a>.</p>
+        <p className="text-sm text-muted">Full price history is a <a className="link" href="/premium">Premium</a> feature, free for our first 50 accounts.</p>
       ) : (
         !state && (
           <button

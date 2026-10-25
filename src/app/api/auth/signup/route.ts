@@ -3,6 +3,8 @@ import bcrypt from "bcryptjs";
 import { prisma, dbConfigured } from "@/lib/db";
 import { createSession } from "@/lib/auth";
 import { ipOf, limited } from "@/lib/rate-limit";
+import { FOUNDING_LIMIT, FOUNDING_UNTIL } from "@/lib/premium";
+import { isAdminEmail } from "@/lib/admin";
 
 export async function POST(req: Request) {
   if (!dbConfigured()) return NextResponse.json({ error: "Accounts are not switched on yet." }, { status: 503 });
@@ -13,7 +15,18 @@ export async function POST(req: Request) {
   if (!password || password.length < 8 || password.length > 200) return NextResponse.json({ error: "Password must be at least 8 characters." }, { status: 400 });
   const exists = await prisma.user.findUnique({ where: { email: e }, select: { id: true } });
   if (exists) return NextResponse.json({ error: "That email already has an account — sign in instead." }, { status: 409 });
-  const u = await prisma.user.create({ data: { email: e, passwordHash: await bcrypt.hash(password, 10) }, select: { id: true } });
+  // The first FOUNDING_LIMIT accounts get Premium free. Two sign-ups racing for
+  // the last place can both get it; a 51st founding member is harmless.
+  // Admins already have Premium, so they never take a founding place.
+  const founding = !isAdminEmail(e) && (await prisma.user.count({ where: { foundingMember: true } })) < FOUNDING_LIMIT;
+  const u = await prisma.user.create({
+    data: {
+      email: e,
+      passwordHash: await bcrypt.hash(password, 10),
+      ...(founding ? { foundingMember: true, tier: "premium", premiumUntil: FOUNDING_UNTIL } : {}),
+    },
+    select: { id: true },
+  });
   await createSession(u.id);
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, founding });
 }

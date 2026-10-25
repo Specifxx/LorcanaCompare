@@ -22,6 +22,7 @@ export default async function Admin() {
   const day = new Date(Date.now() - 86_400_000);
   const week = new Date(Date.now() - 7 * 86_400_000);
   const month = new Date(Date.now() - 30 * 86_400_000);
+  const founders = await prisma.user.count({ where: { foundingMember: true } });
   const [users, newUsers, tiers, alerts, clicks24, clicks7, bySource, topProducts, messages, subs] = await Promise.all([
     prisma.user.count(),
     prisma.user.count({ where: { createdAt: { gte: week } } }),
@@ -35,14 +36,15 @@ export default async function Admin() {
     prisma.newsletterSubscriber.count(),
   ]);
   const paid = Object.fromEntries(tiers.map((t) => [t.tier, t._count._all]));
-  const mrr = (paid.plus ?? 0) * PLANS.plus.monthly + (paid.premium ?? 0) * PLANS.premium.monthly;
+  const mrr = (paid.plus ?? 0) * PLANS.plus.monthly + Math.max(0, (paid.premium ?? 0) - founders) * PLANS.premium.monthly;
   const m = meta();
   return (
     <div className="flex flex-col gap-8">
       <h1 className="font-display text-3xl font-black">{SITE.name} admin</h1>
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
         <Stat label="Users" value={users} sub={`+${newUsers} this week`} />
-        <Stat label="Paying" value={(paid.plus ?? 0) + (paid.premium ?? 0)} sub={`${paid.plus ?? 0} Plus · ${paid.premium ?? 0} Premium`} />
+        <Stat label="Founding members" value={`${founders}/50`} sub="Premium free" />
+        <Stat label="Paying" value={Math.max(0, (paid.plus ?? 0) + (paid.premium ?? 0) - founders)} sub="paid plans: coming soon" />
         <Stat label="MRR (list price)" value={money(mrr)} sub="yearly plans counted monthly" />
         <Stat label="Affiliate clicks" value={clicks24} sub={`${clicks7} in 7 days`} />
         <Stat label="Price alerts" value={alerts} />

@@ -21,6 +21,7 @@ const PRIVATE = new Set([
   "src/app/api/stripe/portal/route.ts",
   "src/app/api/stripe/webhook/route.ts",
   "src/app/go/route.ts",
+  "src/app/api/founding/route.ts",
 ]);
 
 function walk(dir: string): string[] {

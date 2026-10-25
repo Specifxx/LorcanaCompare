@@ -2,6 +2,16 @@
 // everyone; paid tiers watch prices for you.
 export type Tier = "free" | "plus" | "premium";
 
+// Paid plans are "coming soon" (owner, 2026-10-25: "I can't be bothered to set
+// up Stripe right now"). Checkout stays off until PAYMENTS_ENABLED=1 AND a
+// Stripe key are set; the code behind it is complete.
+export const paymentsLive = () => process.env.PAYMENTS_ENABLED === "1" && !!process.env.STRIPE_SECRET_KEY;
+
+// Founding members: the first FOUNDING_LIMIT accounts on each site get
+// Premium free, for good (owner, 2026-10-25).
+export const FOUNDING_LIMIT = 50;
+export const FOUNDING_UNTIL = new Date("2100-01-01T00:00:00Z");
+
 export const PLANS = {
   plus: { name: "Plus", monthly: 299, yearly: 2399 },
   premium: { name: "Premium", monthly: 999, yearly: 7999 },

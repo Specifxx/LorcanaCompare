@@ -3,11 +3,12 @@ import { getUser } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { lineItem, stripe, stripeConfigured, type Interval, type PaidTier } from "@/lib/stripe";
 import { abs } from "@/lib/site";
+import { paymentsLive } from "@/lib/premium";
 
 export async function POST(req: Request) {
   const u = await getUser();
   if (!u) return NextResponse.json({ error: "Sign in first" }, { status: 401 });
-  if (!stripeConfigured()) return NextResponse.json({ error: "Payments are not switched on yet." }, { status: 503 });
+  if (!stripeConfigured() || !paymentsLive()) return NextResponse.json({ error: "Paid plans are coming soon." }, { status: 503 });
   const { tier, interval } = (await req.json().catch(() => ({}))) as { tier?: PaidTier; interval?: Interval };
   if (tier !== "plus" && tier !== "premium") return NextResponse.json({ error: "Unknown plan" }, { status: 400 });
   const iv: Interval = interval === "yearly" ? "yearly" : "monthly";

@@ -45,3 +45,15 @@ human.
   budget. The ops monitor emails you when something breaks.
 * Adding a store: verify that its `products.json` returns this game's
   products, then add it to `src/content/stores.ts`.
+
+## Turning payments on (later)
+
+Paid plans show "Coming soon", and the first 50 accounts on each site are
+founding members with Premium free for good. The Stripe code is complete. To
+start charging:
+
+1. In Stripe, create Plus ($2.99/$23.99) and Premium ($9.99/$79.99) prices per
+   site, a webhook to `/api/stripe/webhook` for the three
+   `customer.subscription.*` events, and turn on the customer portal.
+2. In Vercel set `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, the four
+   `STRIPE_PRICE_*` ids and `PAYMENTS_ENABLED=1`, then redeploy.

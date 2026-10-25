@@ -13,7 +13,7 @@ export async function POST(req: Request) {
   const count = await prisma.priceAlert.count({ where: { userId: u.id } });
   const existing = await prisma.priceAlert.findUnique({ where: { userId_productId: { userId: u.id, productId } }, select: { id: true } });
   if (!existing && count >= LIMITS[u.tier].alerts)
-    return NextResponse.json({ error: `Your plan includes ${LIMITS[u.tier].alerts} alert${LIMITS[u.tier].alerts === 1 ? "" : "s"}. Upgrade for more.` }, { status: 402 });
+    return NextResponse.json({ error: `Your plan includes ${LIMITS[u.tier].alerts} alert${LIMITS[u.tier].alerts === 1 ? "" : "s"}. Paid plans with more alerts are coming soon.` }, { status: 402 });
   await prisma.priceAlert.upsert({
     where: { userId_productId: { userId: u.id, productId } },
     create: { userId: u.id, productId, targetCents },
