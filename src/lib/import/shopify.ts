@@ -47,12 +47,33 @@ export function pickVariant(p: ShopifyProduct): ShopifyVariant | null {
   return list[0] ?? null;
 }
 
+// Shopify Markets prices by the VISITOR's country. GitHub's runners are in the
+// US, so without ?country= an Australian store answers in converted US dollars
+// (Gameology's A$179.95 box came back as 135.00 on 2026-10-25). Every request
+// names the store's own country, as Rift Compare's importer does; eurozone
+// stores all use ES (one EUR price across the single market).
+const ISO: Record<string, string> = { US: "US", UK: "GB", CA: "CA", AU: "AU", SG: "SG", EU: "ES" };
+export const countryOf = (store: StoreConfig) => store.country ?? ISO[store.market];
+
+/** The currency the storefront charges (cart.js, else meta.json), or null if
+ *  neither answers. Rift Compare once published a Canadian store's CAD prices
+ *  as US$ for ten days; this check runs before every store's import. */
+export async function storeCurrency(store: StoreConfig): Promise<string | null> {
+  for (const path of ["/cart.js", "/meta.json"]) {
+    try {
+      const d = await fetchJson<{ currency?: string }>(`${store.base}${path}?country=${countryOf(store)}`, {}, 1);
+      if (d.currency) return d.currency;
+    } catch {}
+  }
+  return null;
+}
+
 export async function fetchStore(store: StoreConfig): Promise<StoreItem[]> {
   const seen = new Set<number>();
   const out: StoreItem[] = [];
   for (const handle of store.collections) {
     for (let page = 1; page <= MAX_PAGES; page++) {
-      const url = `${store.base}/collections/${handle}/products.json?limit=250&page=${page}`;
+      const url = `${store.base}/collections/${handle}/products.json?limit=250&page=${page}&country=${countryOf(store)}`;
       const data = await fetchJson<{ products: ShopifyProduct[] }>(url);
       for (const p of data.products) {
         if (seen.has(p.id)) continue;

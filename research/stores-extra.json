@@ -1,0 +1,400 @@
+{
+ "stores": [
+  {
+   "key": "nutmeggames",
+   "name": "nutmeggames",
+   "base": "https://nutmeggames.com",
+   "country": "US",
+   "currency": "USD",
+   "collections": [
+    "lorcana-singles-all"
+   ],
+   "kind": "singles",
+   "sampleTitles": [
+    "Khan Industries - Greenway Landmark (204/204) [Hyperia City]",
+    "Baloo - Delivery Pilot (188/204) [Hyperia City]",
+    "Colors of the Wind (64/204) [Winterspell]"
+   ],
+   "productCount": 3538,
+   "titleFormat": "Name - Subtitle (num/total) [Set]"
+  },
+  {
+   "key": "axionnow",
+   "name": "axionnow",
+   "base": "https://axionnow.com",
+   "country": "UK",
+   "currency": "GBP",
+   "collections": [
+    "lorcana-singles-products-all"
+   ],
+   "kind": "singles",
+   "sampleTitles": [
+    "Elsa - The Fifth Spirit (48)",
+    "Flynn Rider - Frenemy (106)",
+    "Amethyst Chromicon (66)"
+   ],
+   "productCount": 3358,
+   "titleFormat": "Name - Subtitle (num), set not in title"
+  },
+  {
+   "key": "redfoxgamingonline",
+   "name": "redfoxgamingonline",
+   "base": "https://redfoxgamingonline.com",
+   "country": "US",
+   "currency": "USD",
+   "collections": [
+    "disney-lorcana-singles"
+   ],
+   "kind": "singles",
+   "sampleTitles": [
+    "99 Puppies (24/204) [Into the Inklands]",
+    "A Pirate's Life (128/204) [Ursula's Return]",
+    "Captain Hook - The Pirate King (Enchanted) (215/204) [Reign of Jafar]"
+   ],
+   "productCount": 2010,
+   "titleFormat": "Name - Subtitle (num/total) [Set]"
+  },
+  {
+   "key": "gglehi",
+   "name": "gglehi",
+   "base": "https://store.gglehi.com",
+   "country": "US",
+   "currency": "USD",
+   "collections": [
+    "lorcana-singles-all"
+   ],
+   "kind": "singles",
+   "sampleTitles": [
+    "Friends on the Other Side (64/204) [The First Chapter]",
+    "Let the Storm Rage On (199/204) [Rise of the Floodborn]",
+    "Ba-Boom! (196/204) [Into the Inklands]"
+   ],
+   "productCount": 3014,
+   "titleFormat": "Name - Subtitle (num/total) [Set]"
+  },
+  {
+   "key": "pfcomics",
+   "name": "pfcomics",
+   "base": "https://pfcomics.com",
+   "country": "US",
+   "currency": "USD",
+   "collections": [
+    "lorcana-singles"
+   ],
+   "kind": "singles",
+   "sampleTitles": [
+    "Belle & Beast - Certain as the Sun (Iconic) (245/207) [Attack of the Vine!]",
+    "Sulley & Boo - Scare Buddies (Enchanted) (229/207) [Attack of the Vine!]",
+    "Castle Wyvern - Above the Clouds (204/204) [Whispers in the Well]"
+   ],
+   "productCount": 2539,
+   "titleFormat": "Name - Subtitle (num/total) [Set]"
+  },
+  {
+   "key": "retrogamingofdenver",
+   "name": "retrogamingofdenver",
+   "base": "https://retrogamingofdenver.com",
+   "country": "US",
+   "currency": "USD",
+   "collections": [
+    "lorcana-singles"
+   ],
+   "kind": "singles",
+   "sampleTitles": [
+    "The Wardrobe - Belle's Confidant (57/204) - The First Chapter",
+    "Vicious Betrayal (100/204) - The First Chapter",
+    "Mickey Mouse - Wayward Sorcerer (Enchanted) (208/204) - The First Chapter Holofoil"
+   ],
+   "productCount": 3499,
+   "titleFormat": "mixed; see samples"
+  },
+  {
+   "key": "magicandmonsters",
+   "name": "magicandmonsters",
+   "base": "https://magicandmonsters.com",
+   "country": "US",
+   "currency": "USD",
+   "collections": [
+    "lorcana-singles"
+   ],
+   "kind": "singles",
+   "sampleTitles": [
+    "Merlin - Rabbit (52/204) [Rise of the Floodborn]",
+    "Stitch - New Dog (22/204) [The First Chapter]",
+    "Half Hexwell Crown (65/204) [Shimmering Skies]"
+   ],
+   "productCount": 575,
+   "titleFormat": "Name - Subtitle (num/total) [Set]"
+  },
+  {
+   "key": "epikcg",
+   "name": "epikcg",
+   "base": "https://www.epikcg.com",
+   "country": "US",
+   "currency": "USD",
+   "collections": [
+    "disney-lorcana-singles-all"
+   ],
+   "kind": "singles",
+   "sampleTitles": [
+    "Anna - Diplomatic Queen (85/204) [Shimmering Skies]",
+    "Clarabelle - Light on Her Hooves (84/204) [Shimmering Skies]",
+    "Winterspell Lore Card (2 of 9) [Winterspell]"
+   ],
+   "productCount": 2697,
+   "titleFormat": "Name - Subtitle (num/total) [Set]"
+  },
+  {
+   "key": "galacticgamez",
+   "name": "galacticgamez",
+   "base": "https://www.galacticgamez.com",
+   "country": "US",
+   "currency": "USD",
+   "collections": [
+    "lorcana-singles-all"
+   ],
+   "kind": "singles",
+   "sampleTitles": [
+    "Robin Hood - Champion of Sherwood (190/204) [Into the Inklands]",
+    "Tinker Bell - Giant Fairy (193/204) [The First Chapter]",
+    "Beast - Hardheaded (172/204) [The First Chapter]"
+   ],
+   "productCount": 1957,
+   "titleFormat": "Name - Subtitle (num/total) [Set]"
+  },
+  {
+   "key": "thehaventabletop",
+   "name": "thehaventabletop",
+   "base": "https://thehaventabletop.com",
+   "country": "US",
+   "currency": "USD",
+   "collections": [
+    "lorcana-singles"
+   ],
+   "kind": "singles",
+   "sampleTitles": [
+    "Tiana - Warm and Happy (Epic) (205/204) [Winterspell]",
+    "Donald Duck - Along for the Ride (Epic) (220/204) [Winterspell]",
+    "Nero - Fearsome Crocodile (Cold Foil) (65/204) [Reign of Jafar]"
+   ],
+   "productCount": 3481,
+   "titleFormat": "Name - Subtitle (num/total) [Set]"
+  },
+  {
+   "key": "mothershipatx",
+   "name": "mothershipatx",
+   "base": "https://store.mothershipatx.com",
+   "country": "US",
+   "currency": "USD",
+   "collections": [
+    "lorcana-singles"
+   ],
+   "kind": "singles",
+   "sampleTitles": [
+    "Grab Your Sword (198/204) [The First Chapter]",
+    "Madam Mim - Fox (46/204) [Rise of the Floodborn]",
+    "Winnie the Pooh - Hunny Pirate (3/204) [Azurite Sea]"
+   ],
+   "productCount": 1956,
+   "titleFormat": "Name - Subtitle (num/total) [Set]"
+  },
+  {
+   "key": "tier1games",
+   "name": "tier1games",
+   "base": "https://tier1games.com",
+   "country": "US",
+   "currency": "USD",
+   "collections": [
+    "disney-lorcana-all-products"
+   ],
+   "kind": "singles",
+   "sampleTitles": [
+    "Elsa - Ice Maker (Foil) - Disney Lorcana Promo Cards - 2",
+    "Mickey Mouse - Brave Little Tailor - D23 Promos - 1",
+    "Prince Phillip - Vanquisher of Foes - Ursula's Return - 87/204"
+   ],
+   "productCount": 2480,
+   "titleFormat": "mixed; see samples"
+  },
+  {
+   "key": "storedevastation",
+   "name": "storedevastation",
+   "base": "https://us.storedevastation.com",
+   "country": "US",
+   "currency": "USD",
+   "collections": [
+    "disney-lorcana"
+   ],
+   "kind": "singles",
+   "sampleTitles": [
+    "The Queen - Diviner (156/204) [Ursula's Return]",
+    "Anna - True-Hearted (138/204) [Ursula's Return]",
+    "Whispers in the Well Case File Cards (13 of 18) [Whispers in the Well]"
+   ],
+   "productCount": 3228,
+   "titleFormat": "Name - Subtitle (num/total) [Set]"
+  },
+  {
+   "key": "pokeboxusa",
+   "name": "pokeboxusa",
+   "base": "https://www.pokeboxusa.com",
+   "country": "US",
+   "currency": "USD",
+   "collections": [
+    "disney-lorcana-single-cards"
+   ],
+   "kind": "singles",
+   "sampleTitles": [
+    "The Madrigal Family - Every Generation (30/207) (Attack of the Vine!) (13)",
+    "With a Few Good Friends (65/207) (Attack of the Vine!) (13)",
+    "Stitch - Naughty Experiment (70/204) (Winterspell) (11)"
+   ],
+   "productCount": 3456,
+   "titleFormat": "Name - Subtitle (num), set not in title"
+  },
+  {
+   "key": "wnygaming",
+   "name": "wnygaming",
+   "base": "https://wnygaming.com",
+   "country": "US",
+   "currency": "USD",
+   "collections": [
+    "lorcana-singles"
+   ],
+   "kind": "singles",
+   "sampleTitles": [
+    "Let It Go (163/204) [The First Chapter]",
+    "Tinker Bell - Giant Fairy (193/204) [The First Chapter]",
+    "Sleepy's Flute (34/204) [Rise of the Floodborn]"
+   ],
+   "productCount": 1969,
+   "titleFormat": "Name - Subtitle (num/total) [Set]"
+  },
+  {
+   "key": "atlantis-comics",
+   "name": "atlantis-comics",
+   "base": "https://atlantis-comics.com",
+   "country": "US",
+   "currency": "USD",
+   "collections": [
+    "all-lorcana-singles"
+   ],
+   "kind": "singles",
+   "sampleTitles": [
+    "Elsa - Spirit of Winter (The First Chapter 42/204) Legendary - Near Mint",
+    "Anna - Heir to Arendelle (The First Chapter 35/204) Uncommon - Near Mint",
+    "Yen Sid - Powerful Sorcerer (Ursula's Return 059/204) Legendary - Near Mint"
+   ],
+   "productCount": 4389,
+   "titleFormat": "mixed; see samples"
+  },
+  {
+   "key": "spankyscardshop",
+   "name": "spankyscardshop",
+   "base": "https://spankyscardshop.com",
+   "country": "US",
+   "currency": "USD",
+   "collections": [
+    "lorcana-singles"
+   ],
+   "kind": "singles",
+   "sampleTitles": [
+    "Eeyore - In the Way (Enchanted) (226/204) [Winterspell] Holofoil",
+    "Ohana Means Family (Enchanted) (224/204) [Winterspell] Holofoil",
+    "Woody - Leader of the Toys (21/204) [Wilds Unknown]"
+   ],
+   "productCount": 2391,
+   "titleFormat": "Name - Subtitle (num/total) [Set]"
+  },
+  {
+   "key": "impactgamingcenter",
+   "name": "impactgamingcenter",
+   "base": "https://impactgamingcenter.gg",
+   "country": "US",
+   "currency": "USD",
+   "collections": [
+    "lorcana-singles"
+   ],
+   "kind": "singles",
+   "sampleTitles": [
+    "Lucky Dime (165/204) [Into the Inklands]",
+    "Tinker Bell - Giant Fairy (193/204) [The First Chapter]",
+    "Lantern (33/204) [The First Chapter]"
+   ],
+   "productCount": 785,
+   "titleFormat": "Name - Subtitle (num/total) [Set]"
+  },
+  {
+   "key": "blackvaultgaming",
+   "name": "blackvaultgaming",
+   "base": "https://blackvaultgaming.com",
+   "country": "US",
+   "currency": "USD",
+   "collections": [
+    "disney-lorcana-singles"
+   ],
+   "kind": "singles",
+   "sampleTitles": [
+    "Treasure Mountain - Azurite Sea Island [6 - 203/204]",
+    "Strange Things [12 - 95/204]",
+    "Heihei - Created by the Vine [13 - 54/207]"
+   ],
+   "productCount": 1232,
+   "titleFormat": "mixed; see samples"
+  },
+  {
+   "key": "gameostorus",
+   "name": "gameostorus",
+   "base": "https://gameostorus.com",
+   "country": "US",
+   "currency": "USD",
+   "collections": [
+    "lorcana-singles"
+   ],
+   "kind": "singles",
+   "sampleTitles": [
+    "Hamm - Piggy Bank (11/204) [Wilds Unknown]",
+    "Captain Hook - Forceful Duelist (174/204) [The First Chapter]",
+    "John Silver - Greedy Treasure Seeker (192/204) [Fabled]"
+   ],
+   "productCount": 2063,
+   "titleFormat": "Name - Subtitle (num/total) [Set]"
+  },
+  {
+   "key": "diceanddestiny",
+   "name": "diceanddestiny",
+   "base": "https://www.diceanddestiny.co.uk",
+   "country": "UK",
+   "currency": "GBP",
+   "collections": [
+    "disney-lorcana-singles"
+   ],
+   "kind": "singles",
+   "sampleTitles": [
+    "Hercules - Baby Demigod (86)",
+    "Diablo - Obedient Raven (49)",
+    "Goofy - Flying Goof (123)"
+   ],
+   "productCount": 1379,
+   "titleFormat": "Name - Subtitle (num), set not in title"
+  },
+  {
+   "key": "dicesaloonsingles",
+   "name": "dicesaloonsingles",
+   "base": "https://dicesaloonsingles.co.uk",
+   "country": "UK",
+   "currency": "GBP",
+   "collections": [
+    "lorcana-singles"
+   ],
+   "kind": "singles",
+   "sampleTitles": [
+    "Woody - Helping A Friend (1)",
+    "Hero Work (132)",
+    "Launchpad - Hideout Defender (172)"
+   ],
+   "productCount": 2331,
+   "titleFormat": "Name - Subtitle (num), set not in title"
+  }
+ ]
+}

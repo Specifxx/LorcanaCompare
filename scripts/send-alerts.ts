@@ -5,7 +5,9 @@ import { PrismaClient } from "@prisma/client";
 import fs from "node:fs";
 import path from "node:path";
 import { SITE } from "@/site.config";
-import type { Catalog, Prices } from "@/lib/site-types";
+import type { Catalog } from "@/lib/site-types";
+import { readSummary } from "@/lib/price-store";
+import { decodeOffer } from "@/lib/offer-codec";
 import { sendEmail, escapeHtml } from "@/lib/email";
 import { money } from "@/lib/format";
 
@@ -13,7 +15,7 @@ async function main() {
   if (!process.env.DATABASE_URL) return console.log("[alerts] no DATABASE_URL — skipped");
   const dir = path.join(process.cwd(), "data", "public");
   const catalog = JSON.parse(fs.readFileSync(path.join(dir, "catalog.json"), "utf8")) as Catalog;
-  const prices = JSON.parse(fs.readFileSync(path.join(dir, "prices.json"), "utf8")) as Prices;
+  const summary = readSummary();
   const byId = new Map(catalog.products.map((p) => [p.id, p]));
   const site = (process.env.NEXT_PUBLIC_SITE_URL || `https://${SITE.domain}`).replace(/\/$/, "");
   const db = new PrismaClient();
@@ -26,7 +28,7 @@ async function main() {
   let sent = 0;
   for (const a of alerts) {
     const p = byId.get(a.productId);
-    const best = prices.byId[a.productId]?.offers.find((o) => o.inStock && o.currency === "USD");
+    const best = (summary[a.productId]?.b ?? []).map(decodeOffer).filter((o) => o && o.currency === "USD").sort((x, y) => x!.cents - y!.cents)[0];
     if (!p || !best || best.cents > a.targetCents) continue;
     const ok = await sendEmail(
       a.user.email,

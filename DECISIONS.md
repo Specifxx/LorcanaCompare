@@ -73,3 +73,42 @@ via the setup prompt instead. On 2026-10-25 the pair returned
 `invalid_client` from eBay's token endpoint: a new production keyset stays
 disabled until the Marketplace Account Deletion notification is configured or
 an exemption is filed (docs/SETUP.md, step 4).
+
+## Store coverage: every Rift Compare store, plus the sister sites' — 2026-10-25
+
+**Owner:** "we want to have as many sources as possible … Take a look at how
+many stores RiftCompare has. If we can get like 80% of that, or more … aim for
+at least 200 stores."
+
+Rift Compare tracks 221 Shopify stores. Every one, plus the 321 other stores in
+OP Compare's and MTG Compare's lists and an agent search of US/UK stores, was
+probed: `/collections.json` for a Lorcana / Gundam Card Game collection (no
+Gunpla, Gundam Assemble or Japanese-only collections), then that collection's
+`products.json` checked for real product. Collections that came back empty, and
+duplicate hostnames of one shop, were dropped after the first full import.
+Result: Lorcana 318 stores, Gundam 189 (80% of Rift is 177). On the 2026-10-25
+run Lorcana had 379,097 prices; a $20+ card is listed at a median of 56 stores
+(6 in stock), and Gundam at 27 (5 in stock). Expensive singles sell out, so
+tiles show both "N stores · M in stock", and out-of-stock rows stay in the price
+table (dimmed) with their last price.
+
+Stores are fetched 8 at a time (each still one page at a time) so ~300 stores
+fit the workflow's timeout. Prices are stored as compact tuples, one file per
+set (`data/public/prices/`), plus `summary.json` for list pages: the single
+`prices.json` had reached 95 MB.
+
+Currency is now proved per store: four Canadian stores had been labelled US by
+the probe (their CAD prices would have shown as US$) and one New Zealand store
+as Australian. They were corrected or removed, and the daily import now reads
+each store's `/cart.js` currency first and refuses a store whose currency is not
+its market's, the ops monitor reporting it.
+
+The same day the cause of a worse bug was found: without `?country=` Shopify
+Markets answers in the visitor's currency, and the runners are in the US, so
+every non-US store's prices had come back converted to USD (Gameology's A$179.95
+box as 135.00) and been labelled local. Every store request now sends the
+store's own country (`countryOf`, eurozone → ES as on Rift Compare).
+
+Not yet covered: big non-Shopify US stores (CoolStuffInc, Star City Games,
+Troll and Toad, GameNerdz). Each needs its own scraper, and several sit behind
+Cloudflare challenges.

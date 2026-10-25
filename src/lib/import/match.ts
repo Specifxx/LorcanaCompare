@@ -29,6 +29,8 @@ export interface MatchIndex {
   bySetNumber: Map<string, Product[]>;
   /** "setId|full normalised name" → products, for titles with no number at all. */
   bySetName: Map<string, Product[]>;
+  /** set code ("13", "Q1") and name initials ("TFC") → set ids */
+  setByCode: Map<string, number[]>;
   sealed: Product[];
   setName: Map<number, string[]>;
   style: "fraction" | "code";
@@ -126,7 +128,19 @@ export function buildIndex(products: Product[], sets: SetInfo[], style: "fractio
     }
   }
   const setName = new Map(sets.map((s) => [s.id, tokens(s.name).filter((t) => !STOP.has(t))]));
-  return { byNumber, bySetNumber, bySetName, sealed, setName, style };
+  const setByCode = new Map<string, number[]>();
+  const addCode = (c: string, id: number) => {
+    const k = c.toUpperCase();
+    if (!k) return;
+    if (!setByCode.has(k)) setByCode.set(k, []);
+    if (!setByCode.get(k)!.includes(id)) setByCode.get(k)!.push(id);
+  };
+  for (const st of sets) {
+    addCode(st.code, st.id);
+    const words = st.name.replace(/[^A-Za-z0-9 ]/g, " ").split(/\s+/).filter(Boolean);
+    if (words.length >= 2) addCode(words.map((w) => w[0]).join(""), st.id);
+  }
+  return { byNumber, bySetNumber, bySetName, setByCode, sealed, setName, style };
 }
 
 function overlap(need: string[], have: Set<string>): number {
@@ -149,22 +163,47 @@ export const isForeign = (title: string) => FOREIGN.test(title);
 const MULTI = /\b(pair|bundle of \d+|set of \d+|\d+\s*x|x\s*\d+|\d+[- ]pack bundle|lot of)\b/i;
 const isMulti = (s: string) => MULTI.test(s.replace(/\b\d+\s*packs?\)/i, ""));
 
+/** Titles that give the card's number in the set but not "n/total":
+ *    "99 Puppies (3-024)"            set code - number
+ *    "Ariel - On Human Legs [TFC-1]" set initials - number
+ *    "1TFC-059, L, Ursula" / "[14HPC-132]"  code + initials - number
+ *    "Elsa - The Fifth Spirit (48)"  bare number; the set comes from the
+ *                                    tags / product type (its name or code)
+ *  The name check in matchCard still has to pass. */
+function fractionFallback(title: string, context: string, idx: MatchIndex): Product[] {
+  const out: Product[] = [];
+  const add = (setIds: number[] | undefined, n: number) => {
+    for (const id of setIds ?? []) for (const p of idx.bySetNumber.get(`${id}|${n}`) ?? []) if (!out.includes(p)) out.push(p);
+  };
+  const coded = title.match(/(?:^|[\s(\[])(\d{1,2})?([A-Z]{2,5})?-(\d{1,3})(?=[\s)\],]|$)/);
+  if (coded && (coded[1] || coded[2])) {
+    const n = parseInt(coded[3], 10);
+    if (coded[1]) add(idx.setByCode.get(coded[1]), n);
+    if (!out.length && coded[2]) add(idx.setByCode.get(coded[2]), n);
+    if (out.length) return out;
+  }
+  const bare = title.match(/\((\d{1,4})\)|#(\d{1,4})\b/);
+  const n = bare ? parseInt(bare[1] ?? bare[2], 10) : 0;
+  if (!n) return out;
+  const ctxText = `${title} ${context}`;
+  const ctx = new Set(tokens(ctxText));
+  for (const [setId, setTokens] of idx.setName)
+    if (setTokens.length && setTokens.every((t) => ctx.has(t))) add([setId], n);
+  if (!out.length) {
+    // A tag that is exactly a set code ("12"), as some stores tag the set.
+    for (const tag of context.split(/\s{2,}|,|\|/).map((t) => t.trim())) add(idx.setByCode.get(tag.toUpperCase()), n);
+    for (const t of context.split(/\s+/)) if (/^(\d{1,2}|Q\d)$/i.test(t)) add(idx.setByCode.get(t.toUpperCase()), n);
+  }
+  return out;
+}
+
 /** `context` is extra text that may name the set (Shopify product_type / tags). */
 export function matchCard(title: string, idx: MatchIndex, context = ""): MatchResult | null {
   if (isForeign(title)) return null;
   const have = new Set(tokens(title));
   const scored: MatchResult[] = [];
-  let candidates = numbersInTitle(title, idx.style).flatMap((n) => idx.byNumber.get(n) ?? []);
-  if (!candidates.length && idx.style === "fraction") {
-    // "(0017)" with the set named only in the product type.
-    const bare = title.match(/\((\d{1,4})\)|#(\d{1,4})\b/);
-    const n = bare ? parseInt(bare[1] ?? bare[2], 10) : 0;
-    if (n) {
-      const ctx = new Set(tokens(`${title} ${context}`));
-      for (const [setId, setTokens] of idx.setName)
-        if (setTokens.length && setTokens.every((t) => ctx.has(t))) candidates.push(...(idx.bySetNumber.get(`${setId}|${n}`) ?? []));
-    }
-  }
+  let candidates = [...new Set(numbersInTitle(title, idx.style).flatMap((n) => idx.byNumber.get(n) ?? []))];
+  if (!candidates.length && idx.style === "fraction") candidates = fractionFallback(title, context, idx);
   if (!candidates.length && !numbersInTitle(title, idx.style).length) {
     // No number anywhere: only an EXACT full-name match inside a set the
     // tags / product type name, and only when exactly one product fits.

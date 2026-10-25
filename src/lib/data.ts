@@ -4,7 +4,9 @@
 // once per server instance.
 import fs from "node:fs";
 import path from "node:path";
-import type { Catalog, EbayPick, Meta, PriceEntry, Prices, Product, SetInfo } from "./site-types";
+import type { Catalog, EbayPick, Meta, Offer, PriceEntry, Product, SetInfo } from "./site-types";
+import { readSetPrices, readSummary, type SummaryEntry } from "./price-store";
+import { decodeOffer } from "./offer-codec";
 import { referenceCents } from "./import/tcgcsv";
 import type { Series } from "./series";
 
@@ -20,7 +22,7 @@ function read<T>(rel: string, fallback: T): T {
 
 let cache: {
   catalog: Catalog;
-  prices: Prices;
+  summary: Record<string, SummaryEntry>;
   meta: Meta | null;
   picks: EbayPick[];
   bySlug: Map<string, Product>;
@@ -32,10 +34,9 @@ let cache: {
 function load() {
   if (cache) return cache;
   const catalog = read<Catalog>("public/catalog.json", { generatedAt: "", sets: [], products: [] });
-  const prices = read<Prices>("public/prices.json", { generatedAt: "", byId: {} });
   cache = {
     catalog,
-    prices,
+    summary: readSummary(),
     meta: read<Meta | null>("public/meta.json", null),
     picks: read<EbayPick[]>("public/ebay-picks.json", []),
     bySlug: new Map(catalog.products.map((p) => [p.slug, p])),
@@ -56,8 +57,37 @@ export const setBySlug = (slug: string) => load().setBySlug.get(slug) ?? null;
 export const setById = (id: number) => load().setById.get(id) ?? null;
 
 const EMPTY: PriceEntry = { tcg: {}, offers: [], change7d: null, change30d: null };
-export const priceOf = (id: number): PriceEntry => load().prices.byId[id] ?? EMPTY;
-export const refCents = (id: number): number | null => referenceCents(priceOf(id).tcg);
+// Full offers live in one file per set, loaded only by pages that show them.
+const shards = new Map<number, Record<string, PriceEntry>>();
+export function priceOf(id: number): PriceEntry {
+  const p = productById(id);
+  if (!p) return EMPTY;
+  if (!shards.has(p.setId)) shards.set(p.setId, readSetPrices(p.setId));
+  return shards.get(p.setId)![id] ?? EMPTY;
+}
+
+export interface Summary {
+  tcg: PriceEntry["tcg"];
+  change7d: number | null;
+  change30d: number | null;
+  inStockSources: number;
+  listedSources: number;
+  /** Cheapest in-stock offer per market, plus TCGplayer. */
+  best: Offer[];
+}
+const EMPTY_SUMMARY: Summary = { tcg: {}, change7d: null, change30d: null, inStockSources: 0, listedSources: 0, best: [] };
+const decoded = new Map<number, Summary>();
+/** Everything a list page needs, without loading the per-set shards. */
+export function summaryOf(id: number): Summary {
+  const hit = decoded.get(id);
+  if (hit) return hit;
+  const e = load().summary[id];
+  if (!e) return EMPTY_SUMMARY;
+  const s: Summary = { tcg: e.t, change7d: e.c7, change30d: e.c30, inStockSources: e.n, listedSources: e.l ?? e.n, best: e.b.map(decodeOffer).filter((o): o is Offer => !!o) };
+  decoded.set(id, s);
+  return s;
+}
+export const refCents = (id: number): number | null => referenceCents(summaryOf(id).tcg);
 
 export function historyOf(p: Product): Series {
   const h = read<Record<string, Series>>(`history/${p.setId}.json`, {});
@@ -98,7 +128,7 @@ export interface Mover {
 export function movers(days: 7 | 30 = 7, minCents = 200): { up: Mover[]; down: Mover[] } {
   const rows: Mover[] = [];
   for (const p of products()) {
-    const e = priceOf(p.id);
+    const e = summaryOf(p.id);
     const c = days === 7 ? e.change7d : e.change30d;
     const cents = refCents(p.id);
     if (c == null || cents == null || cents < minCents) continue;
@@ -112,7 +142,7 @@ export function movers(days: 7 | 30 = 7, minCents = 200): { up: Mover[]; down: M
 
 export interface Deal {
   p: Product;
-  offer: PriceEntry["offers"][number];
+  offer: Offer;
   market: number;
   saving: number; // percent below TCGplayer market
 }
@@ -123,9 +153,10 @@ export function deals(limit = 40): Deal[] {
   for (const p of products()) {
     const market = refCents(p.id);
     if (!market || market < 500) continue;
-    for (const o of priceOf(p.id).offers) {
+    const sm = summaryOf(p.id);
+    for (const o of sm.best) {
       if (o.source === "tcgplayer" || !o.inStock || o.currency !== "USD") continue;
-      if (o.printing && o.printing !== "Normal" && priceOf(p.id).tcg.Normal) continue;
+      if (o.printing && o.printing !== "Normal" && sm.tcg.Normal) continue;
       const saving = Math.round((1 - o.cents / market) * 100);
       if (saving >= 8 && saving <= 60) out.push({ p, offer: o, market, saving });
     }

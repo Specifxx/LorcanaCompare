@@ -5,7 +5,7 @@
 //   {{topall:N}}             the N most valuable cards in the game
 //   {{sealed:SETID}}         the set's sealed products, cheapest in-stock offer
 //   {{card:ID}}              link to a product page with its name
-import { byValue, priceOf, productById, products, productsInSet, refCents, setById } from "./data";
+import { byValue, priceOf, productById, products, productsInSet, refCents, setById, summaryOf } from "./data";
 import { money, pct } from "./format";
 import { shortName } from "./names";
 import { escapeHtml } from "./email";
@@ -15,7 +15,7 @@ import type { Product } from "./site-types";
 function table(rows: Product[], withSet: boolean): string {
   const tr = rows
     .map((p, i) => {
-      const e = priceOf(p.id);
+      const e = summaryOf(p.id);
       return `<tr><td>${i + 1}</td><td><a href="/card/${p.slug}">${escapeHtml(shortName(p.name))}</a>${p.number ? ` <span style="opacity:.6">${escapeHtml(p.number)}</span>` : ""}</td>${withSet ? `<td>${escapeHtml(setById(p.setId)?.name ?? "")}</td>` : ""}<td>${escapeHtml(p.rarity ?? "")}</td><td><b>${money(refCents(p.id))}</b></td><td>${pct(e.change7d)}</td></tr>`;
     })
     .join("");

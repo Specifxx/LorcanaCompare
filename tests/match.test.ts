@@ -51,3 +51,23 @@ test("variant markers", () => {
   assert.equal(printingOf("Elsa - Cold Foil"), "Cold Foil");
   assert.equal(printingOf("Elsa", "Non-Foil"), "Normal");
 });
+
+test("set code / initials / bare-number-with-set-tag formats", () => {
+  const s2 = [set(1, "The First Chapter"), set(3, "Attack of the Vine!")];
+  s2[1].code = "13";
+  s2[0].code = "1";
+  const idx2 = buildIndex([card(30, "Ariel - On Human Legs", "1/204", 1), card(13, "4*Town - Hottest Band of the Year", "17/204", 3), card(31, "Ursula - Power Hungry", "59/204", 1)], s2, "fraction");
+  assert.equal(matchCard("4*Town - Hottest Band of the Year (13-017) (Cold Foil)", idx2)?.product.id, 13);
+  assert.equal(matchCard("Ariel - On Human Legs [TFC-1] NM / Normal", idx2)?.product.id, 30);
+  assert.equal(matchCard("1TFC-059, L, Ursula - Power Hungry", idx2)?.product.id, 31);
+  assert.equal(matchCard("Ariel - On Human Legs (1)", idx2, "Singles | 1 | Character | Lorcana")?.product.id, 30);
+  assert.equal(matchCard("Ariel - On Human Legs (1)", idx2, "Singles | 13 | Character"), null);
+});
+
+test("every store request names the store's own country (Shopify Markets)", async () => {
+  const { countryOf } = await import("@/lib/import/shopify");
+  const base = { key: "x", name: "x", base: "https://x", collections: [], kind: "both" as const };
+  assert.equal(countryOf({ ...base, market: "AU" }), "AU");
+  assert.equal(countryOf({ ...base, market: "UK" }), "GB");
+  assert.equal(countryOf({ ...base, market: "EU" }), "ES");
+});

@@ -16,7 +16,7 @@ import { SITE } from "@/site.config";
 import type { Catalog, EbayPick, Market, Meta, Offer, PriceEntry, Prices, StoreStatus } from "@/lib/site-types";
 import { CURRENCY } from "@/lib/site-types";
 import { loadTcgcsv, referenceCents } from "@/lib/import/tcgcsv";
-import { fetchStore } from "@/lib/import/shopify";
+import { fetchStore, storeCurrency } from "@/lib/import/shopify";
 import { buildIndex, isPreorder, looksSealed, matchCard, matchSealed, printingOf } from "@/lib/import/match";
 import {
   ebayCredentials,
@@ -28,6 +28,7 @@ import {
 } from "@/lib/import/ebay";
 import { appendPoint, dayNumber, pctChange, readSetHistory, writeSetHistory } from "@/lib/import/history";
 import { fetchJson } from "@/lib/import/http";
+import { readAllPrices, writePrices } from "@/lib/price-store";
 
 const PUBLIC = path.join(process.cwd(), "data", "public");
 const STATE = path.join(process.cwd(), "data", "state");
@@ -80,7 +81,7 @@ async function clicksLast30d(): Promise<Map<number, number>> {
 async function main() {
   const now = new Date();
   const today = dayNumber(now);
-  const prevPrices = readJson<Prices>(path.join(PUBLIC, "prices.json"), { generatedAt: "", byId: {} });
+  const prevPrices: Prices = { generatedAt: "", byId: readAllPrices() };
   const prevMeta = readJson<Meta | null>(path.join(PUBLIC, "meta.json"), null);
 
   // 1. Catalogue + TCGplayer
@@ -106,8 +107,14 @@ async function main() {
     storeOffers.get(id)!.push(o);
   };
   if (process.env.IMPORT_SKIP_STORES !== "1") {
-    for (const store of SITE.stores) {
+    // Stores in parallel (each one still paginates politely, one page at a
+    // time): ~200 stores one after another would not fit the Actions timeout.
+    const queue = SITE.stores.slice();
+    const runStore = async (store: (typeof SITE.stores)[number]) => {
       try {
+        const cur = await storeCurrency(store);
+        if (cur && cur !== CURRENCY[store.market])
+          throw new Error(`store charges ${cur}, but is configured for ${store.market} (${CURRENCY[store.market]}) — fix its market in src/content/stores.ts`);
         const items = await fetchStore(store);
         let matched = 0;
         // Several listings can match one product (NM / foil / pre-order rows):
@@ -115,7 +122,7 @@ async function main() {
         const best = new Map<string, Offer>();
         for (const it of items) {
           const sealed = looksSealed(it.title, it.productType);
-          const m = sealed ? matchSealed(it.title, idx) : matchCard(it.title, idx, `${it.productType} ${it.tags.join(" ")}`);
+          const m = sealed ? matchSealed(it.title, idx) : matchCard(it.title, idx, `${it.productType} | ${it.tags.join(" | ")}`);
           if (!m) continue;
           matched++;
           // Price sanity: a store price under a quarter or over four times the
@@ -154,7 +161,12 @@ async function main() {
             for (const o of entry.offers) if (o.source === store.key) addOffer(Number(id), o);
         }
       }
-    }
+    };
+    await Promise.all(
+      Array.from({ length: 8 }, async () => {
+        while (queue.length) await runStore(queue.shift()!);
+      }),
+    );
   } else {
     for (const [id, entry] of Object.entries(prevPrices.byId))
       for (const o of entry.offers) if (o.source !== "ebay" && o.source !== "tcgplayer") addOffer(Number(id), o);
@@ -297,7 +309,8 @@ async function main() {
   };
 
   writeJson(path.join(PUBLIC, "catalog.json"), catalog);
-  writeJson(path.join(PUBLIC, "prices.json"), prices);
+  writePrices(prices.byId, products);
+  fs.rmSync(path.join(PUBLIC, "prices.json"), { force: true });
   writeJson(path.join(PUBLIC, "meta.json"), meta);
   writeJson(path.join(PUBLIC, "ebay-picks.json"), picks);
   writeJson(path.join(STATE, "ebay.json"), ebayState);

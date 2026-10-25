@@ -2,14 +2,14 @@ import Link from "next/link";
 import type { Product } from "@/lib/site-types";
 import { imageAt } from "@/lib/image";
 import { money, pct } from "@/lib/format";
-import { priceOf, refCents, setById } from "@/lib/data";
+import { refCents, setById, summaryOf } from "@/lib/data";
 import { shortName } from "@/lib/names";
 
 export function ProductTile({ p, change }: { p: Product; change?: number | null }) {
   const ref = refCents(p.id);
-  const e = priceOf(p.id);
+  const e = summaryOf(p.id);
   const ch = change !== undefined ? change : e.change7d;
-  const stores = new Set(e.offers.filter((o) => o.inStock).map((o) => o.source)).size;
+  const stores = e.inStockSources;
   return (
     <Link href={`/card/${p.slug}`} className="group card-surface flex flex-col overflow-hidden transition hover:border-brand/60">
       <div className="aspect-[5/7] bg-ink-850">
@@ -24,7 +24,7 @@ export function ProductTile({ p, change }: { p: Product; change?: number | null 
           <span className="font-bold text-brand-400">{money(ref)}</span>
           {ch != null && <span className={`text-xs ${ch >= 0 ? "text-up" : "text-down"}`}>{pct(ch)}</span>}
         </div>
-        <p className="text-[11px] text-muted">{stores} source{stores === 1 ? "" : "s"} in stock</p>
+        <p className="text-[11px] text-muted">{e.listedSources} store{e.listedSources === 1 ? "" : "s"} · {stores} in stock</p>
       </div>
     </Link>
   );
