@@ -192,7 +192,7 @@ async function main() {
       const worker = async () => {
         while (!stop && queue.length) {
           const c = queue.shift()!;
-          const ref = refUsd.get(c.product.id)!;
+          const ref = refUsd.get(c.product.id) ?? null;
           try {
             usage.calls++;
             const offer = await searchLowest(token, c.product, c.market, ref, fx[CURRENCY[c.market]] ?? 1);

@@ -36,7 +36,8 @@ export const SITE: SiteConfig = {
     query: "lorcana",
     singlesCategoryId: "183454",
     sealedCategoryId: "183456",
-    minPriceUsd: 20,
+    // Cards under $10 get no eBay call; every sealed product does (owner, 2026-10-25).
+    minPriceUsd: 10,
     dailyBudget: 2500,
     // Run hour (UTC) — Gundam Compare runs at a different hour on the same
     // eBay app so the two sites never race for the shared 5,000.

@@ -61,7 +61,7 @@ export interface SiteConfig {
     query: string;
     singlesCategoryId: string;
     sealedCategoryId: string;
-    /** Never spend a call on anything the market prices under this (USD). */
+    /** Never spend a call on a CARD the market prices under this (USD). Sealed is always eligible. */
     minPriceUsd: number;
     /** This site's share of the eBay app's daily Browse quota. */
     dailyBudget: number;

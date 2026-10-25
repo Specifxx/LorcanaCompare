@@ -291,3 +291,33 @@ Result on 2026-10-25, cards worth $20+ with a live eBay price: Lorcana 407 of
 493 (82%), Gundam 274 of 362 (75%), across eBay US, UK and AU. The rest had no
 matching English, ungraded, single-copy Buy It Now listing. Most are event
 promos and serialized cards.
+
+## eBay: cards from $10, every sealed product — 2026-10-25
+
+**Owner:** "all the sealed products also must have … the eBay quota … change
+it to cards that are $10 or more … all the sealed products should have it as
+well."
+
+`SITE.ebay.minPriceUsd` 20 → 10, and it now applies to cards only: every
+sealed product is eligible whatever its price. Pre-orders with no TCGplayer
+price rank as a $50 product and are searched with no price window. Sealed
+refreshes at least every 48 hours. The planner still spends from the top of a
+value × demand × staleness ranking inside each site's 2,500.
+
+Sealed matching was the weak side (Gundam cases 0/29). Three fixes:
+
+* Sealed searches use eBay's whole Collectible Card Games category (2536).
+  Cases, decks and gift sets are listed outside "Sealed Booster Boxes" (183456).
+* "Boxes", "packs" and "decks" in a title count as the singular.
+* TCGplayer lists pack fillers as sealed products (Lorcana puzzle-insert
+  pieces, lore cards, ink-drop tokens: about 150). `sealedTypeOf` now types
+  them "Insert". They never get an eBay call and don't appear on /sealed.
+* A "Bonus Pack" product never takes a listing that says "deck only" or "no
+  bonus pack".
+
+Result on 2026-10-25 after re-checking every eligible product without an eBay
+price on eBay US. Lorcana: cards $10+ 406 of 411, sealed 145 of 217 (booster
+boxes 14/16, Troves 14/15, collections 17/18, starter decks 38/47, cases
+24/59). Gundam: cards $10+ 396 of 458, sealed 77 of 134 (booster boxes 7/7,
+booster packs 25/26, cases 7/29). Cases are the weak spot: there are few
+English Buy It Now case listings.
