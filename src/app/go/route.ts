@@ -28,7 +28,12 @@ export async function GET(req: Request) {
   const pid = Number(u.searchParams.get("p")) || null;
   const page = (u.searchParams.get("from") ?? "").slice(0, 40) || null;
   if (dbConfigured() && !/bot|crawl|spider|slurp|preview/i.test(req.headers.get("user-agent") ?? "")) {
-    await prisma.clickEvent.create({ data: { productId: pid, source, market, page }, select: { id: true } }).catch(() => {});
+    // Never let the database hold up a buy link: 800 ms at most, and a Neon
+    // outage only loses the log row (the Vercel buy_click event still fires).
+    await Promise.race([
+      prisma.clickEvent.create({ data: { productId: pid, source, market, page }, select: { id: true } }).catch(() => {}),
+      new Promise((r) => setTimeout(r, 800)),
+    ]);
   }
   const res = NextResponse.redirect(tagged(dest, subId(page, pid)), 302);
   res.headers.set("X-Robots-Tag", "noindex, nofollow");

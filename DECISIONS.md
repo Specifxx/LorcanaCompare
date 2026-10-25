@@ -141,3 +141,26 @@ anywhere is tracked without extra code. Custom events need Vercel Pro; the
 `ClickEvent` log works on any plan. Amazon links use Rift Compare's tag
 `riftcompare-20` until each site has its own `AMAZON_ASSOCIATE_TAG`.
 `tests/affiliate.test.ts` pins the EPN, Impact and Amazon tagging.
+
+## Neon only where it is essential — 2026-10-25
+
+**Owner:** "most of the data, like any sort of public data, is now stored [in
+files] … we really aren't using Neon at all for a lot of things, it's only for
+… private data that it must have. Make sure there's not much dependency on Neon."
+
+This site was built that way from the start (public data is only files), and
+two remaining touchpoints were tightened:
+
+* `/api/me` (called on every page view by a signed-in visitor) reads a signed
+  snapshot of the account (email, tier, admin) from the session cookie, and
+  goes to Neon at most once a day per visitor to refresh it. Signed-out
+  visitors never cause a query.
+* `/go` gives its click-log insert 800 ms at most. A slow or missing database
+  costs a log row, never a buy click (Vercel's `buy_click` event still records it).
+
+Neon is used for exactly: accounts and sessions refresh, price alerts and
+their daily email run, the affiliate click log (admin dashboard and the eBay
+demand signal), contact/newsletter rows and Stripe webhook idempotency. Built
+and served with `DATABASE_URL` unset on 2026-10-25, every public page, search,
+the sitemap and the affiliate redirect still worked. `tests/no-db-on-public-pages.test.ts`
+fails if a public page or component imports the database or session reader.
