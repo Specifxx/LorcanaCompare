@@ -117,6 +117,16 @@ Paid plans are "coming soon" on both sites (the first 50 accounts on each get Pr
 so do nothing in Stripe. Leave STRIPE_* unset everywhere. (When I'm ready to charge, the steps
 are in docs/SETUP.md, "Turning payments on".)
 
+=== 6b. Google sign-in (the only sign-in method) ===
+Google Cloud console → new project "Compare Sites Auth" → Google Auth Platform: External, app name
+"Lorcana Compare", support email riftcompare@gmail.com (or bill.jyang101@gmail.com), authorised
+domains lorcanacompare.com and gundamcompare.com, scopes openid / email / profile only →
+Publish app (In production). Clients → Create client → Web application, one per site:
+  Lorcana: origin https://lorcanacompare.com, redirect URI https://lorcanacompare.com/api/auth/google/callback
+  Gundam:  origin https://gundamcompare.com,  redirect URI https://gundamcompare.com/api/auth/google/callback
+Put each client's ID and secret into that Vercel project as GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET,
+then redeploy. (The full version is docs/GOOGLE-OAUTH-PROMPT.md.)
+
 === 7. Email (resend.com) ===
 Domains → Add domain: lorcanacompare.com, then gundamcompare.com. Add the DNS records Resend shows
 in Vercel → Domains (account level) → the domain → DNS Records → Add, then press Verify in Resend.
@@ -184,12 +194,12 @@ the AdSense script. Request review. If AdSense is already approved, create a Dis
 (optionally NEXT_PUBLIC_ADSENSE_SLOT_CARD and NEXT_PUBLIC_ADSENSE_SLOT_ARTICLE too), then redeploy.
 
 === 13. Test as a user ===
-On each site: create an account with bill.jyang101@gmail.com (any password). Confirm "Admin"
+On each site: open /login → "Continue with Google" → sign in as bill.jyang101@gmail.com. Confirm "Admin"
 shows top-right and /admin loads. Open a card, click Buy on a store row and confirm it opens the
 store. Check the store URL: an eBay link must contain "campid=", and a TCGplayer link must
 start at partner.tcgplayer.com. Then Vercel → that project → Analytics → Events should show
-"buy_click" within a few minutes (filter by retailer). Because this is one of the first 50 accounts, /account must show
-"★ Founding member: Premium is free for you" and the plan "premium". Open /premium and
+"buy_click" within a few minutes (filter by retailer). That's the admin account, so /account shows the plan "premium" (admins don't take a
+founding place). Any other Google account you try first will show "★ Founding member". Open /premium and
 confirm it shows the founding-members offer and "Coming soon" on the paid plans.
 
 Then give me the DONE / NEEDS YOU summary from the ground rules, also listing: Neon project names, which secrets and variables were set where, the eBay keyset status and account-deletion verification, the

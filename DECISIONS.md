@@ -179,3 +179,19 @@ checkout API refuses until `PAYMENTS_ENABLED=1` and a Stripe key are set; the
 Stripe code is complete and documented in docs/SETUP.md ("Turning payments
 on"). Tested 2026-10-25 against a local Postgres: accounts 1–50 founding
 Premium, 51–52 free, the counter at 0, checkout answering "coming soon".
+
+## Google is the only sign-in method — 2026-10-25
+
+**Owner:** "I want Google OAuth … just like how we did it for Rift Compare …
+That's the only sign-in method."
+
+`/api/auth/google` → Google (authorization-code flow, random `state` in a
+10-minute httpOnly cookie, scopes openid/email/profile) →
+`/api/auth/google/callback`, which checks the state, requires a verified
+email, finds the account by Google id or email (or creates it; the first 50
+non-admin accounts become founding members, as before) and signs in with the
+same session cookie. Email/password sign-up and login were removed with
+bcrypt; `passwordHash` stays as an unused nullable column so the schema
+change is additive. `next` only accepts same-site paths. Setup:
+docs/GOOGLE-OAUTH-PROMPT.md (one Google Cloud project, one web client per
+site, `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` in each Vercel project).

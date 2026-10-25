@@ -16,7 +16,8 @@ datasource db {
 model User {
   id               String       @id @default(cuid())
   email            String       @unique
-  passwordHash     String
+  googleId         String?      @unique
+  passwordHash     String? // unused since Google became the only sign-in (2026-10-25)
   name             String?
   tier             String       @default("free") // free | plus | premium
   stripeCustomerId String?      @unique
