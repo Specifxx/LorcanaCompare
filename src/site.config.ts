@@ -25,7 +25,8 @@ export const SITE: SiteConfig = {
     "lorcana enchanted prices",
   ],
   adminEmails: ["bill.jyang101@gmail.com"],
-  supportEmail: "bill.jyang101@gmail.com",
+  supportEmail: "riftcompare@gmail.com",
+  ownerEmail: "bill.jyang101@gmail.com",
 
   // TCGCSV mirrors TCGplayer's catalogue and prices daily (tcgcsv.com).
   tcgcsvCategoryId: 71,

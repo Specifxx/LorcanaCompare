@@ -29,6 +29,7 @@ export function Footer() {
             <li><Link href="/blog">Guides</Link></li>
             <li><Link href="/premium">Premium</Link></li>
             <li><Link href="/contact">Contact / list your store</Link></li>
+            <li><a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a></li>
             <li><Link href="/privacy">Privacy</Link> · <Link href="/terms">Terms</Link></li>
           </ul>
         </div>

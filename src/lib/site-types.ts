@@ -51,7 +51,10 @@ export interface SiteConfig {
   keywords: string[];
   /** Hard-coded admins (owner request). ADMIN_EMAILS env adds to it. */
   adminEmails: string[];
+  /** Public contact address, shown on the site. */
   supportEmail: string;
+  /** Private: where the ops monitor and form notifications go. Never rendered. */
+  ownerEmail: string;
   tcgcsvCategoryId: number;
   tcgplayerSlug: string;
   ebay: {

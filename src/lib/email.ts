@@ -23,7 +23,7 @@ export async function notifyOwnerBounded(subject: string, body: string) {
   while (recent.length && recent[0] < day) recent.shift();
   if (recent.length >= 20) return;
   recent.push(Date.now());
-  await sendEmail(SITE.supportEmail, `[${SITE.name}] ${subject}`, `<pre style="font-family:inherit;white-space:pre-wrap">${escapeHtml(body)}</pre>`);
+  await sendEmail(SITE.ownerEmail, `[${SITE.name}] ${subject}`, `<pre style="font-family:inherit;white-space:pre-wrap">${escapeHtml(body)}</pre>`);
 }
 
 export function escapeHtml(s: string) {

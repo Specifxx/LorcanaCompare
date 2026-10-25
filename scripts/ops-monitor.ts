@@ -54,7 +54,7 @@ async function main() {
   for (const r of results) console.log(`${r.status.toUpperCase().padEnd(4)} ${r.name}: ${r.detail}`);
   const bad = results.filter((r) => r.status === "fail" || (r.status === "warn" && !/not set/.test(r.detail)));
   if (bad.length) {
-    await sendEmail(SITE.supportEmail, `[${SITE.name}] ${bad.length} thing(s) need a look`, `<ul>${bad.map((r) => `<li><b>${escapeHtml(r.name)}</b> (${r.status}): ${escapeHtml(r.detail)}</li>`).join("")}</ul><p>${site}/admin</p>`);
+    await sendEmail(SITE.ownerEmail, `[${SITE.name}] ${bad.length} thing(s) need a look`, `<ul>${bad.map((r) => `<li><b>${escapeHtml(r.name)}</b> (${r.status}): ${escapeHtml(r.detail)}</li>`).join("")}</ul><p>${site}/admin</p>`);
   }
 }
 main();

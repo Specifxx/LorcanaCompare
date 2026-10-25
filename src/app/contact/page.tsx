@@ -8,7 +8,7 @@ export default function Contact() {
   return (
     <div className="mx-auto max-w-xl">
       <h1 className="font-display text-3xl font-black">Contact us</h1>
-      <p className="mt-2 text-muted">Wrong price, missing card, or a store that should be listed? We read everything.</p>
+      <p className="mt-2 text-muted">Wrong price, missing card, or a store that should be listed? We read everything. Use the form, or email <a className="link" href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a>.</p>
       <ContactForm />
     </div>
   );
