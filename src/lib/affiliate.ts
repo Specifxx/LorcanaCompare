@@ -11,7 +11,8 @@ import { SITE } from "@/site.config";
 export const EBAY_CAMPAIGN_ID = process.env.EBAY_AFFILIATE_CAMPAIGN || "5339155912";
 export const TCGPLAYER_IMPACT_LINK =
   process.env.TCGPLAYER_IMPACT_LINK || "https://partner.tcgplayer.com/c/7385758/1780961/21018";
-export const AMAZON_TAG = process.env.AMAZON_ASSOCIATE_TAG || "";
+// Rift Compare's Associates tag until each site has its own (AMAZON_ASSOCIATE_TAG).
+export const AMAZON_TAG = process.env.AMAZON_ASSOCIATE_TAG || "riftcompare-20";
 
 const EBAY_ROTATION: Record<string, string> = {
   "ebay.com": "711-53200-19255-0",

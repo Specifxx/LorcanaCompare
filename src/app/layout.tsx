@@ -9,6 +9,7 @@ import { SEASON_BOOT_SCRIPT } from "@/lib/season";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PrefsProvider } from "@/components/ClientPrefs";
+import { BuyClickTracker } from "@/components/BuyClickTracker";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -48,6 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
         </PrefsProvider>
         <Analytics />
+        <BuyClickTracker />
       </body>
     </html>
   );

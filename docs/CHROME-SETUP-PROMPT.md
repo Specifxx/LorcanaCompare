@@ -60,6 +60,12 @@ Deploy: the repo only builds commits whose subject contains "[deploy]". If the f
 shows "Build skipped" (or none appears), go to the GitHub repo → Actions → "Production deploy" →
 Run workflow. That lands a [deploy] commit and Vercel builds it.
 Check that https://lorcanacompare.com and https://gundamcompare.com load.
+Web Analytics, for each project: open the project → "Analytics" tab → Enable Web Analytics
+(the sites already include the Vercel Analytics script). Then redeploy (Deployments → latest →
+⋯ → Redeploy), because analytics only starts on a deployment made after enabling it. The sites send
+a custom event "buy_click" on every buy button, with properties retailer, retailer_key, market,
+product, page and host. Custom events need the Vercel Pro plan. If the team is on Hobby, tell me
+rather than upgrading (every click is also logged in each site's /admin dashboard either way).
 
 === 4. eBay developer keys + Marketplace Account Deletion (developer.ebay.com) ===
 Go to your name (top right) → Application Keysets → the "BillYang-API3" app → Production.
@@ -131,7 +137,9 @@ b) Impact (app.impact.com), TCGplayer program: Settings → Properties → add b
 c) TCGplayer prices: nothing to do (they come from tcgcsv.com; no API key needed).
 d) Amazon Associates (optional): add both sites to the website list. If you can create the
    tracking ids "lorcanacompare-20" and "gundamcompare-20", set AMAZON_ASSOCIATE_TAG in each project.
-e) Redeploy both Vercel projects (Deployments → latest → ⋯ → Redeploy) so every variable applies.
+e) Amazon: until per-site tags exist, the sites use the existing tag riftcompare-20. Add
+   both domains to that Associates account's website list so those clicks are allowed.
+f) Redeploy both Vercel projects (Deployments → latest → ⋯ → Redeploy) so every variable applies.
 
 === 9. First data import ===
 In each GitHub repo: Actions → "Refresh prices" → Run workflow ("Spend eBay calls" ticked).
@@ -181,10 +189,12 @@ the AdSense script. Request review. If AdSense is already approved, create a Dis
 === 13. Test as a user ===
 On each site: create an account with bill.jyang101@gmail.com (any password). Confirm "Admin"
 shows top-right and /admin loads. Open a card, click Buy on a store row and confirm it opens the
-store. Open /premium, click Plus → Monthly and confirm Stripe Checkout opens, then close it
+store. Check the store URL: an eBay link must contain "campid=", and a TCGplayer link must
+start at partner.tcgplayer.com. Then Vercel → that project → Analytics → Events should show
+"buy_click" within a few minutes (filter by retailer). Open /premium, click Plus → Monthly and confirm Stripe Checkout opens, then close it
 without paying.
 
 Finish by listing: Neon project names, which secrets and variables were set where, the Stripe
 price ids and webhook endpoints, the eBay keyset status and account-deletion verification, the
-EPN campaign ids, Google/Bing/AdSense status, and anything that failed or needs me.
+EPN campaign ids, whether Web Analytics and the buy_click events are showing, Google/Bing/AdSense status, and anything that failed or needs me.
 ```

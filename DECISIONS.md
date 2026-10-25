@@ -126,3 +126,18 @@ Deletion notifications. Rather than file the exemption, both sites serve
 sha256(challenge_code + EBAY_VERIFICATION_TOKEN + endpoint URL), POST
 acknowledges a notice with 200. No eBay user data is stored, so there is
 nothing to delete. The shared app registers the Lorcana site's endpoint only.
+
+## Buy clicks are Vercel Analytics events too — 2026-10-25
+
+**Owner:** "enable Vercel web analytics and also … by-click events … the
+retailer that it's coming from for each website."
+
+Every buy link already goes through `/go` (which tags the affiliate URL and
+writes a `ClickEvent` row for /admin). `BuyClickTracker` (in the root layout)
+listens for clicks and middle-clicks on any `/go?` link and sends the Vercel
+event `buy_click` with retailer (display name), retailer_key, market,
+product, page and destination host. One listener means a new buy button
+anywhere is tracked without extra code. Custom events need Vercel Pro; the
+`ClickEvent` log works on any plan. Amazon links use Rift Compare's tag
+`riftcompare-20` until each site has its own `AMAZON_ASSOCIATE_TAG`.
+`tests/affiliate.test.ts` pins the EPN, Impact and Amazon tagging.
