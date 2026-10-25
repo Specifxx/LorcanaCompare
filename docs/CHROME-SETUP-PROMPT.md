@@ -20,7 +20,7 @@ They are Next.js sites that copy riftcompare.com's setup.
 Ground rules:
 - I am signed in to GitHub, Vercel, Neon, Stripe, eBay Developers, eBay Partner Network, Impact
   (TCGplayer affiliate), Google Search Console, Bing Webmaster Tools, Google AdSense and Resend.
-  If a login is needed, stop and ask me.
+  If a site asks me to log in, treat it as a blocker (below): leave the tab open and move on.
 - Never buy anything or enter payment details. Never delete existing projects, keys, domains
   or sites. Don't change anything belonging to riftcompare.com or the TCGEmpire repo.
 - Secrets go ONLY into the secret / environment-variable fields named below.
