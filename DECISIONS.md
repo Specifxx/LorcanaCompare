@@ -258,3 +258,36 @@ their own `openGraph` would otherwise drop it.
 non-English listings are rejected, the price floor rose from 40% to 50% of
 market, and each import re-checks saved results against the current rules,
 so a tightened rule purges old matches without spending calls.
+
+## eBay is highlighted, and its coverage was raised before launch — 2026-10-25
+
+**Owner:** "make sure that eBay prices are highlighted, and all the eBay
+prices are on the websites … the API keys are working before we make these
+posts."
+
+Every card page now opens its price comparison with an eBay call-out: the
+cheapest Buy It Now in the visitor's market (eBay US as the fallback), with
+shipping where eBay gives it, an eBay-blue "Buy on eBay" button and an "All
+eBay listings" search link. Both go through /go, so the affiliate tags and the
+`buy_click` event apply. eBay rows in the table carry the eBay wordmark, a
+tint and the same button.
+
+The keys were confirmed working (a token was issued and the live remaining
+count read) and the first production runs were audited. Three matcher gaps
+were fixed:
+
+* Promos numbered "14" on TCGplayer but "14/P3", "14/D23" or "6/CC1" by sellers
+  now match on the numerator.
+* Sealed queries no longer contain an apostrophe ("Illumineer's" found nothing).
+* Bracketed qualifiers ("Store Tournament Winner Pack 01", "SDCC 2026") must
+  be at least half present in the title, so a participation card or a magazine
+  promo never takes a winner card's price. Numbers in brackets don't count,
+  and NTC / WCS are expanded.
+
+`scripts/ebay-recheck-misses.ts` re-queried only the products without a match,
+inside each site's daily share: about 1,060 calls in total.
+
+Result on 2026-10-25, cards worth $20+ with a live eBay price: Lorcana 407 of
+493 (82%), Gundam 274 of 362 (75%), across eBay US, UK and AU. The rest had no
+matching English, ungraded, single-copy Buy It Now listing. Most are event
+promos and serialized cards.

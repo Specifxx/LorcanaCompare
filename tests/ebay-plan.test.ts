@@ -58,3 +58,25 @@ test("eBay listings: graded, foreign and multi-card titles never match", async (
   ])
     assert.equal(listingMatches(card, t), false, t);
 });
+
+test("promo numbers: TCGplayer '14' matches a seller's '14/P3'", async () => {
+  const { listingMatches } = await import("@/lib/import/ebay");
+  const { SITE } = await import("@/site.config");
+  if (SITE.numberStyle !== "fraction") return;
+  const promo: Product = { ...p(3), name: "Goofy - Expert Shipwright (Disney Cruise Promo)", number: "14", rarity: "Promo" };
+  assert.equal(listingMatches(promo, "Disney Lorcana Goofy - Expert Shipwright Cruise Promo Foil 14/P3 EN"), true);
+  assert.equal(listingMatches(promo, "Goofy - Expert Shipwright 15/P3 Foil"), false);
+});
+
+test("bracketed qualifiers must match: a winner card never takes a participation card's listing", async () => {
+  const { qualifiersAgree } = await import("@/lib/import/ebay");
+  const { tokens } = await import("@/lib/slug");
+  const t = (s: string) => new Set(tokens(s));
+  assert.equal(qualifiersAgree("Gundam Maxter (Store Tournament Winner Pack 01)", t("Gundam Maxter UNIT Holo R GD05-069 Participation Card")), false);
+  assert.equal(qualifiersAgree("Kshatriya (GD01-051) (Store Tournament Winner Pack 01)", t("Kshatriya (GD01-051) (Store Tournament Winner Pack 01)")), true);
+  assert.equal(qualifiersAgree("EX Base (EXBP-031) (SDCC 2026)", t("Gundam Ace September 2026 Issue EXBP-031 EX Base")), false);
+  assert.equal(qualifiersAgree("Goofy - Expert Shipwright (Disney Cruise Promo)", t("Goofy Expert Shipwright Cruise Promo Foil 14/P3")), true);
+  assert.equal(qualifiersAgree("Gundam Exia (Trans-Am) (LR+)", t("Gundam Exia Trans AM GD03-049 LR+ Alt Art")), true);
+  assert.equal(qualifiersAgree("Elsa - Spirit of Winter (Enchanted)", t("Elsa Spirit of Winter 207/204")), true);
+  assert.equal(qualifiersAgree("Unicorn Gundam (Awakened) (Newtype Challenge 2026 Mission 4)", t("Unicorn Gundam Awakened GD04-066 NTC Winners Card")), true);
+});

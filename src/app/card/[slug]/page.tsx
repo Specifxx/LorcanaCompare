@@ -8,11 +8,12 @@ import { imageAt } from "@/lib/image";
 import { money, pct } from "@/lib/format";
 import { shortName } from "@/lib/names";
 import { PriceTable } from "@/components/PriceTable";
+import { EbayCallout } from "@/components/EbayCallout";
 import { PriceChart } from "@/components/PriceChart";
 import { TileGrid } from "@/components/ProductTile";
 import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/AdSlot";
-import { amazonSearchUrl, ebaySearchUrl, goHref } from "@/lib/affiliate";
+import { amazonSearchUrl, goHref } from "@/lib/affiliate";
 import { abs } from "@/lib/site";
 
 export const revalidate = 21600;
@@ -119,9 +120,9 @@ export default function CardPage({ params }: { params: { slug: string } }) {
           </header>
           <section>
             <h2 className="mb-2 text-lg font-bold">Compare prices</h2>
+            <div className="mb-3"><EbayCallout offers={e.offers} productId={p.id} query={`${SITE.ebay.query} ${name} ${p.number ?? ""}`.trim()} /></div>
             <PriceTable offers={e.offers} fx={m?.fx ?? { USD: 1 }} productId={p.id} page="card" />
             <p className="mt-2 flex flex-wrap gap-3 text-xs text-muted">
-              <a className="link" rel="sponsored nofollow noopener" target="_blank" href={goHref({ url: ebaySearchUrl(`${SITE.ebay.query} ${name} ${p.number ?? ""}`), source: "ebay", market: "US" }, p.id, "card-search")}>Search all eBay listings →</a>
               {amazon && <a className="link" rel="sponsored nofollow noopener" target="_blank" href={goHref({ url: amazon, source: "amazon", market: "US" }, p.id, "card")}>Check Amazon →</a>}
             </p>
           </section>
