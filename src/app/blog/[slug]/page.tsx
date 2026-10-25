@@ -15,7 +15,7 @@ export const generateStaticParams = () => posts().map((p) => ({ slug: p.slug }))
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const p = postBySlug(params.slug);
   if (!p) return {};
-  return { title: p.title, description: p.description, keywords: p.keywords, alternates: { canonical: `/blog/${p.slug}` }, openGraph: { type: "article", title: p.title, description: p.description, publishedTime: p.date } };
+  return { title: p.title, description: p.description, keywords: p.keywords, alternates: { canonical: `/blog/${p.slug}` }, openGraph: { type: "article", title: p.title, description: p.description, publishedTime: p.date, images: ["/opengraph-image.jpg"] }, twitter: { card: "summary_large_image", images: ["/opengraph-image.jpg"] } };
 }
 
 export default function PostPage({ params }: { params: { slug: string } }) {

@@ -195,3 +195,25 @@ bcrypt; `passwordHash` stays as an unused nullable column so the schema
 change is additive. `next` only accepts same-site paths. Setup:
 docs/GOOGLE-OAUTH-PROMPT.md (one Google Cloud project, one web client per
 site, `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` in each Vercel project).
+
+## Price comparison only: accounts, Premium, alerts, email and the database removed — 2026-10-25
+
+**Owner:** "I don't care about the sign-in feature anymore … get rid of the
+sign-in features. We don't need the user accounts at all. Get rid of the
+premium … just have it in an archive … get rid of anything that we need to send
+as an email to users. We don't need Resend … it's just a website that helps you
+compare the price of cards, monetized through affiliates and in the future,
+potentially ads … make it more minimalistic."
+
+Removed from the build and moved to `archive/accounts-premium/` (README there
+explains how to restore): Google sign-in and sessions, the Prisma/Neon
+database, Free/Plus/Premium and Stripe, founding members, price alerts and
+their email run, Resend and owner notifications, the contact form, the
+newsletter and /admin. The full price history is now public on every card
+page. Contact is a mailto link to the public address. Clicks are recorded only
+by the Vercel `buy_click` event, so the eBay prioritiser ranks by value,
+rarity, sealed type and set age (its demand input is an empty map). The ops
+monitor fails its workflow run instead of sending email: GitHub notifies the
+owner. This supersedes the account, Premium, founding-member, Google sign-in
+and Neon entries above. The eBay Marketplace Account Deletion endpoint stays
+(eBay requires it, and it stores nothing).

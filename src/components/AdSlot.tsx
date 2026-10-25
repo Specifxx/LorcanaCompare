@@ -3,8 +3,8 @@ import { useEffect } from "react";
 
 const CLIENT = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
 
-/** One AdSense display unit. Renders nothing until a slot id is configured,
- *  and is hidden for Plus/Premium members ([data-ad], globals.css). */
+/** One AdSense display unit (future). Renders nothing until a client and slot id are configured.
+ */
 export function AdSlot({ slot, className = "" }: { slot?: string; className?: string }) {
   useEffect(() => {
     if (!CLIENT || !slot) return;

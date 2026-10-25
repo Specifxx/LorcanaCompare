@@ -1,11 +1,10 @@
 // Runs in GitHub Actions every three hours (ops-monitor.yml). Each check
 // returns ok / warn / fail; anything not ok is emailed to the owner in one
-// message. Add a check here for every new scheduled job, API or limit.
+// GitHub sends the owner a failed-workflow email. Add a check here for every new scheduled job, API or limit.
 import fs from "node:fs";
 import path from "node:path";
 import { SITE } from "@/site.config";
 import type { Meta } from "@/lib/site-types";
-import { sendEmail, escapeHtml } from "@/lib/email";
 
 type Result = { name: string; status: "ok" | "warn" | "fail"; detail: string };
 const site = (process.env.NEXT_PUBLIC_SITE_URL || `https://${SITE.domain}`).replace(/\/$/, "");
@@ -44,17 +43,14 @@ async function main() {
       if (age > 30) return { status: "warn", detail: `last eBay run ${age.toFixed(0)}h ago` };
       return { status: "ok", detail: `${meta.ebay.calls}/${meta.ebay.budget} calls on ${meta.ebay.day}, ${meta.ebay.eligible} eligible` };
     }),
-    check("Stripe", async () => {
-      if (!process.env.STRIPE_SECRET_KEY) return { status: "warn", detail: "STRIPE_SECRET_KEY not set in GitHub secrets (monitor only)" };
-      const r = await fetch("https://api.stripe.com/v1/balance", { headers: { Authorization: `Bearer ${process.env.STRIPE_SECRET_KEY}` } });
-      return r.ok ? { status: "ok", detail: "API reachable" } : { status: "fail", detail: `HTTP ${r.status}` };
-    }),
-    check("Email (Resend)", async () => (process.env.RESEND_API_KEY ? { status: "ok", detail: "configured" } : { status: "warn", detail: "RESEND_API_KEY not set — alerts and this monitor cannot email" })),
   ]);
   for (const r of results) console.log(`${r.status.toUpperCase().padEnd(4)} ${r.name}: ${r.detail}`);
   const bad = results.filter((r) => r.status === "fail" || (r.status === "warn" && !/not set/.test(r.detail)));
   if (bad.length) {
-    await sendEmail(SITE.ownerEmail, `[${SITE.name}] ${bad.length} thing(s) need a look`, `<ul>${bad.map((r) => `<li><b>${escapeHtml(r.name)}</b> (${r.status}): ${escapeHtml(r.detail)}</li>`).join("")}</ul><p>${site}/admin</p>`);
+    // A failed run makes GitHub email the repo owner (no email service needed).
+    console.error(`
+${bad.length} check(s) need a look: ${bad.map((r) => r.name).join(", ")}`);
+    process.exit(1);
   }
 }
 main();

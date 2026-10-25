@@ -8,8 +8,7 @@
 // deployment change once a day, together.
 //
 // Env: EBAY_CLIENT_ID / EBAY_CLIENT_SECRET (optional; no eBay without them),
-// DATABASE_URL (optional; demand signal for eBay), EBAY_REFRESH=false to skip
-// eBay, IMPORT_SKIP_STORES=1 to skip stores (local testing).
+// EBAY_REFRESH=false to skip eBay, IMPORT_SKIP_STORES=1 to skip stores (local testing).
 import fs from "node:fs";
 import path from "node:path";
 import { SITE } from "@/site.config";
@@ -57,25 +56,6 @@ async function fxRates(prev: Record<string, number>): Promise<Record<string, num
     console.warn(`[fx] ${(e as Error).message} — keeping yesterday's rates`);
     return Object.keys(prev).length ? prev : { USD: 1, GBP: 0.75, CAD: 1.4, AUD: 1.42, EUR: 0.89, SGD: 1.28 };
   }
-}
-
-async function clicksLast30d(): Promise<Map<number, number>> {
-  const out = new Map<number, number>();
-  if (!process.env.DATABASE_URL) return out;
-  try {
-    const { PrismaClient } = await import("@prisma/client");
-    const db = new PrismaClient();
-    const rows = await db.clickEvent.groupBy({
-      by: ["productId"],
-      where: { at: { gte: new Date(Date.now() - 30 * 86_400_000) }, productId: { not: null } },
-      _count: { _all: true },
-    });
-    for (const r of rows) if (r.productId != null) out.set(r.productId, r._count._all);
-    await db.$disconnect();
-  } catch (e) {
-    console.warn(`[clicks] ${(e as Error).message} — eBay plan runs without the demand signal`);
-  }
-  return out;
 }
 
 async function main() {
@@ -194,7 +174,9 @@ async function main() {
       const plan = planEbayRefresh({
         products,
         refUsdCents: refUsd,
-        clicks30d: await clicksLast30d(),
+        // No database: demand comes from value, rarity, sealed type and set
+        // age only. (The click log that fed it is archived.)
+        clicks30d: new Map(),
         newSetIds: recentSets,
         state: ebayState,
         budget,

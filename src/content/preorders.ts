@@ -15,6 +15,6 @@ export const PREORDER_COPY: {
   faq: [
     { q: "When do Into the Inkdark pre-orders open?", a: "Some European stores list Collector Booster displays already. Most US stores open pre-orders six to eight weeks before release; this page adds each store as soon as its listing appears." },
     { q: "Why does TCGplayer show no price yet?", a: "Before release TCGplayer carries placeholder listings. We only show a TCGplayer price once it has a real market price, so the store pre-order prices are the ones to compare." },
-    { q: "Is pre-ordering cheaper?", a: "For recent Lorcana sets, store pre-orders at or near MSRP have usually beaten release-week prices. Compare the stores below and set a price alert if you'd rather wait." },
+    { q: "Is pre-ordering cheaper?", a: "For recent Lorcana sets, store pre-orders at or near MSRP have usually beaten release-week prices. Compare the stores below; this page refreshes every morning." },
   ],
 };

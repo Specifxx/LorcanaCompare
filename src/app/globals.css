@@ -69,5 +69,3 @@ body { background: var(--page-bg); min-height: 100vh; }
 }
 @media (prefers-reduced-motion: reduce) { .bat { animation: none; display: none; } }
 
-/* Ad-free tiers hide every ad placement. */
-:root[data-adfree] [data-ad] { display: none !important; }

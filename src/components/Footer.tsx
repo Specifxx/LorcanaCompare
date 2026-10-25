@@ -6,8 +6,8 @@ export function Footer() {
     <footer className="mt-16 border-t border-ink-700/60 bg-ink-950">
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 text-sm md:grid-cols-4">
         <div>
-          <p className="font-display font-black"><span className="wordmark">{SITE.wordmark[0]}</span> {SITE.wordmark[1]}</p>
-          <p className="mt-2 text-muted">{SITE.tagline}. Free for everyone.</p>
+          <p className="flex items-center gap-2 font-display font-black"><img src="/icon.svg" alt="" width={24} height={24} className="h-6 w-6 rounded-md" /><span className="wordmark">{SITE.wordmark[0]}</span> {SITE.wordmark[1]}</p>
+          <p className="mt-2 text-muted">{SITE.tagline}. Free, no account needed.</p>
         </div>
         <div>
           <p className="mb-2 font-semibold">Prices</p>
@@ -27,7 +27,6 @@ export function Footer() {
             <li><Link href="/methodology">How prices work</Link></li>
             <li><Link href="/stores">Stores we track</Link></li>
             <li><Link href="/blog">Guides</Link></li>
-            <li><Link href="/premium">Premium</Link></li>
             <li><Link href="/contact">Contact / list your store</Link></li>
             <li><a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a></li>
             <li><Link href="/privacy">Privacy</Link> · <Link href="/terms">Terms</Link></li>

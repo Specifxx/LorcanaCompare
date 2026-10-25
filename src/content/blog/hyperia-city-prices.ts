@@ -25,7 +25,7 @@ export const post: Post = {
 <p>Compare every store for the <a href="/card/disney-lorcana-hyperia-city-booster-box">Hyperia City booster box</a> before you buy: prices vary by more than the cost of a pack between stores.</p>
 
 <h2>Should you buy singles or open boxes?</h2>
-<p>If you want one specific Enchanted, buying the single is almost always cheaper than chasing it in packs — Enchanteds land in roughly one pack in 96, and the one you want is one of 18. Open boxes for the fun of it, buy singles for the cards you need. Set a <a href="/premium">price alert</a> on any card above and we'll email you when it drops to your price.</p>
+<p>If you want one specific Enchanted, buying the single is almost always cheaper than chasing it in packs — Enchanteds land in roughly one pack in 96, and the one you want is one of 18. Open boxes for the fun of it, buy singles for the cards you need. Every card page charts its price history, so you can see whether today's price is high or low for it.</p>
 `,
   faq: [
     { q: "When did Hyperia City release?", a: "Prerelease events ran from 16 October 2026 and the general release was 23 October 2026." },

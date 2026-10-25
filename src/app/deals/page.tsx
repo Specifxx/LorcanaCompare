@@ -19,7 +19,7 @@ export default function Deals() {
   return (
     <div>
       <h1 className="font-display text-3xl font-black">{SITE.gameShort} cards below market today</h1>
-      <p className="mt-2 text-muted">In-stock US-dollar listings 8–60% under TCGplayer market. Premium members get this list by email every morning.</p>
+      <p className="mt-2 text-muted">In-stock US-dollar listings 8–60% under TCGplayer market. Refreshed every morning.</p>
       <div className="mt-6 overflow-x-auto rounded-xl border border-ink-700/60">
         <table className="w-full text-sm">
           <thead className="bg-ink-850 text-left text-xs uppercase text-muted"><tr><th className="px-3 py-2">Card</th><th className="px-3 py-2">Where</th><th className="px-3 py-2 text-right">Market</th><th className="px-3 py-2 text-right">Price</th><th className="px-3 py-2" /></tr></thead>
