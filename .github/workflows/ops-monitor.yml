@@ -1,0 +1,29 @@
+name: Ops monitor
+# Every three hours, from GitHub (so it works when the site or database is what
+# broke): live site, data freshness, store imports, eBay budget, Stripe, email.
+# Emails the owner only when something needs a look.
+on:
+  schedule:
+    - cron: "40 */3 * * *"
+  workflow_dispatch:
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - env:
+          NEXT_PUBLIC_SITE_URL: ${{ vars.SITE_URL }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+          EBAY_CLIENT_ID: ${{ secrets.EBAY_CLIENT_ID }}
+          EBAY_CLIENT_SECRET: ${{ secrets.EBAY_CLIENT_SECRET }}
+        run: npx tsx scripts/ops-monitor.ts

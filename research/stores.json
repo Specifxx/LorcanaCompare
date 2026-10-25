@@ -1,0 +1,269 @@
+{
+  "verifiedOn": "2026-10-24",
+  "note": "Each collection verified via /collections/<handle>/products.json?limit=250 returning Lorcana products. Currency: Shopify /cart.js where it answered, otherwise store country.",
+  "stores": [
+    {
+      "key": "gamersguildaz",
+      "name": "Gamers Guild AZ",
+      "base": "https://gamersguildaz.com",
+      "country": "US",
+      "currency": "USD",
+      "collections": [
+        "lorcana"
+      ],
+      "kind": "sealed",
+      "sampleTitles": [
+        "Disney Lorcana: Set 13: Attack of the Vine - Collectors Starter Set: Rapunzel Edition",
+        "Lorcana TCG: Archazia’s Island Amethyst & Steel (Jafar and Iago) - Starter Deck",
+        "Lorcana TCG: Archazia's Island - Gift Set"
+      ],
+      "titleFormat": "Sealed only: 'Disney Lorcana: <Set> - <Product>' or 'Lorcana TCG: <Set> <Product>'."
+    },
+    {
+      "key": "hobbiesville",
+      "name": "Hobbiesville",
+      "base": "https://hobbiesville.com",
+      "country": "US",
+      "currency": "USD",
+      "collections": [
+        "disney-lorcana-singles",
+        "disney-lorcana"
+      ],
+      "kind": "both",
+      "sampleTitles": [
+        "Buzz Lightyear - Jungle Ranger (Iconic) (241/204) - Wilds Unknown Holofoil",
+        "Chernabog - Unnatural Force (77/204) - Winterspell Cold Foil",
+        "Aurora - Holding Court (6/204) - Fabled"
+      ],
+      "titleFormat": "'<Name> - <Subtitle> (<Rarity if Enchanted/Iconic>) (<num>/204) - <Set> [Holofoil|Cold Foil]'; non-foil has no suffix."
+    },
+    {
+      "key": "bardsandcards",
+      "name": "Bards and Cards (singles)",
+      "base": "https://singles.bardsandcards.com",
+      "country": "US",
+      "currency": "USD",
+      "collections": [
+        "disney-lorcana-singles"
+      ],
+      "kind": "singles",
+      "sampleTitles": [
+        "Hiram Flaversham - Intrigued Inventor (159/204) [Azurite Sea]",
+        "Stitch - Alien Dancer (9/204) [Fabled]",
+        "Heads Held High (175/204) [Reign of Jafar]"
+      ],
+      "titleFormat": "'<Name> - <Subtitle> (<num>/204) [<Set>]' (TCGplayer/BinderPOS style); foil as variant."
+    },
+    {
+      "key": "wizardtower",
+      "name": "Wizard Tower",
+      "base": "https://store.wizardtower.com",
+      "country": "CA",
+      "currency": "CAD",
+      "collections": [
+        "lorcana-singles",
+        "lorcana-sealed"
+      ],
+      "kind": "both",
+      "sampleTitles": [
+        "4*Town, Hottest Band of the Year (0017)",
+        "99 Puppies (0024) - Cold Foil",
+        "Disney Lorcana Azurite Sea Booster Box"
+      ],
+      "titleFormat": "'<Name>, <Subtitle> (<4-digit num>) [- Cold Foil]'; set only in product_type 'Disney Lorcana Singles > <Set>'; variant = condition."
+    },
+    {
+      "key": "facetoface",
+      "name": "Face to Face Games",
+      "base": "https://www.facetofacegames.com",
+      "country": "CA",
+      "currency": "CAD",
+      "collections": [
+        "lorcana-singles",
+        "lorcana-sealed"
+      ],
+      "kind": "both",
+      "sampleTitles": [
+        "Madam Mim - Fox - 46/204 [Rise Of The Floodborn] [Non-Foil]",
+        "Kuzco - Selfish Emperor - 149/204 [Shimmering Skies] [Non-Foil]",
+        "Te Ka - Heartless - 192/204 [The First Chapter] [Non-Foil]"
+      ],
+      "titleFormat": "'<Name> - <Subtitle> - <num>/204 [<Set>] [Non-Foil|Foil]'."
+    },
+    {
+      "key": "401games",
+      "name": "401 Games",
+      "base": "https://store.401games.ca",
+      "country": "CA",
+      "currency": "CAD",
+      "collections": [
+        "disney-lorcana-singles",
+        "disney-lorcana-sealed-product"
+      ],
+      "kind": "both",
+      "sampleTitles": [
+        "(Out for a Stroll) - 160/204 - Uncommon",
+        "Akela (Wolf Pack Elder) - 182/204 - Common (Foil)",
+        "Alice (Well-Read Whisper) - 36/204 - Uncommon (Foil)"
+      ],
+      "titleFormat": "'<Name> (<Subtitle>) - <num>/204 - <Rarity> [(Foil)]'; set NOT in title (use tags/product_type)."
+    },
+    {
+      "key": "houseofcards",
+      "name": "House of Cards",
+      "base": "https://www.houseofcards.ca",
+      "country": "CA",
+      "currency": "CAD",
+      "collections": [
+        "disney-lorcana-singles",
+        "disney-lorcana-sealed-product"
+      ],
+      "kind": "both",
+      "sampleTitles": [
+        "Elsa - Spirit of Winter (Enchanted) (207/204) [The First Chapter]",
+        "The Sultan - Royal Apparition (73/204) [Reign of Jafar]",
+        "Mufasa - Champion of the Pride Lands (185/204) [Into the Inklands]"
+      ],
+      "titleFormat": "'<Name> - <Subtitle> [(Enchanted)] (<num>/204) [<Set>]'; foil as variant."
+    },
+    {
+      "key": "fusion",
+      "name": "Fusion Gaming",
+      "base": "https://www.fusiongamingonline.com",
+      "country": "CA",
+      "currency": "CAD",
+      "collections": [
+        "lorcana-singles-1",
+        "lorcana-singles"
+      ],
+      "kind": "both",
+      "sampleTitles": [
+        "Lexington - Small in Stature (183/204) [Whispers in the Well]",
+        "Cruella de Vil - Miserable as Usual (72/204) [The First Chapter]",
+        "Heihei - Rambling Rooster (185/204) [Archazia's Island]"
+      ],
+      "titleFormat": "Singles in lorcana-singles-1: '<Name> - <Subtitle> (<num>/204) [<Set>]'; lorcana-singles is mostly sealed/accessories despite its handle."
+    },
+    {
+      "key": "goodgames",
+      "name": "Good Games",
+      "base": "https://www.goodgames.com.au",
+      "country": "AU",
+      "currency": "AUD",
+      "collections": [
+        "disney-lorcana-tcg"
+      ],
+      "kind": "sealed",
+      "sampleTitles": [
+        "Lorcana TCG - Azurite Sea Booster Box",
+        "Lorcana TCG - Ursulas Return Booster Pack",
+        "Lorcana TCG Whispers in the Well Illumineers Trove"
+      ],
+      "titleFormat": "Sealed only: 'Lorcana TCG - <Set> <Product>'."
+    },
+    {
+      "key": "gameology",
+      "name": "Gameology",
+      "base": "https://www.gameology.com.au",
+      "country": "AU",
+      "currency": "AUD",
+      "collections": [
+        "lorcana-tcg-singles",
+        "disney-lorcana-tcg"
+      ],
+      "kind": "both",
+      "sampleTitles": [
+        "Stitch - Carefree Surfer (21/204) - The First Chapter - Lorcana",
+        "Clarabelle - Light on Her Hooves (Enchanted) (211/204) - Shimmering Skies Holofoil",
+        "Hercules - Mighty Leader (118/204) - Whispers in the Well COLD FOIL"
+      ],
+      "titleFormat": "'<Name> - <Subtitle> [(Enchanted)] (<num>/204) - <Set> [Holofoil|COLD FOIL] [- Lorcana]'."
+    },
+    {
+      "key": "gamesempire",
+      "name": "Games Empire",
+      "base": "https://www.gamesempire.com.au",
+      "country": "AU",
+      "currency": "AUD",
+      "collections": [
+        "disney-lorcana-tcg"
+      ],
+      "kind": "sealed",
+      "sampleTitles": [
+        "Disney Lorcana TCG Hyperia City Miguel Rivera Playmat",
+        "Disney Lorcana TCG Whispers in the Well Starter Deck Judy Hopps & Robin Hood",
+        "Disney Lorcana TCG Reign of Jafar Starter Deck Amber & Amethyst"
+      ],
+      "titleFormat": "Sealed/accessories: 'Disney Lorcana TCG <Set> <Product>'."
+    },
+    {
+      "key": "totalcards",
+      "name": "Total Cards",
+      "base": "https://www.totalcards.net",
+      "country": "UK",
+      "currency": "GBP",
+      "collections": [
+        "all-lorcana"
+      ],
+      "kind": "sealed",
+      "sampleTitles": [
+        "Lorcana - Into the Inkdark - Illumineer's Trove",
+        "Lorcana - Winterspell - Booster Box (24 Packs)",
+        "Lorcana - Archazia's Island - Ursula - Deck Box"
+      ],
+      "titleFormat": "Sealed/accessories: 'Lorcana - <Set> - <Product>'."
+    },
+    {
+      "key": "spellbound",
+      "name": "Spellbound Games",
+      "base": "https://www.spellboundgames.co.uk",
+      "country": "UK",
+      "currency": "GBP",
+      "collections": [
+        "lorcana-1"
+      ],
+      "kind": "sealed",
+      "sampleTitles": [
+        "Disney Lorcana TCG: Rise of the Floodborn - Booster Pack",
+        "Disney Lorcana TCG: Into the Inklands - Illumineer Trove",
+        "Disney Lorcana TCG: Into the Inklands - Booster Pack Display (24pcs)"
+      ],
+      "titleFormat": "Small sealed range: 'Disney Lorcana TCG: <Set> - <Product>'."
+    },
+    {
+      "key": "thirstymeeples",
+      "name": "Thirsty Meeples",
+      "base": "https://www.thirstymeeples.co.uk",
+      "country": "UK",
+      "currency": "GBP",
+      "collections": [
+        "disney-lorcana-tcg"
+      ],
+      "kind": "sealed",
+      "sampleTitles": [
+        "Disney Lorcana TCG: Card Sleeves - Lorcana Brand (DAMAGED)",
+        "Disney Lorcana TCG: Winterspell Booster Box (24 Packs)",
+        "Disney Lorcana TCG: Premium Deck Box"
+      ],
+      "titleFormat": "Sealed/accessories: 'Disney Lorcana TCG: <Set> <Product>'."
+    },
+    {
+      "key": "cardcosmos",
+      "name": "Cardcosmos",
+      "base": "https://www.cardcosmos.de",
+      "country": "EU",
+      "currency": "EUR",
+      "collections": [
+        "disney-lorcana-englisch",
+        "disney-lorcana-deutsch"
+      ],
+      "kind": "sealed",
+      "sampleTitles": [
+        "Disney Lorcana - Hyperia City 2-Player Starter Set - EN",
+        "Disney Lorcana - Fabled Illumineer's Trove - EN",
+        "Disney Lorcana - Into the Inklands Booster Display - EN"
+      ],
+      "titleFormat": "'Disney Lorcana - <Set> <Product> - EN|DE'; German set names in -deutsch (e.g. Azurblaues Meer)."
+    }
+  ]
+}
