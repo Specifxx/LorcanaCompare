@@ -48,6 +48,9 @@ const KEEP_ATTRS = new Set([
 
 export function sealedTypeOf(name: string): string {
   const n = name.toLowerCase();
+  // Pack fillers TCGplayer lists as products (puzzle pieces, lore cards, ink
+  // drop and other tokens): not sealed product, never worth an eBay call.
+  if (/puzzle insert|lore card|ink drop|\btokens?\b|\binsert\b|code card/.test(n)) return "Insert";
   if (/\bcase\b/.test(n)) return "Case";
   if (/trove/.test(n)) return "Illumineer's Trove";
   if (/starter (deck|set)|starter decks/.test(n)) return "Starter Deck";

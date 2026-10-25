@@ -36,7 +36,8 @@ committed JSON under `data/` (`src/lib/data.ts`). The removed features are in
 ## eBay
 
 One eBay app (5,000 Browse calls/day) is shared with Gundam Compare: 2,500 each,
-counted in `data/state/ebay-usage.json`. Nothing under $20 gets a call. The
+counted in `data/state/ebay-usage.json`. Cards under $10 get no call; every
+sealed product does. The
 plan is `planEbayRefresh` in `src/lib/import/ebay.ts`, pinned by
 `tests/ebay-plan.test.ts`. Do not raise `SITE.ebay.dailyBudget` without moving
 the other site's down by the same amount.

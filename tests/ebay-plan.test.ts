@@ -6,12 +6,28 @@ import { intervalHours, planEbayRefresh } from "@/lib/import/ebay";
 const p = (id: number, rarity = "Rare", kind: "card" | "sealed" = "card"): Product => ({ id, slug: String(id), name: `Card ${id}`, kind, setId: 1, number: `${id}/204`, rarity, attrs: {}, sealedType: kind === "sealed" ? "Booster Box" : null, image: null, tcgUrl: "", printings: [] });
 const now = new Date("2026-10-24T06:00:00Z");
 
-test("never spends a call under $20", () => {
-  const products = [p(1), p(2), p(3)];
-  const ref = new Map([[1, 1999], [2, 2000], [3, 50]]);
+test("sealed: plurals match, cases match, pack inserts are never eligible", async () => {
+  const { listingMatches } = await import("@/lib/import/ebay");
+  const { sealedTypeOf } = await import("@/lib/import/tcgcsv");
+  const caseP: Product = { ...p(9, "Rare", "sealed"), name: "Dual Impact Booster Box Case", number: null, rarity: null, sealedType: "Case" };
+  assert.equal(listingMatches(caseP, "Gundam Card Game Dual Impact Booster Boxes Sealed Case (12 boxes) GD02"), true);
+  assert.equal(listingMatches(caseP, "Gundam Card Game Dual Impact Booster Box GD02"), false);
+  assert.equal(sealedTypeOf("Attack of the Vine! Puzzle Insert (Top Left)"), "Insert");
+  assert.equal(sealedTypeOf("Winterspell Lore Card (1 of 9)"), "Insert");
+  const bonus: Product = { ...p(11, "Rare", "sealed"), name: "Starter Deck: Silent Barrage Bonus Pack", number: null, rarity: null, sealedType: "Starter Deck" };
+  assert.equal(listingMatches(bonus, "DECK ONLY - Gundam TCG Starter Deck 13: Silent Barrage ST13 - NO BONUS PACK"), false);
+  const insert: Product = { ...p(10, "Rare", "sealed"), name: "Ink Drop", sealedType: "Insert" };
+  assert.equal(listingMatches({ ...insert, name: "Azurite Sea Puzzle Insert (Top Middle)" }, "Disney Lorcana Azurite Sea Puzzle Insert (Top Middle) NM"), false);
+  const { calls } = planEbayRefresh({ products: [insert], refUsdCents: new Map([[10, 5000]]), clicks30d: new Map(), newSetIds: new Set(), state: {}, budget: 10, now });
+  assert.equal(calls.length, 0);
+});
+
+test("cards under $10 get no call; every sealed product does, priced or not", () => {
+  const products = [p(1), p(2), p(3), p(4, "Rare", "sealed"), p(5, "Rare", "sealed")];
+  const ref = new Map<number, number | null>([[1, 999], [2, 1000], [3, 50], [4, 800], [5, null]]);
   const { calls, eligible } = planEbayRefresh({ products, refUsdCents: ref, clicks30d: new Map(), newSetIds: new Set(), state: {}, budget: 100, now });
-  assert.equal(eligible, 1);
-  assert.deepEqual([...new Set(calls.map((c) => c.product.id))], [2]);
+  assert.equal(eligible, 3);
+  assert.deepEqual([...new Set(calls.map((c) => c.product.id))].sort(), [2, 4, 5]);
 });
 
 test("stays inside the budget", () => {

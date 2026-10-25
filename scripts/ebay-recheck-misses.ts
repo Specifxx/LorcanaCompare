@@ -1,5 +1,5 @@
-// Re-checks, on eBay, only the eligible products whose last check found no
-// matching listing — run after the matcher changes, so the fix shows today
+// Checks, on eBay, the eligible products that have no eBay result yet (never
+// checked, or last check found no matching listing) — run after the matcher changes, so the fix shows today
 // instead of after each product's next scheduled refresh. Counts against this
 // site's daily share exactly like the daily import (data/state/ebay-usage.json)
 // and stops at the share, the app's live remaining count minus a reserve, or
@@ -32,9 +32,12 @@ async function main() {
   const budget = Math.max(0, Math.min(max, SITE.ebay.dailyBudget - usage.calls, remaining == null ? Infinity : remaining - 100));
   const misses = cat.products
     .map((p) => ({ p, ref: referenceCents(sum[p.id]?.t) ?? 0 }))
-    .filter(({ p, ref }) => ref >= SITE.ebay.minPriceUsd * 100 && state[p.id] && !Object.values(state[p.id]!).some((e) => e?.offer))
+    // Eligible products with no eBay result: never checked, or checked with no match.
+    .filter(({ p, ref }) => ((p.kind === "sealed" && p.sealedType !== "Insert") || (p.kind === "card" && ref >= SITE.ebay.minPriceUsd * 100)) && !Object.values(state[p.id] ?? {}).some((e) => e?.offer))
     .sort((a, b) => b.ref - a.ref);
-  const markets = (Object.keys(MARKET_SHARE) as Market[]).filter((m) => m === "US" || m === "UK" || m === "AU");
+  // --markets=US spends a small budget on eBay US first.
+  const only = process.argv.find((a) => a.startsWith("--markets="))?.split("=")[1]?.split(",");
+  const markets = (Object.keys(MARKET_SHARE) as Market[]).filter((m) => (only ? only.includes(m) : m === "US" || m === "UK" || m === "AU"));
   let calls = 0;
   let found = 0;
   outer: for (const { p, ref } of misses) {
@@ -43,7 +46,7 @@ async function main() {
       calls++;
       usage.calls++;
       try {
-        const offer = await searchLowest(token, p, m, ref, fx[CURRENCY[m]] ?? 1);
+        const offer = await searchLowest(token, p, m, ref || null, fx[CURRENCY[m]] ?? 1);
         (state[p.id] ??= {})[m] = { at: new Date().toISOString(), offer };
         if (offer) found++;
       } catch (e) {

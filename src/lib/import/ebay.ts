@@ -9,8 +9,10 @@
 // (SITE.ebay.runHourUtc) so neither starves the other mid-run.
 //
 // WHAT GETS A CALL (planEbayRefresh, pure and tested):
-//   1. Nothing the market prices under SITE.ebay.minPriceUsd ($20). Under that
-//      a buyer saves cents and the call is better spent elsewhere.
+//   1. Every sealed product, whatever its price (pre-orders with no TCGplayer
+//      price included), and every card the market prices at
+//      SITE.ebay.minPriceUsd ($10) or more. Under that a buyer saves cents.
+//      (Owner, 2026-10-25: $20 → $10, and all sealed.)
 //   2. Each eligible product has a refresh interval set by value: $100+ daily,
 //      $50–100 every 2 days, $20–50 every 4 days. Demand (affiliate clicks in
 //      the last 30 days), chase rarities, booster boxes and new or upcoming
@@ -73,8 +75,11 @@ export function planEbayRefresh(input: PlanInput): { calls: PlannedCall[]; eligi
   const minCents = SITE.ebay.minPriceUsd * 100;
   const ranked: { product: Product; score: number; interval: number }[] = [];
   for (const p of input.products) {
-    const ref = input.refUsdCents.get(p.id);
-    if (ref == null || ref < minCents) continue;
+    const known = input.refUsdCents.get(p.id);
+    if (p.kind === "card" && (known == null || known < minCents)) continue;
+    if (p.kind === "sealed" && p.sealedType === "Insert") continue;
+    // Sealed with no market price yet (pre-orders) ranks as a $50 product.
+    const ref = known ?? 5000;
     const clicks = input.clicks30d.get(p.id) ?? 0;
     const chase = !!p.rarity && SITE.chaseRarities.includes(p.rarity);
     const box = p.kind === "sealed" && /Booster Box|Case|Trove/.test(p.sealedType ?? "");
@@ -83,7 +88,9 @@ export function planEbayRefresh(input: PlanInput): { calls: PlannedCall[]; eligi
     const value = Math.log10(ref / 100);
     const demand = 1 + Math.log2(1 + clicks);
     const boost = (chase ? 1.3 : 1) * (box ? 1.4 : 1) * (fresh ? 1.5 : 1);
-    ranked.push({ product: p, score: value * demand * boost, interval: intervalHours(ref / 100, clicks, boosted) });
+    // Sealed refreshes at least every two days, whatever its price.
+    const interval = p.kind === "sealed" ? Math.min(48, intervalHours(ref / 100, clicks, boosted)) : intervalHours(ref / 100, clicks, boosted);
+    ranked.push({ product: p, score: Math.max(0.5, value) * demand * boost, interval });
   }
   ranked.sort((a, b) => b.score - a.score);
 
@@ -219,29 +226,38 @@ export function listingMatches(p: Product, title: string): boolean {
     const ok = base.filter((t) => have.has(t)).length / Math.max(1, base.length);
     return ok >= 0.6 && markersAgree(p.name, p.rarity, title) && qualifiersAgree(p.name, have);
   }
+  if (p.sealedType === "Insert") return false;
   if (sealedTypeOf(title) !== sealedTypeOf(p.name)) return false;
+  // "Deck ONLY - no bonus pack" is the opposite of a bonus-pack product.
+  if (/bonus/i.test(p.name) && /\b(no|without|minus)\s+bonus|deck only|only deck/i.test(title)) return false;
+  // "Booster Boxes" / "Packs" / "Decks" count as the singular.
+  const sing = (t: string) => t.replace(/xes$/, "x").replace(/s$/, "");
+  const haveS = new Set([...have].map(sing));
   const need = tokens(shortName(p.name)).filter((t) => t.length > 1 && !["disney", "the", "of"].includes(t));
-  return need.filter((t) => have.has(t)).length / Math.max(1, need.length) >= 0.8;
+  return need.filter((t) => haveS.has(sing(t))).length / Math.max(1, need.length) >= 0.8;
 }
 
 export async function searchLowest(
   token: string,
   p: Product,
   market: Market,
-  refUsdCents: number,
+  refUsdCents: number | null,
   fxUsd: number,
 ): Promise<Offer | null> {
   const mp = MARKETPLACE[market];
   if (!mp) return null;
-  const ref = (refUsdCents / 100) * fxUsd; // in the marketplace currency
+  // No market price yet (a pre-order): no price window, the matcher decides.
+  const ref = refUsdCents == null ? null : (refUsdCents / 100) * fxUsd; // in the marketplace currency
   // Under half of market is far likelier a fake, a damaged or foreign copy
   // than a real bargain on a card this valuable.
-  const lo = Math.max(1, Math.floor(ref * 0.5));
-  const hi = Math.ceil(ref * 3);
+  const priceFilter = ref == null ? "" : `,price:[${Math.max(1, Math.floor(ref * 0.5))}..${Math.ceil(ref * 3)}],priceCurrency:${mp.currency}`;
   const params = new URLSearchParams({
     q: queryFor(p),
-    category_ids: p.kind === "card" ? SITE.ebay.singlesCategoryId : SITE.ebay.sealedCategoryId,
-    filter: `buyingOptions:{FIXED_PRICE},price:[${lo}..${hi}],priceCurrency:${mp.currency}`,
+    // Sealed searches the whole Collectible Card Games category (2536): cases,
+    // decks, tins and gift sets are listed outside "Sealed Booster Boxes", and
+    // listingMatches() decides what counts.
+    category_ids: p.kind === "card" ? SITE.ebay.singlesCategoryId : "2536",
+    filter: `buyingOptions:{FIXED_PRICE}${priceFilter}`,
     sort: "price",
     limit: "25",
   });
