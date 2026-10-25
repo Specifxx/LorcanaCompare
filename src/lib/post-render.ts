@@ -8,7 +8,7 @@
 import { byValue, priceOf, productById, products, productsInSet, refCents, setById, summaryOf } from "./data";
 import { money, pct } from "./format";
 import { shortName } from "./names";
-import { escapeHtml } from "./email";
+import { escapeHtml } from "./html";
 import { sourceNameServer } from "./sources";
 import type { Product } from "./site-types";
 

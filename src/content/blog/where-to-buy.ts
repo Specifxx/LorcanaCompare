@@ -30,7 +30,7 @@ export const post: Post = {
 <ol>
 <li><b>Compare per card.</b> The cheapest store for one Enchanted is rarely the cheapest for the next.</li>
 <li><b>Mind the foil.</b> Cold foil and normal copies of the same card can differ by 5×. Our tables label the printing.</li>
-<li><b>Set alerts instead of refreshing.</b> A <a href="/premium">price alert</a> emails you when a card hits your target.</li>
+<li><b>Check the history first.</b> Every card page charts its price, so you can tell a dip from a spike.</li>
 <li><b>Buy sealed late, singles early in a set's life — or the other way round for chase cards.</b> See <a href="/movers">price movers</a> for what's moving this week.</li>
 </ol>
 <p><a href="/stores">See every store we track →</a></p>

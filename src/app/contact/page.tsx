@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import { SITE } from "@/site.config";
-import { ContactForm } from "./ContactForm";
+import { StaticPage } from "@/components/StaticPage";
 
+export const revalidate = 86400;
 export const metadata: Metadata = { title: "Contact", description: `Contact ${SITE.name}, report a price or list your store.`, alternates: { canonical: "/contact" } };
 
 export default function Contact() {
   return (
-    <div className="mx-auto max-w-xl">
-      <h1 className="font-display text-3xl font-black">Contact us</h1>
-      <p className="mt-2 text-muted">Wrong price, missing card, or a store that should be listed? We read everything. Use the form, or email <a className="link" href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a>.</p>
-      <ContactForm />
-    </div>
+    <StaticPage title="Contact us">
+      <p>Wrong price, missing card, or a store that should be listed? Email <a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a> and we&apos;ll take a look.</p>
+      <p>Store owners: listing is free. Send your store&apos;s address and we&apos;ll add it to the comparison.</p>
+    </StaticPage>
   );
 }

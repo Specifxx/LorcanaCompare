@@ -141,3 +141,120 @@ anywhere is tracked without extra code. Custom events need Vercel Pro; the
 `ClickEvent` log works on any plan. Amazon links use Rift Compare's tag
 `riftcompare-20` until each site has its own `AMAZON_ASSOCIATE_TAG`.
 `tests/affiliate.test.ts` pins the EPN, Impact and Amazon tagging.
+
+## Neon only where it is essential — 2026-10-25
+
+**Owner:** "most of the data, like any sort of public data, is now stored [in
+files] … we really aren't using Neon at all for a lot of things, it's only for
+… private data that it must have. Make sure there's not much dependency on Neon."
+
+This site was built that way from the start (public data is only files), and
+two remaining touchpoints were tightened:
+
+* `/api/me` (called on every page view by a signed-in visitor) reads a signed
+  snapshot of the account (email, tier, admin) from the session cookie, and
+  goes to Neon at most once a day per visitor to refresh it. Signed-out
+  visitors never cause a query.
+* `/go` gives its click-log insert 800 ms at most. A slow or missing database
+  costs a log row, never a buy click (Vercel's `buy_click` event still records it).
+
+Neon is used for exactly: accounts and sessions refresh, price alerts and
+their daily email run, the affiliate click log (admin dashboard and the eBay
+demand signal), contact/newsletter rows and Stripe webhook idempotency. Built
+and served with `DATABASE_URL` unset on 2026-10-25, every public page, search,
+the sitemap and the affiliate redirect still worked. `tests/no-db-on-public-pages.test.ts`
+fails if a public page or component imports the database or session reader.
+
+## Paid plans "coming soon"; the first 50 accounts get Premium free — 2026-10-25
+
+**Owner:** "for the premium features, we'll just say coming soon. And we'll
+just give the first 50 accounts that register premium … I can't be bothered to
+set up Stripe right now."
+
+Sign-up gives the first 50 non-admin accounts per site `foundingMember`,
+`tier: premium` and `premiumUntil: 2100-01-01` (Premium for good). /premium
+shows the founding offer with places left (`/api/founding`, one count query
+cached five minutes at the edge) and "Coming soon" on Plus and Premium. The
+checkout API refuses until `PAYMENTS_ENABLED=1` and a Stripe key are set; the
+Stripe code is complete and documented in docs/SETUP.md ("Turning payments
+on"). Tested 2026-10-25 against a local Postgres: accounts 1–50 founding
+Premium, 51–52 free, the counter at 0, checkout answering "coming soon".
+
+## Google is the only sign-in method — 2026-10-25
+
+**Owner:** "I want Google OAuth … just like how we did it for Rift Compare …
+That's the only sign-in method."
+
+`/api/auth/google` → Google (authorization-code flow, random `state` in a
+10-minute httpOnly cookie, scopes openid/email/profile) →
+`/api/auth/google/callback`, which checks the state, requires a verified
+email, finds the account by Google id or email (or creates it; the first 50
+non-admin accounts become founding members, as before) and signs in with the
+same session cookie. Email/password sign-up and login were removed with
+bcrypt; `passwordHash` stays as an unused nullable column so the schema
+change is additive. `next` only accepts same-site paths. Setup:
+docs/GOOGLE-OAUTH-PROMPT.md (one Google Cloud project, one web client per
+site, `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` in each Vercel project).
+
+## Price comparison only: accounts, Premium, alerts, email and the database removed — 2026-10-25
+
+**Owner:** "I don't care about the sign-in feature anymore … get rid of the
+sign-in features. We don't need the user accounts at all. Get rid of the
+premium … just have it in an archive … get rid of anything that we need to send
+as an email to users. We don't need Resend … it's just a website that helps you
+compare the price of cards, monetized through affiliates and in the future,
+potentially ads … make it more minimalistic."
+
+Removed from the build and moved to `archive/accounts-premium/` (README there
+explains how to restore): Google sign-in and sessions, the Prisma/Neon
+database, Free/Plus/Premium and Stripe, founding members, price alerts and
+their email run, Resend and owner notifications, the contact form, the
+newsletter and /admin. The full price history is now public on every card
+page. Contact is a mailto link to the public address. Clicks are recorded only
+by the Vercel `buy_click` event, so the eBay prioritiser ranks by value,
+rarity, sealed type and set age (its demand input is an empty map). The ops
+monitor fails its workflow run instead of sending email: GitHub notifies the
+owner. This supersedes the account, Premium, founding-member, Google sign-in
+and Neon entries above. The eBay Marketplace Account Deletion endpoint stays
+(eBay requires it, and it stores nothing).
+
+## Rift Compare's Premium tools are free here; new logo and link thumbnail — 2026-10-25
+
+**Owner:** "a lot of the features that we have on Rift Compare, like Deal
+Finder, Rising Cards, Demand Finder … let's just make it all free … any users
+can use it for free."
+
+`/tools` hosts them, free and account-less, all computed from the daily
+summary (`src/lib/tools.ts`):
+
+* **Deal Finder:** every in-stock store or eBay offer 8–60% under TCGplayer
+  market, in every market (converted to USD for the comparison), capped at the
+  1,200 biggest savings. Filters are client-side. `/deals` 308s here.
+* **Rising Cards:** up more than 2% in 7 days and not down over 30, weighted
+  by the size of the rise, the 30-day trend and how few stores still have stock.
+* **Demand Finder:** cards listed at 10+ stores, ranked by the share sold out.
+* **Best Basket:** paste a list and get the cheapest in-stock price per card
+  in your market (US TCGplayer/eBay as fallback), plus the stores that can
+  fill most of it. A plain name matches the base printing; add the number for
+  a variant. Postage is not included (Rift Compare's measured postage was not
+  ported).
+* **Trade Calculator** and **Selling Fee Calculator** (TCGplayer 10.75% +
+  2.5% + $0.30; eBay 13.25% + $0.40, labelled as estimates).
+
+Not ported: Box EV (no reliable pull rates yet, and a wrong EV misleads
+buyers) and the pull tracker (it needs accounts).
+
+**Logo:** original marks, not trademarks. Lorcana is a faceted hexagonal ink
+crystal with an ink drop and sparkles. Gundam is a mecha head with V-fin, eyes
+and red chin. `src/content/logo.tsx` is the source; `icon.svg`, `apple-icon.png`
+and the header use it. **Link thumbnail** (`opengraph-image.jpg` /
+`twitter-image.jpg`, 2400×1260) is built like Rift Compare's: headline, logo
+and bullets on the left, real screenshots of a card page's price table and a
+set page in browser frames on the right. Blog posts set it explicitly, because
+their own `openGraph` would otherwise drop it.
+
+**eBay matching tightened** after the first production runs put a Japanese
+"Set of 3" and PSA/TAG-graded slabs on English raw cards: graded and
+non-English listings are rejected, the price floor rose from 40% to 50% of
+market, and each import re-checks saved results against the current rules,
+so a tightened rule purges old matches without spending calls.

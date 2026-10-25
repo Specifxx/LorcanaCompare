@@ -1,7 +1,7 @@
 import { SITE } from "@/site.config";
 import { posts } from "@/lib/posts";
 import { SITE_URL } from "@/lib/site";
-import { escapeHtml } from "@/lib/email";
+import { escapeHtml } from "@/lib/html";
 
 export const revalidate = 86400;
 

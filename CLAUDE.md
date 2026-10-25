@@ -15,10 +15,17 @@ Production builds only when the commit SUBJECT carries `[deploy]`
 `main` and ride the next daily release, unless the owner says it is urgent.
 Previews build only with `[preview]` in the subject, when the owner asks.
 
+## No accounts, no database, no email
+
+Since 2026-10-25 the site is price comparison only: no sign-in, no Premium,
+no alerts, no email service and no database. Everything it serves is the
+committed JSON under `data/` (`src/lib/data.ts`). The removed features are in
+`archive/accounts-premium/` (not built); don't import from it.
+
 ## Cost rules (from Rift Compare, where breaking them exhausted Neon projects)
 
-1. No public page, layout or route handler reads the database. Public data is
-   the committed JSON under `data/` (`src/lib/data.ts`).
+1. Public data stays in committed files under `data/`; don't add a database
+   read to any page or route.
 2. No `generateStaticParams` that prerenders database- or data-heavy pages at
    build. Card and set pages use an empty list (cached on first visit).
 3. No page or route handler revalidates under 21600 seconds (six hours);
@@ -44,14 +51,13 @@ quarter or over four times TCGplayer's is dropped. Add a test in
 
 ## The site watches itself
 
-`ops-monitor.yml` runs `scripts/ops-monitor.ts` every three hours and emails the
-owner. When you add a scheduled job, external API or anything with a limit, add
-a check there. Every new public form must call `notifyOwnerBounded`.
+`ops-monitor.yml` runs `scripts/ops-monitor.ts` every three hours; a failing
+check fails the run, and GitHub emails the owner. When you add a scheduled job,
+external API or anything with a limit, add a check there.
 
 ## Checks
 
 ```
-npx prisma generate
 npm run typecheck
 npm run lint
 npm test

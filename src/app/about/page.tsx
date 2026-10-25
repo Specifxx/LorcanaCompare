@@ -11,7 +11,7 @@ export default function About() {
       <p>{SITE.name} is a free price comparison site for {SITE.game}. Every day it collects the price of every {SITE.gameShort} card and sealed product from TCGplayer, eBay and {SITE.stores.length} online game stores in the US, UK, Canada, Australia and Europe, and puts them side by side, cheapest first.</p>
       <p>It is built by the team behind <a href="https://riftcompare.com" rel="noopener">Rift Compare</a> (Riftbound) and <a href="https://opcompare.app" rel="noopener">OP Compare</a> (One Piece), with the same rule: comparing prices is free for everyone, and we never hide a cheaper store.</p>
       <h2>How we make money</h2>
-      <p>Some buy links are affiliate links (eBay Partner Network, TCGplayer, Amazon): if you buy, the store may pay us a small commission at no cost to you. Stores are ranked by price only — a store that pays us nothing ranks exactly where its price puts it. Plus and Premium memberships and a few ads pay for the rest.</p>
+      <p>Some buy links are affiliate links (eBay Partner Network, TCGplayer, Amazon): if you buy, the store may pay us a small commission at no cost to you. Stores are ranked by price only — a store that pays us nothing ranks exactly where its price puts it.</p>
       <h2>Contact</h2>
       <p>Spotted a wrong price, or run a store that sells {SITE.gameShort}? <a href="/contact">Get in touch</a> or email <a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a>.</p>
     </StaticPage>

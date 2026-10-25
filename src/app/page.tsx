@@ -11,6 +11,7 @@ import { posts } from "@/lib/posts";
 import { shortName } from "@/lib/names";
 import { JsonLd } from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/site";
+import { TOOLS } from "@/lib/tool-list";
 
 export const revalidate = 21600;
 
@@ -26,7 +27,7 @@ export default function Home() {
     { q: `What is ${SITE.name}?`, a: `${SITE.name} is a free ${SITE.game} price comparison site. It compares prices for every ${SITE.gameShort} card and sealed product across TCGplayer, eBay and ${storeCount} online game stores in the US, UK, Canada, Australia and Europe, and updates them every day.` },
     { q: `Where is the cheapest place to buy ${SITE.gameShort} cards?`, a: `It changes card by card. Search a card on ${SITE.name} to see every store's price for it, cheapest in-stock first, in your own currency, with a direct link to buy.` },
     { q: `How often are ${SITE.gameShort} prices updated?`, a: `Every day. TCGplayer prices and store listings refresh daily; eBay listings for cards worth $20 or more are re-checked every one to four days depending on value and demand.` },
-    { q: `Is ${SITE.name} free?`, a: `Yes. Comparing prices is free for everyone. Premium adds price-drop email alerts, longer price history, a collection tracker and no ads.` },
+    { q: `Is ${SITE.name} free?`, a: `Yes, completely, and you don't need an account. ${SITE.name} is paid for by affiliate commissions: when you buy through some links, the store may pay us a small fee at no cost to you.` },
   ];
   return (
     <div className="flex flex-col gap-10">
@@ -55,7 +56,7 @@ export default function Home() {
 
       {topDeals.length > 0 && (
         <section>
-          <Header title="Today's top deals" href="/deals" sub="In-stock listings below TCGplayer market" />
+          <Header title="Today's top deals" href="/tools/deal-finder" sub="In-stock listings below TCGplayer market" />
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {topDeals.map((d) => (
               <Link key={`${d.p.id}${d.offer.source}`} href={`/card/${d.p.slug}`} className="card-surface flex items-center gap-3 p-3 hover:border-brand/60">
@@ -70,6 +71,18 @@ export default function Home() {
           </div>
         </section>
       )}
+
+      <section>
+        <Header title="Free price tools" href="/tools" sub="Everything that's Premium on other sites, free here. No account needed." />
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {TOOLS.map((t) => (
+            <Link key={t.href} href={t.href} className="card-surface p-4 hover:border-brand/60">
+              <p className="font-semibold">{t.name}</p>
+              <p className="mt-1 text-sm text-muted">{t.text}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
 
       {upcoming && (
         <section className="card-surface flex flex-col items-start gap-3 p-6 md:flex-row md:items-center">
@@ -89,10 +102,13 @@ export default function Home() {
         </section>
       )}
 
-      <section className="grid gap-6 md:grid-cols-2">
-        <MoverList title="Biggest risers (7 days)" rows={mv.up.slice(0, 8)} />
-        <MoverList title="Biggest fallers (7 days)" rows={mv.down.slice(0, 8)} />
-      </section>
+      {/* Hidden until there is a week of daily history to compare against. */}
+      {(mv.up.length > 0 || mv.down.length > 0) && (
+        <section className="grid gap-6 md:grid-cols-2">
+          <MoverList title="Biggest risers (7 days)" rows={mv.up.slice(0, 8)} />
+          <MoverList title="Biggest fallers (7 days)" rows={mv.down.slice(0, 8)} />
+        </section>
+      )}
 
       <section>
         <Header title="Set price guides" href="/sets" />

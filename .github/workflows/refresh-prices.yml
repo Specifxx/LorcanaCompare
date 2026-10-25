@@ -37,13 +37,11 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - run: npx prisma generate
       - name: Import
         env:
           EBAY_CLIENT_ID: ${{ secrets.EBAY_CLIENT_ID }}
           EBAY_CLIENT_SECRET: ${{ secrets.EBAY_CLIENT_SECRET }}
           EBAY_AFFILIATE_CAMPAIGN: ${{ secrets.EBAY_AFFILIATE_CAMPAIGN }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
           EBAY_REFRESH: ${{ github.event_name == 'workflow_dispatch' && !inputs.ebay && 'false' || 'true' }}
         run: npx tsx scripts/import-all.ts
       - name: Commit data (this commit is the daily release)
@@ -62,14 +60,6 @@ jobs:
             sleep $((2 ** i)); git pull --rebase origin main
           done
           exit 1
-      - name: Price alerts
-        if: success()
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
-          NEXT_PUBLIC_SITE_URL: ${{ vars.SITE_URL }}
-        run: npx tsx scripts/send-alerts.ts
       - name: IndexNow
         if: success()
         env:

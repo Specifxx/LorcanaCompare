@@ -1,9 +1,10 @@
-// Every outbound buy link: tag it, log the click (best effort, never blocks the
-// redirect), send the visitor on. Only known shop hosts are allowed, so /go is
-// not an open redirect.
+// Every outbound buy link goes through here: the destination is checked
+// against known shop hosts (so /go is not an open redirect), tagged with the
+// affiliate parameters, and the visitor is sent on. The click itself is
+// recorded by the "buy_click" Vercel Analytics event (BuyClickTracker); there
+// is no database.
 import { NextResponse } from "next/server";
 import { SITE } from "@/site.config";
-import { prisma, dbConfigured } from "@/lib/db";
 import { subId, tagged } from "@/lib/affiliate";
 
 export const dynamic = "force-dynamic";
@@ -15,7 +16,7 @@ const ALLOWED = [
   ...SITE.stores.map((s) => new RegExp(`(^|\\.)${new URL(s.base).hostname.replace(/^www\./, "").replace(/\./g, "\\.")}$`, "i")),
 ];
 
-export async function GET(req: Request) {
+export function GET(req: Request) {
   const u = new URL(req.url);
   const dest = u.searchParams.get("u") ?? "";
   let host = "";
@@ -23,13 +24,8 @@ export async function GET(req: Request) {
     host = new URL(dest).hostname;
   } catch {}
   if (!host || !ALLOWED.some((r) => r.test(host)) || !/^https:\/\//.test(dest)) return NextResponse.redirect(new URL("/", req.url));
-  const source = (u.searchParams.get("s") ?? "").slice(0, 40);
-  const market = (u.searchParams.get("m") ?? "US").slice(0, 4);
   const pid = Number(u.searchParams.get("p")) || null;
   const page = (u.searchParams.get("from") ?? "").slice(0, 40) || null;
-  if (dbConfigured() && !/bot|crawl|spider|slurp|preview/i.test(req.headers.get("user-agent") ?? "")) {
-    await prisma.clickEvent.create({ data: { productId: pid, source, market, page }, select: { id: true } }).catch(() => {});
-  }
   const res = NextResponse.redirect(tagged(dest, subId(page, pid)), 302);
   res.headers.set("X-Robots-Tag", "noindex, nofollow");
   return res;

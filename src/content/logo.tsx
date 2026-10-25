@@ -1,0 +1,18 @@
+// Lorcana Compare's mark: a faceted hexagonal ink crystal with a drop of
+// magic ink and three sparkles, gold on midnight. Original artwork that nods
+// to the game's inkwells and hexagons; it uses no Disney or Lorcana logo.
+export const LOGO_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<defs>
+<linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbe7ad"/><stop offset=".55" stop-color="#d9a441"/><stop offset="1" stop-color="#9c6b14"/></linearGradient>
+<linearGradient id="li" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8f7bff"/><stop offset="1" stop-color="#2a1f7a"/></linearGradient>
+<radialGradient id="lb" cx=".5" cy=".4" r=".7"><stop offset="0" stop-color="#1d1f4d"/><stop offset="1" stop-color="#070815"/></radialGradient>
+</defs>
+<rect width="64" height="64" rx="14" fill="url(#lb)"/>
+<path d="M32 6 54 18.5v27L32 58 10 45.5v-27Z" fill="none" stroke="url(#lg)" stroke-width="3.2" stroke-linejoin="round"/>
+<path d="M32 6v13M54 18.5 43 25M10 18.5 21 25M32 58V45M54 45.5 43 39M10 45.5 21 39" stroke="#d9a441" stroke-opacity=".45" stroke-width="1.4"/>
+<path d="M32 17c0 0-11 12.5-11 20.5a11 11 0 0 0 22 0C43 29.5 32 17 32 17Z" fill="url(#li)" stroke="url(#lg)" stroke-width="2"/>
+<path d="M27.5 36.5a5 5 0 0 0 4 5.6" fill="none" stroke="#e6e0ff" stroke-width="2" stroke-linecap="round" stroke-opacity=".85"/>
+<path d="M49 7l1.3 3.2L53.5 11.5l-3.2 1.3L49 16l-1.3-3.2L44.5 11.5l3.2-1.3Z" fill="#fbe7ad"/>
+<path d="M14.5 50l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9Z" fill="#fbe7ad"/>
+<path d="M51 47.5l.7 1.6 1.6.7-1.6.7-.7 1.6-.7-1.6-1.6-.7 1.6-.7Z" fill="#c9b8ff"/>
+</svg>`;

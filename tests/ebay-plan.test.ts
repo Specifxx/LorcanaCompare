@@ -38,3 +38,23 @@ test("refresh intervals", () => {
   assert.equal(intervalHours(25, 0, false), 96);
   assert.equal(intervalHours(25, 12, false), 24);
 });
+
+test("eBay listings: graded, foreign and multi-card titles never match", async () => {
+  const { listingMatches } = await import("@/lib/import/ebay");
+  const { SITE } = await import("@/site.config");
+  const num = SITE.numberStyle === "code" ? "GD05-102" : "230/204";
+  const card: Product = { ...p(1), name: "Belle - Exceptional Writer (Enchanted)", number: num, rarity: "Enchanted" };
+  assert.equal(listingMatches(card, `Belle Exceptional Writer Enchanted ${num} NM`), true);
+  const song: Product = { ...p(2), name: "Let It Go", number: num, rarity: "Rare" };
+  assert.equal(listingMatches(song, `Let It Go ${num} Holo`), true);
+  for (const t of [
+    `Belle - Exceptional Writer Enchanted ${num} etc Set of 3`,
+    `Belle Exceptional Writer Enchanted ${num} Japan`,
+    `Belle Exceptional Writer Enchanted ${num} JPN`,
+    `Belle Exceptional Writer Enchanted ${num} JA 14`,
+    `PSA10 Belle Exceptional Writer Enchanted ${num}`,
+    `Belle Exceptional Writer Enchanted ${num} TAG 10 GEM MINT`,
+    `Belle Exceptional Writer Enchanted ${num} P SA10`,
+  ])
+    assert.equal(listingMatches(card, t), false, t);
+});

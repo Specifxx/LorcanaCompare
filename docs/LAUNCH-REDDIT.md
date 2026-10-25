@@ -1,41 +1,45 @@
-# Reddit launch posts: Lorcana Compare (ready to post)
+# Reddit launch: Lorcana Compare (final, ready to post)
 
-**Playbook (Rift Compare's):** lead with data people want, and mention the site
-once, near the end, as the source. Post from an account with real comment
-history in the sub. Read each sub's rules first: r/Lorcana (~80k) limits
-self-promotion, while r/LorcanaFinance (~2k) and r/LorcanaTCG (~4k) are friendlier.
-Post a week apart and reply to every comment for the first two hours. Figures
-are from the 25 Oct 2026 import; if you post later, check them on the linked pages.
+Data as of 25 Oct 2026. Post from an account with some history in the sub,
+read the sidebar rules first, and reply to every comment for the first two hours.
+Order: post 1 now, post 2 four to seven days later.
 
----
+## Post 1 · r/LorcanaFinance (best fit), then r/LorcanaTCG two days later
 
-## Post 1 · r/LorcanaFinance · this week
+**Title**
 
-**Title:** I compared 374,000 Lorcana prices across 318 stores. A store beat TCGplayer market on two-thirds of $20+ cards
+```
+I compared 374,000 Lorcana prices across 318 stores — a store beat TCGplayer market on 65% of $20+ cards
+```
 
-**Body:**
+**Body (Markdown editor)**
 
-I wanted to know whether TCGplayer market is actually the cheapest place to buy, so I pulled every listing I could find. That's TCGplayer plus 318 online game stores in the US, Canada, the UK, Australia and Europe: 3,612 cards and 374 sealed products, refreshed every morning.
+```markdown
+I wanted to know whether TCGplayer market is actually the cheapest place to buy, so I pulled every listing I could find from TCGplayer, eBay and **318 online game stores** in the US, Canada, the UK, Australia and Europe: 3,612 cards and 374 sealed products, refreshed every morning.
 
-Some things that surprised me (as of 25 Oct):
+Some things that surprised me:
 
-- **Stores beat TCGplayer market more often than you'd think.** For cards worth $20+, 263 had an in-stock copy at a store. On **173 of them (66%)**, the cheapest store copy was under TCGplayer market (converted to USD, before shipping).
-- **US stores beat TCGplayer on 114 of 243** of those cards. **Canadian stores did on 95 of 244**, even after converting from CAD.
-- **The Hyperia City booster box spread is huge.** Market is ~$150. Across 71 store listings, the cheapest in stock was about **$136 USD** (C$189.99 at a Canadian store). The most expensive was about **$245**, a $100+ gap for the same box.
-- **Expensive singles sell out everywhere.** The average $20+ card is *listed* at 56 stores, but only about 7 have it in stock on a given day. If you're chasing a specific Enchanted, set an alert rather than refreshing.
+- **Stores beat TCGplayer market more often than you'd think.** Of the $20+ cards that a store had in stock, **172 of 263 (65%)** had a store copy under TCGplayer market (converted to USD, before shipping).
+- **US stores beat it on 116 of 243 of those cards, Canadian stores on 93 of 244**, even after converting from CAD.
+- **The Hyperia City booster box spread is huge.** Market is ~$150. Across 74 store listings the cheapest in stock was about **$136 USD**, and the most expensive about **$245**. That's a $100+ gap for the same box.
+- **Expensive singles sell out everywhere.** The typical $20+ card is *listed* at 56 stores, but only about 7 have it in stock on a given day.
 
-I put it all on a free site that updates daily, if you want to check a card before buying: **https://lorcanacompare.com**. No account needed. It's from the people behind Rift Compare (Riftbound).
+I turned it into a free site that updates daily: **[lorcanacompare.com](https://lorcanacompare.com)**. No account, no paywall. Every tool is free, including a Deal Finder (everything listed under market), a Demand Finder (what's selling out), and a "Best Basket" where you paste a deck list and it finds the cheapest price for each card.
 
-Happy to pull numbers for anyone: specific cards, rotation losers, most expensive per set.
+Happy to pull numbers for anyone: specific cards, the most expensive per set, whatever's useful.
+```
 
----
+## Post 2 · r/Lorcana (only if its self-promotion rule allows; otherwise r/LorcanaTCG)
 
-## Post 2 · r/LorcanaTCG (or r/Lorcana if the rules allow) · a week later
+**Title**
 
-**Title:** The 25 most expensive Lorcana cards right now: 12 of the top 20 are Iconics
+```
+The 10 most expensive Lorcana cards right now — 7 of them are Iconics
+```
 
-**Body:**
+**Body (Markdown editor)**
 
+```markdown
 Pulled from TCGplayer market prices on 25 Oct:
 
 | # | Card | Set | Price |
@@ -51,33 +55,28 @@ Pulled from TCGplayer market prices on 25 Oct:
 | 9 | Lilo & Stitch – Fun-Loving Friends (Iconic) | Attack of the Vine! | $1,556 |
 | 10 | Mickey Mouse – True Friend (Disney Cruise promo) | Promo | $1,500 |
 
-- **12 of the top 20 are Iconics**, and every one is from Fabled or later.
+- **12 of the top 20 are Iconics**, and every one of them is from Fabled or later.
 - **The most expensive Enchanted** is Winnie the Pooh – Hunny Wizard (Fabled) at ~$1,411.
 - **The priciest card from a rotated set (1–8)** is still Elsa – Spirit of Winter (Enchanted, The First Chapter) at ~$953.
 - **Hyperia City's two Iconics** debuted at #6 (Mickey, $2,401) and #19 (Cinderella, $1,019) in launch week.
 
-The full top 30 updates daily here: https://lorcanacompare.com/blog/most-expensive-lorcana-cards
-
 With Into the Inkdark's 23-copy Illustrious cards coming in February, I expect this list to look very different by March.
 
----
+The full top 30 updates daily here: [lorcanacompare.com/blog/most-expensive-lorcana-cards](https://lorcanacompare.com/blog/most-expensive-lorcana-cards)
+```
 
-## Post 3 · r/Lorcana / r/LorcanaTCG · when US pre-orders for Into the Inkdark open (Dec/Jan)
+## Communities
 
-**Title:** Into the Inkdark pre-order prices compared: boxes from $[cheapest] to $[highest] so far
+| Subreddit | Size (approx.) | Use it for |
+|---|---|---|
+| r/LorcanaFinance | ~2k | Post 1. Price talk is the point of the sub. |
+| r/LorcanaTCG | ~4k | Post 1 (two days later), or Post 2. Friendlier to tools. |
+| r/Lorcana | ~80k | Post 2 only, and only if the sidebar allows it. It's strict on self-promotion. Otherwise share the data in its weekly/discussion thread. |
+| r/LorcanaRestocks | small | Deal Finder link in its discussion thread; it's about fair prices. |
+| r/CompetitiveLorcana | small | Best Basket ("price your deck list"), as a comment, not a post. |
 
-**Body:**
+## Reply template ("where should I buy X?")
 
-Collector Boosters plus the 23-copy Illustrious cards make this the first set where the pre-order price really matters. Here's every store taking pre-orders so far, cheapest first: [paste the top rows from https://lorcanacompare.com/preorders]
-
-TCGplayer only has placeholder listings right now, so don't benchmark against it yet.
-
-Live tracker, updated daily: https://lorcanacompare.com/preorders
-
-(Fill in the two prices from the tracker on the day you post. On 25 Oct, five stores already listed a standard booster box, from about $129 to $230 USD.)
-
----
-
-## Reply template (for "where should I buy X?" threads; at most once a day, and only when it answers the question)
-
-> [Card] is cheapest at [store] for $[X] right now; TCGplayer market is $[Y]. I keep a comparison of all the stores at https://lorcanacompare.com if you want to check others.
+```markdown
+[Card] is cheapest at [store] for $[X] right now (TCGplayer market is $[Y]). I keep a free comparison of all the stores at [lorcanacompare.com](https://lorcanacompare.com) if you want to check others.
+```

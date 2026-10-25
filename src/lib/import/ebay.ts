@@ -161,7 +161,11 @@ interface ItemSummary {
   condition?: string;
 }
 
-const JUNK = /\b(proxy|custom|orica|fan ?made|replica|lot of|choose|pick|you pick|select|playset|x4|4x|psa|bgs|cgc|graded|slab|empty|opened|japanese|chinese|korean|digital|code card|sleeve|sleeves|playmat|binder|deck box)\b/i;
+const JUNK = /\b(proxy|custom|orica|fan ?made|replica|lot of|lot|set of \d+|bundle of \d+|choose|pick|you pick|select|playset|x[2-9]|[2-9]x|graded|slab|gem ?mint|empty|opened|digital|code card|sleeve|sleeves|playmat|binder|deck box)\b/i;
+// Graded copies: "PSA 10", "PSA10", "P SA10", "BGS 9.5", "CGC", "TAG 10", "ACE 10".
+const GRADED = /\b(p\s?sa|bgs|cgc|tag|ace|sgc|beckett)\s?-?\d{1,2}(\.5)?\b|\b(psa|bgs|cgc|beckett|sgc)\b/i;
+// Non-English copies, in the ways sellers write them.
+const FOREIGN_LISTING = /\b(japanese|japan|jpn|jp|ja|chinese|simplified chinese|traditional chinese|korean|french|german|deutsch|italian|italiano|spanish|español|portuguese|asia|asian)\b|\(jp\)|\[jp\]|日本|中文/i;
 
 export function queryFor(p: Product): string {
   // Variant words in parentheses ("(LR+)", "(Enchanted)") are left out: sellers
@@ -172,6 +176,7 @@ export function queryFor(p: Product): string {
 
 /** Does an eBay listing title describe this product? */
 export function listingMatches(p: Product, title: string): boolean {
+  if (GRADED.test(title) || FOREIGN_LISTING.test(title)) return false;
   if (JUNK.test(title) && !(p.kind === "sealed" && /\bcase\b/i.test(p.name) && /\bcase\b/i.test(title) && !/sleeve|deck box|playmat/i.test(title)))
     return false;
   const have = new Set(tokens(title));
@@ -203,7 +208,9 @@ export async function searchLowest(
   const mp = MARKETPLACE[market];
   if (!mp) return null;
   const ref = (refUsdCents / 100) * fxUsd; // in the marketplace currency
-  const lo = Math.max(1, Math.floor(ref * 0.4));
+  // Under half of market is far likelier a fake, a damaged or foreign copy
+  // than a real bargain on a card this valuable.
+  const lo = Math.max(1, Math.floor(ref * 0.5));
   const hi = Math.ceil(ref * 3);
   const params = new URLSearchParams({
     q: queryFor(p),

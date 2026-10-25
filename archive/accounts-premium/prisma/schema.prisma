@@ -1,0 +1,103 @@
+// PRIVATE data only. Every public page reads committed JSON under data/
+// (src/lib/data.ts), so this database is touched by sign-ins, alerts, the
+// admin dashboard and the click log — a few MB a month of Neon transfer.
+// Additive changes only: scripts/build-db-push.sh runs `prisma db push`
+// without --accept-data-loss on every production build.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String       @id @default(cuid())
+  email            String       @unique
+  googleId         String?      @unique
+  passwordHash     String? // unused since Google became the only sign-in (2026-10-25)
+  name             String?
+  tier             String       @default("free") // free | plus | premium
+  stripeCustomerId String?      @unique
+  stripeSubId      String?
+  premiumUntil     DateTime?
+  foundingMember   Boolean      @default(false)
+  createdAt        DateTime     @default(now())
+  lastSeenAt       DateTime?
+  alerts           PriceAlert[]
+  watches          Watch[]
+  collection       CollectionItem[]
+}
+
+model PriceAlert {
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId   Int
+  targetCents Int // USD
+  market      String    @default("US")
+  lastSentAt  DateTime?
+  createdAt   DateTime  @default(now())
+
+  @@unique([userId, productId])
+  @@index([productId])
+}
+
+model Watch {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId Int
+  createdAt DateTime @default(now())
+
+  @@unique([userId, productId])
+}
+
+model CollectionItem {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId Int
+  qty       Int      @default(1)
+  printing  String   @default("Normal")
+  createdAt DateTime @default(now())
+
+  @@unique([userId, productId, printing])
+}
+
+// One row per outbound affiliate click (/go). Feeds the admin dashboard and the
+// eBay prioritiser's demand signal. Never exported.
+model ClickEvent {
+  id        BigInt   @id @default(autoincrement())
+  productId Int?
+  source    String // store key, ebay, tcgplayer, amazon
+  market    String
+  page      String?
+  at        DateTime @default(now())
+
+  @@index([at])
+  @@index([productId, at])
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  email     String
+  message   String
+  kind      String   @default("contact") // contact | store | feedback
+  createdAt DateTime @default(now())
+  handled   Boolean  @default(false)
+}
+
+model NewsletterSubscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+}
+
+model StripeEvent {
+  id        String   @id // Stripe event id: webhook idempotency
+  type      String
+  createdAt DateTime @default(now())
+}

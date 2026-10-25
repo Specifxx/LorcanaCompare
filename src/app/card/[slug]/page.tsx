@@ -9,8 +9,6 @@ import { money, pct } from "@/lib/format";
 import { shortName } from "@/lib/names";
 import { PriceTable } from "@/components/PriceTable";
 import { PriceChart } from "@/components/PriceChart";
-import { AlertButton } from "@/components/AlertButton";
-import { PremiumHistory } from "@/components/PremiumHistory";
 import { TileGrid } from "@/components/ProductTile";
 import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/AdSlot";
@@ -95,7 +93,6 @@ export default function CardPage({ params }: { params: { slug: string } }) {
       <div className="grid gap-8 md:grid-cols-[minmax(0,320px)_1fr]">
         <div className="flex flex-col gap-4">
           {p.image && <img src={imageAt(p.image, "400w")!} alt={`${name} ${SITE.gameShort} card`} className="w-full rounded-xl" width={400} height={560} />}
-          <AlertButton productId={p.id} refCents={ref} />
           <dl className="card-surface grid grid-cols-2 gap-x-3 gap-y-1.5 p-4 text-sm">
             {set && (<><dt className="text-muted">Set</dt><dd><Link className="link" href={`/sets/${set.slug}`}>{set.name}</Link></dd></>)}
             {p.number && (<><dt className="text-muted">Number</dt><dd>{p.number}</dd></>)}
@@ -130,15 +127,14 @@ export default function CardPage({ params }: { params: { slug: string } }) {
           </section>
           <AdSlot slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_CARD} />
           <section className="card-surface p-4">
-            <h2 className="mb-2 text-lg font-bold">Price history (90 days)</h2>
-            <PriceChart series={series} days={90} />
-            <PremiumHistory productId={p.id} />
+            <h2 className="mb-2 text-lg font-bold">Price history</h2>
+            <PriceChart series={series} days={365} />
           </section>
           <section className="prose-site max-w-none text-sm">
             <h2>Is {name} worth it?</h2>
             <p>
               {name} {ref ? `sells for about ${money(ref)} on TCGplayer` : "has no TCGplayer market price yet"}
-              {e.change30d != null ? `, ${e.change30d >= 0 ? "up" : "down"} ${Math.abs(e.change30d)}% over 30 days` : ""}. {inStock.length ? `The cheapest in-stock listing we track is ${money(inStock[0].cents, inStock[0].currency)}.` : ""} Prices from {SITE.stores.length} stores, TCGplayer and eBay are checked daily; set an alert above and we will email you when it drops to your price.
+              {e.change30d != null ? `, ${e.change30d >= 0 ? "up" : "down"} ${Math.abs(e.change30d)}% over 30 days` : ""}. {inStock.length ? `The cheapest in-stock listing we track is ${money(inStock[0].cents, inStock[0].currency)}.` : ""} Prices from {SITE.stores.length} stores, TCGplayer and eBay are checked every day.
             </p>
           </section>
         </div>
