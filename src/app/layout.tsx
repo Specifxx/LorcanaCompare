@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   openGraph: { type: "website", siteName: SITE.name, url: "/" },
   twitter: { card: "summary_large_image" },
   alternates: { canonical: "/", types: { "application/rss+xml": "/feed.xml" } },
+  // Large image previews and full snippets in Google (Search, Discover, Images), as RiftCompare does.
+  // A page that sets its own `robots` (noindex) replaces this whole object.
+  robots: { googleBot: { "max-image-preview": "large", "max-snippet": -1 } },
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
     other: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION ? { "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION } : undefined,
