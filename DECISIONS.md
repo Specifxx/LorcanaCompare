@@ -359,3 +359,11 @@ Engine changes made for YGO Compare, ported here unchanged in behaviour
 variants each name a printing no longer turns its damaged variants into
 offers of their own, and a store title carrying a Yu-Gi-Oh!-style number
 (e.g. "[14HPC-132]") is never treated as sealed.
+
+## One family of sites — 2026-10-26
+
+Owner, after the strategy review: "execute on all the recommended items". One of
+them: one family of sites people recognise, without moving any domain. The
+footer's sister-sites block now names the Compare Empire family, and every live
+sister site is in it (Gundam Compare and Lorcana Compare joined MTG Compare's and
+DexCompare's lists the same day). YGO Compare joins once it is public.
