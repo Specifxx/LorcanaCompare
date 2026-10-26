@@ -9,8 +9,8 @@ import { slugify } from "@/lib/slug";
 // "LR+" and "LR++" must not share a slug.
 const raritySlug = (r: string) => slugify(r.replace(/\+/g, " plus "));
 
-export const SEALED_ORDER = ["Booster Box", "Case", "Illumineer's Trove", "Booster Pack", "Sleeved Pack", "Starter Deck", "Collection", "Prerelease", "Deck", "Other"];
-export const SEALED_PLURAL: Record<string, string> = { "Booster Box": "Booster boxes", Case: "Cases", "Illumineer's Trove": "Illumineer's Troves", "Booster Pack": "Booster packs", "Sleeved Pack": "Sleeved packs", "Starter Deck": "Starter decks", Collection: "Collections and gift sets", Prerelease: "Prerelease kits", Deck: "Decks", Other: "Other sealed" };
+export const SEALED_ORDER = ["Booster Box", "Case", "Illumineer's Trove", "Booster Pack", "Sleeved Pack", "Starter Deck", "Structure Deck", "Tin", "Special Edition", "Collection", "Prerelease", "Deck", "Other"];
+export const SEALED_PLURAL: Record<string, string> = { "Booster Box": "Booster boxes", Case: "Cases", "Illumineer's Trove": "Illumineer's Troves", "Booster Pack": "Booster packs", "Sleeved Pack": "Sleeved packs", "Starter Deck": "Starter decks", "Structure Deck": "Structure decks", Tin: "Tins", "Special Edition": "Special editions", Collection: "Collections and gift sets", Prerelease: "Prerelease kits", Deck: "Decks", Other: "Other sealed" };
 
 export interface Hub { slug: string; label: string; items: Product[] }
 

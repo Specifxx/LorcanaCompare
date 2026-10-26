@@ -13,7 +13,7 @@ are `src/site.config.ts` and `src/content/` (stores, blog posts, pre-order copy)
 GitHub Actions, daily 06:17 UTC (refresh-prices.yml)
   TCGCSV (TCGplayer catalogue + prices, category 71)
   + every Shopify store in src/content/stores.ts  (products.json)
-  + eBay Browse API, budgeted (2,500 calls/day, nothing under $20)
+  + eBay Browse API, budgeted (1,500 calls/day, nothing under $20)
   → data/public/*.json, data/history/<set>.json, data/state/*.json
   → commit to main with "[deploy]" in the subject  → one Vercel build a day
   → IndexNow ping

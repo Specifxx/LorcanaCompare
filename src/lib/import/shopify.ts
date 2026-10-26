@@ -3,6 +3,7 @@
 // 250 products a page; we stop at the first short page.
 import type { StoreConfig } from "@/lib/site-types";
 import { fetchJson, sleep } from "./http";
+import { editionOf } from "./match";
 
 export interface ShopifyVariant {
   id: number;
@@ -80,10 +81,17 @@ export async function fetchStore(store: StoreConfig): Promise<StoreItem[]> {
         seen.add(p.id);
         const tags = Array.isArray(p.tags) ? p.tags : String(p.tags || "").split(",").map((t) => t.trim());
         const printingVariants = p.variants.filter((v) => !CONDITION_ONLY.test((v.title || "").trim()));
+        // Condition variants that also name an edition ("Near Mint 1st Edition",
+        // "Lightly Played Unlimited") are one offer per edition, never mixed.
+        const editions = new Set(p.variants.map((v) => editionOf(v.title || "")));
+        // Checked first: "Near Mint / 1st Edition" style variants would
+        // otherwise each become an item, damaged copies included.
         const groups: { title: string; variants: ShopifyVariant[] }[] =
-          printingVariants.length > 1 && printingVariants.length === p.variants.length
-            ? printingVariants.map((v) => ({ title: `${p.title} ${v.title}`, variants: [v] }))
-            : [{ title: p.title, variants: p.variants }];
+          editions.size > 1
+            ? [...editions].map((e) => ({ title: e ? `${p.title} ${e}` : p.title, variants: p.variants.filter((v) => editionOf(v.title || "") === e) }))
+            : printingVariants.length > 1 && printingVariants.length === p.variants.length
+              ? printingVariants.filter((v) => !BAD_CONDITION.test(v.title || "")).map((v) => ({ title: `${p.title} ${v.title}`, variants: [v] }))
+              : [{ title: p.title, variants: p.variants }];
         for (const g of groups) {
           const v = pickVariant({ ...p, variants: g.variants });
           if (!v) continue;

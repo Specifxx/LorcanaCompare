@@ -338,3 +338,24 @@ English Buy It Now case listings.
   card, set, hub and guide pages; set pages link to neighbouring sets.
 - The sitemap was already clean (only 200, self-canonical, no parameters);
   checked with curl over every non-card URL and a sample of card pages.
+
+## eBay: 1,500 calls a day, shared three ways with YGO Compare — 2026-10-26
+
+**Owner:** "we can also split the eBay API keys that we use for Gundam and
+Lorcana with Yu-Gi-Oh compare, you can use like 1,500 of that each."
+
+`SITE.ebay.dailyBudget` drops from 2,500 to 1,500 here, in the other sister
+site, and in YGO Compare (`Specifxx/ygocompare`): 4,500 of the app's 5,000,
+leaving 500 for retries and the live-remaining reserve. Run hours: Lorcana 06,
+YGO 12, Gundam 18 UTC, so each eBay day (midnight Pacific) still holds one run
+of each site. The planner already spends from the top of value × demand ×
+staleness, so the cut removes the least valuable re-checks first.
+
+Engine changes made for YGO Compare, ported here unchanged in behaviour
+(every new option is off unless `site.config.ts` sets it): `numberStyle:
+"ygo"`, `slugStyle`, `catalogMinCardCents`, `extraAttrs`, `sealedTypes`,
+`rarityMustAgree`/`rarityAliases`, and 1st/Unlimited editions in
+`printingOf`. Two small changes do apply here: a Shopify product whose
+variants each name a printing no longer turns its damaged variants into
+offers of their own, and a store title carrying a Yu-Gi-Oh!-style number
+(e.g. "[14HPC-132]") is never treated as sealed.

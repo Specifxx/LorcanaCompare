@@ -80,7 +80,7 @@ async function main() {
   const fx = await fxRates(prevMeta?.fx ?? {});
 
   // 2. Stores
-  const idx = buildIndex(products, sets, SITE.numberStyle);
+  const idx = buildIndex(products, sets, SITE.numberStyle, { rarityMustAgree: SITE.rarityMustAgree, rarityAliases: SITE.rarityAliases });
   const storeOffers = new Map<number, Offer[]>();
   const storeStatus: Record<string, StoreStatus> = {};
   const addOffer = (id: number, o: Offer) => {
@@ -120,7 +120,7 @@ async function main() {
             inStock: it.inStock,
             url: it.url,
             title: it.title,
-            printing: m.product.kind === "card" ? printingOf(it.title, it.variantTitle) : undefined,
+            printing: m.product.kind === "card" ? printingOf(it.title, it.variantTitle, m.product.printings) : undefined,
             preorder: isPreorder(it.title, it.tags) || undefined,
           };
           const k = `${m.product.id}|${offer.printing ?? ""}`;

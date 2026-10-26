@@ -22,9 +22,11 @@ test("sealed: plurals match, cases match, pack inserts are never eligible", asyn
   assert.equal(calls.length, 0);
 });
 
-test("cards under $10 get no call; every sealed product does, priced or not", () => {
+test("cards under the floor get no call; every sealed product does, priced or not", async () => {
+  const { SITE } = await import("@/site.config");
+  const floor = SITE.ebay.minPriceUsd * 100;
   const products = [p(1), p(2), p(3), p(4, "Rare", "sealed"), p(5, "Rare", "sealed")];
-  const ref = new Map<number, number | null>([[1, 999], [2, 1000], [3, 50], [4, 800], [5, null]]);
+  const ref = new Map<number, number | null>([[1, floor - 1], [2, floor], [3, 50], [4, 800], [5, null]]);
   const { calls, eligible } = planEbayRefresh({ products, refUsdCents: ref, clicks30d: new Map(), newSetIds: new Set(), state: {}, budget: 100, now });
   assert.equal(eligible, 3);
   assert.deepEqual([...new Set(calls.map((c) => c.product.id))].sort(), [2, 4, 5]);
@@ -58,7 +60,7 @@ test("refresh intervals", () => {
 test("eBay listings: graded, foreign and multi-card titles never match", async () => {
   const { listingMatches } = await import("@/lib/import/ebay");
   const { SITE } = await import("@/site.config");
-  const num = SITE.numberStyle === "code" ? "GD05-102" : "230/204";
+  const num = { code: "GD05-102", ygo: "RA01-EN008", fraction: "230/204" }[SITE.numberStyle];
   const card: Product = { ...p(1), name: "Belle - Exceptional Writer (Enchanted)", number: num, rarity: "Enchanted" };
   assert.equal(listingMatches(card, `Belle Exceptional Writer Enchanted ${num} NM`), true);
   const song: Product = { ...p(2), name: "Let It Go", number: num, rarity: "Rare" };
@@ -95,4 +97,18 @@ test("bracketed qualifiers must match: a winner card never takes a participation
   assert.equal(qualifiersAgree("Gundam Exia (Trans-Am) (LR+)", t("Gundam Exia Trans AM GD03-049 LR+ Alt Art")), true);
   assert.equal(qualifiersAgree("Elsa - Spirit of Winter (Enchanted)", t("Elsa Spirit of Winter 207/204")), true);
   assert.equal(qualifiersAgree("Unicorn Gundam (Awakened) (Newtype Challenge 2026 Mission 4)", t("Unicorn Gundam Awakened GD04-066 NTC Winners Card")), true);
+});
+
+test("Yu-Gi-Oh!: a listing that names another rarity of the same number never matches", async () => {
+  const { listingMatches } = await import("@/lib/import/ebay");
+  const { SITE } = await import("@/site.config");
+  if (SITE.numberStyle !== "ygo") return;
+  const qcsr: Product = { ...p(4), name: "Ash Blossom & Joyous Spring (Quarter Century Secret Rare)", number: "RA01-EN008", rarity: "Quarter Century Secret Rare", printings: ["1st Edition"] };
+  const sr: Product = { ...qcsr, id: 5, name: "Ash Blossom & Joyous Spring (Super Rare)", rarity: "Super Rare" };
+  assert.equal(listingMatches(qcsr, "Yugioh Ash Blossom & Joyous Spring RA01-EN008 Quarter Century Secret Rare 1st Ed NM"), true);
+  assert.equal(listingMatches(qcsr, "Ash Blossom & Joyous Spring RA01-EN008 QCSR 1st Edition"), true);
+  assert.equal(listingMatches(sr, "Yugioh Ash Blossom & Joyous Spring RA01-EN008 Quarter Century Secret Rare 1st Ed NM"), false);
+  assert.equal(listingMatches(sr, "Ash Blossom & Joyous Spring RA01-EN008 Super Rare 1st Edition"), true);
+  assert.equal(listingMatches(qcsr, "Ash Blossom & Joyous Spring RA01-DE008 Quarter Century Secret Rare German"), false);
+  assert.equal(listingMatches(qcsr, "Ash Blossom & Joyous Spring RA01-AE008 Quarter Century Secret Rare"), false);
 });

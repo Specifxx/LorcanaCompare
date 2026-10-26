@@ -13,5 +13,5 @@ database, no email and no account system (archived in
   data goes stale, stores break or eBay stops.
 * Adding a store: verify that its `products.json` returns this game's
   products, then add it to `src/content/stores.ts`.
-* eBay: both sites share one app, at 2,500 calls a day each. The Lorcana
+* eBay: Gundam, Lorcana and YGO Compare share one app, at 1,500 calls a day each. The Lorcana
   site serves the Marketplace Account Deletion endpoint for the app.

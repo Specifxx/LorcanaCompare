@@ -2,11 +2,13 @@
 // a call.
 //
 // THE BUDGET. One eBay developer app (5,000 Browse calls a day) is shared by
-// Lorcana Compare and Gundam Compare, 2,500 each (owner, 2026-10-24). The app's
-// remaining count (Developer Analytics API, free) is shared too, so each site
-// also keeps ITS OWN count in data/state/ebay-usage.json and stops at its
-// share, whichever limit comes first. The two sites run at different hours
-// (SITE.ebay.runHourUtc) so neither starves the other mid-run.
+// Lorcana Compare, Gundam Compare and YGO Compare, 1,500 each (owner,
+// 2026-10-26; 2,500 each for the first two before), leaving 500 spare. The
+// app's remaining count (Developer Analytics API, free) is shared too, so each
+// site also keeps ITS OWN count in data/state/ebay-usage.json and stops at its
+// share, whichever limit comes first. The sites run at different hours
+// (SITE.ebay.runHourUtc: Lorcana 06, YGO 12, Gundam 18 UTC) so none starves
+// another mid-run.
 //
 // WHAT GETS A CALL (planEbayRefresh, pure and tested):
 //   1. Every sealed product, whatever its price (pre-orders with no TCGplayer
@@ -24,7 +26,7 @@
 //      highest-ranked products only.
 import { SITE } from "@/site.config";
 import type { Market, Offer, Product } from "@/lib/site-types";
-import { markersAgree, numbersInTitle } from "./match";
+import { hasEditions, markersAgree, numbersInTitle, printingOf, rarityAgrees, rarityPatterns } from "./match";
 import { tokens } from "@/lib/slug";
 import { sealedTypeOf } from "./tcgcsv";
 import { shortName } from "@/lib/names";
@@ -188,10 +190,12 @@ export function queryFor(p: Product): string {
 // and finish words don't count; markersAgree() handles rarities.
 const QUAL_SKIP = new Set(["foil", "holo", "holofoil", "cold", "enchanted", "iconic", "epic", "promo", "alt", "art", "parallel", "sp", "the", "of", "and", "a"]);
 const ABBREV: Record<string, string[]> = { ntc: ["newtype", "challenge"], wcs: ["world", "championship"], wc: ["world", "championship"], stw: ["store", "tournament", "winner"] };
-export function qualifiersAgree(productName: string, title: Set<string>): boolean {
+export function qualifiersAgree(productName: string, title: Set<string>, rarity: string | null = null): boolean {
   const have = new Set(title);
   for (const t of title) for (const w of ABBREV[t] ?? []) have.add(w);
   for (const m of productName.matchAll(/\(([^)]*)\)/g)) {
+    // "(Quarter Century Secret Rare)" is the rarity itself: rarityAgrees() judges it.
+    if (rarity && m[1].trim().toLowerCase() === rarity.toLowerCase()) continue;
     // Pure numbers ("2026", "Pack 01", "Season 1") vary in how sellers write
     // them, so only words count.
     const words = tokens(m[1]).filter((t) => !QUAL_SKIP.has(t) && !/\d/.test(t) && !/^(lr|r|u|c)\+*$/.test(t) && !/\+/.test(t));
@@ -200,6 +204,10 @@ export function qualifiersAgree(productName: string, title: Set<string>): boolea
   }
   return true;
 }
+
+let rarities: ReturnType<typeof rarityPatterns> | null | undefined;
+const sellerRarities = () =>
+  rarities === undefined ? (rarities = SITE.rarityMustAgree ? rarityPatterns(SITE.rarityOrder, SITE.rarityAliases) : null) : rarities;
 
 /** Does an eBay listing title describe this product? */
 export function listingMatches(p: Product, title: string): boolean {
@@ -224,7 +232,7 @@ export function listingMatches(p: Product, title: string): boolean {
     if (!numOk) return false;
     const base = tokens(p.name.replace(/\([^)]*\)/g, " ")).filter((t) => t.length > 1);
     const ok = base.filter((t) => have.has(t)).length / Math.max(1, base.length);
-    return ok >= 0.6 && markersAgree(p.name, p.rarity, title) && qualifiersAgree(p.name, have);
+    return ok >= 0.6 && markersAgree(p.name, p.rarity, title) && rarityAgrees(p, title, sellerRarities()) && qualifiersAgree(p.name, have, p.rarity);
   }
   if (p.sealedType === "Insert") return false;
   if (sealedTypeOf(title) !== sealedTypeOf(p.name)) return false;
@@ -290,6 +298,8 @@ export async function searchLowest(
         inStock: true,
         url: it.itemAffiliateWebUrl || it.itemWebUrl,
         title: it.title,
+        // Editions (1st / Unlimited) are told apart only where TCGplayer prices them.
+        printing: p.kind === "card" && hasEditions(p.printings) ? printingOf(it.title, "", p.printings) : undefined,
       };
     }
   }

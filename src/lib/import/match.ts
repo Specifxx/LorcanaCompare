@@ -12,7 +12,7 @@ import { sealedTypeOf } from "./tcgcsv";
 const STOP = new Set([
   "the", "a", "of", "and", "disney", "lorcana", "tcg", "card", "game", "gundam", "single", "singles",
   "english", "en", "nm", "near", "mint", "foil", "holo", "holofoil", "cold", "normal", "non",
-  "booster", "set", "chapter",
+  "booster", "set", "chapter", "yu", "gi", "oh", "yugioh", "konami",
 ]);
 
 // Words that mark a variant printing on the product name itself. A title that
@@ -33,10 +33,26 @@ export interface MatchIndex {
   setByCode: Map<string, number[]>;
   sealed: Product[];
   setName: Map<number, string[]>;
-  style: "fraction" | "code";
+  style: NumberStyle;
+  /** Every rarity in the catalogue plus aliases, longest first (rarityMustAgree only). */
+  rarities: { name: string; re: RegExp }[] | null;
 }
 
-export function numberKey(n: string, style: "fraction" | "code"): string | null {
+export type NumberStyle = "fraction" | "code" | "ygo";
+
+// Yu-Gi-Oh! numbers: set code, an optional language, the number —
+// "LOB-EN005", "RA01-EN008", "YGLD-ENA01", old "LOB-005" and European
+// "LOB-E005". The language stays in the key: an "EN" card and an "E" or
+// unmarked one are different printings, and any other language ("LOB-DE005",
+// "RA01-AE008") never produces a key, so it can never match.
+const YGO_NUM = /(?<![A-Z0-9])((?=[A-Z0-9]*[A-Z])[A-Z0-9]{2,5})-(EN|E)?([A-Z]?)(\d{2,3})(?![A-Z0-9])/g;
+const ygoKey = (m: RegExpMatchArray) => `${m[1]}-${m[2] ?? ""}${m[3]}${m[4].padStart(3, "0")}`;
+
+export function numberKey(n: string, style: NumberStyle): string | null {
+  if (style === "ygo") {
+    const m = [...n.toUpperCase().matchAll(YGO_NUM)][0];
+    return m ? ygoKey(m) : null;
+  }
   if (style === "code") {
     const m = n.toUpperCase().match(/\b([A-Z]{1,4}\d{0,2}[A-Z]?)-(\d{2,3}[A-Z]?)\b/);
     return m ? `${m[1]}-${m[2].padStart(3, "0")}` : null;
@@ -47,9 +63,11 @@ export function numberKey(n: string, style: "fraction" | "code"): string | null 
 }
 
 /** Every number-looking token in a store title. */
-export function numbersInTitle(title: string, style: "fraction" | "code"): string[] {
+export function numbersInTitle(title: string, style: NumberStyle): string[] {
   const out = new Set<string>();
-  if (style === "code") {
+  if (style === "ygo") {
+    for (const m of title.toUpperCase().matchAll(YGO_NUM)) out.add(ygoKey(m));
+  } else if (style === "code") {
     for (const m of title.toUpperCase().matchAll(/\b([A-Z]{1,4}\d{0,2}[A-Z]?)-(\d{2,3}[A-Z]?)\b/g))
       out.add(`${m[1]}-${m[2].padStart(3, "0")}`);
   } else {
@@ -103,7 +121,43 @@ export function markersAgree(productName: string, rarity: string | null, title: 
   return true;
 }
 
-export function buildIndex(products: Product[], sets: SetInfo[], style: "fraction" | "code"): MatchIndex {
+const esc = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+/** Rarity names (and aliases) as whole-phrase patterns, longest first, so
+ *  "Quarter Century Secret Rare" wins over "Secret Rare" and "Rare". Full
+ *  names and multi-word aliases match in any case; one-word aliases ("QCSR",
+ *  "UR") only as written. */
+export function rarityPatterns(names: string[], aliases: Record<string, string[]> = {}): { name: string; re: RegExp }[] {
+  const out: { name: string; text: string; re: RegExp }[] = [];
+  for (const n of new Set(names)) out.push({ name: n, text: n, re: new RegExp(`(^|[^A-Za-z0-9])${esc(n)}(?![A-Za-z0-9])`, "i") });
+  for (const [n, list] of Object.entries(aliases))
+    for (const a of list) out.push({ name: n, text: a, re: new RegExp(`(^|[^A-Za-z0-9])${esc(a)}(?![A-Za-z0-9])`, /\s/.test(a) ? "i" : "") });
+  return out.sort((a, b) => b.text.length - a.text.length).map(({ name, re }) => ({ name, re }));
+}
+
+/** The rarity a title names, with the card's own name taken out first (so
+ *  "Rare Metal Dragon" names no rarity), or null. */
+export function rarityInTitle(title: string, productName: string, rarities: { name: string; re: RegExp }[]): string | null {
+  let t = ` ${title} `;
+  const base = productName.replace(/\([^)]*\)/g, " ").trim();
+  if (base) t = t.replace(new RegExp(esc(base), "ig"), " ");
+  for (const r of rarities) if (r.re.test(t)) return r.name;
+  return null;
+}
+
+/** For rarityMustAgree games: a title that names a rarity must name this one. */
+export function rarityAgrees(p: Product, title: string, rarities: { name: string; re: RegExp }[] | null): boolean {
+  if (!rarities || !p.rarity) return true;
+  const named = rarityInTitle(title, p.name, rarities);
+  return named == null || named.toLowerCase() === p.rarity.toLowerCase();
+}
+
+export interface IndexOptions {
+  rarityMustAgree?: boolean;
+  rarityAliases?: Record<string, string[]>;
+}
+
+export function buildIndex(products: Product[], sets: SetInfo[], style: NumberStyle, opts: IndexOptions = {}): MatchIndex {
   const byNumber = new Map<string, Product[]>();
   const bySetNumber = new Map<string, Product[]>();
   const bySetName = new Map<string, Product[]>();
@@ -140,7 +194,10 @@ export function buildIndex(products: Product[], sets: SetInfo[], style: "fractio
     const words = st.name.replace(/[^A-Za-z0-9 ]/g, " ").split(/\s+/).filter(Boolean);
     if (words.length >= 2) addCode(words.map((w) => w[0]).join(""), st.id);
   }
-  return { byNumber, bySetNumber, bySetName, setByCode, sealed, setName, style };
+  const rarities = opts.rarityMustAgree
+    ? rarityPatterns(products.map((p) => p.rarity).filter((r): r is string => !!r), opts.rarityAliases)
+    : null;
+  return { byNumber, bySetNumber, bySetName, setByCode, sealed, setName, style, rarities };
 }
 
 function overlap(need: string[], have: Set<string>): number {
@@ -219,6 +276,7 @@ export function matchCard(title: string, idx: MatchIndex, context = ""): MatchRe
       const nameScore = overlap(baseName(p.name), have);
       if (nameScore < 0.6) continue;
       if (!markersAgree(p.name, p.rarity, title)) continue;
+      if (!rarityAgrees(p, title, idx.rarities)) continue;
       const setScore = overlap(idx.setName.get(p.setId) ?? [], have);
       scored.push({ product: p, score: nameScore + 0.5 * setScore });
     }
@@ -254,7 +312,29 @@ export function matchSealed(title: string, idx: MatchIndex): MatchResult | null 
   return scored[0];
 }
 
-export function printingOf(title: string, variantTitle = ""): string {
+// TCGplayer's edition printings (Yu-Gi-Oh!). When a product is sold in these,
+// the title must say which; an unstated edition stays unknown, never guessed,
+// unless the product exists in only one.
+const EDITIONS: [string, RegExp][] = [
+  ["1st Edition", /\b1st\b|first\s+edition/],
+  ["Unlimited", /\bunlimited\b/],
+  ["Limited", /\blimited\b/],
+];
+
+export const hasEditions = (printings: string[]) => printings.some((p) => EDITIONS.some(([e]) => e === p));
+
+export function editionOf(text: string): string | null {
+  const s = text.toLowerCase();
+  for (const [name, re] of EDITIONS) if (re.test(s)) return name;
+  return null;
+}
+
+export function printingOf(title: string, variantTitle = "", printings: string[] = []): string | undefined {
+  if (hasEditions(printings)) {
+    const named = editionOf(`${variantTitle} ${title}`);
+    if (named) return printings.includes(named) ? named : undefined;
+    return printings.length === 1 ? printings[0] : undefined;
+  }
   const s = `${title} ${variantTitle}`.toLowerCase();
   if (/cold\s*foil/.test(s)) return "Cold Foil";
   if (/non[-\s]?foil/.test(s)) return "Normal";
@@ -267,7 +347,7 @@ export function isPreorder(title: string, tags: string[] = []): boolean {
 }
 
 export function looksSealed(title: string, productType = ""): boolean {
-  return /booster|display|\bbox\b|\bcase\b|\bpack\b|starter|deck|trove|gift set|collection|bundle|prerelease/i.test(
+  return /booster|display|\bbox\b|\bcase\b|\bpack\b|starter|deck|trove|gift set|collection|bundle|prerelease|\btin\b/i.test(
     `${title} ${productType}`,
-  ) && !numbersInTitle(title, "fraction").length && !numbersInTitle(title, "code").length;
+  ) && !numbersInTitle(title, "fraction").length && !numbersInTitle(title, "code").length && !numbersInTitle(title, "ygo").length;
 }
