@@ -67,7 +67,29 @@ export interface SiteConfig {
     dailyBudget: number;
     runHourUtc: number;
   };
-  numberStyle: "fraction" | "code";
+  /** "fraction" 42/204 (Lorcana), "code" GD02-048 (Gundam), "ygo" LOB-EN005
+   *  (set code, language, number; the language is part of the key). */
+  numberStyle: "fraction" | "code" | "ygo";
+  /** "name" (default): the first product of a name keeps the bare slug.
+   *  "name-number": every card's slug carries its number ("dark-magician-lob-en005"),
+   *  for games that reprint one card in dozens of sets. Slugs are decided
+   *  from the whole TCGplayer listing, before any catalogue floor, so they
+   *  never change when a card crosses it. */
+  slugStyle?: "name" | "name-number";
+  /** Leave out cards (never sealed) whose every TCGplayer price is under
+   *  this many US cents, except in sets released in the last 120 days.
+   *  For games with tens of thousands of printings (data size, build size). */
+  catalogMinCardCents?: number;
+  /** TCGplayer extended fields shown on card pages, besides the engine's own. */
+  extraAttrs?: string[];
+  /** Game-specific sealed types, checked before the engine's defaults.
+   *  Return "Insert" for anything that isn't sealed product (accessories). */
+  sealedTypes?: [RegExp, string][];
+  /** A store or eBay title that names a rarity must name the product's own
+   *  (games where one card number exists in several rarities). */
+  rarityMustAgree?: boolean;
+  /** Extra ways sellers write a rarity: { "Quarter Century Secret Rare": ["QCSR", "QCScR"] }. */
+  rarityAliases?: Record<string, string[]>;
   rarityOrder: string[];
   chaseRarities: string[];
   theme: {

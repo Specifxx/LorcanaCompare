@@ -4,7 +4,7 @@ name: Refresh prices
 # The data commit's SUBJECT carries [deploy], so it is the day's one
 # production build (scripts/vercel-ignore-build.sh). Scheduled after TCGCSV's
 # ~20:00 UTC refresh would be ideal for TCGplayer, but the eBay run hour is set
-# per site so Lorcana Compare and Gundam Compare never overlap on the shared
+# per site so Lorcana, YGO and Gundam Compare never overlap on the shared
 # eBay app (SITE.ebay.runHourUtc) — keep this cron's hour equal to it.
 
 on:

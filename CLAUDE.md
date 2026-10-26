@@ -4,7 +4,7 @@ Read `README.md` first. This is Lorcana Compare; Gundam Compare runs the same en
 Engine code (`src/lib`, `src/app`, `src/components`, `scripts`) must stay
 game-agnostic: anything game-specific goes in `src/site.config.ts` or
 `src/content/`. When you change the engine, make the same change in the other
-repo.
+two repos (YGO Compare, `Specifxx/ygocompare`, runs it too).
 
 ## Deploys are gated — do not add `[deploy]` to commit subjects
 
@@ -35,12 +35,13 @@ committed JSON under `data/` (`src/lib/data.ts`). The removed features are in
 
 ## eBay
 
-One eBay app (5,000 Browse calls/day) is shared with Gundam Compare: 2,500 each,
-counted in `data/state/ebay-usage.json`. Cards under $10 get no call; every
+One eBay app (5,000 Browse calls/day) is shared with Gundam Compare and
+YGO Compare: 1,500 each (owner, 2026-10-26), counted in
+`data/state/ebay-usage.json`. Cards under $10 get no call; every
 sealed product does. The
 plan is `planEbayRefresh` in `src/lib/import/ebay.ts`, pinned by
 `tests/ebay-plan.test.ts`. Do not raise `SITE.ebay.dailyBudget` without moving
-the other site's down by the same amount.
+another site's down by the same amount; the three must total 4,500 or less.
 
 ## Matching
 

@@ -7,6 +7,9 @@ import { slugify } from "@/lib/slug";
 import { fetchJson, sleep } from "./http";
 
 const BASE = "https://tcgcsv.com/tcgplayer";
+// TCGCSV blocks browser-like User-Agents (HTTP 401, seen 2026-10-26) and asks
+// each app to name itself.
+export const TCGCSV_INIT: RequestInit = { headers: { "User-Agent": `${SITE.shortName}/1.0 (+https://www.${SITE.domain})` } };
 
 interface Group {
   groupId: number;
@@ -47,6 +50,7 @@ const KEEP_ATTRS = new Set([
 ]);
 
 export function sealedTypeOf(name: string): string {
+  for (const [re, type] of SITE.sealedTypes ?? []) if (re.test(name)) return type;
   const n = name.toLowerCase();
   // Pack fillers TCGplayer lists as products (puzzle pieces, lore cards, ink
   // drop and other tokens): not sealed product, never worth an eBay call.
@@ -74,7 +78,7 @@ export async function loadTcgcsv(now = new Date()): Promise<{
   tcg: Record<number, Record<string, TcgPrice>>;
 }> {
   const cat = SITE.tcgcsvCategoryId;
-  const groups = (await fetchJson<{ results: Group[] }>(`${BASE}/${cat}/groups`)).results;
+  const groups = (await fetchJson<{ results: Group[] }>(`${BASE}/${cat}/groups`, TCGCSV_INIT)).results;
   const sets: SetInfo[] = [];
   const products: Product[] = [];
   const tcg: Record<number, Record<string, TcgPrice>> = {};
@@ -82,8 +86,8 @@ export async function loadTcgcsv(now = new Date()): Promise<{
 
   for (const g of groups) {
     const [prods, prices] = await Promise.all([
-      fetchJson<{ results: RawProduct[] }>(`${BASE}/${cat}/${g.groupId}/products`),
-      fetchJson<{ results: RawPrice[] }>(`${BASE}/${cat}/${g.groupId}/prices`),
+      fetchJson<{ results: RawProduct[] }>(`${BASE}/${cat}/${g.groupId}/products`, TCGCSV_INIT),
+      fetchJson<{ results: RawPrice[] }>(`${BASE}/${cat}/${g.groupId}/prices`, TCGCSV_INIT),
     ]);
     const setSlug = slugify(g.name);
     const released = g.publishedOn ? g.publishedOn.slice(0, 10) : null;
@@ -110,11 +114,16 @@ export async function loadTcgcsv(now = new Date()): Promise<{
       const ext = Object.fromEntries(p.extendedData.map((e) => [e.name, e.value]));
       const isCard = !!ext.Number;
       let slug = slugify(p.name) || String(p.productId);
-      if (usedSlugs.has(slug)) slug = `${slug}-${setSlug}`;
-      if (usedSlugs.has(slug)) slug = `${slug}-${p.productId}`;
-      usedSlugs.add(slug);
+      if (SITE.slugStyle === "name-number") {
+        // Final slugs are settled below, from the whole listing at once.
+        if (isCard) slug = `${slug}-${slugify(ext.Number)}`;
+      } else {
+        if (usedSlugs.has(slug)) slug = `${slug}-${setSlug}`;
+        if (usedSlugs.has(slug)) slug = `${slug}-${p.productId}`;
+        usedSlugs.add(slug);
+      }
       const attrs: Record<string, string> = {};
-      for (const [k, v] of Object.entries(ext)) if (KEEP_ATTRS.has(k) && v) attrs[k] = String(v).replace(/<[^>]+>/g, "");
+      for (const [k, v] of Object.entries(ext)) if ((KEEP_ATTRS.has(k) || SITE.extraAttrs?.includes(k)) && v) attrs[k] = String(v).replace(/<[^>]+>/g, "");
       products.push({
         id: p.productId,
         slug,
@@ -133,7 +142,49 @@ export async function loadTcgcsv(now = new Date()): Promise<{
     await sleep(150);
   }
   sets.sort((a, b) => (b.releasedOn ?? "").localeCompare(a.releasedOn ?? ""));
+  if (SITE.slugStyle === "name-number") settleSlugs(products, sets);
+  if (SITE.catalogMinCardCents) {
+    const kept = applyCatalogFloor(products, sets, tcg, SITE.catalogMinCardCents, now);
+    for (const s of sets) s.productCount = kept.filter((p) => p.setId === s.id).length;
+    return { sets, products: kept, tcg };
+  }
   return { sets, products, tcg };
+}
+
+/** "name-number" slugs: a slug two products share gets the rarity (cards) or
+ *  the set (sealed), then the product id. Decided from the whole listing in a
+ *  fixed order, so a product's slug doesn't depend on which others exist. */
+export function settleSlugs(products: Product[], sets: SetInfo[]) {
+  const setSlug = new Map(sets.map((s) => [s.id, s.slug]));
+  const count = (key: (p: Product) => string) => {
+    const n = new Map<string, number>();
+    for (const p of products) n.set(key(p), (n.get(key(p)) ?? 0) + 1);
+    return n;
+  };
+  const base = count((p) => p.slug);
+  for (const p of products)
+    if (base.get(p.slug)! > 1) p.slug = `${p.slug}-${slugify((p.kind === "card" ? p.rarity : setSlug.get(p.setId)) ?? "") || p.id}`;
+  const second = count((p) => p.slug);
+  for (const p of products) if (second.get(p.slug)! > 1) p.slug = `${p.slug}-${p.id}`;
+}
+
+/** Cards priced under the floor in every printing leave the catalogue, unless
+ *  their set is new or upcoming (prices settle in the first weeks). Sealed
+ *  always stays. */
+export function applyCatalogFloor(
+  products: Product[],
+  sets: SetInfo[],
+  tcg: Record<number, Record<string, TcgPrice>>,
+  minCents: number,
+  now: Date,
+): Product[] {
+  const fresh = new Set(
+    sets.filter((s) => s.upcoming || (s.releasedOn && now.getTime() - new Date(s.releasedOn).getTime() < 120 * 86_400_000)).map((s) => s.id),
+  );
+  return products.filter((p) => {
+    if (p.kind === "sealed" || fresh.has(p.setId)) return true;
+    return Object.values(tcg[p.id] ?? {}).some((t) => (t.market ?? t.mid ?? t.low ?? 0) >= minCents);
+  });
 }
 
 /** The headline USD price of a product: the lowest printing's market price,

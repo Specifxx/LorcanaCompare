@@ -16,7 +16,7 @@ import type { Catalog, EbayPick, Market, Meta, Offer, PriceEntry, Prices, StoreS
 import { CURRENCY } from "@/lib/site-types";
 import { loadTcgcsv, referenceCents } from "@/lib/import/tcgcsv";
 import { fetchStore, storeCurrency } from "@/lib/import/shopify";
-import { buildIndex, isPreorder, looksSealed, matchCard, matchSealed, printingOf } from "@/lib/import/match";
+import { buildIndex, isPreorder, isUnfitListing, looksSealed, matchCard, matchSealed, printingOf } from "@/lib/import/match";
 import {
   ebayCredentials,
   ebayRemaining,
@@ -80,7 +80,7 @@ async function main() {
   const fx = await fxRates(prevMeta?.fx ?? {});
 
   // 2. Stores
-  const idx = buildIndex(products, sets, SITE.numberStyle);
+  const idx = buildIndex(products, sets, SITE.numberStyle, { rarityMustAgree: SITE.rarityMustAgree, rarityAliases: SITE.rarityAliases });
   const storeOffers = new Map<number, Offer[]>();
   const storeStatus: Record<string, StoreStatus> = {};
   const addOffer = (id: number, o: Offer) => {
@@ -102,6 +102,7 @@ async function main() {
         // keep the cheapest in-stock one per printing.
         const best = new Map<string, Offer>();
         for (const it of items) {
+          if (isUnfitListing(it.title)) continue;
           const sealed = looksSealed(it.title, it.productType);
           const m = sealed ? matchSealed(it.title, idx) : matchCard(it.title, idx, `${it.productType} | ${it.tags.join(" | ")}`);
           if (!m) continue;
@@ -120,7 +121,7 @@ async function main() {
             inStock: it.inStock,
             url: it.url,
             title: it.title,
-            printing: m.product.kind === "card" ? printingOf(it.title, it.variantTitle) : undefined,
+            printing: m.product.kind === "card" ? printingOf(it.title, it.variantTitle, m.product.printings) : undefined,
             preorder: isPreorder(it.title, it.tags) || undefined,
           };
           const k = `${m.product.id}|${offer.printing ?? ""}`;
