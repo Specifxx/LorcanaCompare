@@ -453,3 +453,27 @@ median date of the five sets with the nearest ids takes that median. Older
 dates are never touched (promo groups gain products for years). On the
 2026-10-26 catalogues it moves 7 YGO sets and nothing in Gundam or Lorcana.
 Engine change, all three repos.
+
+## Every site links the whole family — 2026-10-27
+
+The owner, once YGO Compare existed: "our website should all have all of our
+compare websites now in the suite of websites … just try to backlink all of
+it." Every site's footer now links the other eight: RiftCompare, OP Compare,
+DexCompare, MTG Compare, Gundam Compare, Lorcana Compare, YGO Compare
+(ygocompare.com), CamCompare (www.camcompare.app) and Compare Empire
+(www.compareempire.com, Australian tech prices), each on the host it already
+uses (no apex or www change). Plain followed links, never sponsored: they are
+our own sites. The link text says what each compares ("Yu-Gi-Oh! card prices",
+"Camera and lens prices"), with the site's name after it, rather than the
+brand alone. MTG Compare is sealed-only since 2026-10-21, so its anchor now
+says "Magic: The Gathering sealed prices" everywhere.
+
+Footer only. In-page blocks ("Compare other TCGs" on card and product pages,
+the article blocks) keep to card games, and the two sites that are not card
+games are labelled as the wider family, so nine look-alike sites linked from
+every page body never read as a link network.
+
+Engine change, all three repos: `SisterSite.anchor` (optional) is the link
+text in the footer and the blog's "Also from us" line, the name after it;
+`tests/sister-sites.test.ts` pins eight others, once each, never this site.
+Each site's list is in its own `site.config.ts`.
