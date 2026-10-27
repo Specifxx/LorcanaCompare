@@ -68,12 +68,17 @@ export const SITE: SiteConfig = {
   },
 
   stores: STORES,
+  // The whole Compare Empire family, card games first (2026-10-27, DECISIONS.md
+  // "Every site links the whole family"). `anchor` is the link text.
   sisterSites: [
-    { name: "Rift Compare", url: "https://riftcompare.com", game: "Riftbound" },
-    { name: "OP Compare", url: "https://opcompare.app", game: "One Piece" },
-    { name: "Gundam Compare", url: "https://gundamcompare.com", game: "Gundam" },
-    { name: "DexCompare", url: "https://www.dexcompare.app", game: "Pokémon" },
-    { name: "MTG Compare", url: "https://mtgcompare.app", game: "Magic" },
+    { name: "Rift Compare", url: "https://riftcompare.com", game: "Riftbound", anchor: "Riftbound card prices" },
+    { name: "OP Compare", url: "https://opcompare.app", game: "One Piece", anchor: "One Piece card prices" },
+    { name: "DexCompare", url: "https://www.dexcompare.app", game: "Pokémon", anchor: "Pokémon sealed prices" },
+    { name: "MTG Compare", url: "https://mtgcompare.app", game: "Magic", anchor: "Magic: The Gathering sealed prices" },
+    { name: "Gundam Compare", url: "https://gundamcompare.com", game: "Gundam", anchor: "Gundam Card Game prices" },
+    { name: "YGO Compare", url: "https://ygocompare.com", game: "Yu-Gi-Oh!", anchor: "Yu-Gi-Oh! card prices" },
+    { name: "CamCompare", url: "https://www.camcompare.app", game: "Cameras", anchor: "Camera and lens prices" },
+    { name: "Compare Empire", url: "https://www.compareempire.com", game: "Australian tech", anchor: "Australian tech prices" },
   ],
   social: { reddit: "https://www.reddit.com/r/Lorcana/" },
 };
