@@ -27,6 +27,7 @@ export const SITE: SiteConfig = {
   adminEmails: ["bill.jyang101@gmail.com"],
   supportEmail: "riftcompare@gmail.com",
   ownerEmail: "bill.jyang101@gmail.com",
+  impactSiteVerification: "dda031ee-47ba-46d5-b639-93aba9b39be3",
 
   // TCGCSV mirrors TCGplayer's catalogue and prices daily (tcgcsv.com).
   tcgcsvCategoryId: 71,
