@@ -1,0 +1,62 @@
+[
+ {
+  "key": "mightycoolgames",
+  "name": "Mighty Cool Games and Collectables",
+  "base": "https://mightycoolgames.com.au",
+  "market": "AU"
+ },
+ {
+  "key": "luniversdelacarte",
+  "name": "L'univers de la carte",
+  "base": "https://luniversdelacarte.ca",
+  "market": "CA"
+ },
+ {
+  "key": "thecgrealm",
+  "name": "The CG Realm",
+  "base": "https://thecgrealm.com",
+  "market": "CA"
+ },
+ {
+  "key": "cardcapital",
+  "name": "CardCapital",
+  "base": "https://cardcapital.shop",
+  "market": "EU"
+ },
+ {
+  "key": "gamesavenue",
+  "name": "Games Avenue",
+  "base": "https://gamesavenue.fr",
+  "market": "EU"
+ },
+ {
+  "key": "jetcards",
+  "name": "JET Cards",
+  "base": "https://www.jetcards.uk",
+  "market": "UK"
+ },
+ {
+  "key": "managaming",
+  "name": "Mana Gaming UK",
+  "base": "https://managaming.shop",
+  "market": "UK"
+ },
+ {
+  "key": "gglehi",
+  "name": "Game Grid - Lehi Store",
+  "base": "https://store.gglehi.com",
+  "market": "US"
+ },
+ {
+  "key": "hoarditall",
+  "name": "Hoard",
+  "base": "https://www.hoarditall.com",
+  "market": "US"
+ },
+ {
+  "key": "thehaventabletop",
+  "name": "The Haven Games",
+  "base": "https://thehaventabletop.com",
+  "market": "US"
+ }
+]
