@@ -621,6 +621,18 @@ link must say which site it came from.
 * **Pack inserts out of the index.** Lorcana's 157 puzzle inserts and ink drops
   (a few cents each) were 12% of its sitemap; now out of it and noindex.
 
+## eBay pushed harder on the card page's phone buy block — 2026-10-28
+
+The owner asked for more eBay clicks across DexCompare, MTG Compare and the
+engine sites: most buy clicks go to stores that pay nothing. On the engine's
+phone buy block, the "or $X on eBay/TCGplayer (+N%)" line now shows a paid row
+up to 50% dearer than the cheapest store (was 20%), and when there is none, an
+"or check listings on eBay →" search (`from=card_top_ebay_search`). Both are
+real rows or a plain search, labelled "Paid link"; nothing is reordered and no
+price is estimated: the owner floated showing an estimated eBay price that
+"happens to be cheapest", which was not built because it would mislead buyers
+(Australian Consumer Law, eBay Partner Network rules).
+
 ## Card ad strips: real cards on eBay and TCGplayer, on every page — 2026-10-28
 
 **Owner:** "we need more ads everywhere … more TCGplayer ads and more eBay ads",
