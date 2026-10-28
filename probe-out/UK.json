@@ -1,0 +1,1707 @@
+[
+ {
+  "host": "board-game.co.uk",
+  "base": "https://www.board-game.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no lorcana collection (30 collections)"
+ },
+ {
+  "host": "goblingaming.co.uk",
+  "base": "https://www.goblingaming.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "Goblin Gaming",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "disney-lorcana(33):1/2"
+  ],
+  "samples": [
+   "Disney Lorcana TCG - Shimmering Skies Gateway"
+  ]
+ },
+ {
+  "host": "moxinthehole.co.uk",
+  "base": "https://moxinthehole.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "Mox in the Hole",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "lorcana-singles-ursulas-return(0):0/0",
+   "lorcana-the-first-chapter(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "thistletavern.com",
+  "base": "https://thistletavern.com",
+  "market": "UK",
+  "ok": false,
+  "name": "Thistle Tavern",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "lorcana-sealed-product(1160):3/17"
+  ],
+  "samples": [
+   "Disney Lorcana: Hyperia City - Technically Terrific & Madcap Whimsy 2-Player Starter Set",
+   "Disney Lorcana – Hyperia City Illumineer's Trove",
+   "Disney Lorcana – Hyperia City Booster Pack & Box"
+  ]
+ },
+ {
+  "host": "rollnplay.co.uk",
+  "base": "https://rollnplay.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "Roll N Play",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 2,
+  "inStock": 1,
+  "currency": "GBP",
+  "reason": "matched 2, in stock 1",
+  "tried": [
+   "disney-lorcana(5):2/3",
+   "lorcana-hyperia-city(4):2/3"
+  ],
+  "samples": [
+   "Disney Lorcana TCG – Hyperia City Booster Pack – Set 14",
+   "Disney Lorcana TCG – Hyperia City Illumineer's Trove – Set 14",
+   "Disney Lorcana TCG – Hyperia City Booster Pack – Set 14",
+   "Disney Lorcana TCG – Hyperia City Illumineer's Trove – Set 14"
+  ]
+ },
+ {
+  "host": "collectorclash.com",
+  "base": "https://www.collectorclash.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no lorcana collection (35 collections)"
+ },
+ {
+  "host": "gatheringpointgames.co.uk",
+  "base": "https://gatheringpointgames.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no lorcana collection (18 collections)"
+ },
+ {
+  "host": "onepiecesingles.com",
+  "base": "https://onepiecesingles.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no lorcana collection (14 collections)"
+ },
+ {
+  "host": "tengentreasures.co.uk",
+  "base": "https://tengentreasures.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "Tengen Treasures",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "disney-lorcana(1):1/1"
+  ],
+  "samples": [
+   "Disney Lorcana: Reign of Jafar Booster Box"
+  ]
+ },
+ {
+  "host": "comicsandbeyond.co.uk",
+  "base": "https://www.comicsandbeyond.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no lorcana collection (959 collections)"
+ },
+ {
+  "host": "1moregogaming.co.uk",
+  "base": "https://1moregogaming.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "1 More Go Gaming",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana-tcg"
+  ],
+  "kind": "sealed",
+  "matched": 2,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 2, in stock 0",
+  "tried": [
+   "disney-lorcana-tcg(2):2/2"
+  ],
+  "samples": [
+   "Attack Of The Vine Booster Box",
+   "Whispers In The Well Booster Box"
+  ]
+ },
+ {
+  "host": "aftermkt.co.uk",
+  "base": "https://aftermkt.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no lorcana collection (31 collections)"
+ },
+ {
+  "host": "cardgoblin.shop",
+  "base": "https://www.cardgoblin.shop",
+  "market": "UK",
+  "ok": true,
+  "name": "Card Goblin",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana-tcg-fabled-1"
+  ],
+  "kind": "both",
+  "matched": 104,
+  "inStock": 50,
+  "currency": "GBP",
+  "reason": null,
+  "tried": [
+   "disney-lorcana-tcg-fabled-1(129):104/127",
+   "lorcana-single(120):101/120",
+   "lorcana(10):4/8"
+  ],
+  "samples": [
+   "Disney Lorcana TCG - Fabled - Illumineers Trove",
+   "Disney Lorcana TCG - Fabled - Booster Pack",
+   "Disney Lorcana TCG - Fabled - Booster Box",
+   "Robin Hood - Sharpshooter (V.2) - Shimmering Skies (Enchanted) [5SSK-215]",
+   "Diablo - Devoted Herald (V.1) - Ursula's Return (Legendary) [4URS-70]",
+   "Pacha - Village Leader - Rise of the Floodborn (Uncommon) [2ROF-190]"
+  ]
+ },
+ {
+  "host": "buyanycards.co.uk",
+  "base": "https://buyanycards.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no lorcana collection (108 collections)"
+ },
+ {
+  "host": "cardandink.com",
+  "base": "https://www.cardandink.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no lorcana collection (14 collections)"
+ },
+ {
+  "host": "badwolfgaming.co.uk",
+  "base": "https://badwolfgaming.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "Bad Wolf Gaming",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "lorcana(10):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "thegamerslodge.com",
+  "base": "https://thegamerslodge.com",
+  "market": "UK",
+  "ok": false,
+  "name": "The Gamers Lodge ",
+  "existingKey": null,
+  "collections": [
+   "lorcana-starter-decks"
+  ],
+  "kind": "sealed",
+  "matched": 2,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 2, in stock 0",
+  "tried": [
+   "lorcana-starter-decks(12):2/2",
+   "lorcana-attack-of-the-vine(9):2/5",
+   "lorcana(22):1/6",
+   "lorcana-wilds-unknown-set-12(9):1/1",
+   "lorcana-whispers-in-the-well(3):1/1",
+   "lorcana-booster-boxes(20):0/0",
+   "lorcana-fabled(3):0/0",
+   "lorcana-reign-of-jafar(3):0/0"
+  ],
+  "samples": [
+   "Disney Lorcana TCG - Set 14 Hyperia City - 2-Player Starter Set",
+   "Disney Lorcana: Whispers in the Well Starter Deck",
+   "Disney Lorcana - 2 Player Starter Deck - Wilds Unknown - Set 12",
+   "Disney Lorcana - 2 Player Starter Deck - Wilds Unknown - Set 12",
+   "Disney Lorcana TCG - Set 13 Attack of the Vine - Illumineer's Trove",
+   "Disney Lorcana TCG - Set 13 Attack of the Vine - Collection Starter Set - Rapunzel"
+  ]
+ },
+ {
+  "host": "crackthepack.com",
+  "base": "https://crackthepack.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no lorcana collection (26 collections)"
+ },
+ {
+  "host": "dungeonsandjoypads.com",
+  "base": "https://dungeonsandjoypads.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no lorcana collection (31 collections)"
+ },
+ {
+  "host": "collect.thegamecollection.net",
+  "base": "https://collect.thegamecollection.net",
+  "market": "UK",
+  "ok": true,
+  "name": "TGC Collectables",
+  "existingKey": null,
+  "collections": [
+   "lorcana-card-game"
+  ],
+  "kind": "sealed",
+  "matched": 37,
+  "inStock": 12,
+  "currency": "GBP",
+  "reason": null,
+  "tried": [
+   "lorcana-card-game(65):37/45",
+   "disney-lorcana-trading-card-game-reign-of-jafar(0):0/0"
+  ],
+  "samples": [
+   "Disney Lorcana TCG - Set 12 - 2 Player Starter Deck - Wilds Unknown",
+   "Disney Lorcana TCG - Set 4 - Ursula's Return - Booster Pack Display (24pcs)",
+   "Disney Lorcana TCG - Set 4 - Ursula's Return - Starter Deck - Sapphire & Steel",
+   "Disney Lorcana TCG - Set 4 - Ursula's Return - Starter Deck - Amber & Amethyst",
+   "Disney Lorcana TCG - Set 1 - The First Chapter - Starter Deck - Emerald & Ruby",
+   "Disney Lorcana TCG - Set 2 - Rise of the Floodborn - Starter Deck - Amethyst & Steel"
+  ]
+ },
+ {
+  "host": "collectorskingdom.co.uk",
+  "base": "https://collectorskingdom.co.uk",
+  "market": "UK",
+  "ok": true,
+  "name": "Collectors Kingdom",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 21,
+  "inStock": 18,
+  "currency": "GBP",
+  "reason": null,
+  "tried": [
+   "disney-lorcana(23):21/23"
+  ],
+  "samples": [
+   "Disney Lorcana Hyperia City Booster Box Case (4 Boxes)",
+   "Disney Lorcana Hyperia City Illumineer's Trove (8 Packs)",
+   "Disney Lorcana Hyperia City Booster Pack",
+   "Disney Lorcana Hyperia City Booster Box (24 Packs)",
+   "Disney Lorcana Attack of the Vine! Illumineer's Trove (8 Packs)",
+   "Disney Lorcana Attack of the Vine! Booster Pack"
+  ]
+ },
+ {
+  "host": "bristolindependentgaming.co.uk",
+  "base": "https://bristolindependentgaming.co.uk",
+  "market": "UK",
+  "ok": true,
+  "name": "Bristol Independent Gaming ltd",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 13,
+  "inStock": 10,
+  "currency": "GBP",
+  "reason": null,
+  "tried": [
+   "disney-lorcana(131):13/38",
+   "card-game-events(28):1/3",
+   "whispers-in-the-well-disney-lorcana(14):0/0"
+  ],
+  "samples": [
+   "Hyperia City - 2-Player Starter Set - Disney Lorcana",
+   "Hyperia City Pre-Release Kit Pack rush event- Wednesday 21st October 2026",
+   "Disney Lorcana - 2 Player Starter Deck - Wilds Unknown - Set 12",
+   "Disney Lorcana TCG - Attack of the Vine Illumineer's Trove Set - Set 13",
+   "Disney Lorcana TCG - Winterspell Booster Pack Display",
+   "Disney Lorcana 'Reign of Jafar' Amber & Amethyst - Starter Deck"
+  ]
+ },
+ {
+  "host": "unioncountygames.com",
+  "base": "https://www.unioncountygames.com",
+  "market": "UK",
+  "ok": false,
+  "name": "Union County Games",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana-singles"
+  ],
+  "kind": "singles",
+  "matched": 230,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 230, in stock 0",
+  "tried": [
+   "disney-lorcana-singles(3078):230/250",
+   "lorcana-sealed-product(1):1/1",
+   "lorcana-challenge-year-3-c2(10):0/10",
+   "cc-lorcana-dis(3):0/3"
+  ],
+  "samples": [
+   "Jessie - Lively Cowgirl (20)",
+   "Lady - Family Dog (11)",
+   "Sid Phillips - Toy Surgeon (126)",
+   "Tramp - Dapper Rascal (22)",
+   "The Queen - Devious Disguise (90)",
+   "Woody - Jungle Guide (15)"
+  ]
+ },
+ {
+  "host": "gocardsuk.co.uk",
+  "base": "https://gocardsuk.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no lorcana collection (55 collections)"
+ },
+ {
+  "host": "evocards.com",
+  "base": "https://www.evocards.com",
+  "market": "UK",
+  "ok": false,
+  "name": "Evo Cards",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "disney-lorcana(2):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "gogetcollectables.com",
+  "base": "https://gogetcollectables.com",
+  "market": "UK",
+  "ok": false,
+  "name": "Go Get Collectables",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "disney-lorcana(7):0/1"
+  ],
+  "samples": []
+ },
+ {
+  "host": "hoctcg.com",
+  "base": "https://hoctcg.com",
+  "market": "UK",
+  "ok": false,
+  "name": "HOC TCG",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana-1"
+  ],
+  "kind": "sealed",
+  "matched": 12,
+  "inStock": 1,
+  "currency": "GBP",
+  "reason": "matched 12, in stock 1",
+  "tried": [
+   "disney-lorcana-1(14):12/14"
+  ],
+  "samples": [
+   "Disney Lorcana TCG - Hyperia City Booster Box",
+   "Disney Lorcana TCG - Azurite Sea - Booster Box",
+   "Disney Lorcana TCG - Shimmering Skies - Booster Box",
+   "Disney Lorcana TCG - Into the Inklands - Booster Box",
+   "Disney Lorcana TCG - Rise of the Floodborn - Booster Box",
+   "Disney Lorcana TCG - The First Chapter - Booster Box"
+  ]
+ },
+ {
+  "host": "japan2uk.com",
+  "base": "https://www.japan2uk.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no lorcana collection (200 collections)"
+ },
+ {
+  "host": "jarvvos.co.uk",
+  "base": "https://www.jarvvos.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no lorcana collection (155 collections)"
+ },
+ {
+  "host": "kumacards.com",
+  "base": "https://kumacards.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no lorcana collection (0 collections)"
+ },
+ {
+  "host": "gameon.games",
+  "base": "https://www.gameon.games",
+  "market": "UK",
+  "ok": false,
+  "name": "GameOn.games",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana-booster-packs-boxes"
+  ],
+  "kind": "sealed",
+  "matched": 9,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 9, in stock 0",
+  "tried": [
+   "disney-lorcana-booster-packs-boxes(10):9/9",
+   "disney-lorcana-trove-sets(3):2/3",
+   "disney-lorcana-decks-gift-sets(7):1/7",
+   "disney-lorcana-trading-card-game(1):0/1"
+  ],
+  "samples": [
+   "Disney Lorcana TCG -Shimmering Skies Booster Pack",
+   "Disney Lorcana TCG - The First Chapter Booster Pack",
+   "Disney Lorcana TCG - Into The Inklands - Booster Pack",
+   "Disney Lorcana TCG - Into The Inklands - Booster Box",
+   "Disney Lorcana TCG - The First Chapter Booster Box",
+   "Disney Lorcana TCG -Shimmering Skies Booster Box"
+  ]
+ },
+ {
+  "host": "megacards.co.uk",
+  "base": "https://megacards.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no lorcana collection (105 collections)"
+ },
+ {
+  "host": "koolthings.co.uk",
+  "base": "https://www.koolthings.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "KOOLTHINGS",
+  "existingKey": null,
+  "collections": [
+   "lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 2,
+  "inStock": 2,
+  "currency": "GBP",
+  "reason": "matched 2, in stock 2",
+  "tried": [
+   "lorcana(5):2/5"
+  ],
+  "samples": [
+   "Disney Lorcana Trading Card Game - Into the Inklands Booster Pack",
+   "Disney Lorcana Trading Card Game - Set 5 Shimmering Skies Booster Pack"
+  ]
+ },
+ {
+  "host": "collectorsedge.co.uk",
+  "base": "https://collectorsedge.co.uk",
+  "market": "UK",
+  "ok": true,
+  "name": "Collector's Edge",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana-tcg"
+  ],
+  "kind": "sealed",
+  "matched": 27,
+  "inStock": 5,
+  "currency": "GBP",
+  "reason": null,
+  "tried": [
+   "disney-lorcana-tcg(88):27/88",
+   "lorcana-english(77):27/77",
+   "disney-lorcana-tcg-booster-packs(10):10/10",
+   "disney-lorcana-tcg-illumineers-trove-set(10):10/10",
+   "lorcana-tcg-fabled-set-9(13):4/13",
+   "disney-lorcana-tcg-starter-decks(12):4/12",
+   "disney-lorcana-tcg-gift-sets-collections(8):3/8",
+   "lorcana-tcg-attack-of-the-vine-set-13(7):3/7",
+   "lorcana-tcg-reign-of-jafar-set-8(12):2/12",
+   "disney-lorcana-tcg-booster-displays(10):0/10"
+  ],
+  "samples": [
+   "Disney Lorcana TCG: Whispers in the Well - Set 10 - Starter Deck - Simba & Megara",
+   "Disney Lorcana TCG: Whispers in the Well - Set 10 - Starter Deck - Judy Hopps & Robin",
+   "Disney Lorcana TCG: Wilds Unknown - Set 12 - 2 Player Starter Deck",
+   "Disney Lorcana TCG: Attack of the Vine! - Set 13 - Illumineer's Trove Set",
+   "Disney Lorcana TCG: Attack of the Vine! - Set 13 - Collection Starter Set - Rapunzel Edition",
+   "Disney Lorcana TCG: Hyperia City - Set 14 - Illumineer's Trove Set"
+  ]
+ },
+ {
+  "host": "meeplescorner.co.uk",
+  "base": "https://meeplescorner.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "Meeples Corner",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana-tcg"
+  ],
+  "kind": "sealed",
+  "matched": 11,
+  "inStock": 1,
+  "currency": "GBP",
+  "reason": "matched 11, in stock 1",
+  "tried": [
+   "disney-lorcana-tcg(16):11/14"
+  ],
+  "samples": [
+   "Disney Lorcana: Wilds Unknown Booster Box",
+   "Disney Lorcana TCG - Set 13 Attack of the Vine - Booster Box (24 Packs)",
+   "Disney Lorcana TCG - Hyperia City Illumineer's Trove Set",
+   "Disney Lorcana TCG - Hyperia City Booster Box",
+   "Disney Lorcana TCG - Set 13 Attack of the Vine - Illumineer's Trove",
+   "Disney Lorcana: Into the Inklands Booster Pack"
+  ]
+ },
+ {
+  "host": "hokeypokegames.co.uk",
+  "base": "https://hokeypokegames.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "Hokey Poke Games",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "all-lorcana(35):0/1",
+   "lorcana-booster-boxes(0):0/0",
+   "lorcana-booster-packs(0):0/0",
+   "lorcana-collection-boxes(0):0/0",
+   "lorcana-troves(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "obsidia-tcg.store",
+  "base": "https://obsidia-tcg.store",
+  "market": "UK",
+  "ok": false,
+  "reason": "no lorcana collection (87 collections)"
+ },
+ {
+  "host": "pixel-hub.co.uk",
+  "base": "https://pixel-hub.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no lorcana collection (28 collections)"
+ },
+ {
+  "host": "pokephd.co.uk",
+  "base": "https://pokephd.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no lorcana collection (31 collections)"
+ },
+ {
+  "host": "mintsidecards.com",
+  "base": "https://mintsidecards.com",
+  "market": "UK",
+  "ok": false,
+  "name": "Mintside Cards",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 10,
+  "inStock": 1,
+  "currency": "GBP",
+  "reason": "matched 10, in stock 1",
+  "tried": [
+   "disney-lorcana(10):10/10"
+  ],
+  "samples": [
+   "Disney Lorcana - Hyperia City Booster Pack",
+   "Disney Lorcana - Hyperia City Illumineer's Trove",
+   "Disney Lorcana - Hyperia City Booster Box (24 Packs)",
+   "Disney Lorcana - Attack of the Vine Booster Box (24 Packs)",
+   "Disney Lorcana TCG - Whispers in the Well Booster Box - Set 10",
+   "Disney Lorcana TCG - Winterspell Booster Pack - Set 11"
+  ]
+ },
+ {
+  "host": "terrorstcg.com",
+  "base": "https://www.terrorstcg.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no lorcana collection (15 collections)"
+ },
+ {
+  "host": "neocards.co.uk",
+  "base": "https://www.neocards.co.uk",
+  "market": "UK",
+  "ok": true,
+  "name": "Neo Cards & Collectables",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana-tcg"
+  ],
+  "kind": "sealed",
+  "matched": 28,
+  "inStock": 13,
+  "currency": "GBP",
+  "reason": null,
+  "tried": [
+   "disney-lorcana-tcg(30):28/29"
+  ],
+  "samples": [
+   "Disney Lorcana TCG: Azurite Sea Booster Pack (Set 6)",
+   "Disney Lorcana TCG: Hyperia City Booster Box (Set 14)",
+   "Disney Lorcana TCG: Into the Inklands Booster Pack (Set 3)",
+   "Disney Lorcana TCG: Reign of Jafar Booster Pack (Set 8)",
+   "Disney Lorcana TCG: Rise of the Floodborn Booster Pack (Set 2)",
+   "Disney Lorcana TCG: Shimmering Skies Booster Pack (Set 5)"
+  ]
+ },
+ {
+  "host": "thecardclubuk.shop",
+  "base": "https://thecardclubuk.shop",
+  "market": "UK",
+  "ok": false,
+  "reason": "no lorcana collection (14 collections)"
+ },
+ {
+  "host": "sportscardsdirect.co.uk",
+  "base": "https://www.sportscardsdirect.co.uk",
+  "market": "UK",
+  "ok": true,
+  "name": "Sports Cards Direct",
+  "existingKey": null,
+  "collections": [
+   "lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 8,
+  "inStock": 5,
+  "currency": "GBP",
+  "reason": null,
+  "tried": [
+   "lorcana(35):8/12",
+   "lorcana-winterspell(4):0/0"
+  ],
+  "samples": [
+   "Disney Lorcana Azurite Sea Starter Deck – Emerald & Sapphire",
+   "Disney Lorcana Azurite Sea Starter Deck – Amber & Ruby",
+   "Disney Lorcana Archazia’s Island Starter Deck – Ruby & Sapphire",
+   "Disney Lorcana Archazia’s Island Starter Deck – Amethyst & Steel",
+   "Disney Lorcana - Wilds Unknown - 2 Player Starter Deck",
+   "Disney Lorcana: Into The Inklands Booster Pack"
+  ]
+ },
+ {
+  "host": "elemental.cards",
+  "base": "https://elemental.cards",
+  "market": "UK",
+  "ok": true,
+  "name": "Elemental Cards",
+  "existingKey": null,
+  "collections": [
+   "lorcana-singles",
+   "lorcana"
+  ],
+  "kind": "both",
+  "matched": 246,
+  "inStock": 197,
+  "currency": "GBP",
+  "reason": null,
+  "tried": [
+   "lorcana-singles(3315):206/250",
+   "lorcana(97):40/83",
+   "lorcana-booster-box(24):15/17",
+   "lorcana-booster-pack(13):5/5",
+   "troves(12):5/9",
+   "lorcana-new-release(10):4/6",
+   "lorcana-fabled(7):3/7",
+   "lorcana-shimmering-skies(3):2/2",
+   "lorcana-challenge-year-3-c2(6):0/6",
+   "lorcana-gift-sets(0):0/0"
+  ],
+  "samples": [
+   "4*Town - Hottest Band Of The Year (17)",
+   "99 Puppies (24)",
+   "A Dark Age No More (162)",
+   "A Pirate's Life (132)",
+   "A Pirate’s Life (128)",
+   "A Very Merry Unbirthday (60)"
+  ]
+ },
+ {
+  "host": "pokevend.co.uk",
+  "base": "https://pokevend.co.uk",
+  "market": "UK",
+  "ok": true,
+  "name": "Pokevend Store",
+  "existingKey": null,
+  "collections": [
+   "all-disney-lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 15,
+  "inStock": 11,
+  "currency": "GBP",
+  "reason": null,
+  "tried": [
+   "all-disney-lorcana(21):15/16",
+   "disney-lorcana-booster-boxes(11):8/8",
+   "disney-lorcana-booster-packs(10):7/8"
+  ],
+  "samples": [
+   "Disney Lorcana Attack of the Vine Booster Box",
+   "Disney Lorcana Whispers in the Well Booster Box",
+   "Disney Lorcana Shimmering Skies Booster Box",
+   "Disney Lorcana Archazia's Island Booster Pack",
+   "Disney Lorcana Ursulas Return Booster Box",
+   "Disney Lorcana Into The Inklands Booster Box"
+  ]
+ },
+ {
+  "host": "thegamingvault.net",
+  "base": "https://thegamingvault.net",
+  "market": "UK",
+  "ok": false,
+  "name": "The Gaming Vault",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "disney-lorcana-tcg(7):0/7"
+  ],
+  "samples": []
+ },
+ {
+  "host": "titancards.co.uk",
+  "base": "https://titancards.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no lorcana collection (278 collections)"
+ },
+ {
+  "host": "trolltradercards.com",
+  "base": "https://trolltradercards.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no lorcana collection (713 collections)"
+ },
+ {
+  "host": "battlegroundgaming.co.uk",
+  "base": "https://battlegroundgaming.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no lorcana collection (267 collections)"
+ },
+ {
+  "host": "travellingman.com",
+  "base": "https://travellingman.com",
+  "market": "UK",
+  "ok": true,
+  "name": "Travelling Man UK",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 43,
+  "inStock": 3,
+  "currency": "GBP",
+  "reason": null,
+  "tried": [
+   "disney-lorcana(85):43/81",
+   "tcg-disney-lorcana-tcg(69):43/66"
+  ],
+  "samples": [
+   "Lorcana TCG Hyperia City Booster Box",
+   "Lorcana TCG Wilds Unknown Illumineer's Trove",
+   "Lorcana TCG Wilds Unknown Booster Box",
+   "Lorcana TCG Winterspell Booster Box",
+   "Lorcana TCG Winterspell Illumineer's Trove",
+   "Lorcana TCG Whispers in the Well Illumineer's Trove"
+  ]
+ },
+ {
+  "host": "cgc-emporium.com",
+  "base": "https://cgc-emporium.com",
+  "market": "UK",
+  "ok": false,
+  "name": "Comics Games And Coffee",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "disney-lorcana(68):0/15"
+  ],
+  "samples": []
+ },
+ {
+  "host": "chesterlegeek.com",
+  "base": "https://chesterlegeek.com",
+  "market": "UK",
+  "ok": false,
+  "name": "Chester Le Geek",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "disney-lorcana-cards-uk-starter-deck-chester-le-geek(4):0/4",
+   "disney-lorcana-cards-uk-booster-boxes-chester-le-geek(0):0/0",
+   "disney-lorcana-cards-uk-illumineers-troves-chester-le-geek(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "crypticcabin.com",
+  "base": "https://crypticcabin.com",
+  "market": "UK",
+  "ok": true,
+  "name": "Cryptic Cabin",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 12,
+  "inStock": 6,
+  "currency": "GBP",
+  "reason": null,
+  "tried": [
+   "disney-lorcana(40):12/23"
+  ],
+  "samples": [
+   "Disney Lorcana - Azurite Sea - Booster Pack",
+   "Disney Lorcana - Into the Inklands Starter Deck - Ruby & Sapphire (Moana & Scrooge)",
+   "Disney Lorcana - Into the Inklands Starter Deck - Amber & Emerald (Pongo & Peter Pan)",
+   "Disney Lorcana - Azurite Sea Starter Deck - Amber & Ruby (Jim Hawkins & Tigger) - Set 6",
+   "Disney Lorcana - Azurite Sea Starter Deck - Emerald & Sapphire (Go Go Tomago & Gadget Hackwrench) - Set 6",
+   "Disney Lorcana - Rise of the Floodborn - Booster Pack Boxset"
+  ]
+ },
+ {
+  "host": "tcgdragon.co.uk",
+  "base": "https://tcgdragon.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "TCG Dragon",
+  "existingKey": null,
+  "collections": [
+   "disney"
+  ],
+  "kind": "sealed",
+  "matched": 14,
+  "inStock": 2,
+  "currency": "GBP",
+  "reason": "matched 14, in stock 2",
+  "tried": [
+   "disney(20):14/20",
+   "collection-title-disney-lorcana-tcg-hyperia-city(3):2/3",
+   "disney-tcg-whispers-in-the-well(2):2/2",
+   "disney-tcg-winterspell(4):1/4",
+   "disney-lorcana-tcg-attack-of-the-vine(2):1/2",
+   "disney-tcg-wilds-unknown(2):1/2",
+   "disney-archazias-island(1):1/1",
+   "disney-azurite-sea(1):1/1",
+   "disney-tcg-fabled(1):1/1",
+   "disney-into-the-inklands(1):1/1"
+  ],
+  "samples": [
+   "Disney - Lorcana TCG - Hyperia City - Illumineer’s Trove",
+   "Disney - Lorcana TCG - Hyperia City - 2-Player Starter Set",
+   "Disney - Lorcana TCG - Attack of the Vine! - Illumineer’s Trove",
+   "Disney - Lorcana TCG - Wilds Unknown - Illumineer’s Trove",
+   "Disney - Lorcana TCG - Winterspell - Illumineer's Trove",
+   "Disney - Lorcana TCG - Whispers in the Well - Booster Box (24 Packs)"
+  ]
+ },
+ {
+  "host": "galleongames.co.uk",
+  "base": "https://galleongames.co.uk",
+  "market": "UK",
+  "ok": true,
+  "name": "Galleon Games",
+  "existingKey": null,
+  "collections": [
+   "lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 22,
+  "inStock": 22,
+  "currency": "GBP",
+  "reason": null,
+  "tried": [
+   "lorcana(132):22/72"
+  ],
+  "samples": [
+   "Disney Lorcana Trading Card Game: Rise of the Floodborn Booster Pack",
+   "Disney Lorcana Trading Card Game: Into the Inklands Booster Pack",
+   "Disney Lorcana Trading Card Game: Ursula's Return - Booster Pack",
+   "Disney Lorcana Trading Card Game: Shimmering Skies Booster Pack",
+   "Disney Lorcana Trading Card Game: Azurite Sea - Booster Pack",
+   "Disney Lorcana Trading Card Game: Archazia's Island Booster Pack"
+  ]
+ },
+ {
+  "host": "thecardvault.co.uk",
+  "base": "https://thecardvault.co.uk",
+  "market": "UK",
+  "ok": true,
+  "name": "The Card Vault",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana-all-products"
+  ],
+  "kind": "sealed",
+  "matched": 36,
+  "inStock": 5,
+  "currency": "GBP",
+  "reason": null,
+  "tried": [
+   "disney-lorcana-all-products(144):36/143",
+   "disney-lorcana-tcg(144):36/143",
+   "disney-lorcana-collection-boxes(14):13/14",
+   "disney-lorcana-booster-packs(13):12/13",
+   "disney-lorcana-new-releases(37):8/37",
+   "disney-lorcana-popular-products(37):8/37",
+   "lorcana-in-stock-products(37):8/37",
+   "disney-lorcana-decks(25):4/25",
+   "disney-lorcana-booster-boxes(18):1/18",
+   "disney-lorcana-display-cases(10):0/10"
+  ],
+  "samples": [
+   "Disney - Lorcana TCG - Into the Inkdark - Illumineer’s Trove",
+   "Disney - Lorcana TCG - Into the Inkdark - Booster Pack",
+   "Disney - Lorcana TCG - Hyperia City - 2-Player Starter Set",
+   "Disney - Lorcana TCG - Hyperia City - Illumineer’s Trove",
+   "Disney - Lorcana TCG - Hyperia City - Booster Pack",
+   "Disney - Lorcana TCG - Attack of the Vine! - Illumineer’s Trove"
+  ]
+ },
+ {
+  "host": "game-hq.co.uk",
+  "base": "https://game-hq.co.uk",
+  "market": "UK",
+  "ok": true,
+  "name": "Game HQ Birmingham",
+  "existingKey": null,
+  "collections": [
+   "lorcana-singles"
+  ],
+  "kind": "singles",
+  "matched": 230,
+  "inStock": 40,
+  "currency": "GBP",
+  "reason": null,
+  "tried": [
+   "lorcana-singles(3759):230/250"
+  ],
+  "samples": [
+   "Hades - Infernal Schemer (147/204) [The First Chapter]",
+   "Ursula - Power Hungry (59/204) [The First Chapter]",
+   "Tamatoa - So Shiny! (159/204) [The First Chapter]",
+   "Mickey Mouse - Brave Little Tailor (115/204) [The First Chapter]",
+   "Belle - Strange but Special (142/204) [The First Chapter]",
+   "Scar - Vicious Cheater (125/204) [Rise of the Floodborn]"
+  ]
+ },
+ {
+  "host": "highlandergames.co.uk",
+  "base": "https://highlandergames.co.uk",
+  "market": "UK",
+  "ok": true,
+  "name": "Highlander Games",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 11,
+  "inStock": 10,
+  "currency": "GBP",
+  "reason": null,
+  "tried": [
+   "disney-lorcana(47):11/25"
+  ],
+  "samples": [
+   "Disney: Lorcana: Archazia’s Island Starter Deck - Amethyst & Steel",
+   "Disney: Lorcana: Archazia’s Island Starter Deck - Ruby & Sapphire",
+   "Disney: Lorcana: Azurite Sea Set 6 Starter Deck - Emerald & Sapphire",
+   "Disney: Lorcana: Azurite Sea Set 6 Starter Deck - Amber & Ruby",
+   "Disney: Lorcana: Azurite Sea Set 6 - Stitch Collectors Gift Set",
+   "Disney: Lorcana: Shimmering Skies Starter Deck - Emerald & Steel"
+  ]
+ },
+ {
+  "host": "grimdice.co.uk",
+  "base": "https://grimdice.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "Grim Dice Tabletop Gaming",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "disney-lorcana(17):0/2",
+   "lorcana-events(4):0/2",
+   "lorcana-preorder(1):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "diceanddumplings.co.uk",
+  "base": "https://diceanddumplings.co.uk",
+  "market": "UK",
+  "ok": true,
+  "name": "Dice and Dumplings",
+  "existingKey": null,
+  "collections": [
+   "lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 11,
+  "inStock": 6,
+  "currency": "GBP",
+  "reason": null,
+  "tried": [
+   "lorcana(11):11/11",
+   "lorcana-booster-boxes(6):6/6",
+   "attack-of-the-vine-lorcana(5):5/5",
+   "wilds-unknown-lorcana(4):4/4",
+   "hyperia-city-lorcana(2):2/2",
+   "lorcana-bundles(2):2/2",
+   "lorcana-prerelease-kits(2):2/2",
+   "lorcana-collection-boxes(1):1/1",
+   "lorcana-events(0):0/0"
+  ],
+  "samples": [
+   "Disney Lorcana Hyperia City Booster Box (24 Packs)",
+   "Disney Lorcana Wilds Unknown Prerelease Box",
+   "Disney Lorcana Hyperia City Booster Box Case (4 Boxes)",
+   "Disney Lorcana Attack of the Vine! Prerelease Box",
+   "Disney Lorcana Wilds Unknown Booster Box Case (4 Boxes)",
+   "Disney Lorcana Attack of the Vine! Booster Box Case (4 Boxes)"
+  ]
+ },
+ {
+  "host": "londonmagictraders.com",
+  "base": "https://londonmagictraders.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no lorcana collection (246 collections)"
+ },
+ {
+  "host": "zatu.com",
+  "base": "https://zatu.com",
+  "market": "UK",
+  "ok": true,
+  "name": "Zatu Games",
+  "existingKey": null,
+  "collections": [
+   "lorcana-winterspell",
+   "lorcana"
+  ],
+  "kind": "both",
+  "matched": 269,
+  "inStock": 16,
+  "currency": "GBP",
+  "reason": null,
+  "tried": [
+   "lorcana-winterspell(446):206/250",
+   "lorcana-single-cards-1(463):201/250",
+   "lorcana(643):128/250",
+   "disney-lorcana-lorcana-into-the-inklands(174):64/173",
+   "trading-card-games-disney-lorcana(172):64/171",
+   "best-sellers-lorcana(52):33/52",
+   "lorcana-starter-decks(30):14/30",
+   "decks-lorcana(24):9/24",
+   "events-lorcana-events(27):0/5",
+   "lorcana-events(27):0/5"
+  ],
+  "samples": [
+   "Disney Lorcana - Archazia's Island - Illumineer's Trove",
+   "Disney Lorcana: Shimmering Skies - Booster Box",
+   "Disney Lorcana - Archazia's Island - Booster Box",
+   "Disney Lorcana: Azurite Sea - Booster Pack",
+   "Disney Lorcana: Shimmering Skies - Booster Pack",
+   "Disney Lorcana: Rise of the Floodborn - Booster Pack"
+  ]
+ },
+ {
+  "host": "incomgaming.co.uk",
+  "base": "https://incomgaming.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "Incom Gaming",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "disney-lorcana(82):11/58"
+  ],
+  "samples": [
+   "RISE OF THE FLOODBORN - Illumineer's Trove",
+   "FABLED Illumineer's Trove Set",
+   "URSULA’S RETURN - Illumineer's Trove",
+   "ATTACK OF THE VINE! - Illumineer's Trove",
+   "WILDS UNKNOWN Illumineer's Trove Set",
+   "WHISPERS IN THE WELL - Starter Deck"
+  ]
+ },
+ {
+  "host": "onyxdawngames.com",
+  "base": "https://onyxdawngames.com",
+  "market": "UK",
+  "ok": false,
+  "name": "Onyx Dawn Games",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 28,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 28, in stock 0",
+  "tried": [
+   "disney-lorcana(44):28/31",
+   "disney-lorcana-attack-of-the-vine(4):2/2"
+  ],
+  "samples": [
+   "Disney Lorcana - Attack of the Vine Illumineer's Trove Set",
+   "Disney Lorcana - Attack of the Vine Booster Box",
+   "Disney Lorcana - 2 Player Starter Deck - Wilds Unknown",
+   "Disney Lorcana - Wilds Unknown Illumineer's Trove",
+   "Disney Lorcana - Wilds Unknown Booster Pack",
+   "Disney Lorcana - Wilds Unknown Booster Box"
+  ]
+ },
+ {
+  "host": "gatheringgames.co.uk",
+  "base": "https://gatheringgames.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "Gathering Games",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 33,
+  "inStock": 1,
+  "currency": "GBP",
+  "reason": "matched 33, in stock 1",
+  "tried": [
+   "disney-lorcana(69):33/69",
+   "disney-lorcana-boosters(16):16/16",
+   "disney-lorcana-illumineers-troves(12):12/12",
+   "disney-lorcana-into-the-inklands(6):4/6",
+   "disney-lorcana-starter-decks(22):3/22",
+   "disney-lorcana-archazias-island(5):2/5",
+   "disney-lorcana-attack-of-the-vine(5):2/5",
+   "disney-lorcana-fabled(5):2/5",
+   "disney-lorcana-reign-of-jafar(5):2/5",
+   "disney-lorcana-tcg-gift-sets(5):1/5"
+  ],
+  "samples": [
+   "Disney Lorcana TCG: Hyperia City - Illumineer's Trove Set",
+   "Disney Lorcana TCG: Hyperia City - Booster Box",
+   "Disney Lorcana TCG: Hyperia City - 2 Player Starter Deck",
+   "Disney Lorcana: Attack of the Vine Illumineer's Trove Set",
+   "Disney Lorcana: Attack of the Vine Booster Box",
+   "Disney Lorcana: Wilds Unknown 2-Player Starter Set"
+  ]
+ },
+ {
+  "host": "pendulumgaming.com",
+  "base": "https://pendulumgaming.com",
+  "market": "UK",
+  "ok": false,
+  "name": "Pendulum Gaming",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "lorcana(48):7/40",
+   "lorcana-events(9):0/3"
+  ],
+  "samples": [
+   "Disney Lorcana - 2 Player Starter Deck - Hyperia City - Set 14",
+   "Disney Lorcana TCG - Hyperia City Illumineer's Trove - Set 14",
+   "Disney Lorcana TCG - Hyperia City Booster Box (24) - Set 14",
+   "Disney Lorcana TCG - Set 13 Attack of the Vine - Booster Box",
+   "Lorcana Shimmering Skies Booster Pack",
+   "Lorcana Azurite Sea Booster Pack"
+  ]
+ },
+ {
+  "host": "harlequinsgames.com",
+  "base": "https://harlequinsgames.com",
+  "market": "UK",
+  "ok": false,
+  "name": "Harlequins Games",
+  "existingKey": null,
+  "collections": [
+   "lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 3,
+  "inStock": 3,
+  "currency": "GBP",
+  "reason": "matched 3, in stock 3",
+  "tried": [
+   "lorcana(17):3/8",
+   "lorcana-starter-decks(9):3/8",
+   "lorcana-booster-boxes(16):2/4",
+   "whispers-in-the-well(3):1/2",
+   "lorcana-products(2):0/2",
+   "lorcana-sets(0):0/0",
+   "lorcana-single(0):0/0"
+  ],
+  "samples": [
+   "Disney Lorcana TCG - Set 13 Attack of the Vine - Illumineer's Quest Set: The Great Hunny Rescue",
+   "Disney Lorcana - 2 Player Starter Deck - Wilds Unknown - Set 12",
+   "Disney Lorcana Trading Card Game - Illumineer's Quest - Palace Heist - Set 8",
+   "Disney Lorcana TCG - Wilds Unknown Booster Box - Set 12",
+   "Disney Lorcana TCG - Fabled Booster Box",
+   "Disney Lorcana - 2 Player Starter Deck - Wilds Unknown - Set 12"
+  ]
+ },
+ {
+  "host": "tabletopdominion.com",
+  "base": "https://tabletopdominion.com",
+  "market": "UK",
+  "ok": false,
+  "name": "Tabletop Dominion",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "disney-lorcana-reign-of-jafar-cards-boosters-decks(3):0/2",
+   "disneys-lorcana-trading-card-game(2):0/2"
+  ],
+  "samples": []
+ },
+ {
+  "host": "tokyotoys.com",
+  "base": "https://tokyotoys.com",
+  "market": "UK",
+  "ok": false,
+  "name": "TokyoToys",
+  "existingKey": null,
+  "collections": [
+   "lorcana-tcg"
+  ],
+  "kind": "sealed",
+  "matched": 2,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 2, in stock 0",
+  "tried": [
+   "lorcana-tcg(77):2/2"
+  ],
+  "samples": [
+   "RELEASE 21st MAR 2025 Disney Lorcana TCG - Archazia's Island Set 7 - Booster Box",
+   "RELEASE 23rd AUG 2024: Disney Lorcana TCG Shimmering Skies Set 5 - Booster Pack Box"
+  ]
+ },
+ {
+  "host": "gundamlab.com",
+  "base": "https://gundamlab.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no lorcana collection (76 collections)"
+ },
+ {
+  "host": "ultrararecards.co.uk",
+  "base": "https://ultrararecards.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "Ultra Rare Cards",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 20,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 20, in stock 0",
+  "tried": [
+   "disney-lorcana(29):20/29"
+  ],
+  "samples": [
+   "Disney Lorcana TCG - Hyperia City Illumineer's Trove Set - Set 14",
+   "Disney Lorcana TCG - Hyperia City Booster Box (24 Packs) - Set 14",
+   "Disney Lorcana TCG - Attack of the Vine Booster Box (24 Packs) - Set 13",
+   "Disney Lorcana TCG - Attack of the Vine Illumineer's Trove Set - Set 13",
+   "Disney Lorcana TCG - Set 9 Fabled - Booster Pack (24 Packs)",
+   "Disney Lorcana TCG Shimmering Skies Set 5 - Illumineers Trove"
+  ]
+ },
+ {
+  "host": "cardempire.co.uk",
+  "base": "https://cardempire.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no lorcana collection (294 collections)"
+ },
+ {
+  "host": "accentgamingdunfermline.com",
+  "base": "https://accentgamingdunfermline.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no lorcana collection (150 collections)"
+ },
+ {
+  "host": "ultimatetcg.co.uk",
+  "base": "https://ultimatetcg.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "Ultimate TCG Limited",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "disney-lorcana(8):1/7"
+  ],
+  "samples": [
+   "Disney Lorcana: Into The Inklands - Gift Set"
+  ]
+ },
+ {
+  "host": "theboardgamehut.co.uk",
+  "base": "https://theboardgamehut.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "The Board Game Hut",
+  "existingKey": null,
+  "collections": [
+   "lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 21,
+  "inStock": 1,
+  "currency": "GBP",
+  "reason": "matched 21, in stock 1",
+  "tried": [
+   "lorcana(90):21/60",
+   "lorcana-ursulas-return(12):3/12",
+   "lorcana-shimmering-skies(7):3/7",
+   "lorcana-1(5):3/4",
+   "lorcana-azurite-sea-set-6(0):0/0",
+   "lorcana-set-7-archazias-island(0):0/0"
+  ],
+  "samples": [
+   "Disney Lorcana : Rise of the Floodborn - Booster Box (24 Packs)",
+   "Disney Lorcana : Into the Inklands - Illumineer's Trove",
+   "Disney Lorcana : Into the Inklands - Gift Set",
+   "Disney Lorcana : Into the Inklands - Booster Box (24 Packs)",
+   "Disney Lorcana :  RIse of the Floodborn - Booster Pack",
+   "Disney Lorcana : The First Chapter - Booster Box (24 Packs)"
+  ]
+ },
+ {
+  "host": "viridianvault.co.uk",
+  "base": "https://viridianvault.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "The Viridian Vault",
+  "existingKey": null,
+  "collections": [
+   "lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 6,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 6, in stock 0",
+  "tried": [
+   "lorcana(21):6/21",
+   "disney-lorcana-cards(5):4/5",
+   "lorcana-troves(3):2/3",
+   "disney-lorcana-booster-display(5):0/5"
+  ],
+  "samples": [
+   "Disney Lorcana TCG: Azurite Sea - Set 6 - Booster Pack",
+   "Disney Lorcana TCG: Archazia’s Island - Set 7 - Booster Pack",
+   "Disney Lorcana TCG: Reign of Jafar - Set 8 - Booster Pack",
+   "Disney Lorcana TCG: Reign of Jafar - Set 8 - Illumineer's Trove Set",
+   "Disney Lorcana TCG: Fabled - Set 9 - Illumineer's Trove Set",
+   "Disney Lorcana TCG: Fabled - Set 9 - Booster Pack"
+  ]
+ },
+ {
+  "host": "fanboy3.co.uk",
+  "base": "https://fanboy3.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "Fan Boy Three",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "lorcana(273):0/1"
+  ],
+  "samples": []
+ },
+ {
+  "host": "athenagames.com",
+  "base": "https://athenagames.com",
+  "market": "UK",
+  "ok": false,
+  "name": "Athena Games Ltd",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 28,
+  "inStock": 1,
+  "currency": "GBP",
+  "reason": "matched 28, in stock 1",
+  "tried": [
+   "disney-lorcana(135):28/95"
+  ],
+  "samples": [
+   "Disney Lorcana: The First Chapter Booster Pack",
+   "Disney Lorcana: Rise of the Floodborn Booster Pack",
+   "Disney Lorcana: Into the Inklands Booster Pack",
+   "Disney Lorcana: Ursula's Return Booster Pack",
+   "Disney Lorcana: Azurite Sea Booster Pack",
+   "Disney Lorcana: Archazia's Island Booster Pack"
+  ]
+ },
+ {
+  "host": "retrogamerbros.co.uk",
+  "base": "https://retrogamerbros.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "Retro Gamer Bros.",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 23,
+  "inStock": 1,
+  "currency": "GBP",
+  "reason": "matched 23, in stock 1",
+  "tried": [
+   "disney-lorcana(48):23/42",
+   "disney-lorcana-tcg-set-13-attack-of-the-vine(9):4/7",
+   "disney-lorcana-tcg-set-14-hyperia-city(5):4/4",
+   "disney-lorcana-set-6-azurite-sea(4):3/4",
+   "disney-lorcana-tcg-set-12-wilds-unknown(4):3/4",
+   "disney-lorcana-tcg-set-11-winterspell(3):3/3",
+   "disney-lorcana-set-4-ursulas-return(3):2/3",
+   "disney-lorcana-set-2-rise-of-the-floodborn(2):1/2",
+   "disney-lorcana-set-7-archazias-island(2):1/2",
+   "disney-lorcana-tcg-set-8-reign-of-jafar(1):0/1"
+  ],
+  "samples": [
+   "Disney Lorcana TCG: Set 6 Azurite Sea - Booster Box (24 Count)",
+   "Disney Lorcana TCG: Set 2 Rise of the Floodborn - Booster Box (24 Count)",
+   "Disney Lorcana TCG - Set 4 Ursulas Return - Booster Pack",
+   "Disney Lorcana TCG - Set 4 Ursulas Return - Booster Box (24 Count)",
+   "Disney Lorcana TCG: Set 7 Archazias Island - Booster Box",
+   "Disney Lorcana TCG: Set 6 Azurite Sea - Illumineers Trove"
+  ]
+ },
+ {
+  "host": "sccg.co.uk",
+  "base": "https://sccg.co.uk",
+  "market": "UK",
+  "ok": true,
+  "name": "Sin City Comics & Gaming",
+  "existingKey": null,
+  "collections": [
+   "trading-cards-disney-lorcana-disney-lorcana-booster-packs",
+   "trading-cards-disney-lorcana-disney-lorcana-box-sets"
+  ],
+  "kind": "sealed",
+  "matched": 13,
+  "inStock": 6,
+  "currency": "GBP",
+  "reason": null,
+  "tried": [
+   "trading-cards-disney-lorcana-disney-lorcana-booster-packs(9):9/9",
+   "trading-cards-disney-lorcana-disney-lorcana-box-sets(4):4/4",
+   "trading-cards-disney-lorcana-disney-lorcana-starter-decks(12):0/12"
+  ],
+  "samples": [
+   "Disney Lorcana TCG - Hyperia City Booster Pack - Set 14",
+   "Disney Lorcana TCG:  Whispers in the Well Booster Pack",
+   "Disney Lorcana TCG: Fabled Booster Pack",
+   "Disney Lorcana – Reign of Jafar Booster Pack",
+   "Disney Lorcana TCG: Archazia's Island Booster Pack",
+   "Disney Lorcana TCG: Shimmering Skies Booster Pack"
+  ]
+ },
+ {
+  "host": "entoyment.co.uk",
+  "base": "https://entoyment.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "Entoyment Wargaming and Hobby Centre",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana-set-9-fabled",
+   "disney-lorcana-set-8-reign-of-jafar",
+   "disney-lorcana-rise-of-the-floodborn",
+   "disney-lorcana-set-6-azurite-sea"
+  ],
+  "kind": "sealed",
+  "matched": 13,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 13, in stock 0",
+  "tried": [
+   "disney-lorcana-set-9-fabled(13):4/13",
+   "disney-lorcana-set-1-the-first-chapter(18):3/18",
+   "disney-lorcana-set-8-reign-of-jafar(13):3/13",
+   "disney-lorcana-rise-of-the-floodborn(12):3/12",
+   "disney-lorcana-set-6-azurite-sea(12):3/12",
+   "disney-lorcana-set-7-archazias-island(11):3/11",
+   "disney-lorcana-set-5-shimmering-skies(15):2/14",
+   "disney-lorcana-set-3-into-the-inklands(12):2/12",
+   "disney-lorcana-set-4-ursulas-return(12):2/12",
+   "disney-lorcana-set-13-attack-of-the-vine(9):0/4"
+  ],
+  "samples": [
+   "Disney Lorcana The First Chapter Booster Pack",
+   "Disney Lorcana The First Chapter Booster Box",
+   "Disney Lorcana First Chapter Illumineers Trove",
+   "Disney Lorcana Shimmering Skies Booster Box",
+   "Disney Lorcana Illumineer's Trove (Shimmering Skies)",
+   "Disney Lorcana Reign of Jafar Booster Box"
+  ]
+ },
+ {
+  "host": "nortontcg.co.uk",
+  "base": "https://nortontcg.co.uk",
+  "market": "UK",
+  "ok": true,
+  "name": "TCG Group",
+  "existingKey": null,
+  "collections": [
+   "lorcana",
+   "disney-lorcana"
+  ],
+  "kind": "both",
+  "matched": 70,
+  "inStock": 34,
+  "currency": "GBP",
+  "reason": null,
+  "tried": [
+   "lorcana(64):48/50",
+   "lorcana-single(64):48/50",
+   "disney-lorcana(51):22/41",
+   "disney-lorcana-sealed-products(40):22/32",
+   "disney-lorcana-decks(12):9/12",
+   "disney-lorcana-booster-packs(10):7/8",
+   "disney-lorcana-box-sets(11):6/11",
+   "disney-lorcana-booster-boxes(6):0/0",
+   "bath-tcg-disney-lorcana-events(2):0/2",
+   "disney-lorcana-pre-orders(0):0/0"
+  ],
+  "samples": [
+   "Meilin Lee - Losing Control (V.2) - Attack of the Vine! (Epic) [13ATV-210]",
+   "Jack-Jack Parr - Incredible Potential (V.2) - Wilds Unknown (Enchanted) [12WIL-232]",
+   "The Cold Never Bothered Me (V.2) - Winterspell (Enchanted) [11WSP-234]",
+   "Jasmine - Steady Strategist (V.2) - Reign of Jafar (Enchanted) [8JAF-221]",
+   "Dale - Ready for His Shot - Wilds Unknown (Legendary) [12WIL-22]",
+   "RLS Legacy - Solar Galleon (V.2) - Into the Inklands (Enchanted) [3INK-216]"
+  ]
+ }
+]

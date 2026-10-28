@@ -1,0 +1,2084 @@
+[
+ {
+  "host": "hobbyexpert.ca",
+  "base": "https://hobbyexpert.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (389 collections)"
+ },
+ {
+  "host": "toysnowman.com",
+  "base": "https://toysnowman.com",
+  "market": "CA",
+  "ok": false,
+  "name": "Toy Snowman",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "lorcana(2):0/2"
+  ],
+  "samples": []
+ },
+ {
+  "host": "eclipsegames.ca",
+  "base": "https://eclipsegames.ca",
+  "market": "CA",
+  "ok": false,
+  "name": "Eclipse Games",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "lorcana-sealed(11):0/0",
+   "lorcana-events(2):0/1"
+  ],
+  "samples": []
+ },
+ {
+  "host": "bananagames.ca",
+  "base": "https://bananagames.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (235 collections)"
+ },
+ {
+  "host": "wanderingadventures.ca",
+  "base": "https://wanderingadventures.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (282 collections)"
+ },
+ {
+  "host": "redriotgames.ca",
+  "base": "https://redriotgames.ca",
+  "market": "CA",
+  "ok": false,
+  "name": "Red Riot Games CA",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "disney-lorcana-pre-order(5):1/1",
+   "disney-lorcana-sealed(1):0/1",
+   "disney-lorcana-singles(0):0/0"
+  ],
+  "samples": [
+   "DISNEY LORCANA: URSULA'S RETURN - BOOSTER BOX (PRE-ORDER)"
+  ]
+ },
+ {
+  "host": "vulcancollectibles.com",
+  "base": "https://vulcancollectibles.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (78 collections)"
+ },
+ {
+  "host": "mechagames.ca",
+  "base": "https://mechagames.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (112 collections)"
+ },
+ {
+  "host": "blackrosehobbies.com",
+  "base": "https://blackrosehobbies.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (67 collections)"
+ },
+ {
+  "host": "everythinggames.ca",
+  "base": "https://everythinggames.ca",
+  "market": "CA",
+  "ok": false,
+  "name": "Everything Games",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "lorcana(0):0/0",
+   "lorcana-1(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "6ixtcgsmarkham.ca",
+  "base": "https://6ixtcgsmarkham.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (24 collections)"
+ },
+ {
+  "host": "bentogaming.com",
+  "base": "https://bentogaming.com",
+  "market": "CA",
+  "ok": false,
+  "name": "Bento Gaming",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "lorcana-tcg-sealed(37):0/0",
+   "lorcana-tcg-singles-03-into-the-inklands(0):0/0",
+   "lorcana-tcg-singles-04-ursulas-return(0):0/0",
+   "lorcana-tcg-singles-05-shimmering-skies(0):0/0",
+   "lorcana-tcg(0):0/0",
+   "lorcana-tcg-singles-the-first-chapter(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "boutiqueartefact.com",
+  "base": "https://boutiqueartefact.com",
+  "market": "CA",
+  "ok": false,
+  "name": "Boutique L'Artefact",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "lorcana-precommande(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "madmerchantgames.com",
+  "base": "https://madmerchantgames.com",
+  "market": "CA",
+  "ok": false,
+  "name": "Mad Merchant Cards and Games",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "lorcana(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "silvergoblin.cards",
+  "base": "https://silvergoblin.cards",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (107 collections)"
+ },
+ {
+  "host": "royaltycardsandcollectibles.com",
+  "base": "https://royaltycardsandcollectibles.com",
+  "market": "CA",
+  "ok": false,
+  "name": "Royalty Cards and Collectibles ",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana-booster-boxes"
+  ],
+  "kind": "sealed",
+  "matched": 2,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 2, in stock 0",
+  "tried": [
+   "disney-lorcana-booster-boxes(2):2/2"
+  ],
+  "samples": [
+   "Disney Lorcana: Azurite Sea Booster Box Case",
+   "Disney Lorcana: Shimmering Skies Booster Box Case"
+  ]
+ },
+ {
+  "host": "sunnyhobbies.com",
+  "base": "https://sunnyhobbies.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (57 collections)"
+ },
+ {
+  "host": "thedropcardshop.com",
+  "base": "https://thedropcardshop.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (151 collections)"
+ },
+ {
+  "host": "203collectibles.com",
+  "base": "https://203collectibles.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (36 collections)"
+ },
+ {
+  "host": "eacollectibles.com",
+  "base": "https://eacollectibles.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (1255 collections)"
+ },
+ {
+  "host": "negativezonecomics.com",
+  "base": "https://negativezonecomics.com",
+  "market": "CA",
+  "ok": false,
+  "name": "Negative Zone Comics",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "disney-lorcana-tcg(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "springerhobbies.com",
+  "base": "https://springerhobbies.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (130 collections)"
+ },
+ {
+  "host": "piratecards.shop",
+  "base": "https://piratecards.shop",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (26 collections)"
+ },
+ {
+  "host": "carderaco.com",
+  "base": "https://carderaco.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (77 collections)"
+ },
+ {
+  "host": "championcitygames.ca",
+  "base": "https://championcitygames.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (25 collections)"
+ },
+ {
+  "host": "kapescaping.ca",
+  "base": "https://kapescaping.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (20 collections)"
+ },
+ {
+  "host": "animealley.ca",
+  "base": "https://animealley.ca",
+  "market": "CA",
+  "ok": false,
+  "name": "Anime Alley",
+  "existingKey": null,
+  "collections": [
+   "lorcana-singles"
+  ],
+  "kind": "singles",
+  "matched": 2,
+  "inStock": 2,
+  "currency": "CAD",
+  "reason": "matched 2, in stock 2",
+  "tried": [
+   "lorcana-singles(2):2/2"
+  ],
+  "samples": [
+   "Archimedes - Exasperated Owl (39/204) [Shimmering Skies]",
+   "Bruni - Fire Salamander (40/204) [Shimmering Skies]"
+  ]
+ },
+ {
+  "host": "radgameshop.ca",
+  "base": "https://www.radgameshop.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (14 collections)"
+ },
+ {
+  "host": "fafnirshoard.ca",
+  "base": "https://fafnirshoard.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (578 collections)"
+ },
+ {
+  "host": "teamcollectors.com",
+  "base": "https://teamcollectors.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (19 collections)"
+ },
+ {
+  "host": "ateliertcg.com",
+  "base": "https://ateliertcg.com",
+  "ok": false,
+  "reason": "not Shopify or unreachable (dth=device-width, initial-scale=1\">\n<title>Page not found | L&#39;Atelier TCG</t)"
+ },
+ {
+  "host": "cardlegendstcg.com",
+  "base": "https://www.cardlegendstcg.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (18 collections)"
+ },
+ {
+  "host": "acgamesonline.com",
+  "base": "https://acgamesonline.com",
+  "market": "CA",
+  "ok": true,
+  "name": "A & C Games",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana-sealed-products"
+  ],
+  "kind": "sealed",
+  "matched": 63,
+  "inStock": 33,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "disney-lorcana-sealed-products(155):63/155",
+   "disney-lorcana(89):33/89",
+   "disney-lorcana-events(0):0/0"
+  ],
+  "samples": [
+   "Disney Lorcana Set 14: Hyperia City Illumineer's Trove",
+   "Disney Lorcana Set 14: Hyperia City Booster Pack",
+   "Disney Lorcana Set 14: Hyperia City Booster Box (Limit 1 Per Customer)",
+   "Disney Lorcana Set 13: Attack of the Vine Rapunzel Edition Starter Set",
+   "Disney Lorcana Set 13: Attack of the Vine Booster Box (Limited 1 Per Customer)",
+   "Disney Lorcana Set 13: Attack of the Vine Booster Pack"
+  ]
+ },
+ {
+  "host": "comfyhobbies.com",
+  "base": "https://comfyhobbies.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (56 collections)"
+ },
+ {
+  "host": "boardgamebliss.com",
+  "base": "https://www.boardgamebliss.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (2000 collections)"
+ },
+ {
+  "host": "pandahobby.ca",
+  "base": "https://pandahobby.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (485 collections)"
+ },
+ {
+  "host": "cellysports.com",
+  "base": "https://www.cellysports.com",
+  "market": "CA",
+  "ok": false,
+  "name": "Celly Sports & Games",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 7,
+  "inStock": 2,
+  "currency": "CAD",
+  "reason": "matched 7, in stock 2",
+  "tried": [
+   "disney-lorcana(98):7/26",
+   "lorcana(27):2/13",
+   "lorcana-upcoming-releases(5):2/4"
+  ],
+  "samples": [
+   "DISNEY LORCANA - WHISPERS IN THE WELL - STARTER DECK",
+   "DISNEY LORCANA - HYPERIA CITY - BOOSTER BOX (OCT 16)",
+   "DISNEY LORCANA - HYPERIA CITY - ILLUMINEER'S TROVE (OCT 16)",
+   "DISNEY LORCANA - WINTERSPELL - SCROOGE MCDUCK GIFT BOX",
+   "DISNEY LORCANA - GREAT HUNNY RESCUE ILLUMINEER'S QUEST",
+   "DISNEY LORCANA - REIGN OF JAFAR - ILLUMINEER'S QUEST PALACE HEIST"
+  ]
+ },
+ {
+  "host": "flaringlair.com",
+  "base": "https://flaringlair.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (122 collections)"
+ },
+ {
+  "host": "elitecardstoronto.com",
+  "base": "https://elitecardstoronto.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (23 collections)"
+ },
+ {
+  "host": "hobbystoptcg.com",
+  "base": "https://www.hobbystoptcg.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (113 collections)"
+ },
+ {
+  "host": "masterset.ca",
+  "base": "https://masterset.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (45 collections)"
+ },
+ {
+  "host": "mysticalsparktcg.ca",
+  "base": "https://www.mysticalsparktcg.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (21 collections)"
+ },
+ {
+  "host": "justahobby.store",
+  "base": "https://www.justahobby.store",
+  "market": "CA",
+  "ok": true,
+  "name": "Just-a-Hobby",
+  "existingKey": null,
+  "collections": [
+   "lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 16,
+  "inStock": 5,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "lorcana(24):16/24"
+  ],
+  "samples": [
+   "Disney Lorcana Into the Inklands - Sleeved Pack (Random Artwork)",
+   "Disney Lorcana Rise of the Floodborn - Sleeved Booster Pack (Random Artwork)",
+   "Disney Lorcana Ursula's Return - Booster Pack (Random Artwork)",
+   "Disney Lorcana Shimmering Skies - Booster Box",
+   "Disney Lorcana Azurite Sea - Booster Pack (Random Artwork)",
+   "Disney Lorcana The First Chapter - Booster Pack (Random Artwork)"
+  ]
+ },
+ {
+  "host": "popcollectibles.ca",
+  "base": "https://popcollectibles.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (116 collections)"
+ },
+ {
+  "host": "gamesland.ca",
+  "base": "https://gamesland.ca",
+  "market": "CA",
+  "ok": true,
+  "name": "GamesLand Canada",
+  "existingKey": null,
+  "collections": [
+   "lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 28,
+  "inStock": 4,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "lorcana(56):28/44",
+   "lorcana-sale(5):3/4",
+   "lorcana-pre-order(5):2/2"
+  ],
+  "samples": [
+   "DISNEY LORCANA SET 10 WHISPERS IN THE WELL STARTER DECK - 1 RANDOM DECK",
+   "DISNEY LORCANA SET 14 HYPERIA CITY ILLUMINEER'S TROVE",
+   "DISNEY LORCANA SET 14 HYPERIA CITY BOOSTER BOX",
+   "DISNEY LORCANA SET 9 FABLED BOOSTER PACK",
+   "DISNEY LORCANA SET 10 WHISPERS IN THE WELL BOOSTER PACK (1 RANDOM PACK)",
+   "Disney Lorcana: Into The Inklands - Booster Pack (1 random pack)"
+  ]
+ },
+ {
+  "host": "ptccollectibles.com",
+  "base": "https://ptccollectibles.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (35 collections)"
+ },
+ {
+  "host": "hobbysag.com",
+  "base": "https://hobbysag.com",
+  "ok": false,
+  "reason": "not Shopify or unreachable (https://hobbysag.com/meta.json: HTTP 500)"
+ },
+ {
+  "host": "pokegemsmtl.com",
+  "base": "https://pokegemsmtl.com",
+  "market": "CA",
+  "ok": true,
+  "name": "Poke Gems MTL",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana-raw-cards"
+  ],
+  "kind": "singles",
+  "matched": 198,
+  "inStock": 160,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "disney-lorcana-raw-cards(200):198/200",
+   "disney-lorcana-sealed(3):1/1"
+  ],
+  "samples": [
+   "Spooky Sight (Enchanted) (237/204) (10)",
+   "Darkwing Duck & Launchpad - St. Canard's Finest (Enchanted) (242/207) (13)",
+   "Winnie the Pooh - Hunny Archmage (Epic) (212/207) (13)",
+   "Mushu - Stealthy Dragon (97/207) (13)",
+   "Jasmine - Vine Expert (Epic) (208/207) (13)",
+   "Sun Yee - Red Panda Spirit (Epic) (218/207) (13)"
+  ]
+ },
+ {
+  "host": "toontownhobbies.com",
+  "base": "https://toontownhobbies.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (85 collections)"
+ },
+ {
+  "host": "remicardtrader.ca",
+  "base": "https://remicardtrader.ca",
+  "market": "CA",
+  "ok": true,
+  "name": "Rémi Card Trader",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 33,
+  "inStock": 16,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "disney-lorcana(113):33/107",
+   "evenements-lorcana(8):0/1",
+   "cartes-gradees-lorcana(2):0/1",
+   "precommande-disney-lorcana(0):0/0"
+  ],
+  "samples": [
+   "Disney Lorcana - Set 14 - Hyperia City Booster Box",
+   "Disney Lorcana - Set 14 - Hyperia City Illumineer's Trove",
+   "Disney Lorcana - Set 14 - Hyperia City Booster Box - Version Française",
+   "Disney Lorcana - Set 10 - Whispers In The Well Starter Deck",
+   "Disney Lorcana - Set 3 - Into The Inklands Booster Box",
+   "Disney Lorcana - Set 8 - Reign Of Jafar Booster Box"
+  ]
+ },
+ {
+  "host": "tonkatomstcgstation.ca",
+  "base": "https://tonkatomstcgstation.ca",
+  "market": "CA",
+  "ok": true,
+  "name": "Tonkatom's  TCG Station",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana-singles"
+  ],
+  "kind": "singles",
+  "matched": 226,
+  "inStock": 50,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "disney-lorcana-singles(2801):226/250"
+  ],
+  "samples": [
+   "99 Puppies (24/204) [Into the Inklands]",
+   "A Pirate's Life (128/204) [Ursula's Return]",
+   "A Pirate's Life (132/204) [Fabled]",
+   "A Whole New World (195/204) [The First Chapter]",
+   "Abu - Bold Helmsman (114/204) [Azurite Sea]",
+   "Abu - Cheeky Phantasm (15/35) [Illumineer's Quest: Palace Heist]"
+  ]
+ },
+ {
+  "host": "vancitytcg.ca",
+  "base": "https://www.vancitytcg.ca",
+  "ok": false,
+  "reason": "not Shopify or unreachable (l; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta nam)"
+ },
+ {
+  "host": "vaultedicons.com",
+  "base": "https://vaultedicons.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (51 collections)"
+ },
+ {
+  "host": "obsidiangames.ca",
+  "base": "https://obsidiangames.ca",
+  "market": "CA",
+  "ok": true,
+  "name": "Obsidian Games",
+  "existingKey": null,
+  "collections": [
+   "lorcana-singles-in-stock",
+   "lorecana-singes",
+   "ravensburger-lorcana"
+  ],
+  "kind": "both",
+  "matched": 361,
+  "inStock": 243,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "lorcana-singles-in-stock(1454):243/250",
+   "lorecana-singes(3759):242/250",
+   "ravensburger-lorcana(14):3/4"
+  ],
+  "samples": [
+   "Tipo - Growing Son (157/204) [Shimmering Skies]",
+   "Sail the Azurite Sea (163/204) [Azurite Sea]",
+   "Pete - Games Referee (195/204) [Shimmering Skies]",
+   "Scrooge McDuck - Afficionado of Antiquities (140/204) [Shimmering Skies]",
+   "Diablo - Obedient Raven (49/204) [Azurite Sea]",
+   "Gantu - Captain Crankyhead (189/204) [Azurite Sea]"
+  ]
+ },
+ {
+  "host": "vancitycj.com",
+  "base": "https://vancitycj.com",
+  "market": "CA",
+  "ok": false,
+  "name": "Vancity CJ Trading Cards",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana-the-first-chapter"
+  ],
+  "kind": "sealed",
+  "matched": 4,
+  "inStock": 2,
+  "currency": "CAD",
+  "reason": "matched 4, in stock 2",
+  "tried": [
+   "disney-lorcana-the-first-chapter(11):4/8"
+  ],
+  "samples": [
+   "Disney Lorcana The First Chapter Starter Deck-Emerald & Ruby",
+   "Disney Lorcana The First Chapter Starter Deck-Sapphire & Steel",
+   "Disney Lorcana - Rise of the Floodborn Starter Deck - Amber & Sapphire",
+   "Disney Lorcana Into The Inklands Starter Deck Ruby & Sapphire"
+  ]
+ },
+ {
+  "host": "yumecards.ca",
+  "base": "https://www.yumecards.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (27 collections)"
+ },
+ {
+  "host": "tistaminis.com",
+  "base": "https://tistaminis.com",
+  "market": "CA",
+  "ok": true,
+  "name": "Tistaminis",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 41,
+  "inStock": 18,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "disney-lorcana(181):41/162",
+   "disney-lorcana-attack-of-the-vine(8):2/5",
+   "lorcana-into-the-wilds(6):2/4",
+   "lorcana-winterspell(5):2/3"
+  ],
+  "samples": [
+   "DISNEY LORCANA SET 14 HYPERIA CITY ILLUMINEER'S TROVE",
+   "DISNEY LORCANA SET 14 HYPERIA CITY BOOSTER BOX",
+   "DISNEY LORCANA SET 13 ATTACK OF THE VINE! ILLUMINEER'S TROVE",
+   "DISNEY LORCANA SET 13 ATTACK OF THE VINE! BOOSTER BOX",
+   "DISNEY LORCANA SET 12 WILDS UNKNOWN ILLUMINEER'S TROVE",
+   "DISNEY LORCANA SET 12 WILDS UNKNOWN BOOSTER BOX"
+  ]
+ },
+ {
+  "host": "boutiquefdb.com",
+  "base": "https://boutiquefdb.com",
+  "market": "CA",
+  "ok": false,
+  "name": "Boutique FDB",
+  "existingKey": null,
+  "collections": [
+   "lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 32,
+  "inStock": 2,
+  "currency": "CAD",
+  "reason": "matched 32, in stock 2",
+  "tried": [
+   "lorcana(104):32/84"
+  ],
+  "samples": [
+   "DISNEY LORCANA: INTO THE INKLANDS - BOOSTER PACK",
+   "Disney Lorcana : Rise of the Floodborn - Booster Pack",
+   "Disney Lorcana  - Archazia’s Island - Booster Pack",
+   "Disney Lorcana  - Winterspell Booster Pack",
+   "Disney Lorcana  - Whispers in the well Booster Pack",
+   "Disney Lorcana : First Chapter - Booster Pack"
+  ]
+ },
+ {
+  "host": "shop.bastiongames.ca",
+  "base": "https://shop.bastiongames.ca",
+  "market": "CA",
+  "ok": true,
+  "name": "Bastion Games",
+  "existingKey": null,
+  "collections": [
+   "lorcana-singles"
+  ],
+  "kind": "singles",
+  "matched": 238,
+  "inStock": 238,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "lorcana-singles(654):238/250"
+  ],
+  "samples": [
+   "Mufasa - Ruler of Pride Rock (Enchanted) (217/204) [Shimmering Skies]",
+   "Hades - Infernal Schemer (147/204) [The First Chapter]",
+   "Ariel - Spectactular Singer (2/204) [The First Chapter]",
+   "John Silver - Alien Pirate (82/204) [The First Chapter]",
+   "Ursula - Deceiver of All (91/204) [Into the Inklands]",
+   "Ursula - Power Hungry (59/204) [The First Chapter]"
+  ]
+ },
+ {
+  "host": "shopverse.com",
+  "base": "https://shopverse.com",
+  "market": "CA",
+  "ok": true,
+  "name": "Shopverse",
+  "existingKey": null,
+  "collections": [
+   "lorcana-tcg"
+  ],
+  "kind": "sealed",
+  "matched": 52,
+  "inStock": 29,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "lorcana-tcg(78):52/71",
+   "disney-lorcana(77):52/74",
+   "disney-lorcana-starter-decks(23):14/23",
+   "disney-lorcana-booster-boxes(12):12/12",
+   "disney-lorcana-collection-boxes(17):10/17",
+   "disney-lorcana-tcg-pre-orders(6):5/6",
+   "disney-lorcana-trading-card-game-azurite-sea-starter-deck(3):2/3"
+  ],
+  "samples": [
+   "Disney Lorcana TCG: Azurite Sea Booster Pack",
+   "Disney Lorcana TCG: Reign of Jafar Booster Pack",
+   "Disney Lorcana TCG: Into the Inkdark Booster Box",
+   "Disney Lorcana TCG: Into the Inkdark Illumineer's Trove",
+   "Disney Lorcana TCG: Whispers in the Well Starter Deck - Sapphire & Steel",
+   "Disney Lorcana TCG: Whispers in the Well Starter Deck - Amber & Emerald"
+  ]
+ },
+ {
+  "host": "brimstonegames.ca",
+  "base": "https://brimstonegames.ca",
+  "market": "CA",
+  "ok": false,
+  "name": "Brimstone Games ",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "disney-lorcana-tcg(19):0/15"
+  ],
+  "samples": []
+ },
+ {
+  "host": "topshelfco.ca",
+  "base": "https://topshelfco.ca",
+  "market": "CA",
+  "ok": true,
+  "name": "Top Shelf Collection",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana-booster-boxes",
+   "disney-lorcana-starter-decks",
+   "disney-lorcana-misc"
+  ],
+  "kind": "sealed",
+  "matched": 19,
+  "inStock": 3,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "disney-lorcana-booster-boxes(8):8/8",
+   "disney-lorcana-starter-decks(13):7/9",
+   "into-the-inklands(12):5/11",
+   "disney-lorcana-misc(18):4/9",
+   "disney-lorcana-the-first-chapterd(18):4/8",
+   "disney-lorcana(26):3/26",
+   "disney-lorcana-return-of-ursula(12):3/9",
+   "shimmering-skies(13):1/7",
+   "disney-lorcana-rise-of-the-floodborn(10):1/3",
+   "disney-lorcana-azurite-sea(6):1/3"
+  ],
+  "samples": [
+   "Disney Lorcana - The First Chapter - Starter Deck (Amber & Amethyst - Sorcerer Mickey x Moana)",
+   "Disney Lorcana - Ursula's Return - Starter Deck (Amber & Amethyst)",
+   "Disney Lorcana - Ursula's Return - Starter Deck (Sapphire & Steel)",
+   "Disney Lorcana - Archazia's Island - Illumineer's Trove",
+   "Disney Lorcana - Into the Inklands - Gift Set",
+   "Disney Lorcana - Into the Inklands - Illumineer's Trove"
+  ]
+ },
+ {
+  "host": "cardboardmemories.ca",
+  "base": "https://cardboardmemories.ca",
+  "market": "CA",
+  "ok": true,
+  "name": "Cardboard Memories Inc.",
+  "existingKey": null,
+  "collections": [
+   "lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 63,
+  "inStock": 20,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "lorcana(160):63/153"
+  ],
+  "samples": [
+   "Disney - Lorcana - The First Chapter - Booster Box",
+   "Disney - Lorcana - Rise of the Floodborn - Booster Pack",
+   "Disney - Lorcana - Rise of the Floodborn - Booster Box",
+   "Disney - Lorcana - The First Chapter - Starter Deck - Sapphire & Steel - Aurora & Simba",
+   "Disney - Lorcana - The First Chapter - Starter Deck - Amber & Amethyst - Moana & Mickey",
+   "Disney - Lorcana - The First Chapter - Starter Deck - Emerald & Ruby - Cruella & Aladdin"
+  ]
+ },
+ {
+  "host": "criticalhitgaminglounge.com",
+  "base": "https://criticalhitgaminglounge.com",
+  "market": "CA",
+  "ok": false,
+  "name": "Critical Hit Gaming Lounge",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "lorcana(11):1/1"
+  ],
+  "samples": [
+   "Lorcana - Hyperia City - Booster Box"
+  ]
+ },
+ {
+  "host": "bootownsgamesandhobbies.com",
+  "base": "https://bootownsgamesandhobbies.com",
+  "market": "CA",
+  "ok": true,
+  "name": "Bootown's Games and Hobbies",
+  "existingKey": null,
+  "collections": [
+   "lorcana-singles-instock",
+   "lorcana-the-first-chapter-singles",
+   "lorcana-rise-of-the-floodborn"
+  ],
+  "kind": "both",
+  "matched": 359,
+  "inStock": 349,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "lorcana-singles-instock(371):248/250",
+   "lorcana-the-first-chapter-singles(136):136/136",
+   "lorcana-rise-of-the-floodborn-single(122):120/122",
+   "lorcana-into-the-inklands-single(112):112/112",
+   "lorcana-rise-of-the-floodborn(15):10/10",
+   "disney-lorcana-the-first-chapter(0):0/0",
+   "lorcana-preorder(0):0/0"
+  ],
+  "samples": [
+   "Elsa - Snow Queen (41/204) [The First Chapter]",
+   "Minnie Mouse - Stylish Surfer (113/204) [Rise of the Floodborn]",
+   "Namaari - Nemesis (118/204) [Rise of the Floodborn]",
+   "Goofy - Musketeer (4/204) [The First Chapter]",
+   "Jasmine - Queen of Agrabah (149/204) [The First Chapter]",
+   "Maurice - World-Famous Inventor (152/204) [The First Chapter]"
+  ]
+ },
+ {
+  "host": "collectorsavenue.com",
+  "base": "https://collectorsavenue.com",
+  "market": "CA",
+  "ok": true,
+  "name": "Collector's Avenue",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 45,
+  "inStock": 23,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "disney-lorcana(86):45/83"
+  ],
+  "samples": [
+   "Disney Lorcana Wilds Unknown Booster Pack",
+   "Disney Lorcana Wilds Unknown Booster Box",
+   "Disney Lorcana Reign Of Jafar Starter Deck Ruby & Steel",
+   "Disney Lorcana Reign Of Jafar Starter Deck Amber & Amethyst",
+   "Disney Lorcana Reign Of Jafar Booster Pack",
+   "Disney Lorcana Reign Of Jafar Booster Box"
+  ]
+ },
+ {
+  "host": "carlitosgamecafe.ca",
+  "base": "https://carlitosgamecafe.ca",
+  "market": "CA",
+  "ok": false,
+  "name": "carlitosgamecafe",
+  "existingKey": null,
+  "collections": [
+   "lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 14,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 14, in stock 0",
+  "tried": [
+   "lorcana(33):14/32",
+   "disney-lorcana-tcg-sealed-product(25):14/24"
+  ],
+  "samples": [
+   "Disney Lorcana: Azurite Sea Booster Box",
+   "Disney Lorcana: Attack of The Vine Illumineer's Trove",
+   "Disney Lorcana: Azurite Sea Booster Pack",
+   "Disney Lorcana: Archazia's Island Booster Box",
+   "Disney Lorcana: Archazia's Island Booster Pack",
+   "Disney Lorcana: Fabled Booster Box"
+  ]
+ },
+ {
+  "host": "destinationretro.ca",
+  "base": "https://destinationretro.ca",
+  "market": "CA",
+  "ok": true,
+  "name": "Destination Retro",
+  "existingKey": null,
+  "collections": [
+   "lorcana-singles",
+   "disney-lorcana-tcg"
+  ],
+  "kind": "both",
+  "matched": 259,
+  "inStock": 250,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "lorcana-singles(2254):245/250",
+   "disney-lorcana-tcg(32):14/21"
+  ],
+  "samples": [
+   "Genie - Satisfied Dragon (189/204) [Reign of Jafar]",
+   "Pluto - Friendly Pooch (21/204) [Fabled]",
+   "Be King Undisputed (133/204) [Fabled]",
+   "Jeweled Collar (120/204) [Reign of Jafar]",
+   "Yzma - Exasperated Schemer (101/204) [Archazia's Island]",
+   "Oswald - The Lucky Rabbit (142/204) [Azurite Sea]"
+  ]
+ },
+ {
+  "host": "gamebreakers.ca",
+  "base": "https://gamebreakers.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (62 collections)"
+ },
+ {
+  "host": "boutiqueawesome.com",
+  "base": "https://boutiqueawesome.com",
+  "market": "CA",
+  "ok": true,
+  "name": "Boutique Awesome",
+  "existingKey": null,
+  "collections": [
+   "lorcana-ursulas-return",
+   "lorcana-nouvel-inventaire-de-cartes-new-cards-inventory",
+   "lorcana-azurite-sea",
+   "lorcana-fabled"
+  ],
+  "kind": "both",
+  "matched": 636,
+  "inStock": 630,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "lorcana-ursulas-return(657):189/250",
+   "lorcana-nouvel-inventaire-de-cartes-new-cards-inventory(3786):167/250",
+   "lorcana-singles(3786):167/250",
+   "lorcana-azurite-sea(446):166/250",
+   "lorcana-fabled(467):152/250",
+   "lorcana-preorders(453):144/250",
+   "lorcana-into-the-inklands(883):127/250",
+   "ursulas-return-singles(642):123/250",
+   "into-the-inklands-singles(869):115/250",
+   "lorcana-foils(1343):7/250"
+  ],
+  "samples": [
+   "Rapunzel & Flynn Rider - Unlikely Pair - Enchanted",
+   "Kevin - Flightless Bird",
+   "Winnie the Pooh - Hunny Archmage",
+   "Cower Before Me!",
+   "Mrs. Hasagawa - Fruit Vendor",
+   "Prophetic Vision"
+  ]
+ },
+ {
+  "host": "gamebridge.ca",
+  "base": "https://gamebridge.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (100 collections)"
+ },
+ {
+  "host": "fanofthesport.com",
+  "base": "https://fanofthesport.com",
+  "market": "CA",
+  "ok": true,
+  "name": "Fan of the Sport",
+  "existingKey": null,
+  "collections": [
+   "lorcana-single",
+   "lorcana-single-in-stock"
+  ],
+  "kind": "singles",
+  "matched": 487,
+  "inStock": 302,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "lorcana-single(3759):249/250",
+   "lorcana-single-in-stock(1398):247/250"
+  ],
+  "samples": [
+   "Madam Mim - Fox (46/204) [Rise of the Floodborn]",
+   "Be Prepared (128/204) [The First Chapter]",
+   "Teeth and Ambitions (130/204) [Rise of the Floodborn]",
+   "Cinderella - Ballroom Sensation (3/204) [Rise of the Floodborn]",
+   "Stitch - Rock Star (23/204) [The First Chapter]",
+   "Let the Storm Rage On (199/204) [Rise of the Floodborn]"
+  ]
+ },
+ {
+  "host": "gameshack.ca",
+  "base": "https://gameshack.ca",
+  "market": "CA",
+  "ok": true,
+  "name": "Game Shack",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 26,
+  "inStock": 8,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "disney-lorcana(65):26/60"
+  ],
+  "samples": [
+   "Disney Lorcana Wilds Unknown - Pre-Release Pack",
+   "Disney Lorcana - Attack Of The Vine! - Booster Box",
+   "Disney Lorcana Wilds Unknown - Booster Box",
+   "Disney Lorcana: Whispers In The Well - Booster Box",
+   "Disney Lorcana: Winterspell - Booster Pack",
+   "Disney Lorcana - Attack Of The Vine! - Illumineer's Trove"
+  ]
+ },
+ {
+  "host": "eventhorizonhobbies.com",
+  "base": "https://eventhorizonhobbies.com",
+  "market": "CA",
+  "ok": true,
+  "name": "Event Horizon Hobbies CA",
+  "existingKey": null,
+  "collections": [
+   "lorcana-singles-in-stock",
+   "lorcana-archazias-island",
+   "lorcana-reign-of-jafar",
+   "lorcana"
+  ],
+  "kind": "both",
+  "matched": 660,
+  "inStock": 644,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "lorcana-singles-in-stock(3059):246/250",
+   "lorcana-archazias-island(207):207/207",
+   "lorcana-reign-of-jafar(212):202/212",
+   "lorcana(71):29/63"
+  ],
+  "samples": [
+   "Pawpsicle (169/204) [Rise of the Floodborn]",
+   "Madam Mim - Fox (46/204) [Rise of the Floodborn]",
+   "Merlin - Rabbit (52/204) [Rise of the Floodborn]",
+   "And Then Along Came Zeus (195/204) [Into the Inklands]",
+   "Fishbone Quill (168/204) [The First Chapter]",
+   "Malicious, Mean, and Scary (97/204) [Whispers in the Well]"
+  ]
+ },
+ {
+  "host": "gothamcentralcomics.com",
+  "base": "https://gothamcentralcomics.com",
+  "market": "CA",
+  "ok": true,
+  "name": "Gotham Central",
+  "existingKey": null,
+  "collections": [
+   "lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 42,
+  "inStock": 23,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "lorcana(76):42/76"
+  ],
+  "samples": [
+   "Disney Lorcana: Hyperia City - Booster Pack",
+   "Disney Lorcana: Hyperia City - Booster Box",
+   "Disney Lorcana: Hyperia City - Illumineer's Trove",
+   "DISNEY LORCANA SET 13 ATTACK OF THE VINE! BOOSTER PACK",
+   "DISNEY LORCANA SET 13 ATTACK OF THE VINE! ILLUMINEER'S TROVE",
+   "DISNEY LORCANA SET 13 ATTACK OF THE VINE! BOOSTER BOX"
+  ]
+ },
+ {
+  "host": "gotitemgames.ca",
+  "base": "https://gotitemgames.ca",
+  "market": "CA",
+  "ok": true,
+  "name": "Got Item! Games",
+  "existingKey": null,
+  "collections": [
+   "lorcana-singles",
+   "sealed-lorcana-instock"
+  ],
+  "kind": "both",
+  "matched": 151,
+  "inStock": 151,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "lorcana-singles(148):145/148",
+   "sealed-lorcana-instock(20):6/19"
+  ],
+  "samples": [
+   "Mouse Armor (203/204) - Rise of the Floodborn",
+   "Last Cannon (202/204) - Rise of the Floodborn",
+   "Let the Storm Rage On (199/204) - Rise of the Floodborn",
+   "Charge! (198/204) - Rise of the Floodborn",
+   "Tiana - Diligent Waitress (197/204) - Rise of the Floodborn",
+   "The Prince - Never Gives Up (195/204) - Rise of the Floodborn"
+  ]
+ },
+ {
+  "host": "derpycards.com",
+  "base": "https://derpycards.com",
+  "market": "CA",
+  "ok": true,
+  "name": "Derpy Cards",
+  "existingKey": null,
+  "collections": [
+   "lorcana-single",
+   "disney-lorcana",
+   "lorcana-preorders"
+  ],
+  "kind": "both",
+  "matched": 278,
+  "inStock": 251,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "lorcana-single(343):250/250",
+   "disney-lorcana(63):25/62",
+   "lorcana-preorders(8):3/8",
+   "lorcana-events(9):0/5",
+   "lorcana-portfolio(1):0/1"
+  ],
+  "samples": [
+   "Family Fishing Pole (100/204) - Fabled Cold Foil",
+   "Maleficent - Monstrous Dragon (113/204) - The First Chapter",
+   "Rapunzel - High Climber (Enchanted) (214/204) - Reign of Jafar Holofoil",
+   "Monstro - Infamous Whale (64/204) - Reign of Jafar",
+   "Scrooge McDuck - Resourceful Miser (154/204) - Archazias Island Cold Foil",
+   "Prince Naveen - Vigilant First Mate (9/204) - Azurite Sea"
+  ]
+ },
+ {
+  "host": "jeuxaz.games",
+  "base": "https://jeuxaz.games",
+  "market": "CA",
+  "ok": false,
+  "name": "Jeux AZ Games",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "lorcana(37):2/35"
+  ],
+  "samples": [
+   "DISNEY LORCANA - Beast Gift Box HYPERIA CITY (2026-11-13)",
+   "DISNEY LORCANA - Collection Starter Set FABLED"
+  ]
+ },
+ {
+  "host": "chimeragamingonline.com",
+  "base": "https://chimeragamingonline.com",
+  "market": "CA",
+  "ok": true,
+  "name": "Chimera Gaming",
+  "existingKey": null,
+  "collections": [
+   "lorcana-singles",
+   "lorcana-all-sealed"
+  ],
+  "kind": "both",
+  "matched": 295,
+  "inStock": 248,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "lorcana-singles(999):241/250",
+   "lorcana-all-sealed(331):54/94",
+   "lorcana-sealed(13):7/12",
+   "disney-lorcana-into-the-inklands-sealed(7):4/5",
+   "lorcana-rise-of-the-floodborn-preorder(5):2/5",
+   "lorcana-preorders(1):1/1",
+   "lorcana-locals(22):0/22",
+   "lorcana-store-championship(2):0/0",
+   "disney-lorcana-the-first-chapter-sealed(0):0/0",
+   "pokemon-prerelease-tickets-1(0):0/0"
+  ],
+  "samples": [
+   "Lilo & Stitch - Fun-Loving Friends (Iconic) (244/207) [Attack of the Vine!]",
+   "Lady - Decisive Dog (Enchanted) (205/204) [Reign of Jafar]",
+   "Alice - Growing Girl (Enchanted) (213/204) [Rise of the Floodborn]",
+   "Goliath - Clan Leader (Enchanted) (238/204) [Whispers in the Well]",
+   "Mulan - Resourceful Recruit (Enchanted) (229/204) [Winterspell]",
+   "Merida - Wisp Conjurer (Enchanted) (231/207) [Attack of the Vine!]"
+  ]
+ },
+ {
+  "host": "impulsegames.ca",
+  "base": "https://impulsegames.ca",
+  "market": "CA",
+  "ok": true,
+  "name": "Impulse Games and Hobbies",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 62,
+  "inStock": 27,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "disney-lorcana(147):62/131",
+   "lorcana-reign-of-jafar(13):5/13"
+  ],
+  "samples": [
+   "Disney Lorcana: Shimmering Skies: Booster PACK",
+   "Disney Lorcana: Into the Inklands: Booster Pack",
+   "DISNEY LORCANA SET 10 WHISPERS IN THE WELL BOOSTER PACK",
+   "Disney Lorcana: Azurite Sea: Booster Pack",
+   "Disney Lorcana: Ursula's Return: Booster Pack",
+   "DISNEY LORCANA SET 11 WINTERSPELL BOOSTER PACK"
+  ]
+ },
+ {
+  "host": "magicartestore.com",
+  "base": "https://magicartestore.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (14 collections)"
+ },
+ {
+  "host": "morrisontradingpost.com",
+  "base": "https://morrisontradingpost.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (47 collections)"
+ },
+ {
+  "host": "lvlupgames.ca",
+  "base": "https://lvlupgames.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (1382 collections)"
+ },
+ {
+  "host": "mypops.ca",
+  "base": "https://mypops.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (135 collections)"
+ },
+ {
+  "host": "leroidescartes.ca",
+  "base": "https://leroidescartes.ca",
+  "market": "CA",
+  "ok": false,
+  "name": "Le Roi Des Cartes",
+  "existingKey": null,
+  "collections": [
+   "lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 14,
+  "inStock": 1,
+  "currency": "CAD",
+  "reason": "matched 14, in stock 1",
+  "tried": [
+   "lorcana(54):14/54",
+   "lorcana-booster-pack(9):5/9",
+   "lorcana-booster-box(10):4/10",
+   "lorcana-illuminers-trove(6):3/6",
+   "lorcana-starter-pack(8):0/8"
+  ],
+  "samples": [
+   "DISNEY LORCANA ILLUMINEER'S TROVE REIGN OF JAFAR",
+   "DISNEY LORCANA REIGN OF JAFAR BOOSTER PACK",
+   "DISNEY LORCANA REIGN OF JAFAR BOOSTER BOX",
+   "DISNEY LORCANA ARCHAZIA'S ISLAND BOOSTER BOX",
+   "DISNEY LORCANA ARCHAZIA'S ISLAND BOOSTER PACK",
+   "LORCANA INTO THE INKLANDS BOOSTER PACK"
+  ]
+ },
+ {
+  "host": "lamoodcomics.ca",
+  "base": "https://lamoodcomics.ca",
+  "market": "CA",
+  "ok": true,
+  "name": "L.A. Mood Comics and Games",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana-singles",
+   "lorcana-sealed"
+  ],
+  "kind": "both",
+  "matched": 262,
+  "inStock": 240,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "disney-lorcana-singles(891):240/250",
+   "lorcana-sealed(70):22/58",
+   "disney-lorcana(20):0/15"
+  ],
+  "samples": [
+   "A Pirate's Life (132/204) [Fabled]",
+   "A Very Merry Unbirthday (60/204) [Azurite Sea]",
+   "Agrabah - Marketplace (134/204) [Into the Inklands]",
+   "Agrabah - Marketplace (136/204) [Fabled]",
+   "Agustin Madrigal - Clumsy Dad (1/204) [Ursula's Return]",
+   "Akood Et Emuti (29/204) [Winterspell]"
+  ]
+ },
+ {
+  "host": "multizone.ca",
+  "base": "https://multizone.ca",
+  "market": "CA",
+  "ok": true,
+  "name": "Multizone: Comics And Games",
+  "existingKey": null,
+  "collections": [
+   "lorcana-pos"
+  ],
+  "kind": "sealed",
+  "matched": 8,
+  "inStock": 4,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "disney-lorcana(131):13/131",
+   "lorcana-pos(26):8/26"
+  ],
+  "samples": [
+   "Lorcana Hyperia City Booster Box",
+   "Disney Lorcana: Fabled Illumineer's Trove",
+   "Lorcana: Wilds Unknown 2-Player Starter Decks",
+   "Lorcana Azurite Sea Illumineer's Trove",
+   "Lorcana: Winterspell : Collection starter set Stitch Edition",
+   "Lorcana Ursula's return Illumineer's Trove"
+  ]
+ },
+ {
+  "host": "mystic-dragon.ca",
+  "base": "https://mystic-dragon.ca",
+  "market": "CA",
+  "ok": true,
+  "name": "Mystic Dragon",
+  "existingKey": null,
+  "collections": [
+   "lorcana-singles",
+   "disney-lorcana"
+  ],
+  "kind": "both",
+  "matched": 33,
+  "inStock": 26,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "lorcana-singles(72):29/39",
+   "disney-lorcana(33):4/8"
+  ],
+  "samples": [
+   "#2 First Chapter- Ariel: Spectacular Singer(non-holo)",
+   "#191 Wilds Unknown Merida: Formidable Archer (Legendary, Holo)",
+   "#133 Attack of the Vine- Dash Parr & Violet Parr: Super Siblings (Foil)",
+   "#61 Attack of the Vine- Christopher Robin: Hunny Sage",
+   "#22 Attack of the Vine- The Horned King: Merciless Master (Foil)",
+   "#22 Attack of the Vine- The Horned King: Merciless Master"
+  ]
+ },
+ {
+  "host": "outpostgaming.ca",
+  "base": "https://outpostgaming.ca",
+  "market": "CA",
+  "ok": false,
+  "name": "Outpost Gaming",
+  "existingKey": null,
+  "collections": [
+   "lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 8,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 8, in stock 0",
+  "tried": [
+   "lorcana(21):8/13"
+  ],
+  "samples": [
+   "Disney Lorcana: Rise of the Floodborn: Booster Pack",
+   "Disney Lorcana: The First Chapter: Starter Deck Amber and Amethyst",
+   "Disney Lorcana: The First Chapter: Starter Deck Sapphire and Steel",
+   "Disney Lorcana: The First Chapter: Starter Deck Emerald and Ruby",
+   "Disney Lorcana: Into the Inklands: Booster Box",
+   "Disney Lorcana: Rise of the Floodborn: Illumineer's Trove"
+  ]
+ },
+ {
+  "host": "nabemacollectibles.com",
+  "base": "https://nabemacollectibles.com",
+  "market": "CA",
+  "ok": true,
+  "name": "Nabema Collectibles",
+  "existingKey": null,
+  "collections": [
+   "lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 44,
+  "inStock": 14,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "lorcana(106):44/100"
+  ],
+  "samples": [
+   "DISNEY LORCANA SET 14 HYPERIA CITY BOOSTER PACK",
+   "Disney Lorcana Hyperia City Booster Box",
+   "Disney Lorcana Hyperia City Illumineer's Trove",
+   "Lorcana Ursula's Return Booster Box",
+   "Lorcana Into The Inklands Booster Box",
+   "Lorcana Disney Into the Inklands Gift Bundle"
+  ]
+ },
+ {
+  "host": "playntradewpg.com",
+  "base": "https://playntradewpg.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (47 collections)"
+ },
+ {
+  "host": "red-dragon.ca",
+  "base": "https://red-dragon.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (187 collections)"
+ },
+ {
+  "host": "overtimesportscards.ca",
+  "base": "https://overtimesportscards.ca",
+  "market": "CA",
+  "ok": true,
+  "name": "Overtime Sportscards",
+  "existingKey": null,
+  "collections": [
+   "lorcana-1"
+  ],
+  "kind": "both",
+  "matched": 29,
+  "inStock": 29,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "lorcana-1(122):29/54",
+   "disney-lorcana(10):10/10",
+   "disney-lorcana-preorders(0):0/0"
+  ],
+  "samples": [
+   "Tiana Party Hostess Enchanted - Disney Lorcana Hyperia City 239/204",
+   "Un Poco Loco Song Enchanted - Disney Lorcana Hyperia City 228/204",
+   "Powerline Megastar Legendary - Disney Lorcana Hyperia City 17/204",
+   "Max Goof Karaoke Star Legendary - Disney Lorcana Hyperia City 89/204",
+   "Belle Exceptional Writer Legendary - Disney Lorcana Hyperia City 90/204",
+   "Aurora Delightful Musician Legendary - Disney Lorcana Hyperia City 19/204"
+  ]
+ },
+ {
+  "host": "shopmancalamonk.com",
+  "base": "https://shopmancalamonk.com",
+  "market": "CA",
+  "ok": true,
+  "name": "Mancala Monk Board Game Cafe",
+  "existingKey": null,
+  "collections": [
+   "lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 14,
+  "inStock": 12,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "lorcana(17):14/17"
+  ],
+  "samples": [
+   "Disney Lorcana Fabled Illumineer's Trove",
+   "Disney Lorcana - Fabled Booster Box",
+   "Disney Lorcana - Reign of Jafar Booster Box",
+   "Disney Lorcana Azurite Sea Illumineer's Trove",
+   "Disney Lorcana Archazia's Island Illumineer's Trove",
+   "Disney Lorcana - Ursula's Return Starter Deck - Sapphire & Steel"
+  ]
+ },
+ {
+  "host": "rivalcards.com",
+  "base": "https://rivalcards.com",
+  "market": "CA",
+  "ok": false,
+  "name": "Rival Cards",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 4,
+  "inStock": 2,
+  "currency": "CAD",
+  "reason": "matched 4, in stock 2",
+  "tried": [
+   "disney-lorcana(20):4/6",
+   "disney-lorcana-sealed(17):4/6"
+  ],
+  "samples": [
+   "2026 Disney Lorcana Wilds Unknown Booster Box",
+   "2026 Disney Lorcana Wilds Unknown Illumineer's Trove",
+   "Disney Lorcana: Hyperia City - Booster Box",
+   "Disney Lorcana: Hyperia City - Illumineer's Trove",
+   "2026 Disney Lorcana Wilds Unknown Booster Box",
+   "2026 Disney Lorcana Wilds Unknown Illumineer's Trove"
+  ]
+ },
+ {
+  "host": "taverneducollectionneur.com",
+  "base": "https://taverneducollectionneur.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (41 collections)"
+ },
+ {
+  "host": "upnorthgames.ca",
+  "base": "https://upnorthgames.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (15 collections)"
+ },
+ {
+  "host": "manalounge.ca",
+  "base": "https://manalounge.ca",
+  "market": "CA",
+  "ok": true,
+  "name": "The Mana Lounge",
+  "existingKey": null,
+  "collections": [
+   "disneys-lorcana-trading-card-game",
+   "disney-lorcana-shimmering-skies",
+   "disney-lorcana-wilds-unknown",
+   "disney-lorcana-azurite-sea"
+  ],
+  "kind": "sealed",
+  "matched": 31,
+  "inStock": 16,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "disneys-lorcana-trading-card-game(37):17/36",
+   "lorcana-master-list(37):17/36",
+   "disney-lorcana-shimmering-skies(21):9/20",
+   "disneys-lorcana-into-the-inklands(8):7/7",
+   "disney-lorcana-set-13-attack-of-the-vine(9):5/8",
+   "disney-lorcana-archazia-s-island(25):4/24",
+   "disney-lorcana-wilds-unknown(8):4/7",
+   "disney-lorcana-ursulas-return(13):3/6",
+   "disney-lorcana-azurite-sea(9):3/6",
+   "isney-lorcana-reign-of-jafar(7):2/7"
+  ],
+  "samples": [
+   "Disney Lorcana TCG: Hyperia City – Illumineer's Trove",
+   "Disney Lorcana TCG: Hyperia City – Booster Pack",
+   "Disney Lorcana TCG: Hyperia City – Booster Box",
+   "Disney Lorcana: Whispers in the Well – Mufasa / Megara Starter Deck",
+   "Disney Lorcana: Whispers in the Well – Judy / Robin Starter Deck",
+   "Disney Lorcana: Shimmering Skies - Starter Deck [Emerald and Steel]"
+  ]
+ },
+ {
+  "host": "threekingdomsgames.com",
+  "base": "https://threekingdomsgames.com",
+  "market": "CA",
+  "ok": true,
+  "name": "Three Kingdoms Games",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana"
+  ],
+  "kind": "sealed",
+  "matched": 7,
+  "inStock": 7,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "disney-lorcana(22):7/22"
+  ],
+  "samples": [
+   "Lorcana - Azurite Sea Booster Box",
+   "Lorcana Ursula's Return Booster Box",
+   "Lorcana Into the Inklands Ruby/Sapphire Starter Deck",
+   "Lorcana Into the Inklands Amber/Emerald Starter Deck",
+   "Lorcana Ursula's Return Amber/Amethyst Starter Deck",
+   "Lorcana Ursula's Return Sapphire/Steel Starter Deck"
+  ]
+ },
+ {
+  "host": "animeotakuhobby.com",
+  "base": "https://animeotakuhobby.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (382 collections)"
+ },
+ {
+  "host": "pandorasboox.ca",
+  "base": "https://pandorasboox.ca",
+  "market": "CA",
+  "ok": true,
+  "name": "Pandora's Boox",
+  "existingKey": null,
+  "collections": [
+   "lorcana-singles",
+   "lorcana-sealed",
+   "lorcana-singles-featured"
+  ],
+  "kind": "both",
+  "matched": 301,
+  "inStock": 276,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "lorcana-singles(1726):239/250",
+   "lorcana-sealed(63):36/45",
+   "lorcana-singles-featured(46):36/45"
+  ],
+  "samples": [
+   "Lucky - The 15th Puppy (8/204) [Into the Inklands]",
+   "Mulan - Reflecting (16/204) [Rise of the Floodborn]",
+   "Magic Broom - Dancing Duster (44/204) [Into the Inklands]",
+   "Toulouse - Artistic Kitten (165/204) [Archazia's Island]",
+   "Winnie the Pooh - Hunny Wizard (59/204) [Rise of the Floodborn]",
+   "Fairy Godmother - Pure Heart (42/204) [Rise of the Floodborn]"
+  ]
+ },
+ {
+  "host": "waypointgames.ca",
+  "base": "https://waypointgames.ca",
+  "market": "CA",
+  "ok": true,
+  "name": "Waypoint Games CA",
+  "existingKey": null,
+  "collections": [
+   "lorcana-sealed"
+  ],
+  "kind": "sealed",
+  "matched": 46,
+  "inStock": 3,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "lorcana-sealed(67):46/63"
+  ],
+  "samples": [
+   "Hyperia City Booster Box",
+   "Attack of the Vine Booster Box",
+   "Attack of the Vine Illumineer's Trove",
+   "Wilds Unknown Booster Pack",
+   "Wilds Unknown Booster Box",
+   "Wilds Unknown Illumineer's Trove"
+  ]
+ },
+ {
+  "host": "arcticriftcards.ca",
+  "base": "https://arcticriftcards.ca",
+  "market": "CA",
+  "ok": false,
+  "name": "Arctic Rift Cards",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana-tcg-sealed-product"
+  ],
+  "kind": "sealed",
+  "matched": 2,
+  "inStock": 1,
+  "currency": "CAD",
+  "reason": "matched 2, in stock 1",
+  "tried": [
+   "disney-lorcana-tcg-sealed-product(15):2/2",
+   "disney-lorcana-tcg-singles(0):0/0"
+  ],
+  "samples": [
+   "Disney Lorcana: Shimmering Skies Booster Pack",
+   "Disney Lorcana: Azurite Sea - Booster Box"
+  ]
+ },
+ {
+  "host": "goforgame.ca",
+  "base": "https://goforgame.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (81 collections)"
+ },
+ {
+  "host": "tcgandgames.com",
+  "base": "https://tcgandgames.com",
+  "market": "CA",
+  "ok": true,
+  "name": "TCG and Games",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana-starter-decks",
+   "disney-lorcana-booster-boxes-packs",
+   "disney-lorcana-troves-collections-boxes"
+  ],
+  "kind": "sealed",
+  "matched": 59,
+  "inStock": 43,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "disney-lorcana-starter-decks(28):24/28",
+   "disney-lorcana-booster-boxes-packs(24):21/24",
+   "disney-lorcana-troves-collections-boxes(20):15/20",
+   "disney-lorcana-pre-orders-1(2):1/2",
+   "disney-lorcana-singles(0):0/0"
+  ],
+  "samples": [
+   "Disney Lorcana Into the Inklands - Starter Deck (Ruby & Sapphire)",
+   "Disney Lorcana Into the Inklands - Starter Deck (Amber & Emerald)",
+   "Lorcana Wilds Unknown Prerelease Box",
+   "Disney Lorcana Reign of Jafar - Starter Deck (Ruby & Steel)",
+   "Hyperia City 2-Player Starter Set",
+   "Disney Lorcana Fabled - Starter Deck (Emerald & Ruby)"
+  ]
+ },
+ {
+  "host": "hkcollectibles.ca",
+  "base": "https://hkcollectibles.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (101 collections)"
+ },
+ {
+  "host": "duelkingdom.ca",
+  "base": "https://duelkingdom.ca",
+  "market": "CA",
+  "ok": true,
+  "name": "Duel Kingdom",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana-single-cards",
+   "disney-lorcana-sealed-product"
+  ],
+  "kind": "both",
+  "matched": 14,
+  "inStock": 9,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "disney-lorcana-single-cards(9):9/9",
+   "disney-lorcana-sealed-product(9):5/5"
+  ],
+  "samples": [
+   "Disney Lorcana: Rise Of The Floodborn Booster Box",
+   "Disney Lorcana: Rise Of The Floodborn Booster Pack",
+   "Disney Lorcana: The First Chapter Starter Deck (Sapphire & Steel)",
+   "Disney Lorcana: The First Chapter Starter Deck (Emerald & Ruby)",
+   "Disney Lorcana: Ursula's Return Booster Box",
+   "Mother Knows Best [95/204] [The First Chapter]"
+  ]
+ },
+ {
+  "host": "vortexgames.ca",
+  "base": "https://vortexgames.ca",
+  "market": "CA",
+  "ok": true,
+  "name": "Vortex Games",
+  "existingKey": null,
+  "collections": [
+   "lorcana-all-singles",
+   "lorcana-starter-decks",
+   "lorcana-booster-boxes"
+  ],
+  "kind": "both",
+  "matched": 265,
+  "inStock": 116,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "lorcana-all-singles(2627):249/250",
+   "lorcana-starter-decks(22):8/9",
+   "lorcana-booster-boxes(12):8/8",
+   "lorcana-preorder(0):0/0"
+  ],
+  "samples": [
+   "Dumbo - Ninth Wonder of the Universe (45/204) [Fabled]",
+   "Pawpsicle (169/204) [Rise of the Floodborn]",
+   "Circle of Life (26/204) [Fabled]",
+   "Robin Hood - Ephemeral Archer (Epic) (221/204) [Whispers in the Well]",
+   "Hades - Looking for a Deal (56/204) [Whispers in the Well]",
+   "Cruella De Vil - Style Icon (143/204) [Fabled]"
+  ]
+ },
+ {
+  "host": "levelzerogames.ca",
+  "base": "https://levelzerogames.ca",
+  "market": "CA",
+  "ok": false,
+  "name": "Level Zero Games",
+  "existingKey": null,
+  "collections": [
+   "lorcana-singles"
+  ],
+  "kind": "sealed",
+  "matched": 4,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 4, in stock 0",
+  "tried": [
+   "lorcana-singles(13):4/4"
+  ],
+  "samples": [
+   "Into the Inklands - Starter Deck (Ruby & Sapphire)",
+   "Into the Inklands - Starter Deck (Amber & Emerald)",
+   "Into the Inklands - Booster Pack",
+   "Into the Inklands - Booster Box"
+  ]
+ },
+ {
+  "host": "gameknight.ca",
+  "base": "https://gameknight.ca",
+  "market": "CA",
+  "ok": true,
+  "name": "GameKnight Games",
+  "existingKey": null,
+  "collections": [
+   "disney-lorcana-singles-all-in-stock",
+   "disney-lorcana-singles-fabled",
+   "disney-lorcana-singles-whispers-in-the-well",
+   "disney-lorcana-singles-into-the-inklands"
+  ],
+  "kind": "singles",
+  "matched": 913,
+  "inStock": 781,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "disney-lorcana-singles-all-in-stock(2643):249/250",
+   "disney-lorcana-singles-fabled(252):243/246",
+   "disney-lorcana-singles-whispers-in-the-well(260):242/249",
+   "disney-lorcana-singles-into-the-inklands(228):223/228",
+   "lorcana-into-the-inklands(228):223/228",
+   "disney-lorcana-singles-archazias-island(242):222/229",
+   "disney-lorcana-singles-azurite-sea(232):222/227",
+   "disney-lorcana-singles-ursulas-return(225):222/225",
+   "disney-lorcana-singles-reign-of-jafar(267):216/241",
+   "disney-lorcana-singles-all(3761):214/250"
+  ],
+  "samples": [
+   "4*Town - Hottest Band of the Year (17/207) [Attack of the Vine!]",
+   "99 Puppies (24/204) [Into the Inklands]",
+   "A Dark Age No More (162/204) [Hyperia City]",
+   "A Pirate's Life (128/204) [Ursula's Return]",
+   "A Pirate's Life (132/204) [Fabled]",
+   "A Very Merry Unbirthday (60/204) [Azurite Sea]"
+  ]
+ },
+ {
+  "host": "ubecard.com",
+  "base": "https://ubecard.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no lorcana collection (94 collections)"
+ },
+ {
+  "host": "blackknightgames.ca",
+  "base": "https://blackknightgames.ca",
+  "market": "CA",
+  "ok": true,
+  "name": "Black Knight Games",
+  "existingKey": null,
+  "collections": [
+   "lorcana",
+   "lorcana-singles"
+  ],
+  "kind": "both",
+  "matched": 47,
+  "inStock": 5,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "lorcana(276):41/141",
+   "stocktake-ccg-lorcana-sealed(110):32/61",
+   "new-lorcana(159):23/75",
+   "lorcana-booster-boxes(22):12/12",
+   "lorcana-singles(3758):6/6",
+   "lorcana-booster-packs(13):5/5",
+   "lorcana-set-1-the-first-chapter(258):4/18",
+   "lorcana-set-2-rise-of-the-floodborn(246):3/9",
+   "flesh-blood-bf(6):1/3",
+   "preorder-lorcana(0):0/0"
+  ],
+  "samples": [
+   "Tiana - Party Hostess (Enchanted) (239/204) [Hyperia City]",
+   "Thomas O'Malley - Savvy Vagabond (Enchanted) (235/204) [Hyperia City]",
+   "Mulan - Martial Arts Master (Enchanted) (234/204) [Hyperia City]",
+   "Daisy Duck - Savvy Investor (Epic) (217/204) [Hyperia City]",
+   "Rapunzel - Outgoing Artist (Enchanted) (226/204) [Hyperia City]",
+   "Tiana - Restauranteur (Epic) (220/204) [Hyperia City]"
+  ]
+ },
+ {
+  "host": "mintink.ca",
+  "base": "https://mintink.ca",
+  "market": "CA",
+  "ok": false,
+  "name": "Mintink Trading Cards & Live Experience",
+  "existingKey": null,
+  "collections": [
+   "lorcana-cards"
+  ],
+  "kind": "sealed",
+  "matched": 6,
+  "inStock": 1,
+  "currency": "CAD",
+  "reason": "matched 6, in stock 1",
+  "tried": [
+   "lorcana-cards(12):6/12",
+   "disney-lorcana-cards(12):6/12",
+   "lorcana-boosters(8):5/8",
+   "lorcana-hobby-boxes(1):1/1",
+   "lorcana-starter-decks(1):0/1"
+  ],
+  "samples": [
+   "Disney Lorcana: Winterspell - Booster Box",
+   "Disney Lorcana: Winterspell - Illumineer's Trove",
+   "Disney Lorcana Whispers in the Well Illumineer's Trove",
+   "Disney Lorcana Whispers in the Well Booster Box",
+   "Disney Lorcana: Fabled Illumineer's Trove",
+   "Disney Lorcana Shimmering Skies Booster Box"
+  ]
+ }
+]
