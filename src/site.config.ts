@@ -39,9 +39,12 @@ export const SITE: SiteConfig = {
     sealedCategoryId: "183456",
     // Cards under $10 get no eBay call; every sealed product does (owner, 2026-10-25).
     minPriceUsd: 10,
-    // One eBay app, three sites: Lorcana, Gundam and YGO Compare, 1,500 each
-    // (owner, 2026-10-26; was 2,500 each before YGO Compare).
-    dailyBudget: 1500,
+    // One eBay app, three sites (4,500 of its 5,000 a day): Lorcana 1,150,
+    // Gundam 1,150, YGO 2,200 (2026-10-28; 1,500 each from the owner's
+    // 2026-10-26 split, but Gundam and Lorcana spent ~1,000 a day covering every
+    // eligible product while YGO's 3,400 eligible products hit the cap). Never
+    // raise one without lowering another by the same amount.
+    dailyBudget: 1150,
     // Run hour (UTC) — YGO Compare (12) and Gundam Compare (18) run at other
     // hours on the same eBay app so no two sites race for the shared 5,000.
     runHourUtc: 6,

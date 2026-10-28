@@ -48,7 +48,8 @@ committed JSON under `data/` (`src/lib/data.ts`). The removed features are in
 ## eBay
 
 One eBay app (5,000 Browse calls/day) is shared with Gundam Compare and
-YGO Compare: 1,500 each (owner, 2026-10-26), counted in
+YGO Compare: Lorcana and Gundam 1,150 each, YGO
+2,200 (2026-10-28; 1,500 each from the owner's 2026-10-26 split), counted in
 `data/state/ebay-usage.json`. Cards under $10 get no call; every
 sealed product does. The
 plan is `planEbayRefresh` in `src/lib/import/ebay.ts`, pinned by
