@@ -5,5 +5,6 @@ import { post as inkdark } from "./into-the-inkdark";
 import { post as whereToBuy } from "./where-to-buy";
 import { post as boxOrSingles } from "./box-or-singles";
 import { post as cardValue } from "./card-value";
+import { SET_POSTS } from "./set-chase";
 
-export const POSTS: Post[] = [hyperia, expensive, inkdark, whereToBuy, boxOrSingles, cardValue];
+export const POSTS: Post[] = [hyperia, expensive, inkdark, whereToBuy, boxOrSingles, cardValue, ...SET_POSTS];

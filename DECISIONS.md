@@ -694,3 +694,12 @@ below the page; `/kits` and each grade page carry the full strip of their popula
 eBay search for that kit's name in the visitor's market (`from=kit-mini-ebay-kit`, `kit-ebay-kit-strip`,
 `kits-…`, `kit-grade-…`), so it costs no eBay API call. The card footer pair no longer shows on kit pages
 (`FooterCardAds` OWN_STRIPS). Engine code: only a site with `SITE.kits` renders it.
+
+## 2026-10-29: A "most valuable cards" post for every main set
+
+Owner (29 October): the site needs many more useful posts; RiftCompare's Google traffic comes from set and
+chase-card searches. `src/content/blog/set-chase.ts` adds one post per main set (Sets 1 to 13; Hyperia City already
+had one) and cross-set Enchanted, Iconic and Epic lists. Every table and price is a live token (`{{toplist}}`,
+`{{rarity}}`, `{{sealed}}`, `{{price}}`); the counts in the prose (cards per rarity, the top ten's share, cards
+under US$1) were read from the 28 October data and say so. No post is called a "card list": that query belongs to
+`/sets/<slug>`. Content only, no engine change.
