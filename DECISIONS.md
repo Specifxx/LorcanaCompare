@@ -716,3 +716,12 @@ from a one-line strip under the header on every page, the homepage's
 "Pre-orders and new releases" block, the set page and the sitemap. Six hours,
 nothing prerendered at build. Family links now point at dexcompare.app and
 compareempire.com, the canonical hosts (their www names lost DNS on 2026-10-26).
+
+## 2026-10-29: A "most valuable cards" post for every main set
+
+Owner (29 October): the site needs many more useful posts; RiftCompare's Google traffic comes from set and
+chase-card searches. `src/content/blog/set-chase.ts` adds one post per main set (Sets 1 to 13; Hyperia City already
+had one) and cross-set Enchanted, Iconic and Epic lists. Every table and price is a live token (`{{toplist}}`,
+`{{rarity}}`, `{{sealed}}`, `{{price}}`); the counts in the prose (cards per rarity, the top ten's share, cards
+under US$1) were read from the 28 October data and say so. No post is called a "card list": that query belongs to
+`/sets/<slug>`. Content only, no engine change.
