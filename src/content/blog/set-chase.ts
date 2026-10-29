@@ -1,6 +1,6 @@
 import type { Post } from "./types";
 
-// One "most valuable cards" post per main set (29 October 2026, owner: set and chase-card searches are what bring RiftCompare its Google traffic), plus the cross-set Iconic, Enchanted and Epic lists. Written from the 28 October data by a script; counts are typed with that date, every price in a table or {{price}} token is live.
+// One "most valuable cards" post per main set (29 October 2026, owner: set and chase-card searches are what bring RiftCompare its Google traffic), plus a rarity explainer; the cross-set lists are the /cards/rarity hubs (a blog list of a rarity would compete with its hub). Written from the 28 October data by a script; counts are typed with that date, every price in a table or {{price}} token is live.
 export const SET_POSTS: Post[] = [
   {
     slug: "the-first-chapter-most-valuable-cards",
@@ -15,7 +15,7 @@ export const SET_POSTS: Post[] = [
 {{toplist:22937:20}}
 
 <h2>The First Chapter Enchanted cards</h2>
-<p>Enchanted cards are full-art versions of the set's cards with a rainbow foil finish, and the classic Lorcana chase. The First Chapter has <b>12</b>. The dearest three are {{card:510153}} ({{price:510153}}), {{card:510154}} ({{price:510154}}) and {{card:510152}} ({{price:510152}}). Every Enchanted card across all sets is in <a href="/blog/lorcana-enchanted-cards">our Enchanted list</a>.</p>
+<p>Enchanted cards are full-art versions of the set's cards with a rainbow foil finish, and the classic Lorcana chase. The First Chapter has <b>12</b>. The dearest three are {{card:510153}} ({{price:510153}}), {{card:510154}} ({{price:510154}}) and {{card:510152}} ({{price:510152}}). Every Enchanted card across all sets is in <a href="/cards/rarity/enchanted">our Enchanted list</a>.</p>
 
 <h2>Where the value sits</h2>
 <p>On 28 October 2026, the ten most valuable cards held <b>89%</b> of the set's total value (US$3,207.27 across 218 priced cards). 12 cards were worth US$100 or more, and <b>189 of 218</b> were worth under US$1. That shape is typical of Disney Lorcana: a handful of chase printings carry the set, and most playable cards cost very little as singles.</p>
@@ -50,7 +50,7 @@ export const SET_POSTS: Post[] = [
 {{toplist:23303:20}}
 
 <h2>Rise of the Floodborn Enchanted cards</h2>
-<p>Enchanted cards are full-art versions of the set's cards with a rainbow foil finish, and the classic Lorcana chase. Rise of the Floodborn has <b>12</b>. The dearest three are {{card:527802}} ({{price:527802}}), {{card:528111}} ({{price:528111}}) and {{card:527799}} ({{price:527799}}). Every Enchanted card across all sets is in <a href="/blog/lorcana-enchanted-cards">our Enchanted list</a>.</p>
+<p>Enchanted cards are full-art versions of the set's cards with a rainbow foil finish, and the classic Lorcana chase. Rise of the Floodborn has <b>12</b>. The dearest three are {{card:527802}} ({{price:527802}}), {{card:528111}} ({{price:528111}}) and {{card:527799}} ({{price:527799}}). Every Enchanted card across all sets is in <a href="/cards/rarity/enchanted">our Enchanted list</a>.</p>
 
 <h2>Where the value sits</h2>
 <p>On 28 October 2026, the ten most valuable cards held <b>88%</b> of the set's total value (US$1,053.17 across 218 priced cards). 3 cards were worth US$100 or more, and <b>197 of 218</b> were worth under US$1. That shape is typical of Disney Lorcana: a handful of chase printings carry the set, and most playable cards cost very little as singles.</p>
@@ -85,7 +85,7 @@ export const SET_POSTS: Post[] = [
 {{toplist:23367:20}}
 
 <h2>Into the Inklands Enchanted cards</h2>
-<p>Enchanted cards are full-art versions of the set's cards with a rainbow foil finish, and the classic Lorcana chase. Into the Inklands has <b>18</b>. The dearest three are {{card:539276}} ({{price:539276}}), {{card:539164}} ({{price:539164}}) and {{card:539171}} ({{price:539171}}). Every Enchanted card across all sets is in <a href="/blog/lorcana-enchanted-cards">our Enchanted list</a>.</p>
+<p>Enchanted cards are full-art versions of the set's cards with a rainbow foil finish, and the classic Lorcana chase. Into the Inklands has <b>18</b>. The dearest three are {{card:539276}} ({{price:539276}}), {{card:539164}} ({{price:539164}}) and {{card:539171}} ({{price:539171}}). Every Enchanted card across all sets is in <a href="/cards/rarity/enchanted">our Enchanted list</a>.</p>
 
 <h2>Where the value sits</h2>
 <p>On 28 October 2026, the ten most valuable cards held <b>72%</b> of the set's total value (US$1,257.19 across 228 priced cards). 3 cards were worth US$100 or more, and <b>204 of 228</b> were worth under US$1. That shape is typical of Disney Lorcana: a handful of chase printings carry the set, and most playable cards cost very little as singles.</p>
@@ -120,7 +120,7 @@ export const SET_POSTS: Post[] = [
 {{toplist:23474:20}}
 
 <h2>Ursula's Return Enchanted cards</h2>
-<p>Enchanted cards are full-art versions of the set's cards with a rainbow foil finish, and the classic Lorcana chase. Ursula's Return has <b>18</b>. The dearest three are {{card:550549}} ({{price:550549}}), {{card:550537}} ({{price:550537}}) and {{card:550544}} ({{price:550544}}). Every Enchanted card across all sets is in <a href="/blog/lorcana-enchanted-cards">our Enchanted list</a>.</p>
+<p>Enchanted cards are full-art versions of the set's cards with a rainbow foil finish, and the classic Lorcana chase. Ursula's Return has <b>18</b>. The dearest three are {{card:550549}} ({{price:550549}}), {{card:550537}} ({{price:550537}}) and {{card:550544}} ({{price:550544}}). Every Enchanted card across all sets is in <a href="/cards/rarity/enchanted">our Enchanted list</a>.</p>
 
 <h2>Where the value sits</h2>
 <p>On 28 October 2026, the ten most valuable cards held <b>73%</b> of the set's total value (US$1,288.71 across 222 priced cards). 4 cards were worth US$100 or more, and <b>196 of 222</b> were worth under US$1. That shape is typical of Disney Lorcana: a handful of chase printings carry the set, and most playable cards cost very little as singles.</p>
@@ -155,7 +155,7 @@ export const SET_POSTS: Post[] = [
 {{toplist:23536:20}}
 
 <h2>Shimmering Skies Enchanted cards</h2>
-<p>Enchanted cards are full-art versions of the set's cards with a rainbow foil finish, and the classic Lorcana chase. Shimmering Skies has <b>18</b>. The dearest three are {{card:562021}} ({{price:562021}}), {{card:562007}} ({{price:562007}}) and {{card:559716}} ({{price:559716}}). Every Enchanted card across all sets is in <a href="/blog/lorcana-enchanted-cards">our Enchanted list</a>.</p>
+<p>Enchanted cards are full-art versions of the set's cards with a rainbow foil finish, and the classic Lorcana chase. Shimmering Skies has <b>18</b>. The dearest three are {{card:562021}} ({{price:562021}}), {{card:562007}} ({{price:562007}}) and {{card:559716}} ({{price:559716}}). Every Enchanted card across all sets is in <a href="/cards/rarity/enchanted">our Enchanted list</a>.</p>
 
 <h2>Where the value sits</h2>
 <p>On 28 October 2026, the ten most valuable cards held <b>77%</b> of the set's total value (US$1,500.70 across 222 priced cards). 4 cards were worth US$100 or more, and <b>201 of 222</b> were worth under US$1. That shape is typical of Disney Lorcana: a handful of chase printings carry the set, and most playable cards cost very little as singles.</p>
@@ -190,7 +190,7 @@ export const SET_POSTS: Post[] = [
 {{toplist:23746:20}}
 
 <h2>Azurite Sea Enchanted cards</h2>
-<p>Enchanted cards are full-art versions of the set's cards with a rainbow foil finish, and the classic Lorcana chase. Azurite Sea has <b>18</b>. The dearest three are {{card:592037}} ({{price:592037}}), {{card:591999}} ({{price:591999}}) and {{card:591998}} ({{price:591998}}). Every Enchanted card across all sets is in <a href="/blog/lorcana-enchanted-cards">our Enchanted list</a>.</p>
+<p>Enchanted cards are full-art versions of the set's cards with a rainbow foil finish, and the classic Lorcana chase. Azurite Sea has <b>18</b>. The dearest three are {{card:592037}} ({{price:592037}}), {{card:591999}} ({{price:591999}}) and {{card:591998}} ({{price:591998}}). Every Enchanted card across all sets is in <a href="/cards/rarity/enchanted">our Enchanted list</a>.</p>
 
 <h2>Where the value sits</h2>
 <p>On 28 October 2026, the ten most valuable cards held <b>70%</b> of the set's total value (US$1,208.43 across 222 priced cards). 3 cards were worth US$100 or more, and <b>198 of 222</b> were worth under US$1. That shape is typical of Disney Lorcana: a handful of chase printings carry the set, and most playable cards cost very little as singles.</p>
@@ -225,7 +225,7 @@ export const SET_POSTS: Post[] = [
 {{toplist:24011:20}}
 
 <h2>Archazia's Island Enchanted cards</h2>
-<p>Enchanted cards are full-art versions of the set's cards with a rainbow foil finish, and the classic Lorcana chase. Archazia's Island has <b>18</b>. The dearest three are {{card:619749}} ({{price:619749}}), {{card:619748}} ({{price:619748}}) and {{card:619733}} ({{price:619733}}). Every Enchanted card across all sets is in <a href="/blog/lorcana-enchanted-cards">our Enchanted list</a>.</p>
+<p>Enchanted cards are full-art versions of the set's cards with a rainbow foil finish, and the classic Lorcana chase. Archazia's Island has <b>18</b>. The dearest three are {{card:619749}} ({{price:619749}}), {{card:619748}} ({{price:619748}}) and {{card:619733}} ({{price:619733}}). Every Enchanted card across all sets is in <a href="/cards/rarity/enchanted">our Enchanted list</a>.</p>
 
 <h2>Where the value sits</h2>
 <p>On 28 October 2026, the ten most valuable cards held <b>78%</b> of the set's total value (US$2,381.14 across 222 priced cards). 9 cards were worth US$100 or more, and <b>196 of 222</b> were worth under US$1. That shape is typical of Disney Lorcana: a handful of chase printings carry the set, and most playable cards cost very little as singles.</p>
@@ -260,7 +260,7 @@ export const SET_POSTS: Post[] = [
 {{toplist:24258:20}}
 
 <h2>Reign of Jafar Enchanted cards</h2>
-<p>Enchanted cards are full-art versions of the set's cards with a rainbow foil finish, and the classic Lorcana chase. Reign of Jafar has <b>18</b>. The dearest three are {{card:633104}} ({{price:633104}}), {{card:631992}} ({{price:631992}}) and {{card:632720}} ({{price:632720}}). Every Enchanted card across all sets is in <a href="/blog/lorcana-enchanted-cards">our Enchanted list</a>.</p>
+<p>Enchanted cards are full-art versions of the set's cards with a rainbow foil finish, and the classic Lorcana chase. Reign of Jafar has <b>18</b>. The dearest three are {{card:633104}} ({{price:633104}}), {{card:631992}} ({{price:631992}}) and {{card:632720}} ({{price:632720}}). Every Enchanted card across all sets is in <a href="/cards/rarity/enchanted">our Enchanted list</a>.</p>
 
 <h2>Where the value sits</h2>
 <p>On 28 October 2026, the ten most valuable cards held <b>79%</b> of the set's total value (US$3,114.95 across 227 priced cards). 12 cards were worth US$100 or more, and <b>199 of 227</b> were worth under US$1. That shape is typical of Disney Lorcana: a handful of chase printings carry the set, and most playable cards cost very little as singles.</p>
@@ -295,13 +295,13 @@ export const SET_POSTS: Post[] = [
 {{toplist:24348:20}}
 
 <h2>Fabled Iconic cards</h2>
-<p>Iconic is the rarest rarity in a pack: since Fabled (Set 9), each main set has two. Fabled has <b>2</b>. The dearest two are {{card:647663}} ({{price:647663}}) and {{card:651106}} ({{price:651106}}). Every Iconic card across all sets is in <a href="/blog/lorcana-iconic-cards">our Iconic list</a>.</p>
+<p>Iconic is the rarest rarity in a pack: since Fabled (Set 9), each main set has two. Fabled has <b>2</b>. The dearest two are {{card:647663}} ({{price:647663}}) and {{card:651106}} ({{price:651106}}). Every Iconic card across all sets is in <a href="/cards/rarity/iconic">our Iconic list</a>.</p>
 
 <h2>Fabled Enchanted cards</h2>
-<p>Enchanted cards are full-art versions of the set's cards with a rainbow foil finish, and the classic Lorcana chase. Fabled has <b>18</b>. The dearest three are {{card:651107}} ({{price:651107}}), {{card:651123}} ({{price:651123}}) and {{card:651112}} ({{price:651112}}). Every Enchanted card across all sets is in <a href="/blog/lorcana-enchanted-cards">our Enchanted list</a>.</p>
+<p>Enchanted cards are full-art versions of the set's cards with a rainbow foil finish, and the classic Lorcana chase. Fabled has <b>18</b>. The dearest three are {{card:651107}} ({{price:651107}}), {{card:651123}} ({{price:651123}}) and {{card:651112}} ({{price:651112}}). Every Enchanted card across all sets is in <a href="/cards/rarity/enchanted">our Enchanted list</a>.</p>
 
 <h2>Fabled Epic cards</h2>
-<p>Epic is the rarity added with Fabled (Set 9), alongside Iconic, and usually sells for far less than an Enchanted. Fabled has <b>18</b>. The dearest three are {{card:647660}} ({{price:647660}}), {{card:650156}} ({{price:650156}}) and {{card:650142}} ({{price:650142}}). Every Epic card across all sets is in <a href="/blog/lorcana-epic-cards">our Epic list</a>.</p>
+<p>Epic is the rarity added with Fabled (Set 9), alongside Iconic, and usually sells for far less than an Enchanted. Fabled has <b>18</b>. The dearest three are {{card:647660}} ({{price:647660}}), {{card:650156}} ({{price:650156}}) and {{card:650142}} ({{price:650142}}). Every Epic card across all sets is in <a href="/cards/rarity/epic">our Epic list</a>.</p>
 
 <h2>Where the value sits</h2>
 <p>On 28 October 2026, the ten most valuable cards held <b>81%</b> of the set's total value (US$15,113.14 across 243 priced cards). 20 cards were worth US$100 or more, and <b>182 of 243</b> were worth under US$1. That shape is typical of Disney Lorcana: a handful of chase printings carry the set, and most playable cards cost very little as singles.</p>
@@ -336,13 +336,13 @@ export const SET_POSTS: Post[] = [
 {{toplist:24414:20}}
 
 <h2>Whispers in the Well Iconic cards</h2>
-<p>Iconic is the rarest rarity in a pack: since Fabled (Set 9), each main set has two. Whispers in the Well has <b>2</b>. The dearest two are {{card:657885}} ({{price:657885}}) and {{card:657889}} ({{price:657889}}). Every Iconic card across all sets is in <a href="/blog/lorcana-iconic-cards">our Iconic list</a>.</p>
+<p>Iconic is the rarest rarity in a pack: since Fabled (Set 9), each main set has two. Whispers in the Well has <b>2</b>. The dearest two are {{card:657885}} ({{price:657885}}) and {{card:657889}} ({{price:657889}}). Every Iconic card across all sets is in <a href="/cards/rarity/iconic">our Iconic list</a>.</p>
 
 <h2>Whispers in the Well Enchanted cards</h2>
-<p>Enchanted cards are full-art versions of the set's cards with a rainbow foil finish, and the classic Lorcana chase. Whispers in the Well has <b>18</b>. The dearest three are {{card:660011}} ({{price:660011}}), {{card:660029}} ({{price:660029}}) and {{card:660041}} ({{price:660041}}). Every Enchanted card across all sets is in <a href="/blog/lorcana-enchanted-cards">our Enchanted list</a>.</p>
+<p>Enchanted cards are full-art versions of the set's cards with a rainbow foil finish, and the classic Lorcana chase. Whispers in the Well has <b>18</b>. The dearest three are {{card:660011}} ({{price:660011}}), {{card:660029}} ({{price:660029}}) and {{card:660041}} ({{price:660041}}). Every Enchanted card across all sets is in <a href="/cards/rarity/enchanted">our Enchanted list</a>.</p>
 
 <h2>Whispers in the Well Epic cards</h2>
-<p>Epic is the rarity added with Fabled (Set 9), alongside Iconic, and usually sells for far less than an Enchanted. Whispers in the Well has <b>18</b>. The dearest three are {{card:660271}} ({{price:660271}}), {{card:660188}} ({{price:660188}}) and {{card:660026}} ({{price:660026}}). Every Epic card across all sets is in <a href="/blog/lorcana-epic-cards">our Epic list</a>.</p>
+<p>Epic is the rarity added with Fabled (Set 9), alongside Iconic, and usually sells for far less than an Enchanted. Whispers in the Well has <b>18</b>. The dearest three are {{card:660271}} ({{price:660271}}), {{card:660188}} ({{price:660188}}) and {{card:660026}} ({{price:660026}}). Every Epic card across all sets is in <a href="/cards/rarity/epic">our Epic list</a>.</p>
 
 <h2>Where the value sits</h2>
 <p>On 28 October 2026, the ten most valuable cards held <b>81%</b> of the set's total value (US$6,166.89 across 242 priced cards). 13 cards were worth US$100 or more, and <b>185 of 242</b> were worth under US$1. That shape is typical of Disney Lorcana: a handful of chase printings carry the set, and most playable cards cost very little as singles.</p>
@@ -377,13 +377,13 @@ export const SET_POSTS: Post[] = [
 {{toplist:24500:20}}
 
 <h2>Winterspell Iconic cards</h2>
-<p>Iconic is the rarest rarity in a pack: since Fabled (Set 9), each main set has two. Winterspell has <b>2</b>. The dearest two are {{card:673300}} ({{price:673300}}) and {{card:673298}} ({{price:673298}}). Every Iconic card across all sets is in <a href="/blog/lorcana-iconic-cards">our Iconic list</a>.</p>
+<p>Iconic is the rarest rarity in a pack: since Fabled (Set 9), each main set has two. Winterspell has <b>2</b>. The dearest two are {{card:673300}} ({{price:673300}}) and {{card:673298}} ({{price:673298}}). Every Iconic card across all sets is in <a href="/cards/rarity/iconic">our Iconic list</a>.</p>
 
 <h2>Winterspell Enchanted cards</h2>
-<p>Enchanted cards are full-art versions of the set's cards with a rainbow foil finish, and the classic Lorcana chase. Winterspell has <b>18</b>. The dearest three are {{card:675515}} ({{price:675515}}), {{card:675279}} ({{price:675279}}) and {{card:673068}} ({{price:673068}}). Every Enchanted card across all sets is in <a href="/blog/lorcana-enchanted-cards">our Enchanted list</a>.</p>
+<p>Enchanted cards are full-art versions of the set's cards with a rainbow foil finish, and the classic Lorcana chase. Winterspell has <b>18</b>. The dearest three are {{card:675515}} ({{price:675515}}), {{card:675279}} ({{price:675279}}) and {{card:673068}} ({{price:673068}}). Every Enchanted card across all sets is in <a href="/cards/rarity/enchanted">our Enchanted list</a>.</p>
 
 <h2>Winterspell Epic cards</h2>
-<p>Epic is the rarity added with Fabled (Set 9), alongside Iconic, and usually sells for far less than an Enchanted. Winterspell has <b>18</b>. The dearest three are {{card:677154}} ({{price:677154}}), {{card:675380}} ({{price:675380}}) and {{card:677143}} ({{price:677143}}). Every Epic card across all sets is in <a href="/blog/lorcana-epic-cards">our Epic list</a>.</p>
+<p>Epic is the rarity added with Fabled (Set 9), alongside Iconic, and usually sells for far less than an Enchanted. Winterspell has <b>18</b>. The dearest three are {{card:677154}} ({{price:677154}}), {{card:675380}} ({{price:675380}}) and {{card:677143}} ({{price:677143}}). Every Epic card across all sets is in <a href="/cards/rarity/epic">our Epic list</a>.</p>
 
 <h2>Where the value sits</h2>
 <p>On 28 October 2026, the ten most valuable cards held <b>75%</b> of the set's total value (US$6,966.23 across 246 priced cards). 18 cards were worth US$100 or more, and <b>181 of 246</b> were worth under US$1. That shape is typical of Disney Lorcana: a handful of chase printings carry the set, and most playable cards cost very little as singles.</p>
@@ -418,13 +418,13 @@ export const SET_POSTS: Post[] = [
 {{toplist:24617:20}}
 
 <h2>Wilds Unknown Iconic cards</h2>
-<p>Iconic is the rarest rarity in a pack: since Fabled (Set 9), each main set has two. Wilds Unknown has <b>2</b>. The dearest two are {{card:690216}} ({{price:690216}}) and {{card:690217}} ({{price:690217}}). Every Iconic card across all sets is in <a href="/blog/lorcana-iconic-cards">our Iconic list</a>.</p>
+<p>Iconic is the rarest rarity in a pack: since Fabled (Set 9), each main set has two. Wilds Unknown has <b>2</b>. The dearest two are {{card:690216}} ({{price:690216}}) and {{card:690217}} ({{price:690217}}). Every Iconic card across all sets is in <a href="/cards/rarity/iconic">our Iconic list</a>.</p>
 
 <h2>Wilds Unknown Enchanted cards</h2>
-<p>Enchanted cards are full-art versions of the set's cards with a rainbow foil finish, and the classic Lorcana chase. Wilds Unknown has <b>18</b>. The dearest three are {{card:692220}} ({{price:692220}}), {{card:690747}} ({{price:690747}}) and {{card:692217}} ({{price:692217}}). Every Enchanted card across all sets is in <a href="/blog/lorcana-enchanted-cards">our Enchanted list</a>.</p>
+<p>Enchanted cards are full-art versions of the set's cards with a rainbow foil finish, and the classic Lorcana chase. Wilds Unknown has <b>18</b>. The dearest three are {{card:692220}} ({{price:692220}}), {{card:690747}} ({{price:690747}}) and {{card:692217}} ({{price:692217}}). Every Enchanted card across all sets is in <a href="/cards/rarity/enchanted">our Enchanted list</a>.</p>
 
 <h2>Wilds Unknown Epic cards</h2>
-<p>Epic is the rarity added with Fabled (Set 9), alongside Iconic, and usually sells for far less than an Enchanted. Wilds Unknown has <b>18</b>. The dearest three are {{card:692203}} ({{price:692203}}), {{card:692208}} ({{price:692208}}) and {{card:692214}} ({{price:692214}}). Every Epic card across all sets is in <a href="/blog/lorcana-epic-cards">our Epic list</a>.</p>
+<p>Epic is the rarity added with Fabled (Set 9), alongside Iconic, and usually sells for far less than an Enchanted. Wilds Unknown has <b>18</b>. The dearest three are {{card:692203}} ({{price:692203}}), {{card:692208}} ({{price:692208}}) and {{card:692214}} ({{price:692214}}). Every Epic card across all sets is in <a href="/cards/rarity/epic">our Epic list</a>.</p>
 
 <h2>Where the value sits</h2>
 <p>On 28 October 2026, the ten most valuable cards held <b>90%</b> of the set's total value (US$7,155.14 across 257 priced cards). 5 cards were worth US$100 or more, and <b>204 of 257</b> were worth under US$1. That shape is typical of Disney Lorcana: a handful of chase printings carry the set, and most playable cards cost very little as singles.</p>
@@ -459,13 +459,13 @@ export const SET_POSTS: Post[] = [
 {{toplist:24666:20}}
 
 <h2>Attack of the Vine! Iconic cards</h2>
-<p>Iconic is the rarest rarity in a pack: since Fabled (Set 9), each main set has two. Attack of the Vine! has <b>2</b>. The dearest two are {{card:702667}} ({{price:702667}}) and {{card:702666}} ({{price:702666}}). Every Iconic card across all sets is in <a href="/blog/lorcana-iconic-cards">our Iconic list</a>.</p>
+<p>Iconic is the rarest rarity in a pack: since Fabled (Set 9), each main set has two. Attack of the Vine! has <b>2</b>. The dearest two are {{card:702667}} ({{price:702667}}) and {{card:702666}} ({{price:702666}}). Every Iconic card across all sets is in <a href="/cards/rarity/iconic">our Iconic list</a>.</p>
 
 <h2>Attack of the Vine! Enchanted cards</h2>
-<p>Enchanted cards are full-art versions of the set's cards with a rainbow foil finish, and the classic Lorcana chase. Attack of the Vine! has <b>18</b>. The dearest three are {{card:704725}} ({{price:704725}}), {{card:704729}} ({{price:704729}}) and {{card:704719}} ({{price:704719}}). Every Enchanted card across all sets is in <a href="/blog/lorcana-enchanted-cards">our Enchanted list</a>.</p>
+<p>Enchanted cards are full-art versions of the set's cards with a rainbow foil finish, and the classic Lorcana chase. Attack of the Vine! has <b>18</b>. The dearest three are {{card:704725}} ({{price:704725}}), {{card:704729}} ({{price:704729}}) and {{card:704719}} ({{price:704719}}). Every Enchanted card across all sets is in <a href="/cards/rarity/enchanted">our Enchanted list</a>.</p>
 
 <h2>Attack of the Vine! Epic cards</h2>
-<p>Epic is the rarity added with Fabled (Set 9), alongside Iconic, and usually sells for far less than an Enchanted. Attack of the Vine! has <b>18</b>. The dearest three are {{card:702665}} ({{price:702665}}), {{card:704702}} ({{price:704702}}) and {{card:704701}} ({{price:704701}}). Every Epic card across all sets is in <a href="/blog/lorcana-epic-cards">our Epic list</a>.</p>
+<p>Epic is the rarity added with Fabled (Set 9), alongside Iconic, and usually sells for far less than an Enchanted. Attack of the Vine! has <b>18</b>. The dearest three are {{card:702665}} ({{price:702665}}), {{card:704702}} ({{price:704702}}) and {{card:704701}} ({{price:704701}}). Every Epic card across all sets is in <a href="/cards/rarity/epic">our Epic list</a>.</p>
 
 <h2>Where the value sits</h2>
 <p>On 28 October 2026, the ten most valuable cards held <b>86%</b> of the set's total value (US$6,641.11 across 251 priced cards). 12 cards were worth US$100 or more, and <b>207 of 251</b> were worth under US$1. That shape is typical of Disney Lorcana: a handful of chase printings carry the set, and most playable cards cost very little as singles.</p>
@@ -488,80 +488,46 @@ export const SET_POSTS: Post[] = [
     ],
   },
   {
-    slug: "lorcana-enchanted-cards",
-    title: "Every Lorcana Enchanted Card, Ranked by Price",
-    description: "The most valuable Disney Lorcana Enchanted cards across every set, from live TCGplayer prices: what Enchanted means, how many each set has and the dearest.",
+    slug: "lorcana-rarities-explained",
+    title: "Lorcana Rarities Explained: Enchanted, Epic and Iconic",
+    description: "What every Disney Lorcana rarity means, from Common to Enchanted, Epic and Iconic, how rare each is per set and which ones are worth money, with live prices.",
     date: "2026-10-29",
-    keywords: ["lorcana enchanted cards", "most expensive enchanted lorcana", "lorcana enchanted list", "enchanted rarity lorcana", "lorcana enchanted prices"],
+    keywords: ["lorcana rarities", "lorcana rarity symbols", "what is enchanted lorcana", "lorcana iconic rarity", "lorcana epic vs enchanted"],
     html: `
-<p><b>Enchanted</b> cards are Disney Lorcana's classic chase: full-art versions of cards from the set with a rainbow foil finish. The first two sets have 12 each; every main set since <i>Into the Inklands</i> has 18. They play exactly like the standard card, so their price is pure collecting demand.</p>
+<p>Disney Lorcana prints every card at one rarity, shown by the symbol at the bottom of the card. Most of a set is Common to Super Rare; the money is in the three chase rarities above them: <b>Enchanted</b>, <b>Epic</b> and <b>Iconic</b>.</p>
 
-<h2>The 40 most valuable Enchanted cards</h2>
-{{rarity:Enchanted:40}}
+<h2>The base rarities</h2>
+<ul><li><b>Common, Uncommon and Rare</b>: the bulk of each set, and the cards most decks are built from.</li><li><b>Super Rare</b> and <b>Legendary</b>: the set's headline characters at their normal printing. A played Legendary can be worth a few dollars or more; most are not.</li></ul>
 
-<h2>What makes one Enchanted worth more than another</h2>
-<p>Three things explain most of the spread in the table. <b>The character:</b> Mickey, Elsa, Stitch and the princesses carry a premium in every set. <b>The set's age and print run:</b> early sets were opened in smaller numbers, so their Enchanteds are scarcer today. <b>Whether the card is played:</b> an Enchanted of a tournament staple has players as well as collectors chasing it.</p>
+<h2>Enchanted</h2>
+<p><b>Enchanted</b> cards are full-art versions of cards from the set with a rainbow foil finish, and the classic Lorcana chase. The first two sets have 12 each; every main set since <i>Into the Inklands</i> has 18. They play exactly like the standard card, so their price is pure collecting demand. The dearest today:</p>
+{{rarity:Enchanted:5}}
+<p>All of them, ranked: <a href="/cards/rarity/enchanted">every Enchanted card</a>.</p>
 
-<h2>Enchanted, Epic and Iconic</h2>
-<p>Since <i>Fabled</i> (Set 9), each main set also has <b>Epic</b> cards and two <b>Iconic</b> cards. Iconics are the rarest pack pull and usually the dearest card in their set; see <a href="/blog/lorcana-iconic-cards">every Iconic card</a> and <a href="/blog/lorcana-epic-cards">every Epic card</a>. From <i>Into the Inkdark</i> (Set 15), Collector Boosters add serialized Illustrious cards, 23 copies of each; <a href="/blog/into-the-inkdark-release-date-collector-boosters">our Inkdark guide</a> explains them.</p>
+<h2>Epic</h2>
+<p><b>Epic</b> arrived with <i>Fabled</i> (Set 9), alongside Iconic. Each main set since has 18 Epic cards. They sell for far less than Enchanteds, which makes them the affordable chase for many collectors:</p>
+{{rarity:Epic:5}}
+<p>All of them, ranked: <a href="/cards/rarity/epic">every Epic card</a>.</p>
 
-<h2>Buying an Enchanted</h2>
-<ul><li><b>Buy the single.</b> The Enchanted you want is one of 18 in its set, so opening boxes for it costs far more than buying it.</li><li><b>Check condition and photos.</b> Foil surfaces scratch, and at these prices near-mint matters.</li><li><b>Compare delivered prices.</b> Each card page lists every store and eBay listing we track, and charts the card's price history.</li></ul>
+<h2>Iconic</h2>
+<p><b>Iconic</b> is the rarest pack rarity. Each main set from <i>Fabled</i> on has exactly two, against 18 Enchanteds, so most players will never open one, and an Iconic is usually the most valuable card in its set:</p>
+{{rarity:Iconic:5}}
+<p>All of them, ranked: <a href="/cards/rarity/iconic">every Iconic card</a>.</p>
+
+<h2>Above Iconic: Illustrious</h2>
+<p>From <i>Into the Inkdark</i> (Set 15), Collector Boosters add serialized Illustrious cards, 23 copies of each; <a href="/blog/into-the-inkdark-release-date-collector-boosters">our Into the Inkdark guide</a> explains them.</p>
+
+<h2>What makes one chase card worth more than another</h2>
+<p><b>The character:</b> Mickey, Elsa, Stitch and the princesses carry a premium in every set. <b>The set's age and print run:</b> early sets were opened in smaller numbers, so their Enchanteds are scarcer today. <b>Whether the card is played:</b> a chase printing of a tournament staple has players as well as collectors chasing it. Each set's own chase list is in its "most valuable cards" post, for example <a href="/blog/the-first-chapter-most-valuable-cards">The First Chapter</a> and <a href="/blog/fabled-most-valuable-cards">Fabled</a>.</p>
+
+<h2>Buying a chase card</h2>
+<ul><li><b>Buy the single.</b> The card you want is one of 18 (or one of two) in its set, so opening boxes for it costs far more than buying it.</li><li><b>Check condition and photos.</b> Foil surfaces scratch, and at these prices near-mint matters; a graded copy settles it.</li><li><b>Compare delivered prices.</b> Each card page lists every store and eBay listing we track, and charts the card's price history.</li></ul>
 `,
     faq: [
-      { q: "How many Enchanted cards are in a Lorcana set?", a: "12 in each of the first two sets, The First Chapter and Rise of the Floodborn, and 18 in every main set since Into the Inklands." },
-      { q: "What is the most expensive Lorcana Enchanted card?", a: "The first row of the table on this page, read from TCGplayer's market price every morning." },
-      { q: "Are Enchanted cards tournament legal?", a: "Yes. An Enchanted card is a printing of a normal card and plays exactly like it." },
-    ],
-  },
-  {
-    slug: "lorcana-iconic-cards",
-    title: "Lorcana Iconic Cards: Every One and Its Price",
-    description: "Every Disney Lorcana Iconic card since Fabled, with live TCGplayer prices: what the Iconic rarity is, how rare it is and which Iconics are worth the most.",
-    date: "2026-10-29",
-    keywords: ["lorcana iconic cards", "iconic rarity lorcana", "lorcana iconic list", "most expensive iconic lorcana", "lorcana iconic price"],
-    html: `
-<p><b>Iconic</b> is Disney Lorcana's rarest pack rarity. It arrived with <i>Fabled</i> (Set 9), and each main set since has exactly two Iconic cards, far rarer than its 18 Enchanteds. That rarity is why an Iconic is usually the most valuable card in its set.</p>
-
-<h2>Every Iconic card, by price</h2>
-{{rarity:Iconic:20}}
-
-<h2>Why Iconics cost so much</h2>
-<p>Two per set, against 18 Enchanteds, means most players will never open one. The characters chosen have been the biggest names in each set (Mickey Mouse in Fabled and Hyperia City, Buzz Lightyear in Wilds Unknown, Moana in Winterspell, Ariel in Whispers in the Well, Belle and Beast in Attack of the Vine!), so collector demand is as high as the supply is low. Their prices also move the most: a new set's Iconics usually swing hardest in the first weeks as boxes are opened.</p>
-
-<h2>Iconic, Enchanted and what comes next</h2>
-<p>Below Iconic sit the <a href="/blog/lorcana-enchanted-cards">Enchanted cards</a> and the <a href="/blog/lorcana-epic-cards">Epic cards</a>. From <i>Into the Inkdark</i>, serialized Illustrious cards in Collector Boosters sit above everything, with only 23 copies of each; see <a href="/blog/into-the-inkdark-release-date-collector-boosters">our Into the Inkdark guide</a>. Each set's chase list, Iconics included, is in its "most valuable cards" post, for example <a href="/blog/fabled-most-valuable-cards">Fabled</a> and <a href="/blog/attack-of-the-vine-most-valuable-cards">Attack of the Vine!</a>.</p>
-
-<h2>Buying an Iconic</h2>
-<ul><li><b>Buy from a seller with photos of the actual card</b>, front and back, and check the corners and foil surface.</li><li><b>Consider graded copies</b> at this price: a PSA, BGS or CGC slab settles condition.</li><li><b>Compare every listing.</b> Each Iconic's card page shows every store and eBay listing we track, with its price history.</li></ul>
-`,
-    faq: [
-      { q: "What is an Iconic card in Lorcana?", a: "The rarest rarity found in Disney Lorcana booster packs, introduced with Fabled (Set 9). Each main set since has two Iconic cards." },
-      { q: "How many Iconic cards are there?", a: "Two per main set from Fabled onward; the table on this page lists every one with its price." },
-      { q: "Is Iconic rarer than Enchanted?", a: "Yes. A set has two Iconics against 18 Enchanteds, and Iconics are pulled far less often." },
-    ],
-  },
-  {
-    slug: "lorcana-epic-cards",
-    title: "Lorcana Epic Cards: The Full List With Prices",
-    description: "Every Disney Lorcana Epic card since Fabled, ranked by live TCGplayer price: what the Epic rarity is, how it compares with Enchanted and the dearest ones.",
-    date: "2026-10-29",
-    keywords: ["lorcana epic cards", "epic rarity lorcana", "lorcana epic list", "lorcana epic price", "lorcana epic vs enchanted"],
-    html: `
-<p><b>Epic</b> is a Disney Lorcana rarity that arrived with <i>Fabled</i> (Set 9), alongside Iconic. Each main set since has 18 Epic cards. They sell for far less than Enchanteds, which makes them the affordable chase for many collectors.</p>
-
-<h2>The 40 most valuable Epic cards</h2>
-{{rarity:Epic:40}}
-
-<h2>Epic versus Enchanted</h2>
-<p>In price, the gap between the two rarities is wide: in most sets the dearest Epic costs a fraction of the dearest Enchanted, and many Epics sell for a few dollars.</p>
-
-<h2>More chase lists</h2>
-<p>See <a href="/blog/lorcana-enchanted-cards">every Enchanted card</a> and <a href="/blog/lorcana-iconic-cards">every Iconic card</a>, or each set's own list, for example <a href="/blog/wilds-unknown-most-valuable-cards">Wilds Unknown</a> and <a href="/blog/winterspell-most-valuable-cards">Winterspell</a>.</p>
-`,
-    faq: [
-      { q: "What is an Epic card in Lorcana?", a: "A rarity introduced with Fabled (Set 9), alongside Iconic. Each main set since has 18 Epic cards." },
-      { q: "Are Epic cards worth money?", a: "Some are; most sell for a few dollars. The table on this page ranks every Epic by TCGplayer's market price." },
+      { q: "What is the rarest rarity in Lorcana?", a: "Iconic, among cards found in normal booster packs: each main set since Fabled has two. Serialized Illustrious cards in Into the Inkdark Collector Boosters are rarer still." },
+      { q: "How many Enchanted cards are in a Lorcana set?", a: "12 in each of the first two sets and 18 in every main set since Into the Inklands." },
+      { q: "Is Epic rarer than Enchanted?", a: "No. Each main set since Fabled has 18 of each, and Epics usually sell for far less than Enchanteds." },
+      { q: "Are Enchanted and Iconic cards tournament legal?", a: "Yes. They are printings of normal cards and play exactly like them." },
     ],
   },
 ];

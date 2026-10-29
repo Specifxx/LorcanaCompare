@@ -721,7 +721,9 @@ compareempire.com, the canonical hosts (their www names lost DNS on 2026-10-26).
 
 Owner (29 October): the site needs many more useful posts; RiftCompare's Google traffic comes from set and
 chase-card searches. `src/content/blog/set-chase.ts` adds one post per main set (Sets 1 to 13; Hyperia City already
-had one) and cross-set Enchanted, Iconic and Epic lists. Every table and price is a live token (`{{toplist}}`,
+had one) and a rarity explainer (`lorcana-rarities-explained`). Cross-set Enchanted, Iconic and Epic lists
+shipped first and were folded into that explainer the same day: `/cards/rarity/<slug>` already ranks each rarity,
+and a blog post with the same list would split the query with it; the posts link those hubs. Every table and price is a live token (`{{toplist}}`,
 `{{rarity}}`, `{{sealed}}`, `{{price}}`); the counts in the prose (cards per rarity, the top ten's share, cards
 under US$1) were read from the 28 October data and say so. No post is called a "card list": that query belongs to
 `/sets/<slug>`. Content only, no engine change.
