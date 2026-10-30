@@ -751,3 +751,14 @@ in every tag; this site's is `lorcana-<market>`. The eBay import's affiliate hea
 Replaced: 5339155911 (WargameCompare, FigureCompare, Compare Empire, K Young), 5339231473 (Lorcana),
 5339231474 (Gundam), 5339234013 (YGO). Old secrets/variables (`EBAY_AFFILIATE_CAMPAIGN`,
 `NEXT_PUBLIC_EBAY_CAMPAIGN_ID`, `EBAY_CAMPAIGN_ID`) are no longer read and can be deleted.
+
+## 2026-10-30: quick view on every product tile (from K Young); Amazon second
+
+Owner: "I really like the kaeyoung quick view pop ups, can we do that for … all the other sites". A plain click on a
+card or sealed tile (`ProductTile`) now opens K Young's quick view at once with what the tile shows (art, name, set),
+then draws the card page's own `PriceTable` (same rows, same order, same market picker) from `/api/quick/<slug>`, a
+function response the CDN keeps six hours like the pages (`Cache-Control: s-maxage=21600`); it is fetched ahead when
+a mouse rests on a tile. The tile is still a real link, so crawlers, new tabs and modified clicks reach the card
+page, whose server HTML keeps every price. Amazon's row on sealed tables moves from the top to just under the first
+eBay row (owner, 2026-10-30: eBay first, Amazon second), or stays first when there is no eBay row. Engine change,
+identical in Gundam, Lorcana and YGO Compare.
