@@ -19,8 +19,8 @@ At the end, list DONE and NEEDS YOU (each open tab and exactly what I must do th
 2. Vercel → each project → Settings → Environment Variables: these are no longer used and can be
    deleted if present: DATABASE_URL, AUTH_SECRET, RESEND_API_KEY, EMAIL_FROM, STRIPE_*,
    GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, PAYMENTS_ENABLED. Keep NEXT_PUBLIC_SITE_URL,
-   EBAY_VERIFICATION_TOKEN, EBAY_AFFILIATE_CAMPAIGN, TCGPLAYER_IMPACT_LINK, INDEXNOW_KEY.
-   (GitHub secrets: keep EBAY_CLIENT_ID, EBAY_CLIENT_SECRET, EBAY_AFFILIATE_CAMPAIGN, INDEXNOW_KEY;
+   EBAY_VERIFICATION_TOKEN, TCGPLAYER_IMPACT_LINK, INDEXNOW_KEY.
+   (GitHub secrets: keep EBAY_CLIENT_ID, EBAY_CLIENT_SECRET, INDEXNOW_KEY; EBAY_AFFILIATE_CAMPAIGN is no longer read (the campaign is hard-coded) and can be deleted;
    DATABASE_URL, RESEND_API_KEY, EMAIL_FROM, STRIPE_SECRET_KEY can go.)
 3. Google Search Console: if the Domain property for each site isn't verified yet, add it
    (TXT record in Vercel → Domains → DNS Records). Submit https://lorcanacompare.com/sitemap.xml
