@@ -52,6 +52,13 @@ export const SITE: SiteConfig = {
 
   // Card numbers look like "207/204" (TCGplayer "Number" extended field).
   numberStyle: "fraction",
+  // Crawlable hubs by card attribute (/cards/<facet>/<slug>), 2026-11-01.
+  cardHubs: [
+    { facet: "ink", attr: "InkType", noun: ["ink colour", "ink colours"], split: ";", title: "{v} {game} cards", blurb: "Every Lorcana card is one of six inks: Amber, Amethyst, Emerald, Ruby, Sapphire and Steel. Dual-ink cards count in both." },
+    { facet: "franchise", attr: "Property", noun: ["franchise", "franchises"], exclude: ["Standard Characters", "Lorcana"], minItems: 15, title: "{v} {game} cards", blurb: "The Disney and Pixar film or show each card comes from." },
+    { facet: "classification", attr: "Classification", noun: ["classification", "classifications"], split: ";", minItems: 20, title: "{v} {game} cards", blurb: "Classifications are the words under a character's name, such as Hero, Villain, Princess or Floodborn." },
+    { facet: "type", attr: "CardType", noun: ["card type", "card types"], title: "{game} {v} cards" },
+  ],
   rarityOrder: ["Enchanted", "Iconic", "Epic", "Legendary", "Super Rare", "Rare", "Uncommon", "Common", "Promo"],
   chaseRarities: ["Enchanted", "Iconic", "Epic"],
 
