@@ -69,6 +69,10 @@ export const SITE: SiteConfig = {
     headline: "Ursula's Night: the ink runs dark until 31 October",
     blurb: "Spooky season on the Great Illuminary — find the cheapest Villain cards before the clock strikes midnight.",
   },
+  christmas: {
+    headline: "A Christmas wish upon a star",
+    blurb: "booster boxes and gift sets, cheapest store first",
+  },
 
   stores: STORES,
   // The whole Compare Empire family, card games first (2026-10-27, DECISIONS.md
