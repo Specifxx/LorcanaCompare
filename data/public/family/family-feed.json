@@ -1,0 +1,108 @@
+{
+ "v": 1,
+ "site": "lorcana",
+ "generatedAt": "2026-11-02T02:49:16.459Z",
+ "links": {
+  "US": {
+   "deals": "https://www.lorcanacompare.com/black-friday",
+   "preorders": "https://www.lorcanacompare.com/preorders"
+  }
+ },
+ "items": [
+  {
+   "kind": "deal",
+   "cluster": "cards",
+   "region": "US",
+   "title": "Whispers in the Well Illumineer's Trove",
+   "url": "https://www.lorcanacompare.com/card/disney-lorcana-whispers-in-the-well-illumineers-trove",
+   "cents": 4999,
+   "currency": "USD",
+   "store": "Red Raccoon Games",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/652709_200w.jpg",
+   "refCents": 11122,
+   "refLabel": "TCGplayer market price",
+   "savingPct": 55
+  },
+  {
+   "kind": "deal",
+   "cluster": "cards",
+   "region": "US",
+   "title": "Into the Inkdark Booster Box",
+   "url": "https://www.lorcanacompare.com/card/disney-lorcana-into-the-inkdark-booster-box",
+   "cents": 14376,
+   "currency": "USD",
+   "store": "Minted TCG",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/723336_200w.jpg",
+   "refCents": 29931,
+   "refLabel": "TCGplayer market price",
+   "savingPct": 52
+  },
+  {
+   "kind": "deal",
+   "cluster": "cards",
+   "region": "US",
+   "title": "Ursula's Return Booster Box",
+   "url": "https://www.lorcanacompare.com/card/disney-lorcana-ursulas-return-booster-box",
+   "cents": 9000,
+   "currency": "USD",
+   "store": "Red Raccoon Games",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/543859_200w.jpg",
+   "refCents": 12954,
+   "refLabel": "TCGplayer market price",
+   "savingPct": 31
+  },
+  {
+   "kind": "deal",
+   "cluster": "cards",
+   "region": "US",
+   "title": "Archazia's Island Booster Box",
+   "url": "https://www.lorcanacompare.com/card/disney-lorcana-archazias-island-booster-box",
+   "cents": 11999,
+   "currency": "USD",
+   "store": "Wilson Trading Card Co.",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/607758_200w.jpg",
+   "refCents": 14924,
+   "refLabel": "TCGplayer market price",
+   "savingPct": 20
+  },
+  {
+   "kind": "deal",
+   "cluster": "cards",
+   "region": "US",
+   "title": "Attack of the Vine! Booster Box",
+   "url": "https://www.lorcanacompare.com/card/disney-lorcana-attack-of-the-vine-booster-box",
+   "cents": 14399,
+   "currency": "USD",
+   "store": "Red Raccoon Games",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/690384_200w.jpg",
+   "refCents": 17744,
+   "refLabel": "TCGplayer market price",
+   "savingPct": 19
+  },
+  {
+   "kind": "deal",
+   "cluster": "cards",
+   "region": "US",
+   "title": "Into the Inkdark Booster Box Case",
+   "url": "https://www.lorcanacompare.com/card/disney-lorcana-into-the-inkdark-booster-box-case",
+   "cents": 89999,
+   "currency": "USD",
+   "store": "The Castle Games",
+   "refCents": 99999,
+   "refLabel": "TCGplayer market price",
+   "savingPct": 10
+  },
+  {
+   "kind": "preorder",
+   "cluster": "cards",
+   "region": "US",
+   "title": "Into the Inkdark Booster Box",
+   "url": "https://www.lorcanacompare.com/preorders/into-the-inkdark",
+   "cents": 14376,
+   "currency": "USD",
+   "store": "Minted TCG",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/723336_200w.jpg",
+   "releaseDate": "2027-02-05"
+  }
+ ]
+}
