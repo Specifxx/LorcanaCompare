@@ -30,6 +30,7 @@ export const SITE: SiteConfig = {
   impactSiteVerification: "dda031ee-47ba-46d5-b639-93aba9b39be3",
 
   // TCGCSV mirrors TCGplayer's catalogue and prices daily (tcgcsv.com).
+  priceAlerts: true,
   tcgcsvCategoryId: 71,
   tcgplayerSlug: "lorcana-tcg",
   // eBay: Collectible Card Games → CCG Individual Cards / Sealed Boxes.
