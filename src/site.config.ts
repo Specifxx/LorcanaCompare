@@ -74,7 +74,7 @@ export const SITE: SiteConfig = {
     pageDark: "#0a0b1a",
     inkDark: ["#070815", "#0c0e22", "#11142d", "#171b3a", "#262b55", "#3a4078"],
     wordmarkGradient: "linear-gradient(180deg, #f6dc9a 0%, #d9a441 55%, #b07d1f 100%)",
-    displayFont: "Cinzel",
+    displayFont: "Plus Jakarta Sans",
   },
   halloween: {
     headline: "Ursula's Night: the ink runs dark until 31 October",
