@@ -1,7 +1,7 @@
 {
  "v": 1,
  "site": "lorcana",
- "generatedAt": "2026-11-02T16:05:35.886Z",
+ "generatedAt": "2026-11-03T14:25:26.974Z",
  "links": {
   "US": {
    "deals": "https://www.lorcanacompare.com/black-friday",
@@ -33,7 +33,7 @@
    "currency": "USD",
    "store": "Minted TCG",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/723336_200w.jpg",
-   "refCents": 29933,
+   "refCents": 29925,
    "refLabel": "TCGplayer market price",
    "savingPct": 52
   },
@@ -47,23 +47,9 @@
    "currency": "USD",
    "store": "Red Raccoon Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/543859_200w.jpg",
-   "refCents": 12954,
+   "refCents": 13010,
    "refLabel": "TCGplayer market price",
    "savingPct": 31
-  },
-  {
-   "kind": "deal",
-   "cluster": "cards",
-   "region": "US",
-   "title": "Archazia's Island Booster Box",
-   "url": "https://www.lorcanacompare.com/card/disney-lorcana-archazias-island-booster-box",
-   "cents": 11999,
-   "currency": "USD",
-   "store": "Wilson Trading Card Co.",
-   "image": "https://tcgplayer-cdn.tcgplayer.com/product/607758_200w.jpg",
-   "refCents": 14924,
-   "refLabel": "TCGplayer market price",
-   "savingPct": 20
   },
   {
    "kind": "deal",
@@ -75,9 +61,23 @@
    "currency": "USD",
    "store": "Red Raccoon Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/690384_200w.jpg",
-   "refCents": 17732,
+   "refCents": 17635,
    "refLabel": "TCGplayer market price",
-   "savingPct": 19
+   "savingPct": 18
+  },
+  {
+   "kind": "deal",
+   "cluster": "cards",
+   "region": "US",
+   "title": "Wilds Unknown Booster Box",
+   "url": "https://www.lorcanacompare.com/card/disney-lorcana-wilds-unknown-booster-box",
+   "cents": 19999,
+   "currency": "USD",
+   "store": "Atlantis Games & Comics",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/678165_200w.jpg",
+   "refCents": 22997,
+   "refLabel": "TCGplayer market price",
+   "savingPct": 13
   },
   {
    "kind": "deal",
