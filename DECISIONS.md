@@ -1182,3 +1182,15 @@ so it grows with their traffic. Creators want something that changes daily more 
 prices hidden) and one link to `/daily?utm_source=embed&utm_medium=daily`. A route handler reading the date, so
 its only cache is the CDN header, held until midnight UTC (`secondsToUtcMidnight`). It reads the same pool as
 `/daily` (`src/lib/daily-data.ts`). The snippet is on `/embed` with the iframe and one plain text link.
+
+## 2026-11-03 SEO audit: alt text, homepage title brand, ItemLists (engine)
+
+Bill's network SEO audit (homepages only) found empty `alt` on product photos on every engine site and no brand in
+Cyberpunk's title ("Cyberpunk TCG Card Prices — Compare 160 Stores": the long game name pushed " | Cyberpunk Compare" past
+60 characters, and `fitTitle` then took the bare title). Every product photo, search thumbnail, ad tile and the logo now
+has descriptive `alt` (the name). The homepage title ladder tries every candidate WITH the brand before any without, so
+Cyberpunk reads "Cyberpunk TCG Card Prices — 160 Stores | Cyberpunk Compare". The homepage lists its shelf and chase cards
+as an ItemList and sealed hubs got one like set pages'. Already in place and kept: Product + AggregateOffer on card,
+sealed and kit pages, BreadcrumbList on every deep page, Organization/WebSite/FAQPage on the homepage, llms.txt.
+hreflang is deliberately absent: the market is picked in the browser on ONE URL per page, so there are no regional
+alternates to declare. `tests/seo-audit.test.ts` pins it.
