@@ -63,6 +63,17 @@ export const SITE: SiteConfig = {
     { facet: "classification", attr: "Classification", noun: ["classification", "classifications"], split: ";", minItems: 20, title: "{v} {game} cards", blurb: "Classifications are the words under a character's name, such as Hero, Villain, Princess or Floodborn." },
     { facet: "type", attr: "CardType", noun: ["card type", "card types"], title: "{game} {v} cards" },
   ],
+  // Homepage copy for this game alone (SEO report, 2026-11-03; lib/home-faq.ts adds the live questions).
+  home: {
+    description: "Disney Lorcana prices for every Enchanted, foil and regular card, booster box and Illumineer's Trove, across TCGplayer, eBay and game stores worldwide.",
+    h1: "prices, from commons to Enchanted, every store",
+    titles: ["Disney Lorcana Card & Booster Box Prices | Lorcana Compare"],
+    faqs: [
+      { q: "What is an Enchanted Lorcana card?", a: "Enchanted cards are full-art versions of a set's cards with a rainbow foil finish, and the classic Lorcana chase. With the top Legendaries and Iconics they hold most of a set's value: most Lorcana cards are worth a few cents." },
+      { q: "How many packs are in a Lorcana booster box?", a: "A standard Lorcana booster box holds 24 booster packs of 12 cards. Each set's booster box price, store by store, is on the sealed pages." },
+      { q: "Are foil and regular Lorcana cards priced separately?", a: "Yes. Foil and non-foil copies of the same card can be priced very differently, so TCGplayer lists them apart and each card page shows both prices." },
+    ],
+  },
   rarityOrder: ["Enchanted", "Iconic", "Epic", "Legendary", "Super Rare", "Rare", "Uncommon", "Common", "Promo"],
   chaseRarities: ["Enchanted", "Iconic", "Epic"],
 
