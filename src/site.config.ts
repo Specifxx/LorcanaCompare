@@ -33,6 +33,7 @@ export const SITE: SiteConfig = {
   priceAlerts: true,
   // Amazon US tracking ID in the owner's US Associates account (verified live 2026-10-28).
   amazonUsTag: "lorcanacompare-20",
+  amazonAuTag: "lorcanacompare-22",
   tcgcsvCategoryId: 71,
   tcgplayerSlug: "lorcana-tcg",
   // eBay: Collectible Card Games → CCG Individual Cards / Sealed Boxes.
