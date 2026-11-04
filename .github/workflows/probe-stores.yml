@@ -5,6 +5,9 @@ name: Probe stores
 # in the log and uploads research/stores-probe.json; it commits nothing.
 
 on:
+  push:
+    branches: ["claude/**"]
+    paths: ["research/candidate-hosts-gap.txt", "scripts/probe-stores.ts"]
   workflow_dispatch:
     inputs:
       tcgcsv:
@@ -30,7 +33,7 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - run: npx tsx scripts/probe-stores.ts ${{ inputs.tcgcsv && '--tcgcsv' || '' }} --hosts "${{ inputs.hosts }}"
+      - run: npx tsx scripts/probe-stores.ts --hosts "${{ inputs.hosts || 'research/candidate-hosts-gap.txt' }}"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
