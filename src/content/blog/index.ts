@@ -8,5 +8,6 @@ import { post as cardValue } from "./card-value";
 import { post as giftGuide } from "./gift-guide";
 import { post as franchises } from "./franchises";
 import { SET_POSTS } from "./set-chase";
+import { post as iconicEra } from "./iconic-era";
 
-export const POSTS: Post[] = [giftGuide, franchises, hyperia, expensive, inkdark, whereToBuy, boxOrSingles, cardValue, ...SET_POSTS];
+export const POSTS: Post[] = [iconicEra, giftGuide, franchises, hyperia, expensive, inkdark, whereToBuy, boxOrSingles, cardValue, ...SET_POSTS];
