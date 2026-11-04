@@ -1344,3 +1344,15 @@ data commit still holds) and its rows leave `data/public/` (prices, summary coun
 files. Both hosts are on RiftCompare's `data/store-vetting/banned.json`, so the weekly vetting goes red if any
 site lists them again. Not a judgement on the store: it does not want the traffic, so we don't send it. The
 change rides the next daily data release.
+
+## 2026-11-04 — List your store: stores come to us
+
+The owner stopped cold email outreach ("not really doing anything") and set the aim: be popular enough that stores
+ask us, and encourage the ones that do. Every Compare Empire site now has `/list-your-store` (shared
+`ListYourStore.tsx` + the `ListStore` form in `ReportForms.tsx`), linked from the footer, `/contact` and the stores
+page: what a store gets (free, no contract, never pays to rank), what we need (a readable shop, own currency,
+established), and what happens next (checked within a few days, reply through the store's own contact details).
+The request is filed as a `suggest-store` report with `issue: "owner"`; RiftCompare's daily reports triage puts
+those first and asks for a reply within two days. No email is asked for (the reports branch is public); no pop-up,
+no cold email. RiftCompare and OP Compare keep their `/stores/suggest` page (now the owner pitch) and redirect
+`/list-your-store` to it.
