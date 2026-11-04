@@ -1,7 +1,7 @@
-// Finds which candidate stores sell English Yu-Gi-Oh! TCG product through
+// Finds which candidate stores sell English the game TCG product through
 // Shopify, and in which collections. Run by .github/workflows/probe-stores.yml
 // (GitHub's runners can reach the stores); prints a ready-to-review
-// src/content/stores.ts listing and writes research/ygo-stores-probe.json.
+// src/content/stores.ts listing and writes research/stores-probe.json.
 // It never changes the site: a person reads the result and copies stores in.
 //
 //   npx tsx scripts/probe-stores.ts [--tcgcsv] [--hosts research/candidate-hosts-2.txt]
@@ -16,9 +16,9 @@ import { SITE } from "@/site.config";
 import { TCGCSV_INIT } from "@/lib/import/tcgcsv";
 
 const MARKET: Record<string, string> = { USD: "US", GBP: "UK", CAD: "CA", AUD: "AU", EUR: "EU", SGD: "SG" };
-const YGO_HANDLE = /yu-?gi-?oh|yugioh|\bygo\b|ygo-/i;
+const YGO_HANDLE = /lorcana/i;
 const NOT_TCG = /japan|\bjp\b|korean|\bkr\b|\bocg\b|rush|asian|chinese|sleeve|accessor|playmat|binder|deck-?box|graded|psa|bgs|cgc|figure|plush|manga|anime|video|game-?boy|nintendo|switch|ps[45]|pre-?owned|bulk|lot/i;
-const YGO_TITLE = /yu-?gi-?oh|yugioh|structure deck|booster box|\bmega tin\b/i;
+const YGO_TITLE = /lorcana|booster box|starter deck|illumineer|\b\d{1,3}\/204\b/i;
 
 interface Collection { handle: string; title: string; products_count?: number }
 interface Found {
@@ -71,7 +71,7 @@ async function probe(host: string): Promise<Found | { host: string; skip: string
     } catch {}
     await sleep(300);
   }
-  if (!found.length) return { host, skip: `no Yu-Gi-Oh! collection (${cands.length} candidates)` };
+  if (!found.length) return { host, skip: `no the game collection (${cands.length} candidates)` };
   const name = meta.name ?? host;
   const key = (new URL(base).hostname.replace(/^www\.|^store\.|^shop\./, "").split(".")[0] || name).replace(/[^a-z0-9]/gi, "").toLowerCase();
   return { key, name, base, market, collections: found, sampleTitles: samples.slice(0, 12) };
@@ -153,7 +153,7 @@ async function main() {
     }
   }));
   const ok = results.filter((r): r is Found => "key" in r).sort((a, b) => a.market.localeCompare(b.market) || a.key.localeCompare(b.key));
-  fs.writeFileSync(path.join(process.cwd(), "research/ygo-stores-probe.json"), JSON.stringify({ probedOn: new Date().toISOString().slice(0, 10), stores: ok }, null, 1) + "\n");
+  fs.writeFileSync(path.join(process.cwd(), "research/stores-probe.json"), JSON.stringify({ probedOn: new Date().toISOString().slice(0, 10), stores: ok }, null, 1) + "\n");
   const used = new Set<string>();
   console.log("\n===== STORES.TS =====");
   for (const f of ok) {
@@ -166,7 +166,7 @@ async function main() {
   console.log("===== END =====\n");
   console.log("===== SAMPLE TITLES =====");
   for (const f of ok) console.log(`${f.key}: ${f.sampleTitles.join(" || ")}`);
-  console.log(`\n${ok.length} of ${hosts.length} candidates sell Yu-Gi-Oh! through Shopify.`);
+  console.log(`\n${ok.length} of ${hosts.length} candidates sell the game through Shopify.`);
 }
 
 main().catch((e) => {

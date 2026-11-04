@@ -1,8 +1,8 @@
 name: Probe stores
 
-# One-off research: which candidate stores sell English Yu-Gi-Oh! through
+# One-off research: which candidate stores sell English the game through
 # Shopify (scripts/probe-stores.ts). Read-only: it prints a stores.ts listing
-# in the log and uploads research/ygo-stores-probe.json; it commits nothing.
+# in the log and uploads research/stores-probe.json; it commits nothing.
 
 on:
   workflow_dispatch:
@@ -35,5 +35,5 @@ jobs:
         if: always()
         with:
           name: ygo-stores-probe
-          path: research/ygo-stores-probe.json
+          path: research/stores-probe.json
           if-no-files-found: ignore
