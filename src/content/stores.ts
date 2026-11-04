@@ -253,6 +253,7 @@ export const STORES: StoreConfig[] = [
   { key: "trinketmage", name: "Trinket Mage", base: "https://trinket-mage.eu", market: "EU", collections: ["lorcana", "lorcana-single", "lorcana-sealed"], kind: "both" },
   { key: "universetcg", name: "Universe TCG", base: "https://www.universetcg.com", market: "EU", collections: ["lorcana", "lorcana-single", "disney-lorcana-winterspell", "lorcana-winterspell"], kind: "both" },
   { key: "versusgamecenter", name: "Versus Gamecenter", base: "https://versusgamecenter.pt", market: "EU", collections: ["lorcana"], kind: "sealed" },
+  { key: "magictraders", name: "Magic Traders", base: "https://magictraders.nl", market: "EU", collections: ["disney-lorcana-1"], kind: "sealed" },
   { key: "1collectibles", name: "1Collectibles", base: "https://www.1collectibles.com", market: "SG", collections: ["disney-lorcana"], kind: "sealed" },
   { key: "1collectiblestcg", name: "1Collectibles", base: "https://1collectiblestcg.com", market: "SG", collections: ["lorcana-singles", "lorcana-fabled-singles-copy", "lorcana-whispers-in-the-well-singles-copy", "lorcana-azurite-sea-singles-copy"], kind: "both" },
   { key: "brintsco", name: "Brints Collectibles", base: "https://brintsco.com", market: "SG", collections: ["lorcana-singles", "disney-lorcana-tcg-cn", "disney-lorcana"], kind: "both" },
