@@ -24,7 +24,6 @@ export const STORES: StoreConfig[] = [
   { key: "goodgames", name: "Good Games", base: "https://www.goodgames.com.au", market: "AU", collections: ["disney-lorcana-tcg", "lorcana-tcg-fabled", "lorcana-tcg-archazias-island", "lorcana-tcg-reign-of-jafar"], kind: "sealed" },
   { key: "grailborne", name: "Grailborne", base: "https://grailborne.com.au", market: "AU", collections: ["lorcana"], kind: "both" },
   { key: "guf", name: "Guf", base: "https://guf.com.au", market: "AU", collections: ["lorcana", "lorcana-fabled"], kind: "both" },
-  { key: "hbtcollectables", name: "HBT Collectables", base: "https://www.hbtcollectables.com", market: "AU", collections: ["disney-lorcana"], kind: "both" },
   { key: "hobbycollectorsaustralia", name: "Hobby Collectors Australia", base: "https://hobbycollectorsaustralia.com.au", market: "AU", collections: ["disney-lorcana", "disney-lorcana-s6-azurite-sea", "s5-shimmering-skies", "disney-lorcana-starter-sets"], kind: "both" },
   { key: "hrgames", name: "HR Games", base: "https://hrgames.au", market: "AU", collections: ["disney-lorcana-trading-card-game"], kind: "both" },
   { key: "justcardstuff", name: "Just Card Stuff", base: "https://justcardstuff.com.au", market: "AU", collections: ["tcg-lorcana-singles-raw", "tcg-lorcana", "tcg-lorcana-sealed-product", "tcg-lorcana-singles-graded"], kind: "both" },
