@@ -1,7 +1,7 @@
 {
  "v": 1,
  "site": "lorcana",
- "generatedAt": "2026-11-03T14:25:26.974Z",
+ "generatedAt": "2026-11-04T14:43:21.839Z",
  "links": {
   "US": {
    "deals": "https://www.lorcanacompare.com/black-friday",
@@ -19,9 +19,9 @@
    "currency": "USD",
    "store": "Red Raccoon Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/652709_200w.jpg",
-   "refCents": 11183,
+   "refCents": 11236,
    "refLabel": "TCGplayer market price",
-   "savingPct": 55
+   "savingPct": 56
   },
   {
    "kind": "deal",
@@ -61,7 +61,7 @@
    "currency": "USD",
    "store": "Red Raccoon Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/690384_200w.jpg",
-   "refCents": 17635,
+   "refCents": 17630,
    "refLabel": "TCGplayer market price",
    "savingPct": 18
   },
@@ -75,7 +75,7 @@
    "currency": "USD",
    "store": "Atlantis Games & Comics",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/678165_200w.jpg",
-   "refCents": 22997,
+   "refCents": 22886,
    "refLabel": "TCGplayer market price",
    "savingPct": 13
   },
