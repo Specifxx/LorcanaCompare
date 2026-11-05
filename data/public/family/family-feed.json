@@ -1,7 +1,7 @@
 {
  "v": 1,
  "site": "lorcana",
- "generatedAt": "2026-11-04T14:43:21.839Z",
+ "generatedAt": "2026-11-05T14:50:06.225Z",
  "links": {
   "US": {
    "deals": "https://www.lorcanacompare.com/black-friday",
@@ -47,9 +47,23 @@
    "currency": "USD",
    "store": "Red Raccoon Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/543859_200w.jpg",
-   "refCents": 13010,
+   "refCents": 13106,
    "refLabel": "TCGplayer market price",
    "savingPct": 31
+  },
+  {
+   "kind": "deal",
+   "cluster": "cards",
+   "region": "US",
+   "title": "Wilds Unknown Booster Box",
+   "url": "https://www.lorcanacompare.com/card/disney-lorcana-wilds-unknown-booster-box",
+   "cents": 17499,
+   "currency": "USD",
+   "store": "Gator's Card Den",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/678165_200w.jpg",
+   "refCents": 22798,
+   "refLabel": "TCGplayer market price",
+   "savingPct": 23
   },
   {
    "kind": "deal",
@@ -61,23 +75,9 @@
    "currency": "USD",
    "store": "Red Raccoon Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/690384_200w.jpg",
-   "refCents": 17630,
+   "refCents": 17820,
    "refLabel": "TCGplayer market price",
-   "savingPct": 18
-  },
-  {
-   "kind": "deal",
-   "cluster": "cards",
-   "region": "US",
-   "title": "Wilds Unknown Booster Box",
-   "url": "https://www.lorcanacompare.com/card/disney-lorcana-wilds-unknown-booster-box",
-   "cents": 19999,
-   "currency": "USD",
-   "store": "Atlantis Games & Comics",
-   "image": "https://tcgplayer-cdn.tcgplayer.com/product/678165_200w.jpg",
-   "refCents": 22886,
-   "refLabel": "TCGplayer market price",
-   "savingPct": 13
+   "savingPct": 19
   },
   {
    "kind": "deal",
