@@ -4,7 +4,7 @@
 # sister's own "name". Files the engine no longer has are deleted there too.
 # It only writes the working trees: review, test and commit each repo yourself.
 #
-#   scripts/engine-sync.sh ../lorcanacompare ../ygocompare
+#   scripts/engine-sync.sh ../lorcanacompare ../cyberpunkcompare
 set -euo pipefail
 here="$(cd "$(dirname "$0")/.." && pwd)"
 [ $# -gt 0 ] || { echo "usage: scripts/engine-sync.sh <sister checkout>..." >&2; exit 2; }
