@@ -1428,3 +1428,15 @@ rail. As the card ad pair, this overrides the 2026-11-03 "only the small pair" a
   (`.tile-grid`). Below 1280px nothing changes.
 - Every link is sponsored, through `/go` with its own tag (`side-ebay-rail`, `side-tcg-rail`, `-all`), labelled "Ad".
   `tests/side-ads.test.ts`.
+
+## 2026-11-06 — Buy links open the store's checkout
+
+**Decision (owner: "for all the sites that we can, send them directly to the checkout page, with the item in the
+basket"):** an in-stock Shopify store row opens that store's checkout with the priced item in the cart, through
+Shopify's cart permalink (`/cart/<variant id>:1`), as RiftCompare (#340) and OP Compare (#99) do. The engine's Shopify
+reader has always stored `?variant=<id>` on every offer URL, so no import change is needed: `goHref` adds `c=1` to an
+in-stock store row's `/go` link whose URL names a variant, and `/go` → `tagged(…, { checkout: true })` returns the cart
+link with the usual referral tags plus `utm_content=checkout`. Awin stores keep their tracked product link (Awin is
+asked first); eBay, TCGplayer, Amazon, sold-out rows and non-Shopify stores keep product pages. `buy_click` carries
+`link_type`. `lib/checkout-link.ts`, `tests/checkout-link.test.ts`. Engine change: same in all three repos. Revert by
+dropping the `c` flag in `goHref`.
