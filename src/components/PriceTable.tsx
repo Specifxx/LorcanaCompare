@@ -5,6 +5,7 @@
 // Out-of-stock rows fold behind a button, as on RiftCompare: they are the
 // last thing a buyer needs and used to push the live prices off the screen.
 // Row order is lib/price-rows.ts, shared with the phone buy block.
+import { StoreVote } from "./StoreVote";
 import { Fragment, useState } from "react";
 import { AmazonPrice, AMAZON_PRICE_DISCLAIMER } from "./AmazonPrice";
 import type { AmazonCell } from "@/lib/amazon-live";
@@ -121,6 +122,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
                 <tr className={`border-t border-ink-800 ${best ? "bg-buy/10" : ""} ${o.inStock ? "" : "opacity-60"}`}>
                   <td className="px-3 py-2.5">
                     <span className="font-medium text-fg">{sourceName(o)}</span>
+                    <StoreVote url={o.url} name={sourceName(o)} className="ml-2 text-muted" />
                     {o.source === "ebay" && <span className="ml-2 rounded bg-ink-800 px-1.5 py-0.5 text-[10px] font-semibold text-muted">Ad</span>}
                     {best && <span className="ml-2 rounded bg-buy px-1.5 py-0.5 text-[10px] font-bold uppercase text-white">Best price</span>}
                   </td>
