@@ -1408,3 +1408,23 @@ sites shares its thumbs; this site stores nothing and fetches the tally in the b
 step). One vote per browser per store, a few per network, marketplaces (eBay, Amazon, TCGplayer…) get none. Votes never
 order prices, hide a store or decide the cheapest. RiftCompare's DECISIONS.md, 2026-11-06, has the rules; change the
 component there first and copy it.
+## 2026-11-06 — Side rails: eBay left, TCGplayer right, the column a little thinner from 1280px (engine)
+
+**Decision (owner: "I really like what the Dex Compare and MTG Compare engine have, where the actual site is a little
+thinner and then you have the two ad banners, one for eBay, one for TCGplayer, on the sides … make sure that everything
+else fits and is aligned"):** from 1280px (every regular 16:9 and 16:10 screen) the page column (`max-w-7xl`: the
+header's contents, the pre-order strip, `main` and the footer) narrows to `min(80rem, 100% - 320px)` (`globals.css`, "The
+side rails"), and `components/SideAds.tsx` fixes a 136px rail 12px outside each side of it, under the header to the
+window's foot: real cards and sealed with today's eBay Buy It Now price in the visitor's market down the left (beside the
+navigation rail; eBay US where a market has under four tiles), TCGplayer's market price down the right. Ten tiles each,
+newest sets' leading products first (`cardAds({ limit: 10 })`, the card ad pair's own selection), scrolling inside the
+rail. As the card ad pair, this overrides the 2026-11-03 "only the small pair" ad rule for wide screens only.
+
+- Browser only. The rails mount after hydration, only while the window is 1280px+ and tall enough for one whole tile,
+  and only then ask `/api/rails` (CDN-held six hours). Nothing is in the server HTML: no SEO change; CLS 0 because the
+  room is CSS and a fixed element takes none. URLs, titles, metadata, h1/h2 and text are unchanged.
+- Realigned for the thinner column: the homepage hero band fills the column (rounded) instead of bleeding to the window,
+  so nothing runs under a rail; product and kit tile grids show five across from 1280px and six again from 1440px
+  (`.tile-grid`). Below 1280px nothing changes.
+- Every link is sponsored, through `/go` with its own tag (`side-ebay-rail`, `side-tcg-rail`, `-all`), labelled "Ad".
+  `tests/side-ads.test.ts`.

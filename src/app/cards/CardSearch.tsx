@@ -18,7 +18,7 @@ export function CardSearch() {
       <h2 className="mb-3 text-lg font-bold">Results for “{q}”</h2>
       {hits === null && <p className="text-muted">Searching…</p>}
       {hits?.length === 0 && <p className="text-muted">No cards match. Try fewer words, or a card number.</p>}
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+      <div className="tile-grid grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
         {hits?.map((h) => (
           <a key={h.href ?? h.slug} href={h.href ?? `/card/${h.slug}`} className="card-surface overflow-hidden hover:border-brand/60">
             <div className="aspect-[5/7] bg-ink-850">{h.image && <img src={h.image.replace("_200w", "_400w")} alt={h.name} className="h-full w-full object-contain p-1.5" loading="lazy" />}</div>

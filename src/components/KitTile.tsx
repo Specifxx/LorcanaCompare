@@ -26,7 +26,7 @@ export function KitTile({ k }: { k: Kit }) {
 
 export function KitGrid({ items }: { items: Kit[] }) {
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+    <div className="tile-grid grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
       {items.map((k) => <KitTile key={k.jan} k={k} />)}
     </div>
   );
