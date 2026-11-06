@@ -31,7 +31,7 @@ export function ProductTile({ p, change }: { p: Product; change?: number | null 
         <p className="line-clamp-2 text-sm font-medium text-fg">{shortName(p.name)}</p>
         <p className="truncate text-xs text-muted">{set}{p.number ? ` · ${p.number}` : ""}</p>
         <div className="mt-auto flex items-baseline justify-between pt-1">
-          <span className="font-bold text-brand-400">{money(ref)}</span>
+          <span className="font-bold text-brand-400">{money(ref)}<span className="ml-1 text-[10px] font-normal text-muted">market</span></span>
           {ch != null && <span className={`text-xs ${ch >= 0 ? "text-up" : "text-down"}`}>{pct(ch)}</span>}
         </div>
         <p className="text-[11px] text-muted">{e.listedSources} store{e.listedSources === 1 ? "" : "s"} · {stores} in stock</p>
