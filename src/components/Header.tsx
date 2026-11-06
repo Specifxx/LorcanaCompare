@@ -2,6 +2,7 @@ import Link from "@/components/Link";
 import { SITE } from "@/site.config";
 import { SearchBox } from "./SearchBox";
 import { MarketPicker, ThemeToggle } from "./ClientPrefs";
+import { CartHeaderLink } from "./cart/CartHeaderLink";
 import { phoneNav } from "@/lib/nav";
 import { historyOn } from "@/lib/data";
 
@@ -32,11 +33,16 @@ export function Header() {
           <Link href="/tools" className="hidden rounded-full px-3 py-1.5 text-sm text-fg/85 hover:bg-ink-800 lg:inline-block">Tools</Link>
           <MarketPicker />
           <ThemeToggle />
+          {/* The cart list (components/cart, owner 2026-11-06), with its count: here from md, beside the search on phones. */}
+          <CartHeaderLink className="hidden text-fg/85 md:inline-flex" />
         </div>
       </div>
       {/* Phones search too: on RiftCompare search is the most-used control. */}
-      <div className="px-4 pb-2 md:hidden">
-        <SearchBox />
+      <div className="flex items-center gap-2 px-4 pb-2 md:hidden">
+        <div className="min-w-0 flex-1">
+          <SearchBox />
+        </div>
+        <CartHeaderLink className="text-fg/85" />
       </div>
       <nav className="flex gap-1 overflow-x-auto px-4 pb-2 lg:hidden" aria-label="Main">
         {nav.map((n) => (
