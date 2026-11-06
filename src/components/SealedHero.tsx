@@ -30,7 +30,7 @@ function Tile({ i, market }: { i: HeroItem; market: Market }) {
       <span className="flex flex-1 flex-col gap-0.5 p-2.5">
         <span className="line-clamp-2 text-sm font-semibold leading-tight">{i.name}</span>
         <span className="mt-auto pt-1 text-lg font-black tabular-nums text-brand-400">{pr ? money(pr.cents, pr.currency) : "—"}</span>
-        <span className="truncate text-[11px] text-muted">{pr ? `at ${pr.store} · ${pr.stores} store${pr.stores === 1 ? "" : "s"}` : `Not listed in ${market} yet`}</span>
+        <span className="truncate text-[11px] text-muted">{pr ? `${pr.preorder && !i.releasesOn ? "Pre-order " : ""}at ${pr.store} · ${pr.stores} store${pr.stores === 1 ? "" : "s"}` : `Not listed in ${market} yet`}</span>
       </span>
     </Link>
   );

@@ -1496,3 +1496,14 @@ is counted as a store, "Best price", a deal, an alert price or the reference pri
 references (no thumbs, no cart line); no Amazon link in a pop-up.
 On this engine (Lorcana, Cyberpunk, Bandai) TCGplayer, when pinned, now sits under Amazon: `pinnedOrder` no longer puts
 a cheaper TCGplayer row above eBay (it did from 2026-10-27).
+
+
+## 2026-11-06: one price story on a product page (shopper review)
+
+A shopper review of Cyberpunk Compare found a box page that disagreed with itself. Engine fixes, in all three sites:
+the card page's summary sentence names the cheapest in-stock **US** listing (it sorted every currency by its number
+and printed "£93.99" on a US page); a lone in-stock listing is tagged "Only listing", never "Best price" (one $1,200
+TCGplayer row on an $800 card); a list tile's price is labelled "market" (it is TCGplayer's market price, per the
+reference-price rule, while the homepage shelf shows the cheapest store); and the homepage sealed shelf says
+"Pre-order at <store>" when its cheapest store is a pre-order of a product already out ($107.95 at Flipside on the
+home page, absent from the box page's in-stock table).
