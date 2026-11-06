@@ -42,7 +42,7 @@ export function ProductTile({ p, change }: { p: Product; change?: number | null 
 
 export function TileGrid({ items }: { items: Product[] }) {
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+    <div className="tile-grid grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
       {items.map((p) => <ProductTile key={p.id} p={p} />)}
     </div>
   );

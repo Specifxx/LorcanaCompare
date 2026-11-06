@@ -19,6 +19,7 @@ import { RateCard } from "@/components/site-reviews/RateCard";
 import { BuyClickTracker } from "@/components/BuyClickTracker";
 import { ShareArrival } from "@/components/ShareArrival";
 import { SideNav } from "@/components/SideNav";
+import { SideAds } from "@/components/SideAds";
 import { navGroups } from "@/lib/nav";
 import { historyOn } from "@/lib/data";
 
@@ -71,6 +72,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <main className="mx-auto max-w-7xl px-4 py-6">{children}</main>
             <Footer />
           </div>
+          {/* The eBay and TCGplayer side rails from 1280px (SideAds.tsx): browser-only, fixed beside the column, nothing in the server HTML. */}
+          <SideAds />
           <QuickView />
           {/* Rate us (owner, 2026-11-03): the corner card, asking only after real use; RiftCompare keeps the ratings. */}
           <RateCard />

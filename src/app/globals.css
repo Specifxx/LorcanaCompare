@@ -497,3 +497,26 @@ h1, h2, h3 { letter-spacing: -0.01em; }
 @media (min-width: 768px) and (max-width: 1100px) { .game-fan { display: none; } .game-tile-name, .game-tile-blurb { padding-right: 0; } }
 @media (max-width: 480px) { .game-fan { width: 96px; height: 90px; top: 12px; right: 8px; } .game-fan-card { width: 52px; } .game-fan-0 { right: 32px; } .game-fan-1 { right: 16px; } .game-tile-name, .game-tile-blurb { padding-right: 100px; } }
 @media (prefers-reduced-motion: reduce) { .game-tile { transition: none; } .game-tile:hover { transform: none; } .game-fan-card { transition: none; } }
+
+/* ── The side rails (components/SideAds.tsx; owner, 2026-11-06) ─────────────
+   Like DexCompare and MTG Compare: from 1280px (every regular 16:9 and 16:10
+   screen) the page column is a little thinner, leaving 160px on each side (a
+   136px rail and a 12px gutter on either side of it) for an eBay rail beside
+   the navigation rail and a TCGplayer rail at the right. The header's,
+   pre-order strip's, main's and footer's contents all share the one column
+   (max-w-7xl), so they stay aligned with each other and clear of the rails.
+   Pure CSS, the same on the server and in the browser: no layout shift when
+   the rails mount. --hdr is the sticky header's height, the rails' top. */
+:root { --hdr: 55px; }
+@media (min-width: 1280px) {
+  .max-w-7xl { max-width: min(80rem, calc(100% - 320px)); }
+  /* The hero band fills the column instead of the window, so it never runs
+     under a rail: a rounded panel the rails sit 12px beside. */
+  .hero-bleed { margin-left: -1rem; margin-right: -1rem; border-radius: 1.25rem; overflow: hidden; }
+  /* Tile grids: five across while the column is under ~880px, six from 1440px. */
+  .tile-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
+@media (min-width: 1440px) {
+  .tile-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+}
+.rail-scroll { scrollbar-width: thin; scrollbar-color: rgb(var(--c-ink-700)) transparent; }
