@@ -5,13 +5,15 @@ import { MarketPicker, ThemeToggle } from "./ClientPrefs";
 import { CartHeaderLink } from "./cart/CartHeaderLink";
 import { phoneNav } from "@/lib/nav";
 import { historyOn } from "@/lib/data";
+import { holidayNav } from "@/lib/holiday-nav";
 
 // The top bar: the search, the region and the theme. From lg up the logo and
 // the navigation live in the left rail (SideNav.tsx), and this bar sits to the
 // right of it; below lg it carries the logo, a search row and a scrolling row
 // of the main sections (lib/nav.ts).
 export function Header() {
-  const nav = phoneNav({ history: historyOn() });
+  const sale = holidayNav();
+  const nav = phoneNav({ history: historyOn(), sale });
   return (
     <header className="sticky top-0 z-30 border-b border-ink-800/70 bg-ink-950/85 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center gap-2 px-4 py-2.5 sm:gap-4">
@@ -28,6 +30,7 @@ export function Header() {
           <SearchBox />
         </div>
         <div className="ml-auto flex shrink-0 items-center gap-2">
+          {sale && <Link href={sale.href} className="hidden rounded-full px-3 py-1.5 text-sm font-semibold text-brand-400 hover:bg-ink-800 lg:inline-block">{sale.label}</Link>}
           <Link href="/sealed" className="hidden rounded-full px-3 py-1.5 text-sm text-fg/85 hover:bg-ink-800 lg:inline-block">Sealed</Link>
           <Link href="/blog" className="hidden rounded-full px-3 py-1.5 text-sm text-fg/85 hover:bg-ink-800 lg:inline-block">Guides</Link>
           <Link href="/tools" className="hidden rounded-full px-3 py-1.5 text-sm text-fg/85 hover:bg-ink-800 lg:inline-block">Tools</Link>
