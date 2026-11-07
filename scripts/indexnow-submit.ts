@@ -8,6 +8,9 @@ import type { Catalog } from "@/lib/site-types";
 import { SITE_URL } from "@/lib/site";
 import { posts } from "@/lib/posts";
 
+// The sale pages change with every import and are what people search for in season (2026-11-07, Black Friday push).
+const SEASON_HUBS = ["/black-friday", "/cyber-monday", "/boxing-day", "/january-sales", "/lunar-new-year"];
+
 async function main() {
   const key = process.env.INDEXNOW_KEY;
   if (!key) return console.log("[indexnow] INDEXNOW_KEY not set — skipped");
@@ -17,7 +20,7 @@ async function main() {
   const fresh = new Set(
     cat.sets.filter((s) => s.upcoming || (s.releasedOn && now - new Date(s.releasedOn).getTime() < 45 * 86_400_000)).map((s) => s.id),
   );
-  const hubs = ["", "/cards", "/sets", "/sealed", "/movers", "/preorders", "/tools/deal-finder", "/tools/rising", "/blog"].map((p) => `${site}${p}`);
+  const hubs = ["", "/cards", "/sets", "/sealed", "/movers", "/preorders", "/tools/deal-finder", "/tools/rising", "/blog", ...SEASON_HUBS].map((p) => `${site}${p}`);
   const recent = cat.sets.filter((s) => s.productCount > 0).slice(0, 6).map((s) => `${site}/sets/${s.slug}`);
   const guides = posts().map((p) => `${site}/blog/${p.slug}`);
   const newCards = cat.products.filter((p) => fresh.has(p.setId)).map((p) => `${site}/card/${p.slug}`);
