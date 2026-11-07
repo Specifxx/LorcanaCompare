@@ -13,7 +13,7 @@ export function HolidayStrip() {
     <div className="border-b border-ink-700/60 bg-brand/10" data-holiday-strip={s.event}>
       <p className="mx-auto max-w-7xl truncate px-4 py-1.5 text-center text-xs sm:text-sm">
         <Link href={s.href} className="hover:text-fg">
-          <b>{s.name} {SITE.gameShort} deals</b> · today&apos;s store prices under TCGplayer, updated daily · <span className="link">see the deals →</span>
+          <b>{s.name} {SITE.gameShort} deals</b><span className="hidden sm:inline"> · today&apos;s store prices under TCGplayer, updated daily</span> · <span className="link">see the deals →</span>
         </Link>
       </p>
     </div>
