@@ -8,6 +8,7 @@ import { PLATFORM_STYLE, PlatformIcon } from "@/components/creators/PlatformIcon
 import { creatorsOn, featuredCreators, type Creator } from "@/lib/creators";
 import { canon, SITE_URL } from "@/lib/site";
 import { SITE } from "@/site.config";
+import { fitDescription } from "@/lib/seo-title";
 
 // /creators: the creators this site features (owner, 2026-10-31), modelled on
 // MTG Compare's /creators. The list is static (src/content/creators.ts) and the
@@ -21,7 +22,7 @@ export const revalidate = 86400;
 const first = featuredCreators()[0];
 export const metadata: Metadata = {
   title: `${SITE.gameShort} creators we feature`,
-  description: `${SITE.game} creators we love${first ? `, starting with ${first.name}` : ""}. Follow them on Instagram and YouTube. Make ${SITE.gameShort} content? Get featured free.`,
+  description: fitDescription(`${SITE.game} creators we love${first ? `, starting with ${first.name}` : ""}. Follow them on Instagram and YouTube. Make ${SITE.gameShort} content? Get featured free.`),
   ...canon("/creators"),
 };
 

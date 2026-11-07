@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
 import { Trade } from "./Trade";
+import { fitDescription } from "@/lib/seo-title";
 
 export const revalidate = 86400;
 export const metadata: Metadata = {
   title: `${SITE.gameShort} trade calculator — is your trade fair?`,
-  description: `Value both sides of a ${SITE.game} trade at today's TCGplayer market price. Free, no account.`,
+  description: fitDescription(`Value both sides of a ${SITE.game} trade at today's TCGplayer market price. Free, no account.`),
   ...canon("/tools/trade"),
 };
 

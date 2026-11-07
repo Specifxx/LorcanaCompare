@@ -5,11 +5,12 @@ import { canon } from "@/lib/site";
 import { movers } from "@/lib/data";
 import { money, pct } from "@/lib/format";
 import { shortName } from "@/lib/names";
+import { fitDescription } from "@/lib/seo-title";
 
 export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
 export const metadata: Metadata = {
   title: `${SITE.gameShort} price movers — biggest risers and fallers`,
-  description: `The ${SITE.game} cards whose prices moved most this week and this month, from daily TCGplayer market prices.`,
+  description: fitDescription(`The ${SITE.game} cards whose prices moved most this week and this month, from daily TCGplayer market prices.`),
   ...canon("/movers"),
 };
 

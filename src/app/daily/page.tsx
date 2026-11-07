@@ -4,11 +4,12 @@ import { canon } from "@/lib/site";
 import { dailyCards } from "@/lib/daily-data";
 import { dayKey, upcomingPuzzles } from "@/lib/daily";
 import { DailyGame } from "./DailyGame";
+import { fitDescription } from "@/lib/seo-title";
 
 export const revalidate = 86400; // carries a week of puzzles; the client picks today's (lib/daily.ts)
 export const metadata: Metadata = {
   title: `${SITE.gameShort} Price Duel — the daily card price game`,
-  description: `Ten pairs of ${SITE.game} cards a day: pick the one worth more at TCGplayer market price. Same puzzle for everyone, keep your streak, share your score. Free, no account.`,
+  description: fitDescription(`Ten pairs of ${SITE.game} cards a day: pick the one worth more at TCGplayer market price. Same puzzle for everyone, keep your streak, share your score. Free, no account.`),
   ...canon("/daily"),
 };
 

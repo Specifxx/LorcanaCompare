@@ -10,6 +10,7 @@ import { attrFacet, attrHubTitle, facetStats } from "@/lib/hubs";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
 import { abs } from "@/lib/site";
+import { fitDescription } from "@/lib/seo-title";
 
 // The index of one attribute hub (SITE.cardHubs): every colour, type or
 // franchise with its card count, median and most valuable card.
@@ -23,7 +24,7 @@ export function generateMetadata({ params }: { params: { facet: string } }): Met
   if (!f) return {};
   return {
     title: `${SITE.gameShort} cards by ${f.cfg.noun[0]}: prices for every ${f.cfg.noun[0]}`,
-    description: `All ${f.hubs.length} ${SITE.game} ${f.cfg.noun[1]} with card counts, median price and the most valuable card in each. Compare every store.`,
+    description: fitDescription(`All ${f.hubs.length} ${SITE.game} ${f.cfg.noun[1]} with card counts, median price and the most valuable card in each. Compare every store.`),
     ...canon(`/cards/${f.cfg.facet}`),
   };
 }

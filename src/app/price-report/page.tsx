@@ -7,6 +7,7 @@ import { money, pct } from "@/lib/format";
 import { shortName } from "@/lib/names";
 import { MARKETS, MARKET_LABEL } from "@/lib/site-types";
 import { reportMonth, sealedLines, storeCoverage, storesVsTcgplayer, type ReportRow } from "@/lib/market-report";
+import { fitDescription } from "@/lib/seo-title";
 
 // The self-updating monthly price report (DECISIONS.md, "Self-updating price report",
 // 2026-11-02): the page outreach offers to writers and creators, rebuilt from the
@@ -18,7 +19,7 @@ export function generateMetadata(): Metadata {
   const month = reportMonth(meta()?.updatedAt);
   return {
     title: `${SITE.gameShort} Price Report, ${month}: Stores vs TCGplayer`,
-    description: `How ${SITE.game} prices compare across ${SITE.stores.length} stores in six markets this month: how often a store undercuts TCGplayer, the cheapest sealed boxes and the biggest price movers. Free to cite.`,
+    description: fitDescription(`How ${SITE.game} prices compare across ${SITE.stores.length} stores in six markets this month: how often a store undercuts TCGplayer, the cheapest sealed boxes and the biggest price movers. Free to cite.`),
     ...canon("/price-report"),
   };
 }

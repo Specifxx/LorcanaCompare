@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SITE } from "@/site.config";
 import { SharedList } from "./SharedList";
+import { fitDescription } from "@/lib/seo-title";
 
 // A shared list (owner, 2026-11-02, word of mouth): the cards travel in the
 // link (/list?i=…, lib/share.ts), nothing is stored and no account is needed.
@@ -9,7 +10,7 @@ import { SharedList } from "./SharedList";
 export const revalidate = 86400;
 export const metadata: Metadata = {
   title: `A shared ${SITE.gameShort} list, priced at every store`,
-  description: `Someone shared a ${SITE.game} list with you: the cheapest in-stock price for every card across ${SITE.stores.length} stores, TCGplayer and eBay.`,
+  description: fitDescription(`Someone shared a ${SITE.game} list with you: the cheapest in-stock price for every card across ${SITE.stores.length} stores, TCGplayer and eBay.`),
   alternates: { canonical: "/list" },
   robots: { index: false, follow: true },
 };

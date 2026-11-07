@@ -3,11 +3,12 @@ import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
 import { StaticPage } from "@/components/StaticPage";
 import { HowWePickStores } from "@/components/HowWePickStores";
+import { fitDescription } from "@/lib/seo-title";
 
 export const revalidate = 86400;
 export const metadata: Metadata = {
   title: "How we pick stores",
-  description: `How ${SITE.name} checks every ${SITE.gameShort} store before listing it, keeps checking it, and how to report one.`,
+  description: fitDescription(`How ${SITE.name} checks every ${SITE.gameShort} store before listing it, keeps checking it, and how to report one.`),
   ...canon("/how-we-pick-stores"),
 };
 

@@ -8,6 +8,7 @@ import { KitEbayStrip } from "@/components/KitAds";
 import { KitGrid } from "@/components/KitTile";
 import { KitPrice } from "@/components/KitPrice";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { fitDescription } from "@/lib/seo-title";
 
 export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
 export const generateStaticParams = () => [];
@@ -21,7 +22,7 @@ export function generateMetadata({ params }: { params: { grade: string } }): Met
   if (!h || !SITE.kits) return {};
   return {
     title: `${h.label} ${SITE.kits.label} prices: compare ${SITE.kits.stores.length} shops`,
-    description: `Compare prices for ${h.items.length} ${h.label} kits across ${SITE.kits.stores.length} hobby shops in the US, UK, Canada and Australia, cheapest in-stock first.`,
+    description: fitDescription(`Compare prices for ${h.items.length} ${h.label} kits across ${SITE.kits.stores.length} hobby shops in the US, UK, Canada and Australia, cheapest in-stock first.`),
     ...canon(`/kits/grade/${h.slug}`, KITS_SHARE_IMAGE),
   };
 }
