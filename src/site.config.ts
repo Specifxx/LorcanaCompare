@@ -54,6 +54,10 @@ export const SITE: SiteConfig = {
     runHourUtc: 6,
   },
 
+  // The low-traction cull (owner, 2026-11-07): cards under $1 leave the catalogue (new sets and any
+  // card page Search Console shows people finding stay); 2,500 of 3,600 cards, near-zero search demand.
+  catalogMinCardCents: 100,
+
   // Card numbers look like "207/204" (TCGplayer "Number" extended field).
   numberStyle: "fraction",
   // Crawlable hubs by card attribute (/cards/<facet>/<slug>), 2026-11-01.
