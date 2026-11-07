@@ -36,6 +36,9 @@ export const SITE: SiteConfig = {
   amazonAuTag: "lorcanacompare-22",
   tcgcsvCategoryId: 71,
   tcgplayerSlug: "lorcana-tcg",
+  // Booster boxes in one Booster Box Case (eBay titles and store listings, 2026-11-07): a listing stating another count is another product.
+  caseUnits: 4,
+  casePacks: 96,
   // eBay: Collectible Card Games → CCG Individual Cards / Sealed Boxes.
   ebay: {
     query: "lorcana",
