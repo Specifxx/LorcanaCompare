@@ -1,0 +1,43 @@
+{
+ "v": 1,
+ "site": "www.lorcanacompare.com",
+ "at": "2026-11-07T10:39:12.390Z",
+ "overall": "warn",
+ "checks": [
+  {
+   "name": "Live site",
+   "status": "ok",
+   "detail": "200"
+  },
+  {
+   "name": "A card page",
+   "status": "ok",
+   "detail": "200"
+  },
+  {
+   "name": "Daily price import",
+   "status": "ok",
+   "detail": "20.3h old"
+  },
+  {
+   "name": "Store imports",
+   "status": "warn",
+   "detail": "cardhouse: 0 matched; millenniumcomics: https://millenniumcomics.com.au/collections/lorcana-singles/products.json?limit=250&page=1&country=AU: HTTP 429; cardxchange: https://cardxchange.uk/collections/disney-lorcana/products.json?limit=250&page=1&country=GB: HTTP 401 ; five6gaming: 0 matched; southtexastcg: https://southtexastcg.com/collections/menu-lorcana/products.json?limit=250&page=1&country=US: HTTP 401 "
+  },
+  {
+   "name": "eBay budget",
+   "status": "ok",
+   "detail": "909/1150 calls on 2026-11-06, 623 eligible"
+  },
+  {
+   "name": "Family feed",
+   "status": "ok",
+   "detail": "7 items, 20.2h old; 8 sister feeds (rift, op, dex, mtg, gundam, ygo, cyberpunk, bandai)"
+  },
+  {
+   "name": "Amazon ASIN finder",
+   "status": "ok",
+   "detail": "AU: off, 20h ago; CA: off, 20h ago; EU: off, 20h ago; UK: off, 20h ago; US: off, 20h ago"
+  }
+ ]
+}
