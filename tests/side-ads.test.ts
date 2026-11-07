@@ -18,7 +18,7 @@ test("the rails start at every regular 16:9 and 16:10 width, and the CSS says th
 test("a window too short for one whole tile shows no rail", () => {
   assert.equal(railFits(1080), true);
   assert.equal(railFits(720), true);
-  assert.equal(railFits(55 + 24 + 30 + 34 + 16 + TILE_H - 1), false);
+  assert.equal(railFits(55 + 30 + 34 + TILE_H - 1), false);
 });
 
 test("a market's own eBay tiles when it has enough, else eBay US, never more than ten", () => {
