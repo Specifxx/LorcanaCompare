@@ -1538,3 +1538,13 @@ pages are what keep a new domain "Discovered – not indexed".
 - The import writes `data/public/culled.json` (card slug → set slug); `/card/<culled slug>` 301s to the set
   (`lib/culled.ts`). A card that climbs back over the floor gets its page back at the same URL.
 - Price history keeps every card, so a returning card keeps its chart.
+
+## 2026-11-07 — Meta descriptions fit 120–160 characters
+
+The owner's Search Console and Bing audit (2026-11-07) flagged Lorcana Compare's meta descriptions as too short. Every
+page's description now passes through `fitDescription` (`src/lib/seo-title.ts`): a description under 120 characters
+gains true site-wide sentences it does not already say (store count with TCGplayer and eBay, daily prices in your
+currency, cheapest in stock first, free with no account, the site's name), and one over 160 ends at its last full
+sentence inside 160, else at a word with an ellipsis. It never adds a fact about the page itself. Titles, URLs and
+headings are unchanged. `tests/meta-description.test.ts` pins the window and fails a page whose metadata sets a
+description without it. Engine change, so Cyberpunk Compare and BandaiCompare get it byte for byte.

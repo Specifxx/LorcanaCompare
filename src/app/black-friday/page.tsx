@@ -8,6 +8,7 @@ import { shortName } from "@/lib/names";
 import { sourceNameServer } from "@/lib/sources";
 import { blackFriday, cyberMonday, longDate, seasonYear, splitDeals } from "@/lib/black-friday";
 import { FamilyCluster } from "@/components/FamilyCluster";
+import { fitDescription } from "@/lib/seo-title";
 
 // The Black Friday page (DECISIONS.md, "Black Friday page", 2026-11-02): one URL kept
 // year after year, so links and rankings it gathers carry over. Rebuilt from the day's
@@ -20,7 +21,7 @@ export function generateMetadata(): Metadata {
   const year = seasonYear(today());
   return {
     title: `${SITE.gameShort} Black Friday Deals ${year}: Store Prices Under TCGplayer`,
-    description: `Black Friday and Cyber Monday ${year} ${SITE.game} deals: sealed product and cards that ${SITE.stores.length} stores sell under TCGplayer's market price today, updated every day.`,
+    description: fitDescription(`Black Friday and Cyber Monday ${year} ${SITE.game} deals: sealed product and cards that ${SITE.stores.length} stores sell under TCGplayer's market price today, updated every day.`),
     ...canon("/black-friday"),
   };
 }

@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
 import { StaticPage } from "@/components/StaticPage";
+import { fitDescription } from "@/lib/seo-title";
 
 export const revalidate = 86400;
-export const metadata: Metadata = { title: `About ${SITE.name}`, description: `${SITE.name} compares ${SITE.game} prices across stores so you never overpay.`, ...canon("/about") };
+export const metadata: Metadata = { title: `About ${SITE.name}`, description: fitDescription(`${SITE.name} compares ${SITE.game} prices across stores so you never overpay.`), ...canon("/about") };
 
 export default function About() {
   return (

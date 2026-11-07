@@ -26,7 +26,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ShareButton } from "@/components/ShareButton";
 import { attrHref, rarityHref, sealedHref } from "@/lib/hubs";
 
-import { cardTitleCandidates, fitTitle } from "@/lib/seo-title";
+import { cardTitleCandidates, fitTitle, fitDescription } from "@/lib/seo-title";
 import { cardIndexable, priceValidUntil } from "@/lib/indexing";
 
 export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
@@ -43,7 +43,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   // "<card> <number> Price — <game> <set>", stepped down to fit 60 characters (lib/seo-title.ts).
   const title = fitTitle(cardTitleCandidates(name, p.number, set?.name ?? null, p.kind === "sealed")).absolute;
   const stores = new Set(priceOf(p.id).offers.map((o) => o.source)).size;
-  const description = `${name} (${set?.name ?? SITE.gameShort}${p.rarity ? `, ${p.rarity}` : ""}) ${ref ? `is worth about ${money(ref)} today` : "has no TCGplayer market price yet"}. Compare ${stores} live prices from TCGplayer, eBay and ${SITE.gameShort} stores, with price history.`;
+  const description = fitDescription(`${name} (${set?.name ?? SITE.gameShort}${p.rarity ? `, ${p.rarity}` : ""}) ${ref ? `is worth about ${money(ref)} today` : "has no TCGplayer market price yet"}. Compare ${stores} live prices from TCGplayer, eBay and ${SITE.gameShort} stores, with price history.`);
   return {
     title: { absolute: title },
     description,

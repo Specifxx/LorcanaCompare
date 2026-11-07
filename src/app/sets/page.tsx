@@ -4,7 +4,7 @@ import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
 import { productsInSet, refCents, sets } from "@/lib/data";
 import { money } from "@/lib/format";
-import { fitTitle } from "@/lib/seo-title";
+import { fitTitle, fitDescription } from "@/lib/seo-title";
 import { JsonLd } from "@/components/JsonLd";
 import { abs } from "@/lib/site";
 import { LINES, isMultiGame } from "@/lib/lines";
@@ -14,7 +14,7 @@ export const revalidate = 86400;
 export const metadata: Metadata = {
   // "sets in order" is how people ask for this list (Rift Compare's /blog/riftbound-sets-in-order ranks for it).
   title: fitTitle([`${SITE.gameShort} Sets in Order — Card Lists & Prices`, `${SITE.gameShort} Sets in Order`]),
-  description: `Every ${SITE.game} set in release order, newest first, with each set's card list, card prices, the most valuable cards and the set's total value.`,
+  description: fitDescription(`Every ${SITE.game} set in release order, newest first, with each set's card list, card prices, the most valuable cards and the set's total value.`),
   ...canon("/sets"),
 };
 

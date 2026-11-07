@@ -5,7 +5,7 @@ import { canon } from "@/lib/site";
 import { priceOf, refCents } from "@/lib/data";
 import { preorderSetList, sealedInSet } from "@/lib/hubs";
 import { daysUntil, isPreorder, longDate, preorderPath } from "@/lib/preorders";
-import { fitTitle } from "@/lib/seo-title";
+import { fitTitle, fitDescription } from "@/lib/seo-title";
 import { PREORDER_COPY } from "@/content/preorders";
 import { JsonLd } from "@/components/JsonLd";
 import { money } from "@/lib/format";
@@ -22,7 +22,7 @@ export function generateMetadata(): Metadata {
   const title = fitTitle([`${SITE.gameShort} Pre-Orders: Every Upcoming Release Compared`, `${SITE.gameShort} Pre-Orders: Upcoming Releases`, `${SITE.gameShort} Pre-Orders`]);
   return {
     title,
-    description: `Every upcoming ${SITE.game} release with its release date and a page comparing every store's booster box and sealed pre-order prices, cheapest first. Updated daily.`,
+    description: fitDescription(`Every upcoming ${SITE.game} release with its release date and a page comparing every store's booster box and sealed pre-order prices, cheapest first. Updated daily.`),
     ...canon("/preorders"),
   };
 }

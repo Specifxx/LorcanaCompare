@@ -8,6 +8,7 @@ import { FORUM_SITE } from "@/lib/forum/site";
 import { readForum } from "@/lib/forum/store";
 import { canon } from "@/lib/site";
 import { SITE } from "@/site.config";
+import { fitDescription } from "@/lib/seo-title";
 
 export const revalidate = 21600;
 
@@ -15,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const forum = await readForum(FORUM_SITE, revalidate);
   return {
     title: `${SITE.gameShort} forum: prices, deals and collections`,
-    description: `The ${SITE.name} community forum. Talk ${SITE.game} prices, deals and collections. No account needed.`,
+    description: fitDescription(`The ${SITE.name} community forum. Talk ${SITE.game} prices, deals and collections. No account needed.`),
     ...canon("/forum"),
     ...(forumIndexable(forum) ? {} : { robots: { index: false, follow: true } }),
   };

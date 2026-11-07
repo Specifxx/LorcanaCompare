@@ -6,7 +6,7 @@ import { canon, abs } from "@/lib/site";
 import { byValue, meta, priceOf, productsInSet, refCents, setBySlug } from "@/lib/data";
 import { preorderSetList, sealedInSet } from "@/lib/hubs";
 import { daysUntil, isPreorder, longDate, preorderPath, preorderTitleCandidates } from "@/lib/preorders";
-import { fitTitle } from "@/lib/seo-title";
+import { fitTitle, fitDescription } from "@/lib/seo-title";
 import { postsAbout } from "@/lib/posts";
 import { PREORDER_COPY } from "@/content/preorders";
 import { PriceTable } from "@/components/PriceTable";
@@ -54,9 +54,9 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   if (!s) return {};
   const pre = isPreorder(s);
   const title = fitTitle(preorderTitleCandidates(s.name, pre));
-  const description = pre
+  const description = fitDescription(pre
     ? `${s.name} pre-order prices: booster boxes, packs and sealed from every ${SITE.gameShort} store we track, cheapest first, in your currency. Out ${longDate(s.releasedOn)}.`
-    : `${s.name} booster box and sealed prices from every ${SITE.gameShort} store we track, in-stock first, in your currency, updated daily. Released ${longDate(s.releasedOn)}.`;
+    : `${s.name} booster box and sealed prices from every ${SITE.gameShort} store we track, in-stock first, in your currency, updated daily. Released ${longDate(s.releasedOn)}.`);
   const path = preorderPath(s);
   return { title, description, ...canon(path), openGraph: { ...canon(path).openGraph, title: title.absolute, description } };
 }

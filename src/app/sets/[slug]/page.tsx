@@ -12,7 +12,7 @@ import { shortName } from "@/lib/names";
 import { TileGrid } from "@/components/ProductTile";
 import { JsonLd } from "@/components/JsonLd";
 import { abs } from "@/lib/site";
-import { fitTitle, setTitleCandidates } from "@/lib/seo-title";
+import { fitTitle, setTitleCandidates, fitDescription } from "@/lib/seo-title";
 import { postsAbout } from "@/lib/posts";
 import { imageAt } from "@/lib/image";
 import { SealedQuickBuy } from "@/components/SealedQuickBuy";
@@ -31,9 +31,9 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   const title = fitTitle(setTitleCandidates(s.name, count, spoilers));
   return {
     title,
-    description: spoilers
+    description: fitDescription(spoilers
       ? `Every ${s.name} card revealed so far (${count} and counting), with pre-order prices as stores list them${s.releasedOn ? `. Releases ${s.releasedOn}` : ""}. Updated daily as new spoilers land.`
-      : `${count > 0 ? `All ${count} ${s.name} cards` : `The ${s.name} card list`} with prices: the most valuable cards, every card's TCGplayer market price, and the cheapest store and eBay listings. Updated daily.`,
+      : `${count > 0 ? `All ${count} ${s.name} cards` : `The ${s.name} card list`} with prices: the most valuable cards, every card's TCGplayer market price, and the cheapest store and eBay listings. Updated daily.`),
     ...canon(`/sets/${s.slug}`),
     openGraph: { ...canon(`/sets/${s.slug}`).openGraph, title: title.absolute },
   };
