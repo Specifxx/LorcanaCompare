@@ -3,7 +3,7 @@ import Link from "@/components/Link";
 import { notFound } from "next/navigation";
 import { SITE } from "@/site.config";
 import { canon, abs } from "@/lib/site";
-import { fitTitle } from "@/lib/seo-title";
+import { fitTitle, fitDescription } from "@/lib/seo-title";
 import { lineBySlug } from "@/lib/lines";
 import { gameView } from "@/lib/game-hubs";
 import { productsInSet, refCents } from "@/lib/data";
@@ -22,7 +22,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   const title = fitTitle([`${line.name} Prices — Booster Boxes & Cards, Every Store`, `${line.name} Prices — Booster Boxes & Cards`, `${line.name} Prices`]);
   return {
     title,
-    description: `${line.name} prices compared across TCGplayer, eBay and ${SITE.stores.length} stores: ${v.sets.length} sets, ${v.cards.toLocaleString()} cards and ${v.sealed} sealed products, cheapest in-stock first, in your currency, updated daily.`,
+    description: fitDescription(`${line.name} prices compared across TCGplayer, eBay and ${SITE.stores.length} stores: ${v.sets.length} sets, ${v.cards.toLocaleString()} cards and ${v.sealed} sealed products, cheapest in-stock first, in your currency, updated daily.`),
     ...canon(`/games/${line.slug}`),
     openGraph: { ...canon(`/games/${line.slug}`).openGraph, title: title.absolute },
   };

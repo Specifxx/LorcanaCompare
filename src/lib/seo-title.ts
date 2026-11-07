@@ -45,3 +45,38 @@ export function cardTitleCandidates(name: string, number: string | null, setName
   out.push(`${head} Price — ${g}`, `${head} Price`, head);
   return out;
 }
+
+// Meta descriptions (2026-11-07, Bing's "meta description too short" in the owner's SEO audit): search engines show
+// about 120–160 characters, so every page's description is fitted into that window. A short one gains true sentences
+// about the site (the first that are not already said and still fit); a long one ends at its last full sentence inside
+// 160, or at a word with an ellipsis. Never invents a fact about the page itself.
+export const DESC_MIN = 120;
+export const DESC_MAX = 160;
+
+/** Site-wide facts a short description can end with, each skipped when the text already says it. */
+export function descriptionTails(): { text: string; said: RegExp }[] {
+  return [
+    { text: `Compare ${SITE.stores.length} ${SITE.gameShort} stores, TCGplayer and eBay.`, said: /\bstores?\b/i },
+    { text: "Prices updated daily, in your currency.", said: /\bdaily\b/i },
+    { text: "Cheapest in-stock price first.", said: /cheapest/i },
+    { text: "Free, no account needed.", said: /\bfree\b|no account/i },
+    { text: `${SITE.name}: ${SITE.game} price comparison.`, said: new RegExp(SITE.name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i") },
+  ];
+}
+
+/** `base` fitted to 120–160 characters (DESC_MIN–DESC_MAX). */
+export function fitDescription(base: string, tails = descriptionTails()): string {
+  let out = base.replace(/\s+/g, " ").trim();
+  if (out && !/[.!?…]$/.test(out)) out += ".";
+  for (const t of tails) {
+    if (out.length >= DESC_MIN) break;
+    if (t.said.test(out)) continue;
+    const next = out ? `${out} ${t.text}` : t.text;
+    if (next.length <= DESC_MAX) out = next;
+  }
+  if (out.length <= DESC_MAX) return out;
+  const cut = out.slice(0, DESC_MAX + 1);
+  const stop = Math.max(cut.lastIndexOf(". "), cut.lastIndexOf("! "), cut.lastIndexOf("? "));
+  if (stop + 1 >= DESC_MIN) return out.slice(0, stop + 1);
+  return `${out.slice(0, DESC_MAX - 1).replace(/[\s,;:—–-]+\S*$/, "")}…`;
+}

@@ -9,6 +9,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/AdSlot";
 import { abs } from "@/lib/site";
 import { renderPost } from "@/lib/post-render";
+import { fitDescription } from "@/lib/seo-title";
 
 export const revalidate = 86400;
 // Blog posts are code, not database rows: prerendering them costs nothing.
@@ -18,7 +19,8 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   const p = postBySlug(params.slug);
   if (!p) return {};
   const image = p.image?.src ?? "/opengraph-image.jpg";
-  return { title: p.title, description: p.description, keywords: p.keywords, alternates: { canonical: `/blog/${p.slug}` }, openGraph: { type: "article", siteName: SITE.name, url: `/blog/${p.slug}`, title: p.title, description: p.description, publishedTime: p.date, images: [{ url: image, width: 1200, height: 630, alt: p.image?.alt ?? p.title }] }, twitter: { card: "summary_large_image", images: [image] } };
+  const description = fitDescription(p.description);
+  return { title: p.title, description, keywords: p.keywords, alternates: { canonical: `/blog/${p.slug}` }, openGraph: { type: "article", siteName: SITE.name, url: `/blog/${p.slug}`, title: p.title, description, publishedTime: p.date, images: [{ url: image, width: 1200, height: 630, alt: p.image?.alt ?? p.title }] }, twitter: { card: "summary_large_image", images: [image] } };
 }
 
 export default function PostPage({ params }: { params: { slug: string } }) {

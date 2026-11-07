@@ -26,11 +26,12 @@ import { SideNav } from "@/components/SideNav";
 import { SideAds } from "@/components/SideAds";
 import { navGroups } from "@/lib/nav";
 import { historyOn } from "@/lib/data";
+import { fitDescription } from "@/lib/seo-title";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: { default: `${SITE.name} — ${SITE.tagline}`, template: `%s | ${SITE.name}` },
-  description: SITE.description,
+  description: fitDescription(SITE.description),
   keywords: SITE.keywords,
   applicationName: SITE.name,
   openGraph: { type: "website", siteName: SITE.name, url: "/" },

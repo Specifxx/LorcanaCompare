@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "@/components/Link";
 import { Fragment } from "react";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
+import { culledSetSlug } from "@/lib/culled";
 import { SITE } from "@/site.config";
 import { byValue, historyOf, meta, priceOf, productBySlug, productsInSet, refCents, setById } from "@/lib/data";
 import { imageAt } from "@/lib/image";
@@ -25,7 +26,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ShareButton } from "@/components/ShareButton";
 import { attrHref, rarityHref, sealedHref } from "@/lib/hubs";
 
-import { cardTitleCandidates, fitTitle } from "@/lib/seo-title";
+import { cardTitleCandidates, fitTitle, fitDescription } from "@/lib/seo-title";
 import { cardIndexable, priceValidUntil } from "@/lib/indexing";
 
 export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
@@ -42,7 +43,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   // "<card> <number> Price — <game> <set>", stepped down to fit 60 characters (lib/seo-title.ts).
   const title = fitTitle(cardTitleCandidates(name, p.number, set?.name ?? null, p.kind === "sealed")).absolute;
   const stores = new Set(priceOf(p.id).offers.map((o) => o.source)).size;
-  const description = `${name} (${set?.name ?? SITE.gameShort}${p.rarity ? `, ${p.rarity}` : ""}) ${ref ? `is worth about ${money(ref)} today` : "has no TCGplayer market price yet"}. Compare ${stores} live prices from TCGplayer, eBay and ${SITE.gameShort} stores, with price history.`;
+  const description = fitDescription(`${name} (${set?.name ?? SITE.gameShort}${p.rarity ? `, ${p.rarity}` : ""}) ${ref ? `is worth about ${money(ref)} today` : "has no TCGplayer market price yet"}. Compare ${stores} live prices from TCGplayer, eBay and ${SITE.gameShort} stores, with price history.`);
   return {
     title: { absolute: title },
     description,
@@ -58,7 +59,12 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
 
 export default function CardPage({ params }: { params: { slug: string } }) {
   const p = productBySlug(params.slug);
-  if (!p) notFound();
+  if (!p) {
+    // A card the catalogue floor culled: its set lists what is left (lib/culled.ts).
+    const set = culledSetSlug(params.slug);
+    if (set) permanentRedirect(`/sets/${set}`);
+    notFound();
+  }
   const set = setById(p.setId);
   const e = priceOf(p.id);
   const ref = refCents(p.id);

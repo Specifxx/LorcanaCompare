@@ -14,7 +14,7 @@ import { shortName } from "@/lib/names";
 import { JsonLd } from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/site";
 import type { Metadata } from "next";
-import { fitTitle } from "@/lib/seo-title";
+import { fitTitle, fitDescription } from "@/lib/seo-title";
 import { featuredSealed, preorderSetList, sealedHubs } from "@/lib/hubs";
 import { isPreorder, preorderPath } from "@/lib/preorders";
 import { inSeason as bfSeason } from "@/lib/black-friday";
@@ -36,7 +36,7 @@ export function generateMetadata(): Metadata {
   const title = fitTitle([`${g} Card Prices — Compare ${n} Stores${brand}`, `${g} Card Prices — ${n} Stores${brand}`, `${g} Card Prices${brand}`, `${g} Card Prices — Compare ${n} Stores`, `${g} Card Prices`]);
   return {
     title,
-    description: `Compare ${SITE.game} card and booster box prices across TCGplayer, eBay and ${n} online stores. Cheapest in-stock first, in your currency, updated daily.`,
+    description: fitDescription(`Compare ${SITE.game} card and booster box prices across TCGplayer, eBay and ${n} online stores. Cheapest in-stock first, in your currency, updated daily.`),
     alternates: { canonical: "/", types: { "application/rss+xml": "/feed.xml" } },
     openGraph: { type: "website", siteName: SITE.name, url: "/", title: title.absolute },
   };

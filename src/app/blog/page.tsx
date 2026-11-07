@@ -3,11 +3,12 @@ import Link from "@/components/Link";
 import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
 import { posts } from "@/lib/posts";
+import { fitDescription } from "@/lib/seo-title";
 
 export const revalidate = 86400;
 export const metadata: Metadata = {
   title: `${SITE.gameShort} guides and price analysis`,
-  description: `Guides to buying ${SITE.game} cards: set price guides, most valuable cards, where to buy and pre-order advice.`,
+  description: fitDescription(`Guides to buying ${SITE.game} cards: set price guides, most valuable cards, where to buy and pre-order advice.`),
   ...canon("/blog"),
 };
 

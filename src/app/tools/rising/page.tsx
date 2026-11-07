@@ -4,11 +4,12 @@ import { canon } from "@/lib/site";
 import { risingRows } from "@/lib/tools";
 import { money, pct } from "@/lib/format";
 import { ToolTable } from "@/components/ToolTable";
+import { fitDescription } from "@/lib/seo-title";
 
 export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
 export const metadata: Metadata = {
   title: `Rising ${SITE.gameShort} cards — prices climbing this week`,
-  description: `${SITE.game} cards whose prices are rising this week and holding over the month, ranked with how thin in-stock supply is. Free, updated daily.`,
+  description: fitDescription(`${SITE.game} cards whose prices are rising this week and holding over the month, ranked with how thin in-stock supply is. Free, updated daily.`),
   ...canon("/tools/rising"),
 };
 

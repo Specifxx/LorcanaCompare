@@ -1521,6 +1521,33 @@ else the tagged search), never Amazon's price: that stays on the product page un
 overlays (a phone ad dock, a corner card, an exit pop-up) still never carry Amazon, and an Amazon page is never framed
 (item (n)).
 
+## 2026-11-07 — The low-traction cull: cheap cards leave the catalogue, culled URLs 301 to their set
+
+Owner, 2026-11-07: apply Compare Empire's focus cull ("less is more") to every site; cut products with no
+traction to lower costs and keep only what people want. Search Console (56 days, exported daily to this
+repo's `demand` branch by RiftCompare's sister-demand job) shows card pages under $1 get almost no
+impressions and no clicks: nobody compares store prices for a bulk common, and thousands of near-empty
+pages are what keep a new domain "Discovered – not indexed".
+
+- `SITE.catalogMinCardCents` (the floor that already existed for BandaiCompare) is now set on every engine
+  site: Lorcana $1 (≈3,990 → 1,840 products), Cyberpunk $1 (nothing yet: every set is under 120 days old),
+  BandaiCompare $5, up from $1 (≈9,990 → 6,370). Sealed always stays; sets released in the last 120 days
+  or upcoming stay whole.
+- A card page with a click or 10+ impressions in Search Console stays whatever its price
+  (`lib/import/demand.ts`, read from the `demand` branch at import; no branch means the floor alone).
+- The import writes `data/public/culled.json` (card slug → set slug); `/card/<culled slug>` 301s to the set
+  (`lib/culled.ts`). A card that climbs back over the floor gets its page back at the same URL.
+- Price history keeps every card, so a returning card keeps its chart.
+
+## 2026-11-07 — Meta descriptions fit 120–160 characters
+
+The owner's Search Console and Bing audit (2026-11-07) flagged Lorcana Compare's meta descriptions as too short. Every
+page's description now passes through `fitDescription` (`src/lib/seo-title.ts`): a description under 120 characters
+gains true site-wide sentences it does not already say (store count with TCGplayer and eBay, daily prices in your
+currency, cheapest in stock first, free with no account, the site's name), and one over 160 ends at its last full
+sentence inside 160, else at a word with an ellipsis. It never adds a fact about the page itself. Titles, URLs and
+headings are unchanged. `tests/meta-description.test.ts` pins the window and fails a page whose metadata sets a
+description without it. Engine change, so Cyberpunk Compare and BandaiCompare get it byte for byte.
 ## 2026-11-07 — Black Friday strip and Cyber Monday page (owner: "capture all of the Black Friday SEO")
 
 Black Friday is 27 November 2026 and Cyber Monday 30 November. Three additions, every Compare site:

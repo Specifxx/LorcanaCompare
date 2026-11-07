@@ -15,6 +15,7 @@ import { meta } from "@/lib/data";
 import { abs, KITS_SHARE_IMAGE } from "@/lib/site";
 import { MARKET_LABEL } from "@/lib/site-types";
 import { sourceNameServer } from "@/lib/sources";
+import { fitDescription } from "@/lib/seo-title";
 
 export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
 // Empty list = nothing prerendered at build; each page is cached after its first visit.
@@ -27,7 +28,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   const stores = new Set(offers.map((o) => o.source)).size;
   const us = offers.find((o) => o.market === "US" && o.inStock);
   const title = `${k.name} price: compare ${stores} shops`;
-  const description = `${k.name} ${SITE.kits.label} kit${us ? ` from ${money(us.cents, us.currency)} in the US` : ""}. Compare ${stores} hobby shops in the US, UK, Canada and Australia, matched by barcode (JAN ${k.jan}), cheapest in stock first.`;
+  const description = fitDescription(`${k.name} ${SITE.kits.label} kit${us ? ` from ${money(us.cents, us.currency)} in the US` : ""}. Compare ${stores} hobby shops in the US, UK, Canada and Australia, matched by barcode (JAN ${k.jan}), cheapest in stock first.`);
   const images = k.image ? [kitImage(k.image, 1000)] : [KITS_SHARE_IMAGE];
   return {
     title,

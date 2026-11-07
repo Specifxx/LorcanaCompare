@@ -6,6 +6,7 @@ import { byValue, products, summaryOf } from "@/lib/data";
 import { shortName } from "@/lib/names";
 import { MARKETS } from "@/lib/site-types";
 import { badgeOffer, dailySnippet, embedSnippet, storeBadge } from "@/lib/embed";
+import { fitDescription } from "@/lib/seo-title";
 
 // The free widgets directory (DECISIONS.md, "Free price widgets", 2026-11-02): the page outreach points at instead of
 // asking for a link. Shows code, never live iframes of our own widgets.
@@ -14,7 +15,7 @@ export const revalidate = 86400;
 export function generateMetadata(): Metadata {
   return {
     title: `Free ${SITE.gameShort} Price Widgets for Your Site`,
-    description: `A live ${SITE.game} card price badge for blogs, deck guides and community sites, and a badge for stores we compare. One line of HTML, free, no signup.`,
+    description: fitDescription(`A live ${SITE.game} card price badge for blogs, deck guides and community sites, and a badge for stores we compare. One line of HTML, free, no signup.`),
     ...canon("/embed"),
   };
 }

@@ -8,6 +8,7 @@ import { rarityHubs } from "@/lib/hubs";
 import { ChipList } from "@/components/ChipList";
 import { TileGrid } from "@/components/ProductTile";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { fitDescription } from "@/lib/seo-title";
 
 export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
 export const generateStaticParams = () => [];
@@ -19,7 +20,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   if (!h) return {};
   return {
     title: `${h.label} ${SITE.gameShort} card prices — most valuable first`,
-    description: `All ${h.items.length} ${h.label} ${SITE.game} cards ranked by TCGplayer market price, with the cheapest store and eBay listing for each.`,
+    description: fitDescription(`All ${h.items.length} ${h.label} ${SITE.game} cards ranked by TCGplayer market price, with the cheapest store and eBay listing for each.`),
     ...canon(`/cards/rarity/${h.slug}`),
   };
 }

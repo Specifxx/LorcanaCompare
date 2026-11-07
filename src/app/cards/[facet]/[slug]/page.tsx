@@ -10,7 +10,7 @@ import { attrFacet, attrFacets, attrHub, attrHubTitle } from "@/lib/hubs";
 import { ChipList } from "@/components/ChipList";
 import { TileGrid } from "@/components/ProductTile";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { fitTitle } from "@/lib/seo-title";
+import { fitTitle, fitDescription } from "@/lib/seo-title";
 
 // One attribute hub (SITE.cardHubs): every card of one colour, type or
 // franchise, most valuable first. Cached on first visit, never prerendered.
@@ -24,7 +24,7 @@ export function generateMetadata({ params }: { params: { facet: string; slug: st
   const name = attrHubTitle(f.cfg, h.label);
   return {
     title: fitTitle([`${name}: prices, most valuable first`, `${name}: prices`, name]),
-    description: `All ${h.items.length} ${h.label} ${SITE.game} cards ranked by TCGplayer market price, with the cheapest store and eBay listing for each. Updated daily.`,
+    description: fitDescription(`All ${h.items.length} ${h.label} ${SITE.game} cards ranked by TCGplayer market price, with the cheapest store and eBay listing for each. Updated daily.`),
     ...canon(`/cards/${f.cfg.facet}/${h.slug}`),
   };
 }

@@ -76,10 +76,12 @@ function cents(v: number | null | undefined): number | null {
 }
 
 
-export async function loadTcgcsv(now = new Date()): Promise<{
+export async function loadTcgcsv(now = new Date(), demandSlugs: ReadonlySet<string> = new Set()): Promise<{
   sets: SetInfo[];
   products: Product[];
   tcg: Record<number, Record<string, TcgPrice>>;
+  /** Cards the catalogue floor left out, and their set: their old URLs 301 to the set (lib/culled.ts). */
+  culled: { slug: string; setId: number }[];
 }> {
   // One TCGplayer category, or one per game on a multi-game site (SITE.lines).
   const cats: { cat: number; line?: string }[] = SITE.lines?.length
@@ -158,11 +160,13 @@ export async function loadTcgcsv(now = new Date()): Promise<{
   borrowImages(products);
   if (SITE.slugStyle === "name-number") settleSlugs(products, sets);
   if (SITE.catalogMinCardCents) {
-    const kept = applyCatalogFloor(products, sets, tcg, SITE.catalogMinCardCents, now);
+    const kept = applyCatalogFloor(products, sets, tcg, SITE.catalogMinCardCents, now, demandSlugs);
     for (const s of sets) s.productCount = kept.filter((p) => p.setId === s.id).length;
-    return { sets, products: kept, tcg };
+    const keptIds = new Set(kept.map((p) => p.id));
+    const culled = products.filter((p) => !keptIds.has(p.id)).map((p) => ({ slug: p.slug, setId: p.setId }));
+    return { sets, products: kept, tcg, culled };
   }
-  return { sets, products, tcg };
+  return { sets, products, tcg, culled: [] };
 }
 
 /** A set's URL slug: its name, and on a multi-game site the game's slug
@@ -245,20 +249,23 @@ export function settleSlugs(products: Product[], sets: SetInfo[]) {
 }
 
 /** Cards priced under the floor in every printing leave the catalogue, unless
- *  their set is new or upcoming (prices settle in the first weeks). Sealed
- *  always stays. */
+ *  their set is new or upcoming (prices settle in the first weeks) or Search
+ *  Console shows people finding the card's page (`keep`: slugs with a click or
+ *  enough impressions, lib/import/demand.ts; the low-traction cull, owner
+ *  2026-11-07). Sealed always stays. */
 export function applyCatalogFloor(
   products: Product[],
   sets: SetInfo[],
   tcg: Record<number, Record<string, TcgPrice>>,
   minCents: number,
   now: Date,
+  keep: ReadonlySet<string> = new Set(),
 ): Product[] {
   const fresh = new Set(
     sets.filter((s) => s.upcoming || (s.releasedOn && now.getTime() - new Date(s.releasedOn).getTime() < 120 * 86_400_000)).map((s) => s.id),
   );
   return products.filter((p) => {
-    if (p.kind === "sealed" || fresh.has(p.setId)) return true;
+    if (p.kind === "sealed" || fresh.has(p.setId) || keep.has(p.slug)) return true;
     return Object.values(tcg[p.id] ?? {}).some((t) => (t.market ?? t.mid ?? t.low ?? 0) >= minCents);
   });
 }

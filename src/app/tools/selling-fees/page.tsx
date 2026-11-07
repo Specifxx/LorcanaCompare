@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
 import { Fees } from "./Fees";
+import { fitDescription } from "@/lib/seo-title";
 
 export const revalidate = 86400;
 export const metadata: Metadata = {
   title: `${SITE.gameShort} selling fee calculator — TCGplayer and eBay`,
-  description: `How much you keep when you sell a ${SITE.game} card on TCGplayer or eBay, after fees. Free calculator.`,
+  description: fitDescription(`How much you keep when you sell a ${SITE.game} card on TCGplayer or eBay, after fees. Free calculator.`),
   ...canon("/tools/selling-fees"),
 };
 

@@ -6,9 +6,10 @@ import { MARKET_LABEL } from "@/lib/site-types";
 import { StaticPage } from "@/components/StaticPage";
 import { kitStoreStatus } from "@/lib/kits";
 import { SuggestStore } from "@/components/ReportForms";
+import { fitDescription } from "@/lib/seo-title";
 
 export const revalidate = 86400;
-export const metadata: Metadata = { title: `${SITE.gameShort} stores we compare`, description: `Every online ${SITE.game} store ${SITE.name} compares, by country.`, ...canon("/stores") };
+export const metadata: Metadata = { title: `${SITE.gameShort} stores we compare`, description: fitDescription(`Every online ${SITE.game} store ${SITE.name} compares, by country.`), ...canon("/stores") };
 
 export default function Stores() {
   const m = meta();

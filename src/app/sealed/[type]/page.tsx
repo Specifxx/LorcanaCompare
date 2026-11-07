@@ -9,6 +9,7 @@ import { setById } from "@/lib/data";
 import { sealedHubs } from "@/lib/hubs";
 import { TileGrid } from "@/components/ProductTile";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { fitDescription } from "@/lib/seo-title";
 
 export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
 export const generateStaticParams = () => [];
@@ -20,7 +21,7 @@ export function generateMetadata({ params }: { params: { type: string } }): Meta
   if (!h) return {};
   return {
     title: `${SITE.gameShort} ${h.label.toLowerCase()} — prices for every set`,
-    description: `Compare prices for all ${h.items.length} ${SITE.game} ${h.label.toLowerCase()} across TCGplayer, eBay and ${SITE.stores.length} stores, newest set first.`,
+    description: fitDescription(`Compare prices for all ${h.items.length} ${SITE.game} ${h.label.toLowerCase()} across TCGplayer, eBay and ${SITE.stores.length} stores, newest set first.`),
     ...canon(`/sealed/${h.slug}`),
   };
 }

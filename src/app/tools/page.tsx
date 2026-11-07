@@ -4,11 +4,12 @@ import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
 import { TOOLS } from "@/lib/tool-list";
 import { historyOn } from "@/lib/data";
+import { fitDescription } from "@/lib/seo-title";
 
 export const revalidate = 86400;
 export const metadata: Metadata = {
   title: `Free ${SITE.gameShort} price tools`,
-  description: `Free ${SITE.game} tools: Deal Finder, Rising Cards, Demand Finder, Best Basket, a trade calculator and a selling-fee calculator. No account needed.`,
+  description: fitDescription(`Free ${SITE.game} tools: Deal Finder, Rising Cards, Demand Finder, Best Basket, a trade calculator and a selling-fee calculator. No account needed.`),
   ...canon("/tools"),
 };
 

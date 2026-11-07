@@ -9,6 +9,7 @@ import { sourceNameServer } from "@/lib/sources";
 import { blackFriday, cyberMonday, EVENT_NAME, holidayFaq, longDate, seasonYear, splitDeals, type HolidayEvent } from "@/lib/black-friday";
 import { listRegions } from "@/lib/sale-seasons";
 import { FamilyCluster } from "@/components/FamilyCluster";
+import { fitDescription } from "@/lib/seo-title";
 import { ADJ, IN, UnderStores } from "@/components/SaleSeasonPage";
 import type { Market } from "@/lib/site-types";
 
@@ -30,13 +31,13 @@ export function holidayMetadata(event: HolidayEvent): Metadata {
   if (event === "black-friday") {
     return {
       title: `${SITE.gameShort} Black Friday Deals ${year}: Store Prices Under TCGplayer`,
-      description: `Black Friday and Cyber Monday ${year} ${SITE.game} deals: sealed product and cards that ${SITE.stores.length} stores sell under TCGplayer's market price today, updated every day.`,
+      description: fitDescription(`Black Friday and Cyber Monday ${year} ${SITE.game} deals: sealed product and cards that ${SITE.stores.length} stores sell under TCGplayer's market price today, updated every day.`),
       ...canon("/black-friday"),
     };
   }
   return {
     title: `${SITE.gameShort} Cyber Monday Deals ${year}: Store Prices Compared`,
-    description: `Cyber Monday ${year} ${SITE.game} deals: booster boxes, sealed product and cards that ${SITE.stores.length} online stores sell under TCGplayer's market price today, updated every day.`,
+    description: fitDescription(`Cyber Monday ${year} ${SITE.game} deals: booster boxes, sealed product and cards that ${SITE.stores.length} online stores sell under TCGplayer's market price today, updated every day.`),
     ...canon("/cyber-monday"),
   };
 }

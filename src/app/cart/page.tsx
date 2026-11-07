@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CartListView } from "@/components/cart/CartListView";
+import { fitDescription } from "@/lib/seo-title";
 
 // THE CART LIST (owner, 2026-11-06; DECISIONS.md, "A cart list on every site"). The
 // list lives in the visitor's browser (src/lib/cart-list.ts), so this page is the
@@ -8,7 +9,7 @@ export const dynamic = "force-static";
 
 export const metadata: Metadata = {
   title: "Your cart",
-  description: "The store prices you saved, grouped by store, with one checkout button per store.",
+  description: fitDescription("The store prices you saved, grouped by store, with one checkout button per store."),
   // Personal page: never indexed, never in the sitemap. Not disallowed in robots.txt,
   // so Google can see the noindex.
   robots: { index: false, follow: false },
