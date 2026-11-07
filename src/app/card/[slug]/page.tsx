@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "@/components/Link";
 import { Fragment } from "react";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
+import { culledSetSlug } from "@/lib/culled";
 import { SITE } from "@/site.config";
 import { byValue, historyOf, meta, priceOf, productBySlug, productsInSet, refCents, setById } from "@/lib/data";
 import { imageAt } from "@/lib/image";
@@ -58,7 +59,12 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
 
 export default function CardPage({ params }: { params: { slug: string } }) {
   const p = productBySlug(params.slug);
-  if (!p) notFound();
+  if (!p) {
+    // A card the catalogue floor culled: its set lists what is left (lib/culled.ts).
+    const set = culledSetSlug(params.slug);
+    if (set) permanentRedirect(`/sets/${set}`);
+    notFound();
+  }
   const set = setById(p.setId);
   const e = priceOf(p.id);
   const ref = refCents(p.id);

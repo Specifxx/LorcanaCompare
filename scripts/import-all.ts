@@ -15,6 +15,7 @@ import { SITE } from "@/site.config";
 import type { Catalog, EbayPick, Market, Meta, Offer, PriceEntry, Prices, StoreStatus } from "@/lib/site-types";
 import { CURRENCY } from "@/lib/site-types";
 import { loadTcgcsv, referenceCents } from "@/lib/import/tcgcsv";
+import { readDemandSlugs } from "@/lib/import/demand";
 import { fetchStore, storeCurrency } from "@/lib/import/shopify";
 import { buildIndex, isPreorder, isUnfitListing, looksSealed, matchCard, matchSealed, printingOf } from "@/lib/import/match";
 import {
@@ -69,7 +70,7 @@ async function main() {
 
   // 1. Catalogue + TCGplayer
   console.log(`[tcgcsv] category ${SITE.tcgcsvCategoryId}`);
-  const { sets, products, tcg } = await loadTcgcsv(now);
+  const { sets, products, tcg, culled } = await loadTcgcsv(now, SITE.catalogMinCardCents ? readDemandSlugs() : new Set());
   console.log(`[tcgcsv] ${sets.length} sets, ${products.length} products`);
   // Before release TCGplayer carries placeholder listings ($9,999 boxes) with
   // no market price. For upcoming sets, only a real market price counts.
@@ -314,6 +315,9 @@ async function main() {
   };
 
   writeJson(path.join(PUBLIC, "catalog.json"), catalog);
+  // Culled cards' URLs -> their set (lib/culled.ts), only for sets still listed.
+  const setSlugById = new Map(sets.filter((s) => s.productCount > 0).map((s) => [s.id, s.slug]));
+  writeJson(path.join(PUBLIC, "culled.json"), Object.fromEntries(culled.flatMap((c) => (setSlugById.has(c.setId) ? [[c.slug, setSlugById.get(c.setId)!] as const] : [])).sort((a, b) => a[0].localeCompare(b[0]))));
   writePrices(prices.byId, products);
   fs.rmSync(path.join(PUBLIC, "prices.json"), { force: true });
   writeJson(path.join(PUBLIC, "meta.json"), meta);
