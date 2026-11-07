@@ -178,6 +178,7 @@ test("cases: an item in a case, part of a case, another product's case or anothe
     "NEW AWAKENING BOOSTER BOX lot - Half Case (6 boxes)",
     "OPEN CASE OF 4 BOXES Wilds Unknown Illumineers Trove - NEW",
     "Attack of the Vine S13 - 48 Sleeved Booster Packs Case",
+    "36x Wilds Unknown Booster Pack (Case)",
   ]) assert.equal(wrongCase(box, t, 4, 96), true, t);
   assert.equal(wrongCase(box, "Wilds Unknown Booster Box Case (48 Packs)", 4, 96), true);
   assert.equal(wrongCase(box, "Great Legend Booster Box Case 6 Boxes Sealed", 12, null), true);

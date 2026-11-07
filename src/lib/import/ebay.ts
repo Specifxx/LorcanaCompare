@@ -302,6 +302,8 @@ export function wrongCase(p: Product, title: string, units = caseUnitsOf(p), pac
   if (p.kind !== "sealed" || !/\bcase\b/i.test(p.name)) return false;
   if (CASE_ITEM.test(title)) return true;
   if (/\bsleeved\b/i.test(title) && !/\bsleeved\b/i.test(p.name)) return true;
+  // "36x … Booster Pack (Case)" on a tin or box case: loose packs, not the case.
+  if (/\b\d{1,3}\s*x\s.*\bbooster\s+packs?\b/i.test(title) && !/\bpacks?\b/i.test(p.name)) return true;
   // The case's contents must be the product's: "Case of 4 Boxes … Illumineers Trove" is not a Booster Box Case.
   const inner = (s: string) => sealedTypeOf(s.replace(/\bcases?\b/gi, " "));
   const want = inner(p.name);
