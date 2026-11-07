@@ -24,6 +24,7 @@ export function Footer() {
             {history && <li><Link href="/movers">Price movers</Link></li>}
             {history && <li><Link href="/price-report">Monthly price report</Link></li>}
             <li><Link href="/black-friday">Black Friday deals</Link></li>
+            <li><Link href="/cyber-monday">Cyber Monday deals</Link></li>
             <li><Link href="/boxing-day">Boxing Day deals</Link></li>
             <li><Link href="/january-sales">January sales</Link></li>
             <li><Link href="/lunar-new-year">Lunar New Year deals</Link></li>

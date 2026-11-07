@@ -13,6 +13,8 @@ import { themeCss } from "@/lib/theme-vars";
 import { DEFAULT_MODE, THEME_BOOT_SCRIPT } from "@/lib/theme";
 import { SEASON_BOOT_SCRIPT } from "@/lib/season";
 import { Header } from "@/components/Header";
+import { holidayNav } from "@/lib/holiday-nav";
+import { HolidayStrip } from "@/components/HolidayStrip";
 import { Footer } from "@/components/Footer";
 import { PreorderStrip } from "@/components/PreorderStrip";
 import { PrefsProvider } from "@/components/ClientPrefs";
@@ -68,9 +70,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="font-sans antialiased">
         <PrefsProvider>
           {/* The left rail from lg up (SideNav.tsx); everything else keeps --sidenav-w of room for it (globals.css). */}
-          <SideNav groups={navGroups({ history: historyOn() })} />
+          <SideNav groups={navGroups({ history: historyOn(), sale: holidayNav() })} />
           <div className="lg:pl-[var(--sidenav-w)]">
             <Header />
+            <HolidayStrip />
             <PreorderStrip />
             <main className="mx-auto max-w-7xl px-4 py-6">{children}</main>
             <Footer />
