@@ -22,19 +22,16 @@ import { useMarket } from "./ClientPrefs";
 import { EbayWord } from "./EbayCallout";
 import { AdDock, DockGate, DockTile, DOCK_LINK, type DockSide } from "./AdDock";
 
-/** From MIN_WIDTH a rail RAIL_W wide sits GUTTER outside each side of the page column (globals.css narrows the column to make room). */
+/** From MIN_WIDTH a rail RAIL_W wide sits flush against each side of the window (globals.css narrows the column to make room). */
 export const MIN_WIDTH = 1280;
 export const RAIL_W = 136;
-const GUTTER = 12;
-/** The column's widest (Tailwind max-w-7xl, 80rem): from there the rails sit just outside it instead of at the window's edges. */
-const COLUMN_MAX = 1280;
-/** Vertical budget: the sticky header, a gutter above and below, the rail's own top line and note, its padding. */
+/** Vertical budget: the sticky header, the rail's own top line and note. */
 const HDR = 55;
 const HEAD = 30;
 const NOTE = 34;
-const PAD = 16;
+const PAD = 0;
 /** One tile: a card-shaped (5:7) picture across the tile, a title line and a price line. */
-export const TILE_H = 6 + Math.round(((RAIL_W - PAD - 12) * 7) / 5) + 4 + 18 + 20 + 6;
+export const TILE_H = 16 + Math.round(((RAIL_W - 1 - 16) * 7) / 5) + 4 + 18 + 20 + 1;
 export const MAX_TILES = 10;
 /** A market's own eBay tiles are shown from this many; fewer, and the rail shows eBay US (as the card ad pair does). */
 const MIN_OWN = 4;
@@ -42,7 +39,7 @@ const EBAY_SEARCH_MARKETS = ["US", "UK", "AU", "CA"] as const;
 
 /** Whether a window this tall holds a rail with at least one whole tile in view (the rest scroll). Pure, for the tests. */
 export function railFits(innerHeight: number): boolean {
-  return innerHeight - HDR - 2 * GUTTER - HEAD - NOTE - PAD >= TILE_H;
+  return innerHeight - HDR - HEAD - NOTE - PAD >= TILE_H;
 }
 
 /** The eBay tiles a market's rail shows: its own when it has enough, else eBay US's. Pure, for the tests. */
@@ -135,17 +132,18 @@ export function SideAds() {
   );
 }
 
-const RAIL = "side-rail fixed z-30 hidden flex-col rounded-2xl border border-ink-700/60 bg-ink-900 p-2 min-[1280px]:flex";
-const LIST = "rail-scroll grid min-h-0 grid-cols-1 flex-1 content-start gap-2 overflow-y-auto overscroll-contain";
-const TILE = "group flex flex-col rounded-xl border border-ink-700 bg-ink-950/40 p-1.5 transition-colors hover:border-[var(--ad-accent)]";
+const RAIL = "side-rail fixed z-30 hidden flex-col border-ink-700/60 bg-ink-900 min-[1280px]:flex";
+const LIST = "rail-scroll grid min-h-0 grid-cols-1 flex-1 content-start overflow-y-auto overscroll-contain border-y border-ink-700/60";
+const TILE = "group flex flex-col border-b border-ink-700/60 px-2 py-2 transition-colors hover:bg-ink-950/50";
 
 const railStyle = (side: "left" | "right", accent: string): CSSProperties => ({
-  top: `calc(var(--hdr) + ${GUTTER}px)`,
-  bottom: GUTTER,
+  // Flush (owner, 2026-11-07: "I don't like how it's floating … no gap"): from the header to the window's foot, against the
+  // navigation rail (left) or the window's edge (right), square, one hairline facing the page; tiles edge to edge.
+  top: "var(--hdr)",
+  bottom: 0,
   width: RAIL_W,
-  // Just outside the column: GUTTER from it, and never closer than GUTTER to the navigation rail or the window's edge. 100% is the
-  // window's width without its scrollbar (a fixed element's containing block), as the column's is.
-  [side]: `calc(${side === "left" ? "var(--sidenav-w) + " : ""}max(${GUTTER}px, (100% - var(--sidenav-w)) / 2 - ${COLUMN_MAX / 2 + GUTTER + RAIL_W}px))`,
+  [side]: side === "left" ? "var(--sidenav-w)" : 0,
+  [side === "left" ? "borderRightWidth" : "borderLeftWidth"]: 1,
   ["--ad-accent" as string]: accent,
 });
 
@@ -153,7 +151,7 @@ function Rail(props: { side: "left" | "right"; label: string; brand: ReactNode; 
   const { side, label, brand, accent, tiles, tileHref, allHref, allLabel, note, sub } = props;
   return (
     <aside role="group" data-ad={`side-${side}`} aria-label={label} className={RAIL} style={railStyle(side, accent)}>
-      <div className="mb-2 flex h-[22px] shrink-0 items-center justify-between px-1">
+      <div className="flex h-[30px] shrink-0 items-center justify-between px-2">
         {brand}
         <span className="rounded bg-ink-950/70 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-muted">Ad</span>
       </div>
@@ -171,7 +169,7 @@ function Rail(props: { side: "left" | "right"; label: string; brand: ReactNode; 
           </li>
         ))}
       </ul>
-      <p className="mt-2 flex h-[26px] shrink-0 flex-col justify-center px-1 text-[10px] leading-[13px] text-muted">
+      <p className="flex h-[34px] shrink-0 flex-col justify-center px-2 text-[10px] leading-[13px] text-muted">
         <a href={allHref} rel="sponsored nofollow noopener" target="_blank" className="truncate font-bold" style={{ color: accent === "#0064d2" ? "#4f9cf0" : "#4fa3ff" }}>
           {allLabel}
         </a>
