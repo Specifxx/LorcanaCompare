@@ -2,7 +2,6 @@ import Link from "@/components/Link";
 import { RateUsLink } from "./site-reviews/SiteReviews";
 import { SITE } from "@/site.config";
 import { creatorsOn } from "@/lib/creators";
-import { NETWORK_PAGE, footerSisters } from "@/lib/family-network";
 import { historyOn } from "@/lib/data";
 
 export function Footer() {
@@ -54,15 +53,10 @@ export function Footer() {
           </ul>
         </div>
         <div>
-          {/* The other card sites, by brand name only (owner, 2026-11-03: no hobby or tech sites in a card
-              site's footer), then one link to the network page that lists every site (DECISIONS.md). */}
-          <p className="mb-2 font-semibold">Other card games</p>
-          <p className="text-muted">
-            {footerSisters(SITE.family.id).map((s, i) => (
-              <span key={s.id}>{i ? " · " : ""}<a href={s.url} rel="noopener" title={s.label}>{s.name}</a></span>
-            ))}
-          </p>
-          <p className="mt-2 text-muted"><a href={NETWORK_PAGE} rel="noopener">A Compare Empire site →</a></p>
+          {/* One link to the page that lists our other sites (2026-11-08): the other card sites named on every page were
+              thousands of site-wide links between our own sites, the pattern Google's link-spam policy warns about. */}
+          <p className="mb-2 font-semibold">Compare Empire</p>
+          <p className="text-muted"><Link href="/our-sites">Our other price comparison sites →</Link></p>
         </div>
       </div>
       <p className="mx-auto max-w-7xl px-4 pb-8 text-xs text-muted">
