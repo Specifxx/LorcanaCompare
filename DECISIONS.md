@@ -1594,3 +1594,10 @@ DexCompare's footer went first (CompareEmpire #153); every other site now does t
 internal page, `/our-sites`, and that page links each other family site once, by its plain name, from
 `FAMILY_SITES` (`lib/family-network.ts`, unchanged; `footerSisters` stays for the shared test). Every other footer
 link, page URL and title is unchanged. Cross-traffic still comes from the price blocks on the deals and pre-order pages.
+
+## 2026-11-08 — Engine: the store focus option (off here)
+
+BandaiCompare's cull (bandaicompare DECISIONS.md, same date) added `SITE.catalogFocus` (`lib/import/focus.ts`): after
+the store pass, keep products the stores sell, chase cards, new sealed and search demand. It is off on this site (no
+`catalogFocus` in `site.config.ts`), so nothing here changes; the synced set page now 301s a released set with no
+products to its game hub or `/sets` (none today).

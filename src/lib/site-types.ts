@@ -132,6 +132,11 @@ export interface SiteConfig {
    *  this many US cents, except in sets released in the last 120 days.
    *  For games with tens of thousands of printings (data size, build size). */
   catalogMinCardCents?: number;
+  /** The store focus, after the store pass (lib/import/focus.ts): a card stays when it is in stock at
+   *  `minStores` stores in one market, or worth `keepListedCents` with a store listing it, or worth
+   *  `keepCents`; sealed when any store has it, it is new or upcoming, or it is a priced box or case.
+   *  Search demand always stays. Off when unset. */
+  catalogFocus?: { minStores: number; keepListedCents: number; keepCents: number };
   /** Cards under this TCGplayer price (US cents) stay out of the sitemap but
    *  remain crawlable through set pages. Default 50. A new domain with tens of
    *  thousands of card URLs gets few of them crawled; this points Google at
@@ -365,6 +370,9 @@ export interface Meta {
   stores: Record<string, StoreStatus>;
   ebay: { day: string; calls: number; budget: number; eligible: number; refreshed: number; at: string } | null;
   counts: { cards: number; sealed: number; offers: number; sets: number };
+  /** Set when the store focus (SITE.catalogFocus) shaped this catalogue: tomorrow's import then
+   *  treats catalog.json's products as yesterday's kept list (hysteresis). */
+  focused?: boolean;
 }
 
 export interface EbayPick {

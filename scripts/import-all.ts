@@ -16,6 +16,7 @@ import type { Catalog, EbayPick, Market, Meta, Offer, PriceEntry, Prices, StoreS
 import { CURRENCY } from "@/lib/site-types";
 import { loadTcgcsv, referenceCents } from "@/lib/import/tcgcsv";
 import { readDemandSlugs } from "@/lib/import/demand";
+import { focusCatalog } from "@/lib/import/focus";
 import { fetchStore, storeCurrency } from "@/lib/import/shopify";
 import { buildIndex, isPreorder, isUnfitListing, looksSealed, matchCard, matchSealed, printingOf } from "@/lib/import/match";
 import {
@@ -70,7 +71,12 @@ async function main() {
 
   // 1. Catalogue + TCGplayer
   console.log(`[tcgcsv] category ${SITE.tcgcsvCategoryId}`);
-  const { sets, products, tcg, culled } = await loadTcgcsv(now, SITE.catalogMinCardCents ? readDemandSlugs() : new Set());
+  const demand = SITE.catalogMinCardCents || SITE.catalogFocus ? readDemandSlugs() : new Set<string>();
+  // Yesterday's catalogue, read before it is overwritten: the store focus's hysteresis (lib/import/focus.ts).
+  const prevKept = prevMeta?.focused ? new Set(readJson<Catalog | null>(path.join(PUBLIC, "catalog.json"), null)?.products.map((p) => p.id) ?? []) : new Set<number>();
+  const loaded = await loadTcgcsv(now, demand);
+  const { sets, tcg, culled } = loaded;
+  let products = loaded.products;
   console.log(`[tcgcsv] ${sets.length} sets, ${products.length} products`);
   // Before release TCGplayer carries placeholder listings ($9,999 boxes) with
   // no market price. For upcoming sets, only a real market price counts.
@@ -78,7 +84,6 @@ async function main() {
   for (const p of products)
     if (upcomingIds.has(p.setId) && tcg[p.id])
       for (const [k, v] of Object.entries(tcg[p.id])) if (v.market == null) delete tcg[p.id][k];
-  const catalog: Catalog = { generatedAt: now.toISOString(), sets, products };
   const byId = new Map(products.map((p) => [p.id, p]));
   const fx = await fxRates(prevMeta?.fx ?? {});
 
@@ -157,6 +162,20 @@ async function main() {
     for (const [id, entry] of Object.entries(prevPrices.byId))
       for (const o of entry.offers) if (o.source !== "ebay" && o.source !== "tcgplayer") addOffer(Number(id), o);
   }
+
+  // 2b. The store focus (SITE.catalogFocus): after matching on the whole catalogue, keep what the
+  // stores sell, the chase cards and anything people search for. Before eBay, so the shared keyset's
+  // calls go only to products that keep a page.
+  if (SITE.catalogFocus) {
+    const kept = focusCatalog({ products, sets, offers: storeOffers, tcg, rule: SITE.catalogFocus, now, demand, previous: prevKept });
+    const keptIds = new Set(kept.map((p) => p.id));
+    for (const p of products) if (!keptIds.has(p.id)) { culled.push({ slug: p.slug, setId: p.setId }); byId.delete(p.id); }
+    for (const id of [...storeOffers.keys()]) if (!keptIds.has(id)) storeOffers.delete(id);
+    console.log(`[focus] ${kept.length} of ${products.length} products kept (${prevKept.size ? "with" : "without"} yesterday's list)`);
+    products = kept;
+    for (const s of sets) s.productCount = products.filter((p) => p.setId === s.id).length;
+  }
+  const catalog: Catalog = { generatedAt: now.toISOString(), sets, products };
 
   // 3. eBay
   const refUsd = new Map(products.map((p) => [p.id, referenceCents(tcg[p.id])]));
@@ -312,11 +331,12 @@ async function main() {
       offers: offerCount,
       sets: sets.length,
     },
+    ...(SITE.catalogFocus ? { focused: true } : {}),
   };
 
   writeJson(path.join(PUBLIC, "catalog.json"), catalog);
-  // Culled cards' URLs -> their set (lib/culled.ts), only for sets still listed.
-  const setSlugById = new Map(sets.filter((s) => s.productCount > 0).map((s) => [s.id, s.slug]));
+  // Culled products' URLs -> their set (lib/culled.ts); a set left empty 301s on to its game.
+  const setSlugById = new Map(sets.map((s) => [s.id, s.slug]));
   writeJson(path.join(PUBLIC, "culled.json"), Object.fromEntries(culled.flatMap((c) => (setSlugById.has(c.setId) ? [[c.slug, setSlugById.get(c.setId)!] as const] : [])).sort((a, b) => a[0].localeCompare(b[0]))));
   writePrices(prices.byId, products);
   fs.rmSync(path.join(PUBLIC, "prices.json"), { force: true });

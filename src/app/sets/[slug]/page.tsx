@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "@/components/Link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
+import { lineOfSet } from "@/lib/lines";
 import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
 import { byValue, priceOf, productsInSet, refCents, setBySlug, sets, summaryOf } from "@/lib/data";
@@ -42,6 +43,11 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
 export default function SetPage({ params }: { params: { slug: string } }) {
   const s = setBySlug(params.slug);
   if (!s) notFound();
+  // A released set the catalogue cull emptied (lib/import/focus.ts) goes to its game, or the set list.
+  if (s.productCount === 0 && !s.upcoming) {
+    const line = lineOfSet(s);
+    permanentRedirect(line ? `/games/${line.slug}` : "/sets");
+  }
   const all = byValue(productsInSet(s.id));
   const cards = all.filter((p) => p.kind === "card");
   const sealed = all.filter((p) => p.kind === "sealed");
