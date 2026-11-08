@@ -39,6 +39,7 @@ export function Footer() {
           <p className="mb-2 font-semibold">{SITE.name}</p>
           <ul className="space-y-1 text-muted">
             <li><Link href="/about">About</Link></li>
+            <li><Link href="/collection">My collection</Link></li>
             <li><Link href="/methodology">How prices work</Link></li>
             <li><Link href="/stores">Stores we track</Link></li>
             <li><Link href="/blog">Guides</Link></li>
