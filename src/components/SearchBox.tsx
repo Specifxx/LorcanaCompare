@@ -29,7 +29,8 @@ export function SearchBox({ big = false, placeholder }: { big?: boolean; placeho
       className="relative w-full"
       onSubmit={(e) => {
         e.preventDefault();
-        router.push(`/cards?q=${encodeURIComponent(q.trim())}`);
+        // A pasted store link goes to the "Is this a good price?" checker (lib/link-check.ts), in the fragment: one CDN copy.
+        router.push(/^\s*(https?:\/\/|[a-z0-9-]+(\.[a-z0-9-]+)+\/)/i.test(q) ? `/tools/is-this-a-good-price#link=${encodeURIComponent(q.trim())}` : `/cards?q=${encodeURIComponent(q.trim())}`);
         setOpen(false);
       }}
     >
