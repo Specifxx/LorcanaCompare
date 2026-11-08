@@ -10,7 +10,7 @@ export const CREATORS: Creator[] = [
     name: "Dan Arnold Lorcana",
     blurb: "Competitive Disney Lorcana: weekly meta reports, deck guides, tournament breakdowns and coaching.",
     about:
-      "Dan Arnold has been deep in the Lorcana meta since the game launched. Every week he breaks down what is actually winning at the top tables, from event standings and the decks players registered to the best lists to bring to your next tournament. The meta reports, deck guides and podcasts land on YouTube and Instagram, and he coaches players of every level on Metafy.",
+      "Dan Arnold is a competitive Disney Lorcana player, Metafy coach and content creator with 25+ years of card game experience, including a 2019 Transformers TCG World Championship. His weekly data-driven meta reports and deck guides help players walk into their next Set Championship, CCQ or DLC ready to win.",
     links: [
       { platform: "YouTube", url: "https://www.youtube.com/@danarnoldlorcana", handle: "@danarnoldlorcana" },
       { platform: "Instagram", url: "https://www.instagram.com/danarnoldlorcana/", handle: "@danarnoldlorcana" },
