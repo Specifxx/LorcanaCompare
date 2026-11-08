@@ -4,7 +4,6 @@ import { SearchBox } from "@/components/SearchBox";
 import { MarketChooser } from "@/components/ClientPrefs";
 import { CreatorsBubble } from "@/components/creators/CreatorsBubble";
 import { HeroSparks } from "@/components/HeroSparks";
-import { ChristmasDecor } from "@/components/ChristmasDecor";
 import { ChristmasGifts } from "@/components/ChristmasGifts";
 import { TileGrid } from "@/components/ProductTile";
 import { byValue, deals, latestReleasedSet, meta, products, productsInSet } from "@/lib/data";
@@ -93,8 +92,6 @@ export default function Home() {
           the page container; `hero-search` keeps the suggestions above what follows. */}
       <section className="hero-band hero-bleed relative -mt-6 flex flex-col items-center justify-center overflow-x-clip px-4 pb-10 pt-8 text-center sm:px-8 sm:pb-14 sm:pt-12">
         <HeroSparks />
-        {/* Christmas (1 November to Boxing Day): snow, lights, trees. */}
-        <ChristmasDecor />
         <CreatorsBubble />
         <ChristmasGifts />
         <p className="mx-auto hidden items-center justify-center gap-2 font-display text-base font-black sm:flex">

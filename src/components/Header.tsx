@@ -18,10 +18,8 @@ export function Header() {
     <header className="sticky top-0 z-30 border-b border-ink-800/70 bg-ink-950/85 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center gap-2 px-4 py-2.5 sm:gap-4">
         <Link href="/" className="flex min-w-0 shrink items-center gap-2 overflow-x-clip whitespace-nowrap font-display text-base font-black leading-none sm:shrink-0 sm:overflow-visible sm:text-lg lg:hidden" aria-label={`${SITE.name} home`}>
-          {/* In a host span so the Christmas Santa hat (globals.css .xmas-logo-hat) can sit on the icon. */}
-          <span className="xmas-hat-host">
+          <span className="relative inline-flex shrink-0">
             <img src="/icon.svg" alt={`${SITE.name} logo`} width={34} height={34} className="h-[30px] w-[30px] shrink-0 rounded-xl sm:h-[34px] sm:w-[34px]" />
-            <span aria-hidden="true" className="xmas-logo-hat" />
           </span>
           <span className="wordmark">{SITE.wordmark[0]}</span> <span className="text-fg">{SITE.wordmark[1]}</span>
           <span className="season-only ml-1 inline" aria-hidden>🎃</span>
