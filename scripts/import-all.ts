@@ -18,7 +18,7 @@ import { loadTcgcsv, referenceCents } from "@/lib/import/tcgcsv";
 import { readDemandSlugs } from "@/lib/import/demand";
 import { focusCatalog } from "@/lib/import/focus";
 import { fetchStore, storeCurrency } from "@/lib/import/shopify";
-import { buildIndex, isPreorder, isUnfitListing, looksSealed, matchCard, matchSealed, printingOf } from "@/lib/import/match";
+import { buildIndex, handleOf, isForeign, isPreorder, isUnfitListing, looksSealed, matchCard, matchSealed, printingOf } from "@/lib/import/match";
 import {
   ebayCredentials,
   ebayRemaining,
@@ -112,6 +112,7 @@ async function main() {
         const best = new Map<string, Offer>();
         for (const it of items) {
           if (isUnfitListing(it.title)) continue;
+          if (isForeign(handleOf(it.url))) continue;
           const sealed = looksSealed(it.title, it.productType, SITE.numberStyle);
           const m = sealed ? matchSealed(it.title, idx) : matchCard(it.title, idx, `${it.productType} | ${it.tags.join(" | ")}`);
           if (!m) continue;
