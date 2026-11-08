@@ -10,7 +10,8 @@ must stay game-agnostic: anything game-specific goes in `src/site.config.ts` or
 Lorcana Compare, Cyberpunk Compare and BandaiCompare run ONE
 engine (Gundam Compare ran it until 2026-11-04, when the owner moved it onto
 the Dex / MTG Compare engine, and YGO Compare until 2026-11-06, when it moved there too as a sealed-only
-site; neither `Specifxx/GundamCompare` nor `Specifxx/ygocompare` is a sister any more).
+site, and BandaiCompare on 2026-11-08, sealed-only too; none of `Specifxx/GundamCompare`, `Specifxx/ygocompare`
+or `Specifxx/bandaicompare` is a sister any more).
 `engine.json` lists its files (the code, tests and build config; never
 `src/site.config.ts`, `src/content/`, icons, share images, workflows or
 `data/`), and they must be byte-identical in all three repos. After an engine
