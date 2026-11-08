@@ -34,9 +34,8 @@ export function SideNav({ groups: given }: { groups?: NavGroup[] }) {
   return (
     <nav aria-label="Site navigation" className="sidenav fixed inset-y-0 left-0 z-40 hidden w-[var(--sidenav-w)] flex-col border-r border-ink-800/80 bg-ink-950/95 backdrop-blur lg:flex">
       <Link href="/" className="flex items-center gap-2 px-4 py-3 font-display text-base font-black leading-none" aria-label={`${SITE.name} home`}>
-        <span className="xmas-hat-host">
+        <span className="relative inline-flex shrink-0">
           <img src="/icon.svg" alt={`${SITE.name} logo`} width={32} height={32} className="h-8 w-8 shrink-0 rounded-xl" />
-          <span aria-hidden="true" className="xmas-logo-hat" />
         </span>
         <span>
           <span className="wordmark">{SITE.wordmark[0]}</span> <span className="text-fg">{SITE.wordmark[1]}</span>
