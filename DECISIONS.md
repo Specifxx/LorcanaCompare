@@ -1610,3 +1610,13 @@ logo, candy-cane stripes and seasonal palette swaps) is gone, with its art in `p
 touch, drawn in the site's own colours: the gifts line in the hero (`ChristmasGifts`, `.xmas-pill`), a plain pill that inherits the hero's text colour, with no gift icon or red glow. (wording still `SITE.christmas`). It still starts and ends by itself (`lib/season.ts`, 1 November to
 Boxing Day), and the tests pin that nothing else comes back. Black Friday and Cyber Monday (strip, pages, nav) are
 unchanged. The same rule went to every sister site: the site's own identity first.
+
+## 2026-11-08 — The card share image is text only (Vercel cost cap)
+
+Vercel's billing (owner's team, 2026-11-08) showed ISR writes as the biggest line on the team after Compare Empire's
+CPU, and Observability put ~90% of this engine family's ISR write units on one route: `/card/[slug]/opengraph-image`.
+Each image carried the card's art and came out at ~580 KB, and Vercel bills every cached copy by the 8 KB write unit
+(~72 units per image, written again each day and after every deploy as crawlers fetch `og:image`). The image keeps
+everything that makes it worth sharing (name, set and number, the US price gap or TCGplayer market) and drops the art:
+flat colour and text render at ~49 KB, about a twelfth. `tests/share.test.ts` fails if `<img>` or `imageAt` comes back.
+The page itself still shows the art; only the link thumbnail lost it.
