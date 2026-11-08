@@ -1,7 +1,7 @@
 {
  "v": 1,
  "site": "lorcana",
- "generatedAt": "2026-11-07T13:11:39.489Z",
+ "generatedAt": "2026-11-08T13:42:55.869Z",
  "links": {
   "US": {
    "deals": "https://www.lorcanacompare.com/black-friday",
@@ -33,7 +33,7 @@
    "currency": "USD",
    "store": "Minted TCG",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/723336_200w.jpg",
-   "refCents": 29925,
+   "refCents": 29865,
    "refLabel": "TCGplayer market price",
    "savingPct": 52
   },
@@ -55,15 +55,15 @@
    "kind": "deal",
    "cluster": "cards",
    "region": "US",
-   "title": "Wilds Unknown Booster Box",
-   "url": "https://www.lorcanacompare.com/card/disney-lorcana-wilds-unknown-booster-box",
-   "cents": 17499,
+   "title": "Into the Inkdark Illumineer's Trove",
+   "url": "https://www.lorcanacompare.com/card/disney-lorcana-into-the-inkdark-illumineers-trove",
+   "cents": 7995,
    "currency": "USD",
-   "store": "Gator's Card Den",
-   "image": "https://tcgplayer-cdn.tcgplayer.com/product/678165_200w.jpg",
-   "refCents": 22637,
+   "store": "Lazarus Games",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/723343_200w.jpg",
+   "refCents": 10850,
    "refLabel": "TCGplayer market price",
-   "savingPct": 23
+   "savingPct": 26
   },
   {
    "kind": "deal",
@@ -75,9 +75,9 @@
    "currency": "USD",
    "store": "Red Raccoon Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/690384_200w.jpg",
-   "refCents": 17734,
+   "refCents": 17576,
    "refLabel": "TCGplayer market price",
-   "savingPct": 19
+   "savingPct": 18
   },
   {
    "kind": "deal",
