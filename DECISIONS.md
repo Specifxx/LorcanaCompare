@@ -1684,3 +1684,21 @@ matcher runs here, so the fix is ported (Gundam Compare DECISIONS.md, 2026-11-08
 ## 2026-11-09 — TokyoToys (UK) added for Lorcana
 
 TokyoToys (tokyotoys.com, Shopify, GBP, UK mainland delivery only; vetted for Cyberpunk Compare, see its DECISIONS.md) lists Lorcana sealed through its `lorcana-tcg` collection (read by hand 2026-11-09, items in stock with tracked inventory). UK market only. Its titles carry a "RELEASE <date>:" prefix. Dex and MTG Compare already list it; One Piece, Pokemon (English) and Union Arena / Digimon / Fusion World sealed are not stocked, so those sites do not.
+
+
+## 2026-11-09 — Navigation by the game's own dimensions (owner: "navigation is very, very important")
+
+A player deep in a game looks for their ink or colour, a rarity, a set or a sealed type first; the header said only Sealed, Guides
+and Tools, the rail was one flat "Prices" list and the phone had a row of chips with no menu. Audit: `/mnt/project-files/nav-audit/`.
+
+- `lib/shop-nav.ts` builds ONE list from the hubs that already exist (`attrFacets`, `rarityHubs`, `sealedHubs`, the set list): no new
+  page, query or cache entry, and no link to a hub with no products. Three readers: the header dropdowns (`HeaderMenus.tsx`, xl and
+  up: Cards by each facet and rarity, Sets, Sealed by type; CSS-only, hover or focus-within, plain links in the server HTML, the panel
+  spans the header row), the rail (`navGroups({ shop })`: "Shop by <facet>", rarity, Sets, Sealed by type, then deals, tools and
+  guides folded) and the phone menu (`MobileMenu.tsx`, a `<dialog>` opened by "Menu", the same groups, no region step).
+- Header is `z-50` so a dropdown is never under the side rails. The search box keeps 14rem at xl; Guides and Tools return to the
+  header at 2xl (they are in the rail and the menu).
+- Engine change: identical in Lorcana and Cyberpunk Compare (`scripts/engine-sync.sh`); each game's facets come from its own
+  `SITE.cardHubs`, so nothing game-specific is in the engine.
+- Not done: a cross-filter hub (ink x set, rarity x set) and a rarity row in the breadcrumb ("By rarity"), which would add pages
+  or change a BreadcrumbList; the footer's single link to /our-sites stays (2026-11-08 decision).

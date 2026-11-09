@@ -16,6 +16,8 @@ function isActive(pathname: string | null, href: string): boolean {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
+const FOLDED = new Set(["Free tools", "Guides & news"]);
+
 function Chevron({ open }: { open: boolean }) {
   return (
     <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={`h-3 w-3 shrink-0 transition-transform ${open ? "" : "-rotate-90"}`}>
@@ -28,7 +30,8 @@ export function SideNav({ groups: given }: { groups?: NavGroup[] }) {
   const pathname = usePathname();
   const groups = useMemo(() => given ?? navGroups(), [given]);
   const [q, setQ] = useState("");
-  const [closed, setClosed] = useState<Set<string>>(() => new Set());
+  // The tools and guides start folded (a collector came for the game's own shelves) unless the visitor is on one of them.
+  const [closed, setClosed] = useState<Set<string>>(() => new Set(groups.filter((g) => FOLDED.has(g.title) && !g.links.some((l) => isActive(pathname, l.href))).map((g) => g.title)));
   const needle = q.trim().toLowerCase();
   const shown: NavGroup[] = needle ? groups.map((g) => ({ ...g, links: g.links.filter((l) => l.label.toLowerCase().includes(needle)) })).filter((g) => g.links.length > 0) : groups;
   return (

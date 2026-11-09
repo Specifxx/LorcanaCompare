@@ -26,6 +26,7 @@ import { ShareArrival } from "@/components/ShareArrival";
 import { SideNav } from "@/components/SideNav";
 import { SideAds } from "@/components/SideAds";
 import { navGroups } from "@/lib/nav";
+import { shopNav } from "@/lib/shop-nav";
 import { historyOn } from "@/lib/data";
 import { fitDescription } from "@/lib/seo-title";
 
@@ -71,7 +72,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="font-sans antialiased">
         <PrefsProvider>
           {/* The left rail from lg up (SideNav.tsx); everything else keeps --sidenav-w of room for it (globals.css). */}
-          <SideNav groups={navGroups({ history: historyOn(), sale: holidayNav() })} />
+          <SideNav groups={navGroups({ history: historyOn(), sale: holidayNav(), shop: shopNav().groups })} />
           <div className="lg:pl-[var(--sidenav-w)]">
             <Header />
             <HolidayStrip />

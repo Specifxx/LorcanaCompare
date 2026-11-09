@@ -3,7 +3,10 @@ import { SITE } from "@/site.config";
 import { SearchBox } from "./SearchBox";
 import { MarketPicker, ThemeToggle } from "./ClientPrefs";
 import { CartHeaderLink } from "./cart/CartHeaderLink";
-import { phoneNav } from "@/lib/nav";
+import { navGroups, phoneNav } from "@/lib/nav";
+import { shopNav } from "@/lib/shop-nav";
+import { HeaderMenus } from "./HeaderMenus";
+import { MobileMenu } from "./MobileMenu";
 import { historyOn } from "@/lib/data";
 import { holidayNav } from "@/lib/holiday-nav";
 
@@ -13,10 +16,12 @@ import { holidayNav } from "@/lib/holiday-nav";
 // of the main sections (lib/nav.ts).
 export function Header() {
   const sale = holidayNav();
-  const nav = phoneNav({ history: historyOn(), sale });
+  const shop = shopNav();
+  const opts = { history: historyOn(), sale, shop: shop.groups };
+  const nav = phoneNav(opts);
   return (
-    <header className="sticky top-0 z-30 border-b border-ink-800/70 bg-ink-950/85 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center gap-2 px-4 py-2.5 sm:gap-4">
+    <header className="sticky top-0 z-50 border-b border-ink-800/70 bg-ink-950/85 backdrop-blur">
+      <div className="relative mx-auto flex max-w-7xl items-center gap-2 px-4 py-2.5 sm:gap-4">
         <Link href="/" className="flex min-w-0 shrink items-center gap-2 overflow-x-clip whitespace-nowrap font-display text-base font-black leading-none sm:shrink-0 sm:overflow-visible sm:text-lg lg:hidden" aria-label={`${SITE.name} home`}>
           <span className="relative inline-flex shrink-0">
             <img src="/icon.svg" alt={`${SITE.name} logo`} width={34} height={34} className="h-[30px] w-[30px] shrink-0 rounded-xl sm:h-[34px] sm:w-[34px]" />
@@ -24,14 +29,17 @@ export function Header() {
           <span className="wordmark">{SITE.wordmark[0]}</span> <span className="text-fg">{SITE.wordmark[1]}</span>
           <span className="season-only ml-1 inline" aria-hidden>🎃</span>
         </Link>
-        <div className="hidden min-w-0 flex-1 md:block lg:max-w-xl">
+        <div className="hidden min-w-0 flex-1 md:block lg:max-w-xl xl:min-w-[14rem]">
           <SearchBox />
         </div>
         <div className="ml-auto flex shrink-0 items-center gap-2">
           {sale && <Link href={sale.href} className="hidden rounded-full px-3 py-1.5 text-sm font-semibold text-brand-400 hover:bg-ink-800 lg:inline-block">{sale.label}</Link>}
-          <Link href="/sealed" className="hidden rounded-full px-3 py-1.5 text-sm text-fg/85 hover:bg-ink-800 lg:inline-block">Sealed</Link>
-          <Link href="/blog" className="hidden rounded-full px-3 py-1.5 text-sm text-fg/85 hover:bg-ink-800 lg:inline-block">Guides</Link>
-          <Link href="/tools" className="hidden rounded-full px-3 py-1.5 text-sm text-fg/85 hover:bg-ink-800 lg:inline-block">Tools</Link>
+          {/* xl: Cards, Sets and Sealed open dropdowns (lib/shop-nav.ts); lg has the rail, so only the short row. */}
+          <HeaderMenus menus={shop.menus} />
+          <Link href="/tools/deal-finder" className="hidden rounded-full px-3 py-1.5 text-sm text-fg/85 hover:bg-ink-800 xl:inline-block">Deals</Link>
+          <Link href="/sealed" className="hidden rounded-full px-3 py-1.5 text-sm text-fg/85 hover:bg-ink-800 lg:inline-block xl:hidden">Sealed</Link>
+          <Link href="/blog" className="hidden rounded-full px-3 py-1.5 text-sm text-fg/85 hover:bg-ink-800 lg:inline-block xl:hidden 2xl:inline-block">Guides</Link>
+          <Link href="/tools" className="hidden rounded-full px-3 py-1.5 text-sm text-fg/85 hover:bg-ink-800 lg:inline-block xl:hidden 2xl:inline-block">Tools</Link>
           <MarketPicker />
           <ThemeToggle />
           {/* The cart list (components/cart, owner 2026-11-06), with its count: here from md, beside the search on phones. */}
@@ -45,7 +53,8 @@ export function Header() {
         </div>
         <CartHeaderLink className="text-fg/85" />
       </div>
-      <nav className="flex gap-1 overflow-x-auto px-4 pb-2 lg:hidden" aria-label="Main">
+      <nav className="flex items-center gap-1 overflow-x-auto px-4 pb-2 lg:hidden" aria-label="Main">
+        <MobileMenu groups={navGroups(opts)} />
         {nav.map((n) => (
           <Link key={n.href} href={n.href} className="shrink-0 rounded-full px-3 py-1 text-sm text-fg/85 hover:bg-ink-800">
             {n.label}
