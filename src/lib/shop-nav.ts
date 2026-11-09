@@ -74,5 +74,8 @@ function buildShopNav(): ShopNav {
   const groups: NavGroup[] = dims.map((d, i) => ({ title: d.title.replace(/^By /, "Shop by "), links: [...(i === 0 ? [{ href: "/cards", label: "All cards" }] : []), ...cap(d.links, RAIL_LINKS, d.all)] }));
   groups.push({ title: "Sets", links: cap(setLinks, 10, { href: "/sets", label: "Every set" }) });
   if (sealedLinks.length) groups.push({ title: "Sealed by type", links: [...sealedLinks, { href: "/sealed", label: "All sealed" }] });
-  return { menus, groups };
+  // A link the rail already shows (the "All cards" that closes a long list) is not repeated further down.
+  const seen = new Set<string>();
+  const unique = groups.map((g) => ({ ...g, links: g.links.filter((l) => !seen.has(l.href) && !!seen.add(l.href)) })).filter((g) => g.links.length);
+  return { menus, groups: unique };
 }
