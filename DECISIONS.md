@@ -1679,3 +1679,8 @@ matcher runs here, so the fix is ported (Gundam Compare DECISIONS.md, 2026-11-08
   name the product's own set, or a set whose name the product's set carries. A store's typo loses a row rather than a
   guess putting it on the wrong page.
 - Replaying the stored rows: one Chinese listing ("...-副本") stops matching on Cyberpunk Compare; nothing changes on Lorcana Compare.
+
+
+## 2026-11-09 — TokyoToys (UK) added for Lorcana
+
+TokyoToys (tokyotoys.com, Shopify, GBP, UK mainland delivery only; vetted for Cyberpunk Compare, see its DECISIONS.md) lists Lorcana sealed through its `lorcana-tcg` collection (read by hand 2026-11-09, items in stock with tracked inventory). UK market only. Its titles carry a "RELEASE <date>:" prefix. Dex and MTG Compare already list it; One Piece, Pokemon (English) and Union Arena / Digimon / Fusion World sealed are not stocked, so those sites do not.

@@ -322,6 +322,7 @@ export const STORES: StoreConfig[] = [
   { key: "unioncountygames", name: "Union County Games", base: "https://unioncountygames.co.uk", market: "UK", collections: ["disney-lorcana-singles", "lorcana-challenge-year-3-c2", "cc-lorcana-dis"], kind: "both" },
   { key: "yardsgames", name: "Yard's Games", base: "https://yardsgames.com", market: "UK", collections: ["disney-lorcana-singles"], kind: "both" },
   { key: "zatu", name: "Zatu Games", base: "https://zatu.com", market: "UK", collections: ["lorcana-winterspell", "lorcana"], kind: "both" },
+  { key: "tokyotoys", name: "TokyoToys", base: "https://tokyotoys.com", market: "UK", collections: ["lorcana-tcg"], kind: "sealed" },
   { key: "151collectables", name: "151Collectables", base: "https://151collectables.com", market: "US", collections: ["disney-lorcana", "disney-lorcana-1", "sealed-lorcana"], kind: "both" },
   { key: "accidentallycoolgames", name: "Accidentally Cool Games", base: "https://accidentallycoolgames.com", market: "US", collections: ["lorcana-products"], kind: "sealed" },
   { key: "ajtradingbros", name: "A&J Trading Bros LLC", base: "https://ajtradingbros.com", market: "US", collections: ["lorcana"], kind: "both" },
