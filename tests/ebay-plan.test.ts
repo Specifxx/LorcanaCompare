@@ -53,15 +53,35 @@ test("expensive and in-demand first; fresh results are not re-checked", () => {
 test("the US first: planned before the UK and AU, and it takes the slots they leave", () => {
   const products = Array.from({ length: 400 }, (_, i) => p(i + 1));
   const ref = new Map(products.map((x) => [x.id, 2000 + x.id * 10]));
-  // The UK and AU checked everything an hour ago: their slots are free.
+  // The other markets checked everything an hour ago: their slots are free.
   const fresh = { at: new Date(now.getTime() - 3_600_000).toISOString(), offer: null };
-  const state = Object.fromEntries(products.map((x) => [x.id, { UK: fresh, AU: fresh }]));
+  const state = Object.fromEntries(products.map((x) => [x.id, { UK: fresh, AU: fresh, CA: fresh }]));
   const { calls } = planEbayRefresh({ products, refUsdCents: ref, clicks30d: new Map(), newSetIds: new Set(), state, budget: 200, now });
   assert.equal(calls.length, 200, "the spare slots are spent");
   assert.ok(calls.every((c) => c.market === "US"));
   const mixed = planEbayRefresh({ products, refUsdCents: ref, clicks30d: new Map(), newSetIds: new Set(), state: {}, budget: 200, now }).calls;
   const firstOther = mixed.findIndex((c) => c.market !== "US");
   assert.ok(firstOther > 0 && mixed.slice(firstOther).every((c) => c.market !== "US"), "every US call runs before any other market's");
+});
+
+// The owner's region split (2026-11-10): SITE.ebay.marketShares adds Canada; the US still runs first.
+test("market shares: Canada at the UK's size, the US first, never more than the budget", async () => {
+  const { marketShares } = await import("@/lib/import/ebay");
+  const products = Array.from({ length: 2000 }, (_, i) => p(i + 1));
+  const ref = new Map(products.map((x) => [x.id, 2000 + x.id * 10]));
+  const shares = marketShares({ US: 0.625, UK: 0.125, AU: 0.125, CA: 0.125 });
+  const { calls } = planEbayRefresh({ products, refUsdCents: ref, clicks30d: new Map(), newSetIds: new Set(), state: {}, budget: 1150, now }, shares);
+  const count = calls.reduce<Record<string, number>>((o, c) => ((o[c.market] = (o[c.market] ?? 0) + 1), o), {});
+  // 718 of its own, and the 3 the others' rounding leaves.
+  assert.deepEqual(count, { US: 721, UK: 143, AU: 143, CA: 143 });
+  const firstOther = calls.findIndex((c) => c.market !== "US");
+  assert.ok(calls.slice(firstOther).every((c) => c.market !== "US"), "every US call runs before any other market's");
+  assert.deepEqual(marketShares(undefined), { US: 0.75, UK: 0.125, AU: 0.125 });
+  assert.throws(() => marketShares({ US: 0.8, UK: 0.2, CA: 0.2 }));
+  assert.throws(() => marketShares({ UK: 0.5, CA: 0.5 }));
+  // A small catalogue (Cyberpunk's 120): every product in every market, inside the budget.
+  const few = planEbayRefresh({ products: products.slice(0, 120), refUsdCents: ref, clicks30d: new Map(), newSetIds: new Set(), state: {}, budget: 600, now }, marketShares({ US: 0.4, UK: 0.2, AU: 0.2, CA: 0.2 })).calls;
+  assert.equal(few.length, 480);
 });
 
 test("refresh intervals", () => {

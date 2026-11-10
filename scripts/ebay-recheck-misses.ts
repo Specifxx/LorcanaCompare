@@ -38,7 +38,7 @@ async function main() {
     .sort((a, b) => b.ref - a.ref);
   // --markets=US spends a small budget on eBay US first.
   const only = process.argv.find((a) => a.startsWith("--markets="))?.split("=")[1]?.split(",");
-  const markets = (Object.keys(MARKET_SHARE) as Market[]).filter((m) => (only ? only.includes(m) : m === "US" || m === "UK" || m === "AU"));
+  const markets = (Object.keys(MARKET_SHARE) as Market[]).filter((m) => (only ? only.includes(m) : true));
   let calls = 0;
   let found = 0;
   outer: for (const { p, ref } of misses) {

@@ -69,7 +69,9 @@ YGO Compare: Lorcana and Gundam 1,150 each, YGO
 `data/state/ebay-usage.json`. Cards under $10 get no call; every
 sealed product does. The
 plan is `planEbayRefresh` in `src/lib/import/ebay.ts`, pinned by
-`tests/ebay-plan.test.ts`. Do not raise `SITE.ebay.dailyBudget` without moving
+`tests/ebay-plan.test.ts`. The split between eBay sites is `SITE.ebay.marketShares`
+(owner's region split, 2026-11-10: US 0.625, UK, Australia and Canada 0.125 each; the US
+always runs first). Do not raise `SITE.ebay.dailyBudget` without moving
 another site's down by the same amount; the three must total 4,500 or less.
 
 ## Amazon's price on sealed pages (owner, 2026-11-05)

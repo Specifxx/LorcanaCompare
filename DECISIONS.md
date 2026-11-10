@@ -1717,3 +1717,20 @@ largest bill line until it moved to its CDN pattern (2026-10-17).
   revalidates under six hours.
 - Engine change: identical in Lorcana and Cyberpunk Compare (only the changed files were copied, because Cyberpunk's
   `tests/set-editions.test.ts` already carried a TokyoToys case Lorcana lacks).
+
+## 2026-11-10: Canada becomes an eBay market, at the UK's size (`SITE.ebay.marketShares`)
+
+**Why.** The 30 days to 11 Nov (`/mnt/project-files/strategy/ebay-site-region-split-2026-11-10.html`): 192 Canadian
+visitors and 206 buy clicks on Canadian pages, but no Canadian eBay search, so a Canadian visitor's eBay row was empty.
+The UK (26 visitors, A$34.06 of eBay) and Australia (21) each get 143 calls a day; the US needs about 619 for every
+eligible product and the site spent 905 of its 1,150. Bill approved the recommended region split the same day.
+
+**What.** One engine option, `SITE.ebay.marketShares` (default US 0.75, UK and AU 0.125, no Canada, so a site that
+does not set it behaves as before): `marketShares()` keeps only eBay sites we can search, requires the US and refuses a
+total over 1. Lorcana sets US 0.625, UK, AU and CA 0.125 each (143 a day each). The US is still planned and run first
+and keeps the slots the others leave. Canada uses the existing `EBAY_CA` marketplace: Canadian sellers, CAD, stated
+postage (the 2026-10-31 rule). A dry run on today's catalogue and state plans US 619 / UK 143 / AU 143 / CA 143 = 1,048
+of 1,150 for the next two runs: the site cap and the shared keyset (4,500 of 5,000) are unchanged.
+`ebay-recheck-misses.ts` now searches every market in the shares, and `/stores` names the eBay sites from them.
+Engine change: identical in Cyberpunk Compare, which sets US 0.4 and the others 0.2 (its 120 eligible products
+in every market daily, 480 of its 600).

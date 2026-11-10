@@ -52,6 +52,10 @@ export const SITE: SiteConfig = {
     // eligible product while YGO's 3,400 eligible products hit the cap). Never
     // raise one without lowering another by the same amount.
     dailyBudget: 1150,
+    // Canada joins at the UK's size (owner's region split, 2026-11-10: 192 Canadian visitors and 206 buy clicks on
+    // Canadian pages a month, no Canadian eBay search): 1,150 × 0.125 ≈ 143 each for the UK, Australia and Canada.
+    // The US needs about 620 a day for every eligible product and keeps any slots the others leave.
+    marketShares: { US: 0.625, UK: 0.125, AU: 0.125, CA: 0.125 },
     // Run hour (UTC) — YGO Compare (12) and Gundam Compare (18) run at other
     // hours on the same eBay app so no two sites race for the shared 5,000.
     runHourUtc: 6,

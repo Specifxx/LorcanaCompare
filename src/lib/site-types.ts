@@ -108,6 +108,9 @@ export interface SiteConfig {
     /** This site's share of the eBay app's daily Browse quota. */
     dailyBudget: number;
     runHourUtc: number;
+    /** Share of dailyBudget per eBay site (US, UK, AU, CA), summing to 1 or less. Default US 0.75, UK and AU
+     *  0.125 each, no Canada. The US is always planned and run first, whatever share it is given. */
+    marketShares?: Partial<Record<Market, number>>;
   };
   /** "fraction" 42/204 (Lorcana), "code" GD02-048 (Gundam), "plain" 001 / B001
    *  (Cyberpunk TCG: three digits, an optional letter, nothing else), "ygo" LOB-EN005
