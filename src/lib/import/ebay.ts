@@ -24,8 +24,9 @@
 //   3. Products that are due are ranked by value × demand × how overdue they
 //      are, and the budget is spent from the top. Anything left over refreshes
 //      not-yet-due products in the same order.
-//   4. A share of the budget goes to the UK and Australian eBay sites, for the
-//      highest-ranked products only.
+//   4. A share of the budget goes to the other eBay sites (the UK and
+//      Australia by default; Canada too where SITE.ebay.marketShares names it,
+//      owner's region split 2026-11-10), for the highest-ranked products only.
 //   5. The US comes first (owner, 2026-11-01): its calls are planned and run
 //      before any other market's, so a quota stop mid-run cuts the UK and
 //      Australia, never the US, and any slots the other markets leave unused
@@ -66,8 +67,17 @@ export function endUserContext(market: Market, reference: string): string {
   return `affiliateCampaignId=${EBAY_CAMPAIGN_ID},affiliateReferenceId=${reference},contextualLocation=${encodeURIComponent(`country=${mp.country},zip=${mp.zip}`)}`;
 }
 
-/** Share of the daily budget per eBay site. */
-export const MARKET_SHARE: Partial<Record<Market, number>> = { US: 0.75, UK: 0.125, AU: 0.125 };
+/** Share of the daily budget per eBay site: SITE.ebay.marketShares, else US 0.75 and UK and AU 0.125 each. */
+export const DEFAULT_MARKET_SHARE: Partial<Record<Market, number>> = { US: 0.75, UK: 0.125, AU: 0.125 };
+export const MARKET_SHARE: Partial<Record<Market, number>> = marketShares(SITE.ebay.marketShares);
+
+/** Only eBay sites we can search, and never more than the whole budget. */
+export function marketShares(given: Partial<Record<Market, number>> | undefined): Partial<Record<Market, number>> {
+  const shares = Object.fromEntries(Object.entries(given ?? DEFAULT_MARKET_SHARE).filter(([m, s]) => MARKETPLACE[m as Market] && (s ?? 0) > 0));
+  const total = Object.values(shares).reduce((a, b) => a + (b ?? 0), 0);
+  if (!shares.US || total > 1 + 1e-9) throw new Error(`SITE.ebay.marketShares must include the US and sum to 1 or less (${total})`);
+  return shares;
+}
 
 export interface EbayStateEntry {
   at: string; // last checked
@@ -101,7 +111,7 @@ export function intervalHours(usd: number, clicks: number, boosted: boolean): nu
   return h;
 }
 
-export function planEbayRefresh(input: PlanInput): { calls: PlannedCall[]; eligible: number } {
+export function planEbayRefresh(input: PlanInput, shares: Partial<Record<Market, number>> = MARKET_SHARE): { calls: PlannedCall[]; eligible: number } {
   const minCents = SITE.ebay.minPriceUsd * 100;
   const ranked: { product: Product; score: number; interval: number }[] = [];
   for (const p of input.products) {
@@ -126,8 +136,8 @@ export function planEbayRefresh(input: PlanInput): { calls: PlannedCall[]; eligi
 
   const calls: PlannedCall[] = [];
   const usLeft: PlannedCall[] = [];
-  // The US first, whatever order MARKET_SHARE is written in.
-  const markets = (Object.entries(MARKET_SHARE) as [Market, number][]).sort((a, b) => Number(b[0] === "US") - Number(a[0] === "US"));
+  // The US first, whatever order the shares are written in.
+  const markets = (Object.entries(shares) as [Market, number][]).sort((a, b) => Number(b[0] === "US") - Number(a[0] === "US"));
   for (const [market, share] of markets) {
     const slots = Math.floor(input.budget * share);
     // Secondary markets only look at the top of the ranking.
@@ -149,7 +159,7 @@ export function planEbayRefresh(input: PlanInput): { calls: PlannedCall[]; eligi
     });
   }
   // Slots the other markets could not use go to the US's next-ranked products,
-  // planned right after the US's own share so they run before the UK and AU.
+  // planned right after the US's own share so they run before the other markets.
   const spare = Math.max(0, input.budget - calls.length);
   if (spare && usLeft.length) {
     const usCount = calls.filter((c) => c.market === "US").length;

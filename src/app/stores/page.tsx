@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
 import { meta } from "@/lib/data";
-import { MARKET_LABEL } from "@/lib/site-types";
+import { MARKET_LABEL, type Market } from "@/lib/site-types";
 import { StaticPage } from "@/components/StaticPage";
 import { kitStoreStatus } from "@/lib/kits";
 import { SuggestStore } from "@/components/ReportForms";
@@ -14,9 +14,11 @@ export const metadata: Metadata = { title: `${SITE.gameShort} stores we compare`
 export default function Stores() {
   const m = meta();
   const markets = [...new Set(SITE.stores.map((s) => s.market))];
+  const ebayNames = (Object.keys(SITE.ebay.marketShares ?? { US: 1, UK: 1, AU: 1 }) as Market[]).map((mk) => ({ US: "US", UK: "UK", AU: "Australia", CA: "Canada" } as Partial<Record<Market, string>>)[mk] ?? mk);
+  const ebayList = ebayNames.length > 1 ? `${ebayNames.slice(0, -1).join(", ")} and ${ebayNames[ebayNames.length - 1]}` : ebayNames.join("");
   return (
     <StaticPage title={`${SITE.gameShort} stores we compare`}>
-      <p>Plus TCGplayer and eBay (US, UK and Australia). Know a store we should compare? <a href="#suggest">Suggest it below</a>. Run one? <a href="/list-your-store">List your store</a>, free. Every store is checked before it is listed and every week after: <a href="/how-we-pick-stores">how we pick stores</a>.</p>
+      <p>Plus TCGplayer and eBay ({ebayList}). Know a store we should compare? <a href="#suggest">Suggest it below</a>. Run one? <a href="/list-your-store">List your store</a>, free. Every store is checked before it is listed and every week after: <a href="/how-we-pick-stores">how we pick stores</a>.</p>
       {markets.map((mk) => (
         <section key={mk}>
           <h2>{MARKET_LABEL[mk]}</h2>
