@@ -7,6 +7,7 @@ export const post: Post = {
   title: "Disney Lorcana Black Friday 2026: the prices to beat",
   description: "Disney Lorcana Black Friday and Cyber Monday 2026: today's prices for the newest sets' sealed product, the cheapest store for each, and five checks before you buy.",
   date: "2026-11-07",
+  image: { src: "/blog/lorcana-black-friday-2026.jpg", alt: "Disney Lorcana Black Friday 2026" },
   keywords: ["lorcana black friday", "lorcana black friday deals", "lorcana cyber monday", "lorcana booster box black friday", "black friday 2026"],
   html: `
 <p>Black Friday is Friday 27 November 2026 and Cyber Monday is Monday 30 November. Plenty of stores will run sales on Disney Lorcana that week, and some start earlier. The one thing worth doing before then is knowing what each product costs today, so you can tell a real deal from a normal price with a red sticker on it.</p>

@@ -5,6 +5,7 @@ export const post: Post = {
   title: "Lorcana booster box or singles: which is cheaper for your deck?",
   description: "When opening a Lorcana booster box beats buying singles, when it doesn't, and how to check the numbers for any set with today's prices.",
   date: "2026-10-26",
+  image: { src: "/blog/lorcana-booster-box-or-singles.jpg", alt: "Lorcana booster box or singles" },
   keywords: ["lorcana booster box worth it", "lorcana booster box vs singles", "lorcana expected value", "is a lorcana box worth opening", "lorcana booster box price"],
   html: `
 <p>If you want specific cards for a deck, buying the singles is almost always cheaper than opening packs for them. Boxes make sense for a different reason: you enjoy opening them, you are playing a sealed event, or the box is selling at or under the value of what's inside. Here is how to tell which case you are in.</p>

@@ -6,6 +6,7 @@ export const post: Post = {
   title: "Which Disney movies have the most valuable Lorcana cards?",
   description: "Every Disney and Pixar franchise in Lorcana ranked by cards, median price and cards worth $10+, plus all six inks compared. Live prices, updated daily.",
   date: "2026-11-01",
+  image: { src: "/blog/lorcana-cards-by-disney-movie.jpg", alt: "Most valuable Lorcana cards by Disney movie" },
   keywords: ["lorcana cards by movie", "frozen lorcana cards", "most valuable lorcana franchise", "lorcana stitch cards", "lorcana princess cards", "lorcana ink colors"],
   html: `
 <p>Most people come to Disney Lorcana through a film they love: a Frozen fan wants every Elsa, a Lilo &amp; Stitch fan wants every Stitch. So which films have the most cards, and which are the most expensive to collect? The tables below are live and update every time we import prices.</p>
