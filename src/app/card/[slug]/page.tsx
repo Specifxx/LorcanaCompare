@@ -30,10 +30,7 @@ import { attrHref, rarityHref, sealedHref } from "@/lib/hubs";
 import { cardTitleCandidates, fitTitle, fitDescription } from "@/lib/seo-title";
 import { cardIndexable, priceValidUntil } from "@/lib/indexing";
 
-export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
-// Empty list = nothing prerendered at build, but each page is cached (ISR)
-// after its first visit instead of rendering on every request.
-export const generateStaticParams = () => [];
+export const dynamic = "force-dynamic"; // one CDN copy per URL (next.config.js CDN_PAGES), never ISR
 
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const p = productBySlug(params.slug);

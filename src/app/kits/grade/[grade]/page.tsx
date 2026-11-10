@@ -10,8 +10,7 @@ import { KitPrice } from "@/components/KitPrice";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { fitDescription } from "@/lib/seo-title";
 
-export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
-export const generateStaticParams = () => [];
+export const dynamic = "force-dynamic"; // one CDN copy per URL (next.config.js CDN_PAGES), never ISR
 
 // Tiles for the first kits, a plain list for the rest: an HG hub holds
 // hundreds of kits, and a tile each is hundreds of store photos.

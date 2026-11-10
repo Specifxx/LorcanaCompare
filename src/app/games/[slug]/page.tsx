@@ -12,8 +12,7 @@ import { TileGrid } from "@/components/ProductTile";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
 
-export const revalidate = 86400; // data only changes with a release
-export const generateStaticParams = () => [];
+export const dynamic = "force-dynamic"; // one CDN copy per URL (next.config.js CDN_PAGES), never ISR
 
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const line = lineBySlug(params.slug);

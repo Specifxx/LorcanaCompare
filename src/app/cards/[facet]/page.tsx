@@ -14,8 +14,7 @@ import { fitDescription } from "@/lib/seo-title";
 
 // The index of one attribute hub (SITE.cardHubs): every colour, type or
 // franchise with its card count, median and most valuable card.
-export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
-export const generateStaticParams = () => [];
+export const dynamic = "force-dynamic"; // one CDN copy per URL (next.config.js CDN_PAGES), never ISR
 
 const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 

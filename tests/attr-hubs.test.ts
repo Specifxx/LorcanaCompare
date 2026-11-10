@@ -28,10 +28,10 @@ test("every hub has enough cards, a slug, and never takes the rarity segment", (
   assert.ok((SITE.cardHubs ?? []).every((c) => /^[a-z-]+$/.test(c.facet)));
 });
 
-test("hub pages are cached a day and never prerendered", () => {
+test("hub pages are one CDN copy a day each (tests/vercel-cost.test.ts), never ISR and never prerendered", () => {
   for (const f of ["src/app/cards/[facet]/page.tsx", "src/app/cards/[facet]/[slug]/page.tsx"]) {
     const src = fs.readFileSync(f, "utf8");
-    assert.match(src, /revalidate = 86400/, f);
-    assert.match(src, /generateStaticParams = \(\) => \[\]/, f);
+    assert.match(src, /export const dynamic = "force-dynamic";/, f);
+    assert.doesNotMatch(src, /revalidate|generateStaticParams/, f);
   }
 });

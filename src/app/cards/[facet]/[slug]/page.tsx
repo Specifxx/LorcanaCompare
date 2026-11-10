@@ -14,8 +14,7 @@ import { fitTitle, fitDescription } from "@/lib/seo-title";
 
 // One attribute hub (SITE.cardHubs): every card of one colour, type or
 // franchise, most valuable first. Cached on first visit, never prerendered.
-export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
-export const generateStaticParams = () => [];
+export const dynamic = "force-dynamic"; // one CDN copy per URL (next.config.js CDN_PAGES), never ISR
 
 export function generateMetadata({ params }: { params: { facet: string; slug: string } }): Metadata {
   const f = attrFacet(params.facet);

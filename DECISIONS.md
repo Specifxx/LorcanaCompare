@@ -1702,3 +1702,18 @@ and Tools, the rail was one flat "Prices" list and the phone had a row of chips 
   `SITE.cardHubs`, so nothing game-specific is in the engine.
 - Not done: a cross-filter hub (ink x set, rarity x set) and a rarity row in the breadcrumb ("By rarity"), which would add pages
   or change a BreadcrumbList; the footer's single link to /our-sites stays (2026-11-08 decision).
+
+## 2026-11-10: catalogue pages are one CDN copy per URL, never ISR (site review X5)
+
+The site review (`/mnt/project-files/strategy/site-review-2026-11-10.html`) asked for hosting under A$3 a week. Card, kit,
+set, sealed-type, rarity, facet, game, grade and pre-order release pages were ISR (`revalidate` + an empty
+`generateStaticParams`): every first visit after a release was a render AND an ISR write, and ISR writes were OP Compare's
+largest bill line until it moved to its CDN pattern (2026-10-17).
+
+- Those ten routes are `export const dynamic = "force-dynamic"` and listed in `next.config.js` `CDN_PAGES`, which sends
+  `Vercel-CDN-Cache-Control: public, s-maxage=86400, stale-while-revalidate=86400`: one cached copy per URL at the edge, no
+  ISR write. Nothing in them reads a cookie, header or the session, so the copy is the same for every visitor.
+- The hub pages keep their `revalidate` (prerendered, few URLs). `tests/vercel-cost.test.ts` pins the list and that no page
+  revalidates under six hours.
+- Engine change: identical in Lorcana and Cyberpunk Compare (only the changed files were copied, because Cyberpunk's
+  `tests/set-editions.test.ts` already carried a TokyoToys case Lorcana lacks).
