@@ -6,6 +6,7 @@ export const post: Post = {
   description:
     "Lorcana Set 15 Into the Inkdark: the expected February 2027 release date, what Collector Boosters and the 23-copy Illustrious rarity are, and where to pre-order cheapest.",
   date: "2026-10-25",
+  image: { src: "/blog/into-the-inkdark-release-date-collector-boosters.jpg", alt: "Into the Inkdark release and Collector Boosters" },
   keywords: ["into the inkdark release date", "lorcana collector booster", "illustrious lorcana", "lorcana set 15", "serialized lorcana", "into the inkdark pre order"],
   html: `
 <p><b>Into the Inkdark</b> is Disney Lorcana's 15th main set and its first villain-themed one. It is also the biggest change to how Lorcana is sold since launch: it brings <b>Collector Boosters</b> and a new top rarity, <b>Illustrious</b>.</p>

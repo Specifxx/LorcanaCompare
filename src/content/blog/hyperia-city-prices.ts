@@ -6,6 +6,7 @@ export const post: Post = {
   description:
     "Every Hyperia City chase card and its price today — the two Iconics, all 18 Enchanteds and the booster box — compared across TCGplayer, eBay and stores, updated daily.",
   date: "2026-10-25",
+  image: { src: "/blog/hyperia-city-card-list-prices.jpg", alt: "Hyperia City most valuable cards" },
   keywords: ["hyperia city price list", "hyperia city enchanted", "mickey mouse best in town iconic price", "hyperia city booster box price", "lorcana set 14 cards"],
   html: `
 <p><b>Hyperia City</b>, Disney Lorcana's 14th set, hit stores on 23 October 2026 after prerelease weekend on 16 October. It brings Pixar's <i>Coco</i> into the game, a new <b>ink drops</b> mechanic, and 204 core cards with <b>18 Enchanted, 18 Epic and 2 Iconic</b> chase cards. Launch-week prices move fast; the table below updates every morning from TCGplayer's market price.</p>

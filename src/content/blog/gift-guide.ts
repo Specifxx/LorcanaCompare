@@ -6,6 +6,7 @@ export const post: Post = {
   title: "Disney Lorcana gift guide 2026: the best presents at every budget",
   description: "Disney Lorcana gifts from a $8 booster pack to a sealed box: starter decks, gift sets, Illumineer's Troves and booster boxes, with today's prices and the cheapest store.",
   date: "2026-11-01",
+  image: { src: "/blog/lorcana-gift-guide.jpg", alt: "Disney Lorcana gift guide 2026" },
   keywords: ["lorcana gift", "disney lorcana christmas gift", "lorcana gift ideas", "lorcana gift set", "best lorcana booster box", "lorcana for beginners"],
   html: `
 <p>Disney Lorcana is one of the easiest card games to give as a present: everyone knows the characters, and the starter products are made for people who have never played. Here is what to buy at each budget, with today's market prices. Every product links to its page, where we compare TCGplayer, eBay and every store we track, cheapest in-stock first.</p>

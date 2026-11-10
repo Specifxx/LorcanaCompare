@@ -6,6 +6,7 @@ export const post: Post = {
   description:
     "Where to buy Disney Lorcana singles and booster boxes for less: how TCGplayer, eBay and local stores compare, country by country, with the stores we track.",
   date: "2026-10-25",
+  image: { src: "/blog/where-to-buy-lorcana-cards-cheapest.jpg", alt: "Where to buy Lorcana cards cheapest" },
   keywords: ["where to buy lorcana cards", "buy lorcana singles", "cheapest lorcana booster box", "lorcana booster box price", "lorcana cards uk", "lorcana cards canada", "lorcana cards australia"],
   html: `
 <p>The cheapest place to buy a Lorcana card changes card by card and day by day. That is the whole reason <a href="/">Lorcana Compare</a> exists: search any card and you see every store's price for it, cheapest in-stock first. Here is what we have learned from comparing 20,000+ prices a day.</p>

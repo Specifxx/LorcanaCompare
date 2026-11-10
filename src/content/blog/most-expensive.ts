@@ -6,6 +6,7 @@ export const post: Post = {
   description:
     "The 30 most expensive Disney Lorcana cards today, from Iconics and Enchanteds to the rare foil promos — live TCGplayer market prices with the cheapest place to buy each.",
   date: "2026-10-25",
+  image: { src: "/blog/most-expensive-lorcana-cards.jpg", alt: "The most expensive Lorcana cards" },
   keywords: ["most expensive lorcana cards", "lorcana iconic cards", "most valuable lorcana cards", "lorcana enchanted list", "rarest lorcana cards"],
   html: `
 <p>This list is rebuilt every morning from TCGplayer market prices for every Disney Lorcana card ever printed — 3,600+ cards across all 14 sets, the Illumineer's Quests and the promo lines. Click any card to compare every store and eBay listing for it.</p>

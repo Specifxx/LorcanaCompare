@@ -5,6 +5,7 @@ export const post: Post = {
   title: "How much are my Lorcana cards worth? A quick price check guide",
   description: "How to find what your Disney Lorcana cards are worth: identify the card, check its market price and eBay sales, and spot the rarities worth more.",
   date: "2026-10-26",
+  image: { src: "/blog/how-much-are-my-lorcana-cards-worth.jpg", alt: "How much are my Lorcana cards worth" },
   keywords: ["how much are my lorcana cards worth", "lorcana card value", "lorcana price checker", "lorcana card prices", "valuable lorcana cards"],
   html: `
 <p>Most Lorcana cards are worth a few cents. A small number — Enchanted cards, top Legendaries and promos — are worth a lot. Here is how to sort one from the other in a few minutes.</p>
