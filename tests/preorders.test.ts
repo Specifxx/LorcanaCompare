@@ -59,7 +59,9 @@ test("pre-order copy is keyed by real set slugs", () => {
 });
 
 test("the hub and every release page cache six hours, and the sitemap lists them", () => {
-  for (const f of ["src/app/preorders/page.tsx", "src/app/preorders/[slug]/page.tsx"]) assert.match(fs.readFileSync(f, "utf8"), /export const revalidate = 21600;/);
-  assert.match(fs.readFileSync("src/app/preorders/[slug]/page.tsx", "utf8"), /generateStaticParams = \(\) => \[\]/);
+  assert.match(fs.readFileSync("src/app/preorders/page.tsx", "utf8"), /export const revalidate = 21600;/);
+  // A release page is one CDN copy per URL (next.config.js CDN_PAGES), never ISR (site review X5, 2026-11-10).
+  assert.match(fs.readFileSync("src/app/preorders/[slug]/page.tsx", "utf8"), /export const dynamic = "force-dynamic";/);
+  assert.match(fs.readFileSync("next.config.js", "utf8"), /\/preorders\/:slug/);
   assert.match(fs.readFileSync("src/app/sitemap.ts", "utf8"), /preorderSetList\(\)/);
 });
