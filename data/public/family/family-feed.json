@@ -1,7 +1,7 @@
 {
  "v": 1,
  "site": "lorcana",
- "generatedAt": "2026-11-09T16:35:24.883Z",
+ "generatedAt": "2026-11-10T15:08:52.008Z",
  "links": {
   "US": {
    "deals": "https://www.lorcanacompare.com/black-friday",
@@ -19,7 +19,7 @@
    "currency": "USD",
    "store": "Red Raccoon Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/652709_200w.jpg",
-   "refCents": 11236,
+   "refCents": 11286,
    "refLabel": "TCGplayer market price",
    "savingPct": 56
   },
@@ -61,9 +61,9 @@
    "currency": "USD",
    "store": "Lazarus Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/723343_200w.jpg",
-   "refCents": 11045,
+   "refCents": 11207,
    "refLabel": "TCGplayer market price",
-   "savingPct": 28
+   "savingPct": 29
   },
   {
    "kind": "deal",
@@ -88,21 +88,9 @@
    "currency": "USD",
    "store": "Red Raccoon Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/690384_200w.jpg",
-   "refCents": 17664,
+   "refCents": 17696,
    "refLabel": "TCGplayer market price",
-   "savingPct": 18
-  },
-  {
-   "kind": "preorder",
-   "cluster": "cards",
-   "region": "US",
-   "title": "Into the Inkdark Booster Box",
-   "url": "https://www.lorcanacompare.com/preorders/into-the-inkdark",
-   "cents": 14376,
-   "currency": "USD",
-   "store": "Minted TCG",
-   "image": "https://tcgplayer-cdn.tcgplayer.com/product/723336_200w.jpg",
-   "releaseDate": "2027-02-05"
+   "savingPct": 19
   }
  ]
 }
