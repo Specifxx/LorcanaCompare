@@ -2,8 +2,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { FamilySearch } from "@/components/FamilySearch";
-import { compareSearchHref } from "@/lib/compare-search";
-import { SITE } from "@/site.config";
 
 interface Hit { slug: string; href?: string; name: string; set: string; image: string | null; price: string; number: string | null; rarity: string | null }
 
@@ -20,13 +18,6 @@ export function CardSearch() {
       <h2 className="mb-3 text-lg font-bold">Results for “{q}”</h2>
       {hits === null && <p className="text-muted">Searching…</p>}
       {hits?.length === 0 && <p className="text-muted">No cards match. Try fewer words, or a card number.</p>}
-      {hits?.length === 0 && q.trim().length > 1 && (
-        <p className="mt-2 text-sm">
-          <a href={compareSearchHref(q, SITE.key)} rel="nofollow" className="font-semibold text-brand-400 hover:underline">
-            Search every Compare Empire site for &ldquo;{q.trim()}&rdquo; &rarr;
-          </a>
-        </p>
-      )}
       <div className="tile-grid grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
         {hits?.map((h) => (
           <a key={h.href ?? h.slug} href={h.href ?? `/card/${h.slug}`} className="card-surface overflow-hidden hover:border-brand/60">
