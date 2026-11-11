@@ -1734,3 +1734,25 @@ of 1,150 for the next two runs: the site cap and the shared keyset (4,500 of 5,0
 `ebay-recheck-misses.ts` now searches every market in the shares, and `/stores` names the eBay sites from them.
 Engine change: identical in Cyberpunk Compare, which sets US 0.4 and the others 0.2 (its 120 eligible products
 in every market daily, 480 of its 600).
+
+## 2026-11-11: Fetch TCG's price on Australian card pages (partner feed, never published)
+
+**Why.** Fetch TCG (fetchtcg.com, an Australia and New Zealand card marketplace) agreed to be listed on every site and sent
+a partner feed on 2026-11-11 (`https://api.fetchtcg.com/partner-feed/au.json`, `Authorization: Bearer <key>`, once a day).
+Its terms: show Fetch's prices with a link back; no reselling or passing the feed on; no building a marketplace or
+pricing model from it. Built first on RiftCompare (TCGEmpire #412), then One Piece and Gundam, then here.
+
+**What.**
+- `scripts/fetch-fetchtcg.ts` runs in every build (after `fetch-awin`, never fatal) and keeps only Lorcana (`gameId: "lorc"`,
+  in-stock cards) in `data/fetch-live/au.json`, **git-ignored** (the feed is 95 MB and publishing it is passing it on),
+  traced into the functions beside `data/public`. `FETCH_TCG_API_KEY` is a Vercel Production variable and a GitHub secret.
+  Fetch lists single cards only, so sealed product gets no Fetch row.
+- `src/lib/fetchtcg.ts`: a card gets rows only when Fetch has the same collector number (leading zeros ignored) in the same
+  set under the same name; one row per finish (Normal, Cold Foil), the cheapest in-stock listing. Two names on one number
+  is no row. On 2026-11-11, 487 of the catalogue's 1,459 cards matched; the rest are not in stock at Fetch (it lists in-stock
+  cards only) or promos.
+- `PriceTable` draws it in Australia only, right after eBay and Amazon: "Fetch TCG · Marketplace" (violet outline), Near
+  Mint else the best raw condition, in stock, "price on <date>", Fetch's own URL as sent. Never ranked, never "Best
+  price", never in the feed, an alert, a deal, a basket, JSON-LD or the quick view.
+- A file older than three days is ignored. Ops monitor check "Fetch TCG row" (warn at most).
+- Recheck about 18 November with the first Fetch clicks and Fetch's commission rate.
