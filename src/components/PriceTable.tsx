@@ -16,6 +16,7 @@ import { Flag } from "./Flag";
 import { goHref, subId, tagged } from "@/lib/affiliate";
 import { CartAddButton } from "./cart/CartAddButton";
 import { priceRows } from "@/lib/price-rows";
+import type { FetchRows } from "@/lib/fetchtcg";
 import { useMarket } from "./ClientPrefs";
 import { ReportPrice } from "./ReportForms";
 
@@ -35,6 +36,8 @@ export function sourceName(o: Offer) {
 export const PIN_OUTLINE = {
   ebay: "outline outline-2 -outline-offset-2 outline-[#16a34a]",
   amazon: "outline outline-2 -outline-offset-2 outline-[#f59e0b]",
+  /** Fetch TCG (2026-11-11): its own row after eBay and Amazon, violet so it reads as a marketplace, never the cheapest. */
+  fetch: "outline outline-2 -outline-offset-2 outline-[#7c3aed]",
   /** The cheapest row (owner, 2026-11-07: "the cheapest listing should also have an outline too"): sky blue, never
    *  read as eBay's green or Amazon's amber; it wins over eBay's when eBay is itself the cheapest. */
   cheapest: "outline outline-2 -outline-offset-2 outline-[#0ea5e9]",
@@ -43,7 +46,7 @@ export const PIN_OUTLINE = {
 /** Where the phone's sticky buy bar hides (components/CardBuy.tsx). */
 export const PRICE_TABLE_ID = "price-comparison";
 
-export function PriceTable({ offers, fx, productId, page, compact = false, amazon = null, tableId = PRICE_TABLE_ID, product, image = null }: { /** the product's picture, for the cart list (components/cart) */ image?: string | null; offers: Offer[]; fx: Record<string, number>; productId: number; page: string; compact?: boolean; amazon?: Partial<Record<Market, string | AmazonCell>> | null; /** null in the quick view: the page's own table keeps the id the buy bar watches */ tableId?: string | null; /** the product's name: shows "Report a wrong price" under the table */ product?: string }) {
+export function PriceTable({ offers, fx, productId, page, compact = false, amazon = null, tableId = PRICE_TABLE_ID, product, image = null, fetchTcg = null }: { /** Fetch TCG's own price of this card (Australia only, lib/fetchtcg.ts): a marketplace row after eBay and Amazon, never ranked */ fetchTcg?: FetchRows | null } & { /** the product's picture, for the cart list (components/cart) */ image?: string | null; offers: Offer[]; fx: Record<string, number>; productId: number; page: string; compact?: boolean; amazon?: Partial<Record<Market, string | AmazonCell>> | null; /** null in the quick view: the page's own table keeps the id the buy bar watches */ tableId?: string | null; /** the product's name: shows "Report a wrong price" under the table */ product?: string }) {
   const { market, setMarket } = useMarket();
   const [showOut, setShowOut] = useState(false);
   // eBay and TCGplayer lead the table (lib/price-rows.ts `display`); "Cheapest"
@@ -121,6 +124,28 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
       </td>
     </tr>
   ) : null;
+  // Fetch TCG (owner, 2026-11-11): Australia's own marketplace, rows after eBay and Amazon, never ranked, never "Best price".
+  const fetchRow = market === "AU" && fetchTcg
+    ? fetchTcg.rows.map((r) => (
+        <tr key={`fetchtcg-${r.finish}`} data-fetch-row className={`border-t border-ink-800 ${PIN_OUTLINE.fetch}`}>
+          <td className="px-3 py-2.5">
+            <span className="font-medium text-fg">Fetch TCG</span>
+            <span className="ml-2 rounded bg-ink-800 px-1.5 py-0.5 text-[10px] font-semibold text-muted">Marketplace</span>
+          </td>
+          <td className="hidden px-3 py-2.5 text-xs text-muted sm:table-cell">
+            {r.finish !== "Normal" && <span className="mr-1 rounded bg-ink-800 px-1.5 py-0.5 text-[10px] font-semibold text-muted">{r.finish}</span>}
+            <span className="mr-1 rounded bg-ink-800 px-1.5 py-0.5 text-[10px] font-semibold text-muted">{r.condition}</span>
+            In stock · postage at checkout · price on {new Date(fetchTcg.at).toLocaleDateString("en-AU", { day: "numeric", month: "short", timeZone: "Australia/Sydney" })}
+          </td>
+          <td className="px-3 py-2.5 text-right font-semibold tabular-nums">{money(r.priceCents, "AUD")}</td>
+          <td className="px-3 py-2.5 text-right">
+            <a href={r.url} rel="sponsored nofollow noopener" target="_blank" className="btn-ghost min-h-10 whitespace-nowrap px-3 py-1.5">
+              View on Fetch TCG <span aria-hidden="true">↗</span>
+            </a>
+          </td>
+        </tr>
+      ))
+    : null;
   // Amazon is the second row, right under eBay (first when there is no eBay row).
   const amazonAfter = shown.findIndex((o) => o.source === "ebay" && pinned.includes(o));
   return (
@@ -137,6 +162,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
         </thead>
         <tbody>
           {amazonAfter < 0 && amazonRow}
+          {amazonAfter < 0 && fetchRow}
           {shown.map((o, i) => {
             const c = conv(o);
             const best = o === cheapest;
@@ -181,6 +207,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
                   </td>
                 </tr>
                 {i === amazonAfter && amazonRow}
+                {i === amazonAfter && fetchRow}
               </Fragment>
             );
           })}

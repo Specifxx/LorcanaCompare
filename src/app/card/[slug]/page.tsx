@@ -22,6 +22,7 @@ import { CompactCardAds } from "@/components/CardAds";
 import { adSearch, cardAds } from "@/lib/card-ads";
 import { amazonSearchUrls } from "@/lib/affiliate";
 import { amazonCells } from "@/lib/amazon-live";
+import { fetchRowsFor } from "@/lib/fetchtcg";
 import { abs } from "@/lib/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ShareButton } from "@/components/ShareButton";
@@ -73,6 +74,8 @@ export default function CardPage({ params }: { params: { slug: string } }) {
   const inStock = e.offers.filter((o) => o.inStock);
   const usOffers = inStock.filter((o) => o.currency === "USD");
   // Sealed only: the markets' tagged searches, upgraded to the item's own page and this build's price where the API found them.
+  // Fetch TCG's own listing of this card (Australia only; Fetch lists no sealed): null without the build-time file.
+  const fetchTcg = p.kind === "card" ? fetchRowsFor({ name: p.name, number: p.number, setName: set?.name ?? null }) : null;
   const amazon = p.kind === "sealed" ? amazonCells(p.id, amazonSearchUrls(`${SITE.game} ${name}`)) : null;
   return (
     <article className="flex flex-col gap-8">
@@ -149,7 +152,7 @@ export default function CardPage({ params }: { params: { slug: string } }) {
               <CheckedAgo at={m?.updatedAt} />
             </div>
             <div className="mb-3"><EbayCallout offers={e.offers} productId={p.id} query={`${SITE.ebay.query} ${name} ${p.number ?? ""}`.trim()} /></div>
-            <PriceTable offers={e.offers} fx={m?.fx ?? { USD: 1 }} productId={p.id} page="card" amazon={amazon} image={p.image ? imageAt(p.image, "200w") : null} product={`${name}${p.number ? ` ${p.number}` : ""}`} />
+            <PriceTable offers={e.offers} fx={m?.fx ?? { USD: 1 }} productId={p.id} page="card" amazon={amazon} fetchTcg={fetchTcg} image={p.image ? imageAt(p.image, "200w") : null} product={`${name}${p.number ? ` ${p.number}` : ""}`} />
             {SITE.priceAlerts && <PriceAlert site={SITE.key} productId={p.id} prices={lowestByMarket(e.offers)} />}
           </section>
           <AdSlot slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_CARD} />

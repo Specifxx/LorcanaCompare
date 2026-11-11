@@ -8,3 +8,6 @@ out
 .vercel
 data/.cache
 data/amazon-live/
+
+# Fetch TCG's feed, kept out of the public source (its terms): scripts/fetch-fetchtcg.ts
+/data/fetch-live/
