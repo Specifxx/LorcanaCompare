@@ -73,3 +73,9 @@ test("the Amazon strip: only when asked, only products with a real ASIN, no pric
   // The rails (a fixed column on a wide screen, not an overlay) ask too; the quick view never does.
   assert.match(readFileSync("src/app/api/rails/route.ts", "utf8"), /amazon: true/);
 });
+
+test("Amazon's row only for products Amazon carries (owner, 2026-11-12)", async () => {
+  const { amazonCarries } = await import("@/lib/amazon-live");
+  for (const t of ["Booster Box", "Booster Pack", "Starter Deck", "Tin", "Collection"]) assert.equal(amazonCarries({ id: 987654321, sealedType: t }), true, t);
+  for (const t of ["Case", "Prerelease", "Insert", "Other", "Starter Deck Display", null]) assert.equal(amazonCarries({ id: 987654321, sealedType: t }), false, String(t));
+});

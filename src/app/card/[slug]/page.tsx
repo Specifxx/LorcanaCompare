@@ -21,7 +21,7 @@ import { AdSlot } from "@/components/AdSlot";
 import { CompactCardAds } from "@/components/CardAds";
 import { adSearch, cardAds } from "@/lib/card-ads";
 import { amazonSearchUrls } from "@/lib/affiliate";
-import { amazonCells } from "@/lib/amazon-live";
+import { amazonCarries, amazonCells } from "@/lib/amazon-live";
 import { fetchRowsFor } from "@/lib/fetchtcg";
 import { abs } from "@/lib/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -76,7 +76,7 @@ export default function CardPage({ params }: { params: { slug: string } }) {
   // Sealed only: the markets' tagged searches, upgraded to the item's own page and this build's price where the API found them.
   // Fetch TCG's own listing of this card (Australia only; Fetch lists no sealed): null without the build-time file.
   const fetchTcg = p.kind === "card" ? fetchRowsFor({ name: p.name, number: p.number, setName: set?.name ?? null }) : null;
-  const amazon = p.kind === "sealed" ? amazonCells(p.id, amazonSearchUrls(`${SITE.game} ${name}`)) : null;
+  const amazon = p.kind === "sealed" && amazonCarries(p) ? amazonCells(p.id, amazonSearchUrls(`${SITE.game} ${name}`)) : null;
   return (
     <article className="flex flex-col gap-8">
       {/* Product markup only when a real in-stock US offer backs it (2026-11-04,
