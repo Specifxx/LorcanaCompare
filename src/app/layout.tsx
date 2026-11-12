@@ -12,7 +12,7 @@ import { SITE } from "@/site.config";
 import { SITE_URL } from "@/lib/site";
 import { themeCss } from "@/lib/theme-vars";
 import { DEFAULT_MODE, THEME_BOOT_SCRIPT } from "@/lib/theme";
-import { SEASON_BOOT_SCRIPT } from "@/lib/season";
+import { CHRISTMAS_FESTIVE_LAYER, SEASON_BOOT_SCRIPT } from "@/lib/season";
 import { Header } from "@/components/Header";
 import { holidayNav } from "@/lib/holiday-nav";
 import { HolidayStrip } from "@/components/HolidayStrip";
@@ -58,7 +58,7 @@ const fontHref = `https://fonts.googleapis.com/css2?family=Inter:wght@400;500;60
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-theme={DEFAULT_MODE} suppressHydrationWarning>
+    <html lang="en" data-theme={DEFAULT_MODE} data-festive={CHRISTMAS_FESTIVE_LAYER ? "on" : undefined} suppressHydrationWarning>
       <head>
         <style dangerouslySetInnerHTML={{ __html: themeCss() }} />
         <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT + SEASON_BOOT_SCRIPT }} />
