@@ -1793,3 +1793,12 @@ canvas and repeating gradients in the Christmas CSS.
 
 **Taking it off.** Set `CHRISTMAS_FESTIVE_LAYER = false` after New Year, or let the window end on 26 December: the card, the hairline and the
 accents all go together. Without the layer the quiet gifts pill of 8 November  is what remains.
+
+## 2026-11-12 — Amazon strip beside eBay and TCGplayer on the product page (owner)
+
+The owner said most of his own spending is on Amazon and asked for Amazon links as visible as eBay's and TCGplayer's. The pinned Amazon price-table
+row already existed (2026-11-06); what eBay and TCGplayer had and Amazon lacked was the photo strip. `CompactCardAds` now draws a third row, "amazon",
+on the product page only, for US visitors, from products with a real ASIN in `data/amazon/asins-US.json` (`cardAds({ amazon: true })`), at least three
+tiles. Tiles carry NO price ("View"): Amazon's licence. The link is the item's own tagged `/dp/` page, rel sponsored, through /go (`source=amazon`),
+with the disclosure and Associate line. Plain text word, no Amazon logo or orange. Never in the quick view or the rails or the dock (the quick view
+and rails call `cardAds` without the flag; `tests/card-ads.test.ts` pins it). Markets other than the US have no ASIN data yet, so they see no strip.

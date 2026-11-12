@@ -55,3 +55,20 @@ test("the small eBay + TCGplayer pair is the only card ad: card pages and the qu
   for (const f of ["src/app/page.tsx", "src/app/sets/[slug]/page.tsx", "src/app/layout.tsx"]) assert.doesNotMatch(read(f), /CardAd|CardStrip|card-ads/, f);
   assert.doesNotMatch(read("src/components/CardAds.tsx"), /export function (EbayCardStrip|TcgplayerCardStrip|CardAdPair)/);
 });
+
+test("the Amazon strip: only when asked, only products with a real ASIN, no price, tagged amazon.com link", () => {
+  const rows = [
+    { ...row(p(1), 5000, [ebay("US", 4500)]), asin: "B012345678" },
+    row(p(2), 9000, [ebay("US", 8000)]),
+    { ...row(p(3), 2000, []), asin: "not-an-asin" },
+  ];
+  assert.equal(selectCardAds(rows).amazon, undefined);
+  const ads = selectCardAds(rows, { amazon: true });
+  assert.deepEqual(ads.amazon!.map((t) => t.id), [1]);
+  assert.equal(ads.amazon![0].cents, 0);
+  assert.match(ads.amazon![0].url, /^https:\/\/www\.amazon\.com\/dp\/B012345678\?tag=/);
+  // The card page asks; the quick view and the rails never do (a pop-up and a fixed overlay).
+  assert.match(readFileSync("src/app/card/[slug]/page.tsx", "utf8"), /amazon: true/);
+  assert.doesNotMatch(readFileSync("src/app/api/quick/[slug]/route.ts", "utf8"), /amazon: true/);
+  assert.doesNotMatch(readFileSync("src/app/api/rails/route.ts", "utf8"), /amazon: true/);
+});
