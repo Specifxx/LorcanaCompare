@@ -11,5 +11,5 @@ export const dynamic = "force-dynamic";
 const RAIL_TILES = 10;
 
 export function GET() {
-  return NextResponse.json({ ads: cardAds({ limit: RAIL_TILES }), adSearch: adSearch() }, { headers: { "Cache-Control": "public, s-maxage=21600, stale-while-revalidate=86400" } });
+  return NextResponse.json({ ads: cardAds({ limit: RAIL_TILES, amazon: true }), adSearch: adSearch() }, { headers: { "Cache-Control": "public, s-maxage=21600, stale-while-revalidate=86400" } });
 }

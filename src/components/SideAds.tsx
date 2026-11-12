@@ -109,7 +109,26 @@ export function SideAds() {
           sub="eBay Buy It Now"
         />
       )}
-      {tcg.length >= 2 && (
+      {market === "US" && (data.ads.amazon?.length ?? 0) >= 2 ? (
+        <Rail
+          side="right"
+          label={`Sponsored: ${SITE.gameShort} on Amazon`}
+          brand={
+            <span className="text-[15px] font-black tracking-tight text-fg" aria-label="Amazon">
+              amazon
+            </span>
+          }
+          accent="#475569"
+          tiles={data.ads.amazon!.slice(0, MAX_TILES)}
+          tileHref={(t) => goHref({ url: t.url, source: "amazon", market: "US" }, t.id, "side-amazon-rail")}
+          allHref={goHref({ url: data.ads.amazon![0].url, source: "amazon", market: "US" }, undefined, "side-amazon-rail-all")}
+          allLabel="Top pick on Amazon →"
+          note="Ad · Amazon Associate"
+          sub="on Amazon"
+          noPrice
+        />
+      ) : (
+        tcg.length >= 2 && (
         <Rail
           side="right"
           label={`Sponsored: ${SITE.gameShort} on TCGplayer`}
@@ -127,6 +146,7 @@ export function SideAds() {
           note={market !== "US" ? "Ad · prices in US$" : "Ad · we may earn"}
           sub="TCGplayer market"
         />
+        )
       )}
     </>
   );
@@ -147,8 +167,8 @@ const railStyle = (side: "left" | "right", accent: string): CSSProperties => ({
   ["--ad-accent" as string]: accent,
 });
 
-function Rail(props: { side: "left" | "right"; label: string; brand: ReactNode; accent: string; tiles: AdTile[]; tileHref: (t: AdTile) => string; allHref: string; allLabel: string; note: string; sub: string }) {
-  const { side, label, brand, accent, tiles, tileHref, allHref, allLabel, note, sub } = props;
+function Rail(props: { side: "left" | "right"; label: string; brand: ReactNode; accent: string; tiles: AdTile[]; tileHref: (t: AdTile) => string; allHref: string; allLabel: string; note: string; sub: string; noPrice?: boolean }) {
+  const { side, label, brand, accent, tiles, tileHref, allHref, allLabel, note, sub, noPrice } = props;
   return (
     <aside role="group" data-ad={`side-${side}`} aria-label={label} className={RAIL} style={railStyle(side, accent)}>
       <div className="flex h-[30px] shrink-0 items-center justify-between px-2">
@@ -158,12 +178,12 @@ function Rail(props: { side: "left" | "right"; label: string; brand: ReactNode; 
       <ul role="list" className={LIST}>
         {tiles.map((t) => (
           <li key={t.id}>
-            <a href={tileHref(t)} rel="sponsored nofollow noopener" target="_blank" className={TILE} title={`${t.name} · ${money(t.cents, t.currency)} · ${sub}`}>
+            <a href={tileHref(t)} rel="sponsored nofollow noopener" target="_blank" className={TILE} title={`${t.name}${noPrice ? "" : ` · ${money(t.cents, t.currency)}`} · ${sub}`}>
               <span className="relative block aspect-[5/7] w-full overflow-hidden rounded-md bg-ink-850">
                 {t.image && <img src={t.image} alt={t.name} width={112} height={157} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-contain p-0.5" />}
               </span>
               <span className="mt-1 block h-[18px] truncate text-xs font-semibold leading-[18px] group-hover:text-[var(--ad-accent)]">{t.name}</span>
-              <span className="block tabular-nums h-5 truncate text-[15px] font-bold leading-5">{money(t.cents, t.currency)}</span>
+              <span className="block tabular-nums h-5 truncate text-[15px] font-bold leading-5">{noPrice ? "View" : money(t.cents, t.currency)}</span>
               <span className="sr-only">, {sub}</span>
             </a>
           </li>
