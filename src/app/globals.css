@@ -39,6 +39,8 @@ body { background: var(--page-bg); min-height: 100vh; overflow-x: clip; }
 .card-surface { @apply rounded-2xl border border-ink-700/60 bg-ink-900 shadow-[0_1px_0_rgb(255_255_255/0.03)_inset]; }
 .btn { @apply inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition; }
 .btn-primary { @apply btn bg-brand text-ink-950 hover:bg-brand-400; }
+/* TCGplayer\'s button (owner, 2026-11-12): blue. */
+.btn-tcg { @apply btn bg-[#1d4ed8] text-white hover:bg-[#2563eb]; }
 .btn-buy { @apply btn bg-buy text-white hover:bg-buy-400 px-3 py-1.5; }
 .btn-ghost { @apply btn border border-ink-700 text-fg hover:bg-ink-800; }
 .chip { @apply inline-flex items-center rounded-full border border-ink-700 px-2.5 py-0.5 text-xs text-muted; }
