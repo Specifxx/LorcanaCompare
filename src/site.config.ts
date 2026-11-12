@@ -75,6 +75,7 @@ export const SITE: SiteConfig = {
     { facet: "type", attr: "CardType", noun: ["card type", "card types"], title: "{game} {v} cards" },
   ],
   rarityOrder: ["Enchanted", "Iconic", "Epic", "Legendary", "Super Rare", "Rare", "Uncommon", "Common", "Promo"],
+  featureMinCents: 5000,
   chaseRarities: ["Enchanted", "Iconic", "Epic"],
 
   theme: {
