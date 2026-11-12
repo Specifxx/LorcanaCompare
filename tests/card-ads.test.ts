@@ -70,5 +70,6 @@ test("the Amazon strip: only when asked, only products with a real ASIN, no pric
   // The card page asks; the quick view and the rails never do (a pop-up and a fixed overlay).
   assert.match(readFileSync("src/app/card/[slug]/page.tsx", "utf8"), /amazon: true/);
   assert.doesNotMatch(readFileSync("src/app/api/quick/[slug]/route.ts", "utf8"), /amazon: true/);
-  assert.doesNotMatch(readFileSync("src/app/api/rails/route.ts", "utf8"), /amazon: true/);
+  // The rails (a fixed column on a wide screen, not an overlay) ask too; the quick view never does.
+  assert.match(readFileSync("src/app/api/rails/route.ts", "utf8"), /amazon: true/);
 });
