@@ -1756,3 +1756,19 @@ pricing model from it. Built first on RiftCompare (TCGEmpire #412), then One Pie
   price", never in the feed, an alert, a deal, a basket, JSON-LD or the quick view.
 - A file older than three days is ignored. Ops monitor check "Fetch TCG row" (warn at most).
 - Recheck about 18 November with the first Fetch clicks and Fetch's commission rate.
+
+## 2026-11-12: the front page features the pricier items (owner)
+
+**Ask.** Bill: promote the more expensive items, so a sale earns more commission; the cheap ones should not be advertised on the
+front page. For the TCG sites that means sealed: booster boxes and the like.
+
+**What.** `SITE.featureMinCents` = 5000 ($50). The home page's sealed shelf (`featuredSealed`), today's top deals (`deals()`: the
+reference price must clear it, not just 500), the pre-order boxes in the shelf's tabs carry only products at or
+above it (TCGplayer market; `worthFeaturing` in `lib/data.ts`). Cheaper products keep their page, their set and hub listings, search,
+alerts and the sitemap; only the front page's selection changed, so URLs, titles, metadata and JSON-LD structure are as before.
+Starter Deck Display joins the shelf's fill types. A pre-order with no TCGplayer price yet is still shown. Store rows within a
+product are still sorted by price, never by commission; the reference price is TCGplayer's market and eBay is never a deal.
+
+
+**Why this floor.** From the day's data (TCGplayer market, sealed): booster boxes p25 $144.86; troves median $82.78; starter decks median $23.78; packs median $8.44. The floor keeps the real
+earners and drops packs and the cheapest decks. Revisit with the click-to-sale numbers (which placements earn) in the Monday report.
