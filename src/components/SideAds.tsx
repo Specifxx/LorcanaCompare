@@ -109,25 +109,7 @@ export function SideAds() {
           sub="eBay Buy It Now"
         />
       )}
-      {market === "US" && (data.ads.amazon?.length ?? 0) >= 2 ? (
-        <Rail
-          side="right"
-          label={`Sponsored: ${SITE.gameShort} on Amazon`}
-          brand={
-            <span className="text-[15px] font-black tracking-tight text-fg" aria-label="Amazon">
-              amazon
-            </span>
-          }
-          accent="#475569"
-          tiles={data.ads.amazon!.slice(0, MAX_TILES)}
-          tileHref={(t) => goHref({ url: t.url, source: "amazon", market: "US" }, t.id, "side-amazon-rail")}
-          allHref={goHref({ url: data.ads.amazon![0].url, source: "amazon", market: "US" }, undefined, "side-amazon-rail-all")}
-          allLabel="Top pick on Amazon →"
-          note="Ad · Amazon Associate"
-          sub="on Amazon"
-          noPrice
-        />
-      ) : (
+      {(
         tcg.length >= 2 && (
         <Rail
           side="right"
