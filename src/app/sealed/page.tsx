@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { InlineAds } from "@/components/InlineAds";
 import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
 import { byValue, products, setById } from "@/lib/data";
@@ -30,6 +31,7 @@ export default function Sealed() {
           <TileGrid items={g.items.sort((a, b) => (setById(b.setId)?.releasedOn ?? "").localeCompare(setById(a.setId)?.releasedOn ?? "")).slice(0, 24)} />
         </section>
       ))}
+      <InlineAds page="sealed" />
     </div>
   );
 }

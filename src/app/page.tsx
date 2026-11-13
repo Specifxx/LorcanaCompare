@@ -1,4 +1,5 @@
 import Link from "@/components/Link";
+import { InlineAds } from "@/components/InlineAds";
 import { SITE } from "@/site.config";
 import { SearchBox } from "@/components/SearchBox";
 import { MarketChooser } from "@/components/ClientPrefs";
@@ -176,6 +177,9 @@ export default function Home() {
           <TileGrid items={chase} />
         </section>
       )}
+
+      {/* The page's one ad block (owner, 2026-11-13): between sections, never in the hero or above the first list; browser-only. */}
+      <InlineAds page="home" />
 
       {/* The site's own star score and approved reviews (owner, 2026-11-03), loaded in the browser; nothing until there is a rating. */}
       <SiteReviews />

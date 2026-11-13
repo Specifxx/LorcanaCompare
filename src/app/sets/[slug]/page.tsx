@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { InlineAds } from "@/components/InlineAds";
 import Link from "@/components/Link";
 import { notFound, permanentRedirect } from "next/navigation";
 import { lineOfSet } from "@/lib/lines";
@@ -88,6 +89,7 @@ export default function SetPage({ params }: { params: { slug: string } }) {
       />
       {cards.length > 0 && (<section><h2 className="mb-3 text-xl font-bold">Most valuable {s.name} cards</h2><TileGrid items={cards.slice(0, 18)} /></section>)}
       {sealed.length > 0 && (<section><h2 className="mb-3 text-xl font-bold">{s.name} booster boxes and sealed</h2><TileGrid items={sealed.slice(0, 12)} /></section>)}
+      <InlineAds page="set" />
       {cards.length > 0 && (
         <section>
           <h2 className="mb-3 text-xl font-bold">Full {s.name} card list with prices</h2>

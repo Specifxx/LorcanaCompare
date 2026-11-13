@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { InlineAds } from "@/components/InlineAds";
 import Link from "@/components/Link";
 import { Suspense } from "react";
 import { SITE } from "@/site.config";
@@ -48,6 +49,8 @@ export default function Cards() {
           <TileGrid items={rising} />
         </section>
       )}
+
+      <InlineAds page="cards" />
 
       <section>
         <div className="mb-3 flex items-baseline justify-between gap-3">

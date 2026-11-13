@@ -24,7 +24,7 @@ import { RateCard } from "@/components/site-reviews/RateCard";
 import { BuyClickTracker } from "@/components/BuyClickTracker";
 import { ShareArrival } from "@/components/ShareArrival";
 import { SideNav } from "@/components/SideNav";
-import { SideAds } from "@/components/SideAds";
+import { PhoneDockAds } from "@/components/PhoneDock";
 import { navGroups } from "@/lib/nav";
 import { shopNav } from "@/lib/shop-nav";
 import { historyOn } from "@/lib/data";
@@ -80,8 +80,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <main className="mx-auto max-w-7xl px-4 py-6">{children}</main>
             <Footer />
           </div>
-          {/* The eBay and TCGplayer side rails from 1280px (SideAds.tsx): browser-only, fixed beside the column, nothing in the server HTML. */}
-          <SideAds />
+          {/* The phone dock (PhoneDock.tsx): browser-only, after a scroll, narrow screens only; wide screens get the in-page ad block. */}
+          <PhoneDockAds />
           <QuickView />
           {/* Rate us (owner, 2026-11-03): the corner card, asking only after real use; RiftCompare keeps the ratings. */}
           <RateCard />

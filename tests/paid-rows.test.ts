@@ -19,9 +19,9 @@ test("Fetch TCG is an ordinary store row: not pinned, no Ad or Marketplace tag",
   if (m) assert.doesNotMatch(m[0], />Marketplace<|>Ad</);
 });
 
-test("the side rails and photo strip carry eBay and TCGplayer only, never Amazon", () => {
-  assert.doesNotMatch(read("SideAds.tsx"), /source: "amazon"/);
-  assert.match(read("CardAds.tsx"), /const showAmazon = false as boolean;/);
+test("the in-page ad block and the phone dock carry eBay and TCGplayer only, never Amazon", () => {
+  assert.doesNotMatch(read("PhoneDock.tsx"), /source: "amazon"|amazon/i);
+  assert.doesNotMatch(read("InlineAds.tsx"), /amazon/i);
 });
 
 test("TCGplayer's pinned button is blue (owner, 2026-11-12)", () => {
