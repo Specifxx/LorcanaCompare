@@ -1861,3 +1861,11 @@ after the card and sealed grids, `/cards`, `/sealed` and each `/sealed/<type>` a
 small strips (`CardAds.tsx` is gone, and the quick view has no ad: its payload no longer carries tiles). The rail code is deleted
 (`SideAds.tsx`, its CSS and tests); the phone dock stays (`PhoneDock.tsx`, `PhoneDockAds`), still after a scroll on screens under 1280px, never
 on a card page, and it yields to the block ([data-ad]). Measure clicks per placement (`*-inline-ebay`, `*-inline-tcg`) against the strips' week.
+
+## 2026-11-13: the collection's button and link are written with their class, not :where()
+
+"+ I own this" drew with its words against its border, and "See my collection" took the text colour instead of the accent:
+`vault.css` wrote both as `:where(.ce-vault-btn)` / `:where(.ce-vault-link)`, which weigh nothing, and Tailwind's preflight styles a
+bare `<button>` (no padding, the parent's size and weight) and a bare `<a>` (the parent's colour). Both are now plain class rules;
+the rest of the file keeps `:where()`. Ported from YGO Compare #154 / DexCompare #210. `tests/vault.test.ts` reads the reset itself
+and the components' markup, so any class on an element the reset styles is held to the same.
