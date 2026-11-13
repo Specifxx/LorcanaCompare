@@ -1,4 +1,5 @@
 import { abs } from "@/lib/site";
+import { InlineAds } from "@/components/InlineAds";
 import { JsonLd } from "@/components/JsonLd";
 import type { Metadata } from "next";
 import Link from "@/components/Link";
@@ -40,6 +41,7 @@ export default function SealedHub({ params }: { params: { type: string } }) {
         <p className="mt-2 text-muted">{h.items.length} products, newest set first. Open any one to compare every store and eBay.</p>
       </header>
       <TileGrid items={items} />
+      <InlineAds page="sealed-type" />
       <section>
         <h2 className="mb-3 text-lg font-bold">Other sealed products</h2>
         <div className="flex flex-wrap gap-2">

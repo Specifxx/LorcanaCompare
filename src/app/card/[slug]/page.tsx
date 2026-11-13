@@ -18,8 +18,7 @@ import { PriceChart } from "@/components/PriceChart";
 import { TileGrid } from "@/components/ProductTile";
 import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/AdSlot";
-import { CompactCardAds } from "@/components/CardAds";
-import { adSearch, cardAds } from "@/lib/card-ads";
+import { InlineAds } from "@/components/InlineAds";
 import { amazonSearchUrls } from "@/lib/affiliate";
 import { amazonCarries, amazonCells } from "@/lib/amazon-live";
 import { fetchRowsFor } from "@/lib/fetchtcg";
@@ -142,10 +141,6 @@ export default function CardPage({ params }: { params: { slug: string } }) {
               </p>
             )}
           </header>
-          {/* The one ad placement on a card page (owner, 2026-11-03): the small
-              eBay + TCGplayer pair under the price and Buy. The full-size strips
-              are gone from every page; the quick view shows the same small pair. */}
-          <CompactCardAds ads={cardAds({ setId: p.setId, kind: p.kind, exclude: p.id, fill: true, amazon: true })} page="card" {...adSearch(set?.name, set)} />
           <section>
             <div className="mb-2 flex flex-wrap items-baseline justify-between gap-x-4">
               <h2 className="text-lg font-bold">Compare prices</h2>
@@ -155,6 +150,8 @@ export default function CardPage({ params }: { params: { slug: string } }) {
             <PriceTable offers={e.offers} fx={m?.fx ?? { USD: 1 }} productId={p.id} page="card" amazon={amazon} fetchTcg={fetchTcg} image={p.image ? imageAt(p.image, "200w") : null} product={`${name}${p.number ? ` ${p.number}` : ""}`} />
             {SITE.priceAlerts && <PriceAlert site={SITE.key} productId={p.id} prices={lowestByMarket(e.offers)} />}
           </section>
+          {/* The page's one ad block (owner, 2026-11-13), below the price table: eBay then TCGplayer, browser-only. */}
+          <InlineAds page="card" />
           <AdSlot slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_CARD} />
           <section className="card-surface p-4">
             <h2 className="mb-2 text-lg font-bold">Price history</h2>

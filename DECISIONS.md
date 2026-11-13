@@ -1845,3 +1845,19 @@ asks `looksLikeBot` (`src/lib/bot-click.ts`): no User-Agent, a crawler's or scri
 or no Sec-Fetch-Mode (every current browser sends it on a navigation) means a bot. A bot is still redirected to the
 shop, just without our tracking, so no person is ever refused a link; at worst a very old browser goes untagged.
 The rules may only mark more obvious bots, each with a test in `tests/bot-click.test.ts`.
+
+## 2026-11-13: one native horizontal ad block in the page, in place of the side rails and the small strips
+
+Owner, after the rails came off: "replace them with ONE bigger, subtler horizontal ad block inside the page content that looks native to the
+site". `components/InlineAds.tsx` is that block: a full-column-width card in the site's own surface and border, a small muted "Ad" label with the
+commission note, then one sideways-scrolling row of larger tiles (150px pictures, a two-line title, the price): up to six eBay Buy It Now tiles
+in the visitor's market first (eBay US where a market is thin), then up to six TCGplayer market-price tiles, each group headed by its logo word
+and an "All on ..." link. Never Amazon, never a store row, best price, deal, alert or counted as a store. Every link is rel sponsored through
+`goHref` with the placements `<page>-inline-ebay` / `-inline-tcg` (and `-all`). It is browser-only like the rails were: the server HTML holds an
+empty aria-hidden box of the block's exact height (`BLOCK_H`, so CLS stays 0), the tiles come from `/api/rails` (the rails' payload, CDN-held six
+hours, now without the Amazon column) once the box nears the viewport, and with no tiles the box closes. One per page, below the main content:
+the home page after the newest set's chase cards, a card page below its price table (never beside a buy button or above a price), a set page
+after the card and sealed grids, `/cards`, `/sealed` and each `/sealed/<type>` after the grids. It replaces the card page's and the quick view's
+small strips (`CardAds.tsx` is gone, and the quick view has no ad: its payload no longer carries tiles). The rail code is deleted
+(`SideAds.tsx`, its CSS and tests); the phone dock stays (`PhoneDock.tsx`, `PhoneDockAds`), still after a scroll on screens under 1280px, never
+on a card page, and it yields to the block ([data-ad]). Measure clicks per placement (`*-inline-ebay`, `*-inline-tcg`) against the strips' week.
