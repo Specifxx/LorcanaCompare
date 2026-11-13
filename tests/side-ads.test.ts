@@ -10,7 +10,7 @@ const t = (id: number, currency = "USD"): AdTile => ({ id, slug: `p${id}`, name:
 test("the rails start at every regular 16:9 and 16:10 width, and the CSS says the same", () => {
   assert.equal(MIN_WIDTH, 1280);
   const css = fs.readFileSync("src/app/globals.css", "utf8");
-  assert.match(css, /@media \(min-width: 1280px\) \{\s*\.max-w-7xl \{ max-width: min\(80rem, calc\(100% - 320px\)\); \}/);
+  assert.doesNotMatch(css, /calc\(100% - 320px\)/, "no rails (owner, 2026-11-13): the column keeps its whole width");
   // 320px = two rails and their gutters (RAIL_W + 2 × 12 each side).
   assert.equal(2 * (RAIL_W + 24), 320);
 });

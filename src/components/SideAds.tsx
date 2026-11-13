@@ -51,6 +51,9 @@ export function ebayTilesFor(ads: CardAds, market: Market): { tiles: AdTile[]; m
 
 type Payload = { ads: CardAds; adSearch: { ebayQuery: string; tcgplayerUrl: string } };
 
+/** The side rails are OFF (owner, 2026-11-13: "banner ads on the side … doesn't look as good … fill in that space on the side again"): the ads are the strips inside the page and the phone dock. The rail code stays; nothing renders or fetches it while this is false. */
+export const SIDE_RAILS = false;
+
 export function SideAds() {
   const [fit, setFit] = useState(false);
   const [narrow, setNarrow] = useState(false);
@@ -58,7 +61,7 @@ export function SideAds() {
   useEffect(() => {
     const mq = window.matchMedia(`(min-width: ${MIN_WIDTH}px)`);
     const update = () => {
-      setFit(mq.matches && railFits(window.innerHeight));
+      setFit(SIDE_RAILS && mq.matches && railFits(window.innerHeight));
       setNarrow(!mq.matches);
     };
     update();
