@@ -338,10 +338,6 @@ h1, h2, h3 { letter-spacing: -0.01em; }
    the rails mount. --hdr is the sticky header's height, the rails' top. */
 :root { --hdr: 55px; }
 @media (min-width: 1280px) {
-  .max-w-7xl { max-width: min(80rem, calc(100% - 320px)); }
-  /* The hero band fills the column instead of the window, so it never runs
-     under a rail: a rounded panel the rails sit 12px beside. */
-  .hero-bleed { margin-left: -1rem; margin-right: -1rem; border-radius: 1.25rem; overflow: hidden; }
   /* Tile grids: five across while the column is under ~880px, six from 1440px. */
   .tile-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 }
