@@ -9,6 +9,7 @@
 import { useEffect } from "react";
 import { track } from "@vercel/analytics";
 import { SITE } from "@/site.config";
+import { installPaidVisitTagger } from "@/lib/paid-visit";
 
 const NAMES: Record<string, string> = {
   tcgplayer: "TCGplayer",
@@ -19,6 +20,8 @@ const NAMES: Record<string, string> = {
 
 export function BuyClickTracker() {
   useEffect(() => {
+    // A paid ad visit adds ad=<mark> to every /go link it opens (lib/paid-visit.ts).
+    installPaidVisitTagger();
     const onClick = (e: MouseEvent) => {
       const a = (e.target as Element | null)?.closest?.("a[href^='/go?']") as HTMLAnchorElement | null;
       if (!a) return;
