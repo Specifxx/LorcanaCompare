@@ -18,8 +18,8 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div>
-      <h1 className="font-display text-3xl font-black">A shared {SITE.gameShort} list</h1>
-      <p className="mt-2 max-w-3xl text-muted">Every card on this list with the cheapest in-stock price we track in your market, and the stores that can fill most of it in one order. Postage isn&apos;t included.</p>
+      <h1 className="page-title">A shared {SITE.gameShort} list</h1>
+      <p className="page-lede">Every card on this list with the cheapest in-stock price we track in your market, and the stores that can fill most of it in one order. Postage isn&apos;t included.</p>
       <SharedList />
     </div>
   );

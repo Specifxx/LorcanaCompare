@@ -40,7 +40,7 @@ export function SealedQuickBuy({ items, title }: { items: QuickBuyItem[]; title:
             <li key={p.id} className="flex items-center gap-3 px-4 py-2.5">
               {p.image ? <img src={p.image} alt={p.name} className="h-12 w-12 shrink-0 object-contain" loading="lazy" /> : <span className="h-12 w-12 shrink-0" />}
               <div className="min-w-0 flex-1">
-                <Link href={`/card/${p.slug}`} className="line-clamp-1 text-sm font-semibold hover:underline">{p.name}</Link>
+                <Link href={`/card/${p.slug}`} className="line-clamp-2 text-sm font-semibold leading-snug hover:underline">{p.name}</Link>
                 <p className="text-xs text-muted">
                   {o ? <><b className="text-base text-fg tabular-nums">{money(o.cents, o.currency)}</b> at {sourceName(o)}</> : "No live price in your market yet"}
                   {" · "}

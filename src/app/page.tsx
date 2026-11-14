@@ -199,7 +199,7 @@ export default function Home() {
       )}
 
       <section className="sd max-w-3xl">
-        <h2 className="mb-3 text-xl font-bold">Frequently asked questions</h2>
+        <h2 className="mb-3 sec-title">Frequently asked questions</h2>
         {faqs.map((f) => (
           <details key={f.q} className="border-b border-ink-800 py-3">
             <summary className="cursor-pointer font-medium">{f.q}</summary>
@@ -214,10 +214,10 @@ export default function Home() {
 
 function Header({ title, href, sub, all = "See all" }: { title: string; href?: string; sub?: string; all?: string }) {
   return (
-    <div className="mb-4 flex items-end justify-between gap-4">
-      <div>
-        <h2 className="font-display text-xl font-black sm:text-2xl">{title}</h2>
-        {sub && <p className="text-sm text-muted">{sub}</p>}
+    <div className="mb-4 flex flex-wrap items-end justify-between gap-x-4 gap-y-3">
+      <div className="min-w-0 flex-1 basis-64">
+        <h2 className="sec-title">{title}</h2>
+        {sub && <p className="mt-0.5 text-sm text-muted">{sub}</p>}
       </div>
       {href && <Link href={href} className="btn-ghost shrink-0 px-3.5 py-1.5 text-xs sm:text-sm">{all} →</Link>}
     </div>

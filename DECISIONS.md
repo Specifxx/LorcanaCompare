@@ -1878,3 +1878,45 @@ tab by `lib/paid-visit.ts` (the same file as RiftCompare's and DexCompare's), an
 `ad=<mark>` (`fbad` for Meta). `/go` accepts only `^[a-z]{2,8}$` and puts it right after the market,
 `cyberpunk-us-fbad-<page>-<id>`, so the 60-character cut never drops it. RiftCompare's earnings dashboard ("Ad tests")
 sums the sales carrying it against the ad's spend. Organic visits are untouched. Engine change, the same in Cyberpunk Compare; Lorcana runs no ad yet, so its marker stays unused until it does.
+## 2026-11-14: every page brought up to the home page's look (owner: "make all the other pages more aesthetic as well")
+
+The home page's design language is now the spec for every page type, through shared classes in `globals.css` rather than
+per-page styling, in both engine repos (one change, copied to the sister):
+
+- **Page header.** Every page below the home page opens the same way: breadcrumb, title (`.page-title`, the display face,
+  30px on a phone, 36px from a tablet, balanced lines), one line under it (`.page-lede`, muted, at most ~70 characters a
+  line). Section titles everywhere are the home page's (`.sec-title`). Only class names changed; every h1 and h2 says what
+  it said.
+- **Light theme legibility.** The brand gold or yellow as text read 1.5:1 on white, the green prices 1.9:1 and the red
+  changes 3.3:1. The light theme now derives the brand's text colour from the brand itself, darkened until it reads 5:1
+  (`brandTextOnLight` in `lib/theme-vars.ts`), and the money colours (`up`, `down`, `buy-400`) are variables with deeper
+  values on white. Words on a brand-filled button follow the brand (`onbrand`); words on the green buy button and badges are
+  near-black (5.8:1, white read 3.2:1). Measured on 16 pages per site in both themes at both sizes: text failing 4.5:1 went
+  from 1,023 to 12 on Lorcana and 548 to 8 on Cyberpunk; what is left is the eBay and TCGplayer logo letters, the eBay
+  callout's blue link and the cart's "+ Add to cart" (frozen paid placement and the cart sheet, left on purpose).
+- **Buttons.** At least 40px tall, a 150ms press, one focus ring everywhere a keyboard lands (the brand as text colour, so
+  it reads in both themes). The phone header's Menu button and nav row are 40px tall too. Prices take tabular figures in
+  every table and tile grid.
+- **Guides and posts.** Real article typography: 17px text at 1.7, a ~65-character measure, one heading scale, quiet list
+  markers, framed tables that scroll sideways in their own box on a phone instead of folding a card name onto five lines.
+  The post's FAQ and "read next" sit in the same card pattern as the home page.
+- **Guides index.** A grid of the home page's guide cards (picture, title, two lines, date): 3,625px tall on a laptop
+  where it was 9,074px. Every title, description, date and link is still in the server HTML.
+- **Stores page.** Two columns of quiet store names with the matched count in small grey type: 11,394px where it was
+  15,831px on a laptop. Same stores, counts, links and order.
+- **Sealed index.** On a phone each product type is one sideways row like the home page's sealed shelf (every tile still
+  in the page); a grid from a tablet up.
+- **Set page's quick-buy list.** Product names wrap to two lines instead of being cut off on a phone.
+- **Search.** A friendly no-results card (what to try, then links to every set, sealed products and the guides). While a
+  search runs, one row of placeholder tiles holds the place, which cut the layout shift of a direct load of a search URL
+  from 0.48 to 0.27 on a laptop; with no results it is 0.15 (was 0.05), because the results are fetched in the browser and
+  the server cannot know the query without making `/cards` dynamic (cost rule).
+- **404.** Says what happened in one line, offers the search, and gives the main ways back (home, cards, sets, sealed,
+  guides).
+
+**Frozen, and checked.** No paid link, ad block, pinned eBay / TCGplayer / Amazon row, affiliate tag, placement name,
+button word or row order changed; no URL, redirect, title, meta description, canonical, robots, Open Graph or JSON-LD
+changed. Compared on 13 Lorcana and 12 Cyberpunk URLs, server HTML with scripts off, origin/main against this branch:
+identical title, metadata, JSON-LD, h1 and h2 texts, the same internal links, the same sponsored links in the same order
+with the same words, and no indexed word lost. So the 19 November clicks-per-placement recheck is unaffected. No new
+client JavaScript, font, library or database read; no `revalidate` change. Motion is CSS only and off for reduced motion.

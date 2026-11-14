@@ -107,7 +107,7 @@ export default function KitPage({ params }: { params: { slug: string } }) {
           <CompactKitAds tiles={adTiles} page="kit" />
           <section>
             <div className="mb-2 flex flex-wrap items-baseline justify-between gap-x-4">
-              <h2 className="text-lg font-bold">Compare prices</h2>
+              <h2 className="sec-title">Compare prices</h2>
               <CheckedAgo at={kitsUpdatedAt() ?? m?.updatedAt} />
             </div>
             <PriceTable offers={offers} fx={m?.fx ?? { USD: 1 }} productId={pid} page="kit" image={k.image ? kitImage(k.image, 400) : null} product={`${k.name} (JAN ${k.jan})`} />
@@ -130,7 +130,7 @@ export default function KitPage({ params }: { params: { slug: string } }) {
       </div>
       {related.length > 0 && (
         <section>
-          <h2 className="mb-3 text-lg font-bold">More {GRADE_LABEL[k.grade!] ?? k.grade} kits</h2>
+          <h2 className="mb-3 sec-title">More {GRADE_LABEL[k.grade!] ?? k.grade} kits</h2>
           <KitGrid items={related} />
         </section>
       )}

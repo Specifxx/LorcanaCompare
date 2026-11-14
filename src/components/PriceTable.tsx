@@ -188,7 +188,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
                     )}
                     {o.source === "ebay" && <span className="ml-2 rounded bg-ink-800 px-1.5 py-0.5 text-[10px] font-semibold text-muted">Ad</span>}
                     {/* One listing is not a comparison: "Only listing", never "Best price" (a lone $1,200 TCGplayer row on a $800 card, 2026-11-06). */}
-                    {best && (inStock.length > 1 ? <span className="ml-2 rounded bg-buy px-1.5 py-0.5 text-[10px] font-bold uppercase text-white">Best price</span> : <span className="ml-2 rounded bg-ink-800 px-1.5 py-0.5 text-[10px] font-semibold uppercase text-muted">Only listing</span>)}
+                    {best && (inStock.length > 1 ? <span className="ml-2 rounded bg-buy px-1.5 py-0.5 text-[10px] font-bold uppercase text-[#03160b]">Best price</span> : <span className="ml-2 rounded bg-ink-800 px-1.5 py-0.5 text-[10px] font-semibold uppercase text-muted">Only listing</span>)}
                   </td>
                   <td className="hidden px-3 py-2.5 text-xs text-muted sm:table-cell">
                     {o.printing && o.printing !== "Normal" && <span className="chip mr-1">{o.printing}</span>}

@@ -94,7 +94,7 @@ export default function PreorderRelease({ params }: { params: { slug: string } }
         <p className="text-xs uppercase tracking-wide text-brand-400">
           {pre ? `Pre-order · releases ${longDate(s.releasedOn)}${days != null ? (days === 0 ? " · out today" : ` · ${days} day${days === 1 ? "" : "s"} to go`) : ""}` : `Out now · released ${longDate(s.releasedOn)}`}
         </p>
-        <h1 className="font-display text-3xl font-black md:text-4xl">{pre ? `${s.name} pre-order prices` : `${s.name} booster box prices`}</h1>
+        <h1 className="page-title">{pre ? `${s.name} pre-order prices` : `${s.name} booster box prices`}</h1>
         {copy?.intro ? (
           <p className="mt-3 max-w-3xl text-muted" dangerouslySetInnerHTML={{ __html: copy.intro }} />
         ) : (
@@ -118,7 +118,7 @@ export default function PreorderRelease({ params }: { params: { slug: string } }
       </header>
 
       <section className="flex flex-col gap-6">
-        <h2 className="text-2xl font-bold">{pre ? `Where to pre-order ${s.name}` : `Where to buy ${s.name}`}</h2>
+        <h2 className="sec-title">{pre ? `Where to pre-order ${s.name}` : `Where to buy ${s.name}`}</h2>
         {sealed.length === 0 && (
           <div className="card-surface p-5 text-sm text-muted">
             No store we track lists {s.name} yet. Stores usually open pre-orders six to ten weeks before release; this page adds each one, and TCGplayer and eBay, as soon as its listing appears, refreshed daily. Nothing here is ever an estimate.
@@ -144,7 +144,7 @@ export default function PreorderRelease({ params }: { params: { slug: string } }
 
       {chase.length > 0 && (
         <section>
-          <h2 className="mb-1 text-2xl font-bold">{s.name} chase cards</h2>
+          <h2 className="mb-1 sec-title">{s.name} chase cards</h2>
           <p className="mb-3 text-sm text-muted">{pre ? "The most valuable cards so far, at TCGplayer market. Pre-release prices move fast." : "The most valuable cards at TCGplayer market."} <Link className="link" href={`/sets/${s.slug}`}>Full card list →</Link></p>
           <TileGrid items={chase} />
         </section>
@@ -172,7 +172,7 @@ export default function PreorderRelease({ params }: { params: { slug: string } }
       <FamilyCluster cluster="cards" kind="preorder" />
 
       <section className="max-w-3xl">
-        <h2 className="mb-3 text-xl font-bold">{s.name} {pre ? "pre-order" : "price"} FAQ</h2>
+        <h2 className="mb-3 sec-title">{s.name} {pre ? "pre-order" : "price"} FAQ</h2>
         {faq.map((f) => (
           <div key={f.q} className="border-b border-ink-800 py-3"><h3 className="font-medium">{f.q}</h3><p className="mt-1 text-sm text-muted">{f.a}</p></div>
         ))}

@@ -32,15 +32,15 @@ export default function EmbedPage() {
   return (
     <article className="flex max-w-3xl flex-col gap-8">
       <header className="flex flex-col gap-2">
-        <h1 className="font-display text-3xl font-black">Free {SITE.gameShort} price widgets for your site</h1>
-        <p className="text-muted">
+        <h1 className="page-title">Free {SITE.gameShort} price widgets for your site</h1>
+        <p className="page-lede">
           Drop a live card price into any page with one line of HTML. It shows the cheapest in-stock store price in your readers&apos; market and updates every
           day by itself. Free, no signup, no tracking. The widget is marked noindex, so it never competes with your own pages in search.
         </p>
       </header>
 
       <section className="card-surface flex flex-col gap-3 p-4">
-        <h2 className="text-lg font-bold">Card price badge</h2>
+        <h2 className="sec-title">Card price badge</h2>
         <p className="text-sm text-muted">
           For deck guides, set reviews and tier lists: put one under each card you mention and readers see what it costs today, without you keeping a price
           table up to date. <Link className="link" href={`/embed/card/${slug}`}>See it running →</Link>
@@ -54,7 +54,7 @@ export default function EmbedPage() {
       </section>
 
       <section className="card-surface flex flex-col gap-3 p-4">
-        <h2 className="text-lg font-bold">Daily price game</h2>
+        <h2 className="sec-title">Daily price game</h2>
         <p className="text-sm text-muted">
           For creators, clubs and Discord-linked sites: today&apos;s {SITE.gameShort} Price Duel, two cards and &ldquo;which is worth more?&rdquo;. It changes by itself
           every day at midnight UTC, so your page has something new daily. <Link className="link" href="/embed/daily">See it running →</Link>
@@ -63,7 +63,7 @@ export default function EmbedPage() {
       </section>
 
       <section className="card-surface flex flex-col gap-3 p-4">
-        <h2 className="text-lg font-bold">For stores we compare</h2>
+        <h2 className="sec-title">For stores we compare</h2>
         <p className="text-sm text-muted">
           A small plain-HTML badge that tells your customers your prices are compared openly. No script, no image, nothing to host.{" "}
           <Link className="link" href="/stores">See the stores we compare →</Link>
@@ -72,7 +72,7 @@ export default function EmbedPage() {
         <pre className="overflow-x-auto rounded bg-ink-900 p-3 text-xs"><code>{badge}</code></pre>
       </section>
       <section className="card-surface flex flex-col gap-3 p-4" id="price-data">
-        <h2 className="text-lg font-bold">Free price data</h2>
+        <h2 className="sec-title">Free price data</h2>
         <p className="text-sm text-muted">
           Building a Discord bot, a deck or collection tool, a spreadsheet or a blog? Every product&apos;s cheapest in-stock price in each market is in one
           JSON file: <a className="link" href={PRICE_API_PATH}>{SITE_URL}{PRICE_API_PATH}</a>. Free, no key, no signup, open to every origin, and

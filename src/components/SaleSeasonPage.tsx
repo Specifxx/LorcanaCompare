@@ -56,8 +56,8 @@ export function SaleSeasonPage({ slug }: { slug: SaleSlug }) {
   return (
     <article className="flex max-w-4xl flex-col gap-8">
       <header className="flex flex-col gap-2">
-        <h1 className="font-display text-3xl font-black">{SITE.gameShort} {saleHeading(slug, year)}</h1>
-        <p className="text-muted">
+        <h1 className="page-title">{SITE.gameShort} {saleHeading(slug, year)}</h1>
+        <p className="page-lede">
           {saleIntro(slug, year, regions)} Rebuilt from each day&apos;s store prices{asOf ? ` (last updated ${asOf})` : ""}, so bookmark it: the same page
           updates every day through the sales.
         </p>
@@ -75,7 +75,7 @@ export function SaleSeasonPage({ slug }: { slug: SaleSlug }) {
       ))}
 
       <section className="card-surface flex flex-col gap-2 p-4 text-sm">
-        <h2 className="text-lg font-bold">How to read this</h2>
+        <h2 className="sec-title">How to read this</h2>
         <p>
           Every price is a store&apos;s in-stock item price before shipping, in that country&apos;s own currency, never converted. In each country we list
           products whose cheapest store is at least 10% (and at most 45%: past that a listing is more likely the wrong product than a sale) under the middle price of three or more stores there. US prices are also compared with
@@ -99,7 +99,7 @@ function MarketSection({ m, us }: { m: Market; us: { sealed: Deal[]; cards: Deal
   const cards = storeDealsIn(m, 16, "card");
   return (
     <section id={m.toLowerCase()} className="flex flex-col gap-4 scroll-mt-20">
-      <h2 className="text-2xl font-bold">Deals in {ADJ[m]} stores</h2>
+      <h2 className="sec-title">Deals in {ADJ[m]} stores</h2>
       {us && <UnderTcg title="Sealed product under TCGplayer today" rows={us.sealed} />}
       {us && <UnderTcg title="Cards under TCGplayer today" rows={us.cards} />}
       <UnderStores title={`Sealed product under other ${ADJ[m]} stores`} rows={sealed} m={m} />

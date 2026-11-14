@@ -14,9 +14,12 @@ export default {
         accent: v("accent"),
         fg: v("fg"),
         muted: v("muted"),
-        up: "#3fb950",
-        down: "#f0506e",
-        buy: { DEFAULT: "#1ea65c", 400: "#34d17e" },
+        // Money colours are variables too (2026-11-14): the dark theme's bright greens and pink read under 3:1 on the light
+        // theme's white, so globals.css gives the light theme deeper ones. `onbrand` is the words on a brand-filled button.
+        up: v("up"),
+        down: v("down"),
+        buy: { DEFAULT: "#1ea65c", 400: v("buy-text") },
+        onbrand: v("on-brand"),
       },
       fontFamily: {
         sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "Segoe UI", "Roboto", "Arial", "sans-serif"],

@@ -39,8 +39,8 @@ export default function Kits() {
     <div className="flex flex-col gap-8">
       <header>
         <Breadcrumbs items={[{ name: cfg.label }]} />
-        <h1 className="font-display text-3xl font-black">{cfg.label} prices</h1>
-        <p className="mt-2 max-w-3xl text-muted">
+        <h1 className="page-title">{cfg.label} prices</h1>
+        <p className="page-lede">
           {all.length.toLocaleString()} {cfg.noun} compared across {cfg.stores.length} hobby shops in {markets.map((m) => MARKET_LABEL[m]).join(", ")}. Every kit is matched by the barcode on its box, so the prices you see are for the same kit. Cheapest in-stock first, in your own currency.
         </p>
         <div className="mt-2"><CheckedAgo at={kitsUpdatedAt()} /></div>
@@ -55,13 +55,13 @@ export default function Kits() {
       </nav>
       {showNew && (
         <section>
-          <h2 className="mb-3 text-xl font-bold">New in stores</h2>
+          <h2 className="mb-3 sec-title">New in stores</h2>
           <KitGrid items={fresh} />
         </section>
       )}
       {hubs.map((h) => (
         <section key={h.slug}>
-          <h2 className="mb-3 text-xl font-bold"><Link className="hover:underline" href={`/kits/grade/${h.slug}`}>{h.label} →</Link></h2>
+          <h2 className="mb-3 sec-title"><Link className="hover:underline" href={`/kits/grade/${h.slug}`}>{h.label} →</Link></h2>
           <KitGrid items={h.items.slice(0, 12)} />
         </section>
       ))}
@@ -69,7 +69,7 @@ export default function Kits() {
         const rest = popular(all.filter((k) => !k.grade)).slice(0, 12);
         return rest.length ? (
           <section>
-            <h2 className="mb-3 text-xl font-bold">Other kits</h2>
+            <h2 className="mb-3 sec-title">Other kits</h2>
             <KitGrid items={rest} />
           </section>
         ) : null;

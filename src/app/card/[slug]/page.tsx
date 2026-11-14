@@ -143,7 +143,7 @@ export default function CardPage({ params }: { params: { slug: string } }) {
           </header>
           <section>
             <div className="mb-2 flex flex-wrap items-baseline justify-between gap-x-4">
-              <h2 className="text-lg font-bold">Compare prices</h2>
+              <h2 className="sec-title">Compare prices</h2>
               <CheckedAgo at={m?.updatedAt} />
             </div>
             <div className="mb-3"><EbayCallout offers={e.offers} productId={p.id} query={`${SITE.ebay.query} ${name} ${p.number ?? ""}`.trim()} /></div>
@@ -168,7 +168,7 @@ export default function CardPage({ params }: { params: { slug: string } }) {
       </div>
       {related.length > 0 && (
         <section>
-          <h2 className="mb-3 text-lg font-bold">More from {set?.name}</h2>
+          <h2 className="mb-3 sec-title">More from {set?.name}</h2>
           <TileGrid items={related} />
         </section>
       )}

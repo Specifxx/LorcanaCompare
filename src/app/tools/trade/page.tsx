@@ -14,8 +14,8 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div>
-      <h1 className="font-display text-3xl font-black">{SITE.gameShort} trade calculator</h1>
-      <p className="mt-2 text-muted">One card per line on each side (&ldquo;2 Card Name&rdquo; works). Valued at today&apos;s TCGplayer market price.</p>
+      <h1 className="page-title">{SITE.gameShort} trade calculator</h1>
+      <p className="page-lede">One card per line on each side (&ldquo;2 Card Name&rdquo; works). Valued at today&apos;s TCGplayer market price.</p>
       <Trade />
     </div>
   );

@@ -14,7 +14,13 @@
   --c-fg: 17 20 36;
   --c-muted: 82 90 112;
   --page-bg: #f4f5fa;
+  /* Money on white (2026-11-14): the dark theme's bright greens and pink read 1.9 to 3.3:1 here. */
+  --c-up: 21 128 61;
+  --c-down: 190 18 60;
+  --c-buy-text: 21 128 61;
 }
+/* The money colours on the dark theme (tailwind.config.ts reads them as up, down and buy-400). */
+:root { --c-up: 63 185 80; --c-down: 240 80 110; --c-buy-text: 52 209 126; }
 
 html { background: var(--page-bg); color: rgb(var(--c-fg)); scroll-behavior: smooth; }
 /* overflow-x: clip (not hidden, so position: sticky keeps working): an element wider than the screen is clipped instead of
@@ -37,23 +43,62 @@ body { background: var(--page-bg); min-height: 100vh; overflow-x: clip; }
 }
 
 .card-surface { @apply rounded-2xl border border-ink-700/60 bg-ink-900 shadow-[0_1px_0_rgb(255_255_255/0.03)_inset]; }
-.btn { @apply inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition; }
-.btn-primary { @apply btn bg-brand text-ink-950 hover:bg-brand-400; }
+/* Buttons (2026-11-14): at least 40px tall for a thumb, a press that gives a little, and words that read on their fill in
+   both themes. Motion is transform and colour only, 150ms, and none for reduced motion. */
+.btn { @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition duration-150 active:scale-[0.97]; }
+.btn-primary { @apply btn bg-brand text-onbrand hover:brightness-110; }
 /* TCGplayer\'s button (owner, 2026-11-12): blue. */
 .btn-tcg { @apply btn bg-[#1d4ed8] text-white hover:bg-[#2563eb]; }
-.btn-buy { @apply btn bg-buy text-white hover:bg-buy-400 px-3 py-1.5; }
-.btn-ghost { @apply btn border border-ink-700 text-fg hover:bg-ink-800; }
+/* Green is money; its words are near-black, which reads 5.8:1 on the green where white read 3.2:1. */
+.btn-buy { @apply btn bg-buy text-[#03160b] hover:bg-[#27b866] px-3 py-1.5; }
+.btn-ghost { @apply btn border border-ink-700 text-fg hover:border-ink-600 hover:bg-ink-800; }
+@media (prefers-reduced-motion: reduce) { .btn { @apply active:scale-100; } }
 .chip { @apply inline-flex items-center rounded-full border border-ink-700 px-2.5 py-0.5 text-xs text-muted; }
-.link { @apply text-brand-400 hover:underline; }
-.prose-site h2 { @apply mt-8 mb-3 text-xl font-bold; }
-.prose-site h3 { @apply mt-6 mb-2 text-lg font-semibold; }
-.prose-site p { @apply my-3 leading-relaxed text-fg/90; }
-.prose-site ul { @apply my-3 list-disc pl-6 space-y-1; }
-.prose-site ol { @apply my-3 list-decimal pl-6 space-y-1; }
-.prose-site a { @apply text-brand-400 underline; }
-.prose-site table { @apply my-4 w-full text-sm; }
-.prose-site th { @apply border-b border-ink-700 py-2 text-left; }
-.prose-site td { @apply border-b border-ink-800 py-2 pr-3; }
+.link { @apply text-brand-400 underline-offset-[3px] hover:underline; }
+
+/* One focus ring everywhere a keyboard lands: the brand as text colour, which reads on both themes. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid rgb(var(--c-brand-light));
+  outline-offset: 2px;
+}
+/* Prices line up: every number in a table, and every price in a tile, takes the same width per digit. */
+table, .tile-grid, .tabular { font-variant-numeric: tabular-nums; }
+
+/* ── Page header (2026-11-14): every page below the home page opens the same way: breadcrumb, a kicker if it has one,
+   the title, one line under it, then its key facts. The section titles are the home page's. ── */
+.page-head { @apply mb-8 max-w-3xl; }
+.page-kicker { @apply text-xs font-semibold uppercase tracking-wider text-brand-400; }
+.page-title { @apply font-display text-3xl font-black leading-[1.15] tracking-tight sm:text-4xl; text-wrap: balance; }
+.page-lede { @apply mt-3 max-w-2xl text-base leading-relaxed text-muted sm:text-lg; text-wrap: pretty; }
+.page-facts { @apply mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted; }
+.sec-title { @apply font-display text-xl font-black tracking-tight sm:text-2xl; }
+
+/* ── Article text (guides, posts, about, stores): a readable measure (~65 characters), one heading scale, room
+   between paragraphs, quiet list markers, and tables that scroll inside their own box on a phone. ── */
+.prose-site { @apply text-[1.0625rem] leading-[1.7]; }
+.prose-site > :is(p, ul, ol, h2, h3, blockquote), .prose-site section > :is(p, ul, ol, h2, h3) { max-width: 65ch; }
+.prose-site h2 { @apply mb-3 mt-10 font-display text-[1.4rem] font-black leading-tight tracking-tight sm:text-2xl; }
+.prose-site h3 { @apply mb-2 mt-7 text-lg font-bold leading-snug; }
+.prose-site > :is(h2, h3):first-child { @apply mt-0; }
+.prose-site p { @apply my-4 text-fg/90; }
+.prose-site :is(ul, ol) { @apply my-4 space-y-2 pl-6 text-fg/90; }
+.prose-site ul { @apply list-disc; }
+.prose-site ol { @apply list-decimal; }
+.prose-site li { @apply pl-1; }
+.prose-site li::marker { color: rgb(var(--c-muted)); }
+.prose-site :is(b, strong) { @apply font-semibold text-fg; }
+.prose-site a { @apply text-brand-400 underline decoration-brand-400/40 decoration-1 underline-offset-[3px] transition-colors hover:decoration-brand-400; }
+.prose-site blockquote { @apply my-6 rounded-r-xl border-l-2 border-ink-600 bg-ink-900 px-4 py-3 text-fg/90; }
+.prose-site table { @apply my-6 w-full text-[0.9375rem] leading-snug; }
+.prose-site thead th { @apply border-b border-ink-700 bg-ink-850 px-3 py-2 text-left text-xs font-semibold uppercase tracking-wide text-muted; }
+.prose-site tbody td { @apply border-b border-ink-800 px-3 py-2.5 align-top; }
+.prose-site tbody tr:last-child td { @apply border-b-0; }
+.prose-site table { @apply overflow-hidden rounded-xl border border-ink-700/60; border-collapse: separate; border-spacing: 0; }
+/* On a phone a table keeps its columns and scrolls sideways in its own box, instead of folding a card name onto five lines. */
+@media (max-width: 639px) {
+  .prose-site table { display: block; width: max-content; max-width: 100%; overflow-x: auto; }
+  .prose-site :is(th, td) { white-space: nowrap; }
+}
 
 /* ── The homepage hero (app/page.tsx, components/HeroSparks.tsx) ──────────────
    Centred, like RiftCompare's: a soft glow of the brand colour behind the
@@ -346,4 +391,30 @@ h1, h2, h3 { letter-spacing: -0.01em; }
    utilities on the same element still win. Pinned by tests/scroller-clip.test.ts. */
 :where(.scroller, .overflow-x-auto, .overflow-x-scroll, .ex-scroll, .ad-scroll) {
   position: relative;
+}
+
+/* The stores page's lists (2026-11-14): two columns from a tablet, store names as quiet links, the count in small grey
+   type, so 500 stores read as a directory rather than a wall of underlines. */
+.prose-site ul.store-list { @apply list-none space-y-0 pl-0 sm:columns-2 sm:gap-8; max-width: none; }
+.prose-site ul.store-list > li { @apply break-inside-avoid border-b border-ink-800/70 py-2 pl-0 text-[0.9375rem] leading-snug; }
+.prose-site ul.store-list a { @apply font-medium text-fg no-underline hover:text-brand-400 hover:underline; }
+.prose-site ul.store-list li > span { font-size: 13px; }
+
+/* A tile grid that is one sideways row on a phone (2026-11-14), the home page's shelf: every tile stays in the page,
+   the next one peeks in at the edge, and a page of eight product types is no longer 33,000px tall. */
+@media (max-width: 639px) {
+  .shelf-phone .tile-grid {
+    position: relative;
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 44%;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    margin-inline: -1rem;
+    padding-inline: 1rem;
+    scroll-padding-inline: 1rem;
+    scrollbar-width: none;
+  }
+  .shelf-phone .tile-grid > * { scroll-snap-align: start; }
 }

@@ -22,7 +22,7 @@ export default function Stores() {
       {markets.map((mk) => (
         <section key={mk}>
           <h2>{MARKET_LABEL[mk]}</h2>
-          <ul>
+          <ul className="store-list">
             {SITE.stores.filter((s) => s.market === mk).map((s) => (
               <li key={s.key}><a href={s.base} rel="noopener nofollow">{s.name}</a> {m?.stores[s.key]?.matched ? <span className="text-muted">— {m.stores[s.key].matched.toLocaleString()} listings matched</span> : null}</li>
             ))}
@@ -33,7 +33,7 @@ export default function Stores() {
         <section>
           <h2>{SITE.kits.label} shops</h2>
           <p>For <a href="/kits">{SITE.kits.noun}</a>, matched by the barcode on the box.</p>
-          <ul>
+          <ul className="store-list">
             {SITE.kits.stores.map((s) => (
               <li key={s.key}><a href={s.base} rel="noopener nofollow">{s.name}</a> <span className="text-muted">— {MARKET_LABEL[s.market]}{kitStoreStatus()[s.key]?.matched ? `, ${kitStoreStatus()[s.key].matched.toLocaleString()} kits matched` : ""}</span></li>
             ))}

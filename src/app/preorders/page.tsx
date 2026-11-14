@@ -56,18 +56,18 @@ export default function Preorders() {
       {PREORDER_COPY.faq.length > 0 && <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: PREORDER_COPY.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }} />}
       <header>
         <p className="text-xs uppercase tracking-wide text-brand-400">Pre-order tracker · updated daily</p>
-        <h1 className="font-display text-3xl font-black md:text-4xl">{SITE.gameShort} pre-orders</h1>
-        {PREORDER_COPY.intro && <p className="mt-3 max-w-3xl text-muted" dangerouslySetInnerHTML={{ __html: PREORDER_COPY.intro }} />}
+        <h1 className="page-title">{SITE.gameShort} pre-orders</h1>
+        {PREORDER_COPY.intro && <p className="page-lede" dangerouslySetInnerHTML={{ __html: PREORDER_COPY.intro }} />}
       </header>
       {upcoming.length > 0 && (
         <section>
-          <h2 className="mb-3 text-xl font-bold">Coming soon</h2>
+          <h2 className="mb-3 sec-title">Coming soon</h2>
           <div className="grid gap-3 md:grid-cols-2">{upcoming.map(card)}</div>
         </section>
       )}
       {recent.length > 0 && (
         <section>
-          <h2 className="mb-3 text-xl font-bold">Just released</h2>
+          <h2 className="mb-3 sec-title">Just released</h2>
           <div className="grid gap-3 md:grid-cols-2">{recent.map(card)}</div>
         </section>
       )}
@@ -75,7 +75,7 @@ export default function Preorders() {
       <FamilyCluster cluster="cards" kind="preorder" />
       {PREORDER_COPY.faq.length > 0 && (
         <section className="max-w-3xl">
-          <h2 className="mb-3 text-xl font-bold">Pre-order FAQ</h2>
+          <h2 className="mb-3 sec-title">Pre-order FAQ</h2>
           {PREORDER_COPY.faq.map((f) => (
             <div key={f.q} className="border-b border-ink-800 py-3"><h3 className="font-medium">{f.q}</h3><p className="mt-1 text-sm text-muted">{f.a}</p></div>
           ))}

@@ -37,8 +37,8 @@ export default function FacetIndex({ params }: { params: { facet: string } }) {
       <Breadcrumbs items={[{ name: "Cards", href: "/cards" }, { name: `By ${f.cfg.noun[0]}` }]} />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "ItemList", name: `${SITE.gameShort} cards by ${f.cfg.noun[0]}`, itemListElement: rows.map((r, i) => ({ "@type": "ListItem", position: i + 1, url: abs(`/cards/${f.cfg.facet}/${r.hub.slug}`), name: attrHubTitle(f.cfg, r.hub.label) })) }} />
       <header>
-        <h1 className="font-display text-3xl font-black">{SITE.gameShort} cards by {f.cfg.noun[0]}</h1>
-        <p className="mt-2 text-muted">{f.cfg.blurb ? `${f.cfg.blurb} ` : ""}{rows.length} {f.cfg.noun[1]}, largest first. Open one for every card in it, most valuable first, with every store compared.</p>
+        <h1 className="page-title">{SITE.gameShort} cards by {f.cfg.noun[0]}</h1>
+        <p className="page-lede">{f.cfg.blurb ? `${f.cfg.blurb} ` : ""}{rows.length} {f.cfg.noun[1]}, largest first. Open one for every card in it, most valuable first, with every store compared.</p>
       </header>
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
