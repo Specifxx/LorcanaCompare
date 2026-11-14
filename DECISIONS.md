@@ -1869,3 +1869,12 @@ on a card page, and it yields to the block ([data-ad]). Measure clicks per place
 bare `<button>` (no padding, the parent's size and weight) and a bare `<a>` (the parent's colour). Both are now plain class rules;
 the rest of the file keeps `:where()`. Ported from YGO Compare #154 / DexCompare #210. `tests/vault.test.ts` reads the reset itself
 and the components' markup, so any class on an element the reset styles is held to the same.
+
+## 2026-11-14: Paid ad visits tag their buy clicks (`ad=fbad`)
+
+Owner: "with the ads, we got to make sure that we keep track to see if they actually are giving us ROI." A visitor who
+lands with `utm_medium=paid` (Cyberpunk Compare's A$35 Meta test, 14-21 Nov) is remembered for the
+tab by `lib/paid-visit.ts` (the same file as RiftCompare's and DexCompare's), and every `/go` link they open gets
+`ad=<mark>` (`fbad` for Meta). `/go` accepts only `^[a-z]{2,8}$` and puts it right after the market,
+`cyberpunk-us-fbad-<page>-<id>`, so the 60-character cut never drops it. RiftCompare's earnings dashboard ("Ad tests")
+sums the sales carrying it against the ad's spend. Organic visits are untouched. Engine change, the same in Cyberpunk Compare; Lorcana runs no ad yet, so its marker stays unused until it does.
