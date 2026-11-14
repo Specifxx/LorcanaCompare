@@ -1939,3 +1939,39 @@ A product page on a sister engine showed an eBay row badged "Best price" and nam
 tiles and the quick buy could lead with an eBay price). Both now skip eBay and Amazon (`neverCheapest` in
 `src/lib/price-rows.ts`); eBay keeps its pinned row and its own ad list (`e`), and a paid alternative is never cheaper
 than the cheapest. `tests/never-cheapest.test.ts` pins it. The summary is rebuilt by the next import.
+
+## 2026-11-14: Review of the day's design pass: a search page that holds still, quieter report link
+
+An independent review of the 14 November design pass (#157 here, #105 on Cyberpunk Compare), with `next build` of the
+commit before it and of `main`, on 12 URLs per site (home, a card, a sealed product, a set, the sealed index, a search with
+results and one without, the guides index, a guide, stores, Black Friday, a 404) at 390×844 and 1440×900 in both themes,
+plus 17 URLs per site compared as server HTML with scripts off. What it found, by page type:
+
+- **Search (`/cards?q=`).** The pass's placeholder row was a regression on a phone: the row is inserted only when the
+  browser takes over, so it pushed the page down by ~400px. Layout shift went from 0.14 to 0.22 (no results) on a phone and
+  from 0.05 to 0.15 on a laptop. Now the server draws the same row in the Suspense fallback (`app/cards/SearchSkeleton.tsx`),
+  hidden unless the existing inline boot script in `<head>` saw a `q` on `/cards` (`SEARCH_BOOT_SCRIPT`, `lib/theme.ts`,
+  appended to the theme and season scripts: no new script, request or library). The results then fill a space that is
+  already there. Measured on both sites: no results 0.006 on a laptop and 0.01 on a phone (was 0.05 and 0.14 before the
+  pass); with results 0.09 to 0.10 on a laptop and 0.045 on a phone (was 0.42 to 0.48 before the pass). The fallback has no
+  heading and no words, so the server HTML's text and h2 outline are unchanged. The no-results card no longer gives a
+  Lorcana card number as its example (the engine is shared, and Cyberpunk's numbers differ).
+- **Card and sealed pages.** "Report a wrong price" and its form's hint were drawn at 75–80% opacity, 3.6 to 4.0:1 on the
+  light theme. They now use the inherited colour (`ReportForms.tsx`), still quiet, above 4.5:1. Nothing in the price
+  table moved.
+- **Guides on a phone.** Tables of three columns or more keep each cell on one line and scroll in their own box, as the
+  pass made them; a two-column table now wraps and fits the screen instead of scrolling (no current guide has one: a
+  guard for the next).
+- **Checked and left alone.** Every other page type matched the pass's report: no horizontal scroll at 390px, a visible
+  focus ring on every tabbed element, motion off under reduced motion (including the placeholder shimmer), no console
+  errors but the local analytics script, robots.txt and the sitemap byte-identical, sampled sitemap URLs 200 and indexable,
+  and an unknown URL a 404. Text under 4.5:1 is down from 40 to 9 per light-theme card page; what is left is logo
+  letters, the eBay callout's blue "All eBay listings" link and the owner's new "+ Add to cart" buttons (#158), all of
+  them money placements frozen until the 19 November recheck.
+
+**Frozen, and checked.** No paid link, ad block, pinned eBay / TCGplayer / Amazon row, affiliate tag, placement name, button
+word or row order changed, and no URL, redirect, title, meta description, canonical, robots, Open Graph or JSON-LD. Server
+HTML with scripts off, the commit before the pass against this branch, on 17 URLs per site: identical metadata, JSON-LD,
+h1 and h2 texts, internal links and indexed words, and the same sponsored links in the same order with the same words and
+hrefs. So the 19 November clicks-per-placement recheck is unaffected. No `revalidate` change, no new font, library or
+database read.

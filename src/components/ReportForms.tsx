@@ -19,7 +19,7 @@ export interface ReportStore {
 const box: CSSProperties = { border: "1px solid rgba(127,127,127,.35)", borderRadius: 10, padding: "12px 14px", marginTop: 8 };
 const field: CSSProperties = { width: "100%", boxSizing: "border-box", padding: "8px 10px", border: "1px solid rgba(127,127,127,.45)", borderRadius: 8, background: "transparent", color: "inherit", font: "inherit", fontSize: 14 };
 const label: CSSProperties = { display: "block", fontSize: 13, fontWeight: 600, margin: "10px 0 4px" };
-const hint: CSSProperties = { fontSize: 12, opacity: 0.75, margin: "8px 0 0" };
+const hint: CSSProperties = { fontSize: 12, margin: "8px 0 0" };
 const defaultButton: CSSProperties = { marginTop: 12, padding: "8px 16px", borderRadius: 8, border: "1px solid currentColor", background: "transparent", color: "inherit", font: "inherit", fontWeight: 600, cursor: "pointer" };
 const hidden: CSSProperties = { position: "absolute", left: -10000, width: 1, height: 1, overflow: "hidden" };
 
@@ -93,7 +93,7 @@ export function ReportPrice({
 
   return (
     <details className={className} style={{ marginTop: 12, fontSize: 14 }} data-report-price>
-      <summary style={{ cursor: "pointer", opacity: 0.8, textDecoration: "underline", textUnderlineOffset: 3, width: "fit-content" }}>{summary}</summary>
+      <summary style={{ cursor: "pointer", textDecoration: "underline", textUnderlineOffset: 3, width: "fit-content" }}>{summary}</summary>
       {state.status === "sent" ? (
         <div style={box}>
           <Result state={state} sentText="Thanks. We check every report and fix the price if it's wrong." />
