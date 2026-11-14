@@ -106,6 +106,7 @@ export default function CardPage({ params }: { params: { slug: string } }) {
         />
       )}
       <Breadcrumbs items={[{ name: p.kind === "sealed" ? "Sealed" : "Cards", href: p.kind === "sealed" ? "/sealed" : "/cards" }, ...(set ? [{ name: set.name, href: `/sets/${set.slug}` }] : []), { name }]} />
+      <InlineAds page="card" />
       <div className="grid gap-8 md:grid-cols-[minmax(0,320px)_1fr]">
         {/* Phones: the name, price and Buy come first; the big image and the
             details follow the prices (RiftCompare's card page, 2026-09-26). */}
@@ -150,8 +151,6 @@ export default function CardPage({ params }: { params: { slug: string } }) {
             <PriceTable offers={e.offers} fx={m?.fx ?? { USD: 1 }} productId={p.id} page="card" amazon={amazon} fetchTcg={fetchTcg} image={p.image ? imageAt(p.image, "200w") : null} product={`${name}${p.number ? ` ${p.number}` : ""}`} />
             {SITE.priceAlerts && <PriceAlert site={SITE.key} productId={p.id} prices={lowestByMarket(e.offers)} />}
           </section>
-          {/* The page's one ad block (owner, 2026-11-13), below the price table: eBay then TCGplayer, browser-only. */}
-          <InlineAds page="card" />
           <AdSlot slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_CARD} />
           <section className="card-surface p-4">
             <h2 className="mb-2 text-lg font-bold">Price history</h2>

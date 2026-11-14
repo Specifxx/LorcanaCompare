@@ -131,6 +131,7 @@ export default function Home() {
         <p className="mt-3 text-sm"><Link href="/cards" className="link font-semibold">All {m?.counts.cards.toLocaleString() ?? ""} cards in the database →</Link></p>
       </section>
 
+      <InlineAds page="home" />
       {/* Multi-game sites (SITE.lines): one tile per game, straight under the hero. */}
       <GameTiles />
 
@@ -178,8 +179,6 @@ export default function Home() {
         </section>
       )}
 
-      {/* The page's one ad block (owner, 2026-11-13): between sections, never in the hero or above the first list; browser-only. */}
-      <InlineAds page="home" />
 
       {/* The site's own star score and approved reviews (owner, 2026-11-03), loaded in the browser; nothing until there is a rating. */}
       <SiteReviews />

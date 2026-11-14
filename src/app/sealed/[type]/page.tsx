@@ -40,8 +40,8 @@ export default function SealedHub({ params }: { params: { type: string } }) {
         <h1 className="page-title">{SITE.gameShort} {h.label.toLowerCase()}</h1>
         <p className="page-lede">{h.items.length} products, newest set first. Open any one to compare every store and eBay.</p>
       </header>
-      <TileGrid items={items} />
       <InlineAds page="sealed-type" />
+      <TileGrid items={items} />
       <section>
         <h2 className="mb-3 sec-title">Other sealed products</h2>
         <div className="flex flex-wrap gap-2">
