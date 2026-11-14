@@ -11,7 +11,7 @@ import "@/content/site.css";
 import { SITE } from "@/site.config";
 import { SITE_URL } from "@/lib/site";
 import { themeCss } from "@/lib/theme-vars";
-import { DEFAULT_MODE, THEME_BOOT_SCRIPT } from "@/lib/theme";
+import { DEFAULT_MODE, SEARCH_BOOT_SCRIPT, THEME_BOOT_SCRIPT } from "@/lib/theme";
 import { CHRISTMAS_FESTIVE_LAYER, SEASON_BOOT_SCRIPT } from "@/lib/season";
 import { Header } from "@/components/Header";
 import { holidayNav } from "@/lib/holiday-nav";
@@ -61,7 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" data-theme={DEFAULT_MODE} data-festive={CHRISTMAS_FESTIVE_LAYER ? "on" : undefined} suppressHydrationWarning>
       <head>
         <style dangerouslySetInnerHTML={{ __html: themeCss() }} />
-        <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT + SEASON_BOOT_SCRIPT }} />
+        <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT + SEASON_BOOT_SCRIPT + SEARCH_BOOT_SCRIPT }} />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link rel="stylesheet" href={fontHref} />
         <link rel="preconnect" href="https://tcgplayer-cdn.tcgplayer.com" />

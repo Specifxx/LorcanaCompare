@@ -10,6 +10,7 @@ import { TileGrid } from "@/components/ProductTile";
 import { SearchBox } from "@/components/SearchBox";
 import { ChipList } from "@/components/ChipList";
 import { CardSearch } from "./CardSearch";
+import { SearchSlot } from "./SearchSkeleton";
 import { fitTitle, fitDescription } from "@/lib/seo-title";
 
 export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
@@ -32,7 +33,7 @@ export default function Cards() {
         <h1 className="page-title">{SITE.gameShort} card prices</h1>
         <p className="page-lede">Search any card, or browse by set. Every card page compares all the stores we track.</p>
         <div className="mt-5 max-w-xl"><SearchBox /></div>
-        <Suspense><CardSearch /></Suspense>
+        <Suspense fallback={<SearchSlot />}><CardSearch /></Suspense>
       </header>
 
       <section>

@@ -97,7 +97,9 @@ table, .tile-grid, .tabular { font-variant-numeric: tabular-nums; }
 /* On a phone a table keeps its columns and scrolls sideways in its own box, instead of folding a card name onto five lines. */
 @media (max-width: 639px) {
   .prose-site table { display: block; width: max-content; max-width: 100%; overflow-x: auto; }
-  .prose-site :is(th, td) { white-space: nowrap; }
+  /* Three columns or more keep each cell on one line; a two-column table wraps and fits the screen instead of
+     hiding the end of its price off the edge (2026-11-14 review). */
+  .prose-site tr:has(> :nth-child(3)) > :is(th, td) { white-space: nowrap; }
 }
 
 /* ── The homepage hero (app/page.tsx, components/HeroSparks.tsx) ──────────────
@@ -418,3 +420,8 @@ h1, h2, h3 { letter-spacing: -0.01em; }
   }
   .shelf-phone .tile-grid > * { scroll-snap-align: start; }
 }
+
+/* The server's placeholder for /cards?q= results (app/cards/SearchSkeleton.tsx): shown only when the boot script in
+   lib/theme.ts saw a search, so the results fill a space that is already there instead of pushing the page down. */
+.search-slot { display: none; }
+:root[data-search] .search-slot { display: block; }
