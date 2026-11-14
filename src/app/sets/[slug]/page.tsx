@@ -75,8 +75,8 @@ export default function SetPage({ params }: { params: { slug: string } }) {
       <Breadcrumbs items={[{ name: "Sets", href: "/sets" }, { name: s.name }]} />
       <header>
         <p className="text-xs uppercase tracking-wide text-brand-400">{s.upcoming ? "Upcoming" : "Released"} {s.releasedOn}</p>
-        <h1 className="font-display text-3xl font-black">{s.upcoming && cards.length > 0 ? <>{s.name} spoilers: every card revealed so far</> : <>{s.name} card list &amp; prices</>}</h1>
-        <p className="mt-2 text-muted">{cards.length} cards · one of each is worth {money(value)} at TCGplayer market · {sealed.length} sealed products.</p>
+        <h1 className="page-title">{s.upcoming && cards.length > 0 ? <>{s.name} spoilers: every card revealed so far</> : <>{s.name} card list &amp; prices</>}</h1>
+        <p className="page-lede">{cards.length} cards · one of each is worth {money(value)} at TCGplayer market · {sealed.length} sealed products.</p>
         {preorderSetList().some((x) => x.id === s.id) && (
           <p className="mt-2"><Link className="link font-semibold" href={preorderPath(s)}>{isPreorder(s) ? `${s.name} pre-order prices at every store →` : `${s.name} booster box prices at every store →`}</Link></p>
         )}
@@ -87,12 +87,12 @@ export default function SetPage({ params }: { params: { slug: string } }) {
         title={`Buy ${s.name} booster boxes and sealed`}
         items={sealedInSet(s.id).slice(0, 6).map((p) => ({ id: p.id, slug: p.slug, name: shortName(p.name), image: imageAt(p.image, "200w"), best: summaryOf(p.id).best, stores: summaryOf(p.id).listedSources }))}
       />
-      {cards.length > 0 && (<section><h2 className="mb-3 text-xl font-bold">Most valuable {s.name} cards</h2><TileGrid items={cards.slice(0, 18)} /></section>)}
-      {sealed.length > 0 && (<section><h2 className="mb-3 text-xl font-bold">{s.name} booster boxes and sealed</h2><TileGrid items={sealed.slice(0, 12)} /></section>)}
+      {cards.length > 0 && (<section><h2 className="mb-3 sec-title">Most valuable {s.name} cards</h2><TileGrid items={cards.slice(0, 18)} /></section>)}
+      {sealed.length > 0 && (<section><h2 className="mb-3 sec-title">{s.name} booster boxes and sealed</h2><TileGrid items={sealed.slice(0, 12)} /></section>)}
       <InlineAds page="set" />
       {cards.length > 0 && (
         <section>
-          <h2 className="mb-3 text-xl font-bold">Full {s.name} card list with prices</h2>
+          <h2 className="mb-3 sec-title">Full {s.name} card list with prices</h2>
           <div className="overflow-x-auto rounded-xl border border-ink-700/60">
             <table className="w-full text-sm">
               <thead className="bg-ink-850 text-left text-xs uppercase text-muted"><tr><th className="px-3 py-2">#</th><th className="px-3 py-2">Card</th><th className="px-3 py-2">Rarity</th><th className="px-3 py-2 text-right">Market</th><th className="px-3 py-2 text-right">7d</th><th className="px-3 py-2 text-right">Stores</th></tr></thead>
@@ -117,7 +117,7 @@ export default function SetPage({ params }: { params: { slug: string } }) {
       )}
       {guides.length > 0 && (
         <section>
-          <h2 className="mb-3 text-lg font-bold">{s.name} guides</h2>
+          <h2 className="mb-3 sec-title">{s.name} guides</h2>
           <ul className="list-disc pl-5 text-sm">{guides.map((g) => <li key={g.slug}><Link className="link" href={`/blog/${g.slug}`}>{g.title}</Link></li>)}</ul>
         </section>
       )}
@@ -127,7 +127,7 @@ export default function SetPage({ params }: { params: { slug: string } }) {
       </nav>
       {others.length > 0 && (
         <section>
-          <h2 className="mb-3 text-lg font-bold">Other {SITE.gameShort} card lists</h2>
+          <h2 className="mb-3 sec-title">Other {SITE.gameShort} card lists</h2>
           <div className="flex flex-wrap gap-2">{others.map((x) => <Link key={x.id} href={`/sets/${x.slug}`} className="chip hover:border-brand">{x.name}</Link>)}</div>
         </section>
       )}

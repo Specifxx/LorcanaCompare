@@ -37,13 +37,13 @@ export default function SealedHub({ params }: { params: { type: string } }) {
         <JsonLd data={{ "@context": "https://schema.org", "@type": "ItemList", name: `${SITE.gameShort} ${h.label.toLowerCase()}`, numberOfItems: items.length, itemListElement: items.slice(0, 30).map((p, i) => ({ "@type": "ListItem", position: i + 1, name: p.name, url: abs(`/card/${p.slug}`) })) }} />
       )}
       <header>
-        <h1 className="font-display text-3xl font-black">{SITE.gameShort} {h.label.toLowerCase()}</h1>
-        <p className="mt-2 text-muted">{h.items.length} products, newest set first. Open any one to compare every store and eBay.</p>
+        <h1 className="page-title">{SITE.gameShort} {h.label.toLowerCase()}</h1>
+        <p className="page-lede">{h.items.length} products, newest set first. Open any one to compare every store and eBay.</p>
       </header>
       <TileGrid items={items} />
       <InlineAds page="sealed-type" />
       <section>
-        <h2 className="mb-3 text-lg font-bold">Other sealed products</h2>
+        <h2 className="mb-3 sec-title">Other sealed products</h2>
         <div className="flex flex-wrap gap-2">
           {sealedHubs().filter((x) => x.slug !== h.slug).map((x) => <Link key={x.slug} href={`/sealed/${x.slug}`} className="chip hover:border-brand">{x.label}</Link>)}
         </div>

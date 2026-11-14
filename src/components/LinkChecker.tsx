@@ -209,7 +209,7 @@ export function LinkChecker({ example }: { example?: string }) {
                         <span className="block truncate font-semibold">{h.name}</span>
                         <span className="block truncate text-xs text-muted">{h.set}</span>
                       </span>
-                      <span className="shrink-0 text-sm font-semibold text-brand">Every store’s price →</span>
+                      <span className="shrink-0 text-sm font-semibold text-brand-400">Every store’s price →</span>
                     </Link>
                   </li>
                 ))
@@ -244,7 +244,7 @@ export function LinkChecker({ example }: { example?: string }) {
               <Figure
                 label="Cheapest in stock"
                 value={found.product.cheapestCents != null ? m(found.product.cheapestCents) : "Sold out"}
-                tone="text-brand"
+                tone="text-brand-400"
                 sub={`${found.product.inStockStores} of ${found.product.listedStores} ${found.product.listedStores === 1 ? "store" : "stores"} in stock`}
               />
               <Figure label="Median in stock" value={found.product.medianCents != null ? m(found.product.medianCents) : "—"} sub="What a typical store asks" />

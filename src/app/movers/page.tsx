@@ -19,7 +19,7 @@ export default function Movers() {
   const mo = movers(30, 300);
   return (
     <div className="flex flex-col gap-8">
-      <h1 className="font-display text-3xl font-black">{SITE.gameShort} price movers</h1>
+      <h1 className="page-title">{SITE.gameShort} price movers</h1>
       <div className="grid gap-6 lg:grid-cols-2">
         <List title="Risers this week" rows={w.up} />
         <List title="Fallers this week" rows={w.down} />

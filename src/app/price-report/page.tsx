@@ -52,15 +52,15 @@ export default function PriceReport() {
   return (
     <article className="flex max-w-4xl flex-col gap-8">
       <header className="flex flex-col gap-2">
-        <h1 className="font-display text-3xl font-black">{SITE.gameShort} price report, {month}</h1>
-        <p className="text-muted">
+        <h1 className="page-title">{SITE.gameShort} price report, {month}</h1>
+        <p className="page-lede">
           {SITE.game} prices across {SITE.stores.length} stores in {MARKETS.length} markets, compared with TCGplayer. Rebuilt from each day&apos;s prices{asOf ? `; last updated ${asOf}` : ""}.
           Free to quote with a link.
         </p>
       </header>
 
       <section className="card-surface flex flex-col gap-3 p-4">
-        <h2 className="text-lg font-bold">Do stores beat TCGplayer?</h2>
+        <h2 className="sec-title">Do stores beat TCGplayer?</h2>
         {share == null ? (
           <p className="text-sm text-muted">Not enough US store prices yet to compare.</p>
         ) : (
@@ -75,7 +75,7 @@ export default function PriceReport() {
 
       {sealed.length > 0 && (
         <section className="flex flex-col gap-2">
-          <h2 className="text-lg font-bold">The most valuable sealed products in US stores today</h2>
+          <h2 className="sec-title">The most valuable sealed products in US stores today</h2>
           <div className="overflow-x-auto">
             <table className="w-full min-w-[520px] text-left text-sm">
               <thead className="text-xs uppercase text-muted">
@@ -98,7 +98,7 @@ export default function PriceReport() {
       )}
 
       <section className="flex flex-col gap-2">
-        <h2 className="text-lg font-bold">Where you can buy from a store</h2>
+        <h2 className="sec-title">Where you can buy from a store</h2>
         <p className="text-sm text-muted">Products with at least one in-stock store price, by market. Each market compares only stores that charge in its own currency.</p>
         <ul className="grid grid-cols-2 gap-2 sm:grid-cols-3">
           {MARKETS.map((mk) => (
@@ -128,7 +128,7 @@ export default function PriceReport() {
       <p className="text-sm"><Link className="link" href="/movers">Every price mover →</Link> · <Link className="link" href="/methodology">How prices are collected →</Link></p>
 
       <section className="card-surface flex flex-col gap-2 p-4">
-        <h2 className="text-lg font-bold">Quote this report</h2>
+        <h2 className="sec-title">Quote this report</h2>
         <p className="text-sm">You&apos;re welcome to use any number here in an article, video or store post, with a link to this page. It updates itself, so the link stays current.</p>
         <p className="rounded bg-ink-900 p-2 font-mono text-xs">{citation}</p>
       </section>

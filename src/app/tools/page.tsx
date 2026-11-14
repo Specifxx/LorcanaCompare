@@ -17,8 +17,8 @@ export const metadata: Metadata = {
 export default function Tools() {
   return (
     <div>
-      <h1 className="font-display text-3xl font-black">Free {SITE.gameShort} price tools</h1>
-      <p className="mt-2 text-muted">All free, no account, updated every morning.</p>
+      <h1 className="page-title">Free {SITE.gameShort} price tools</h1>
+      <p className="page-lede">All free, no account, updated every morning.</p>
       <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {TOOLS.filter((t) => historyOn() || t.href !== "/tools/rising").map((t) => (
           <Link key={t.href} href={t.href} className="card-surface p-5 hover:border-brand/60">

@@ -24,8 +24,8 @@ function Tile({ i, market }: { i: HeroItem; market: Market }) {
     <Link href={`/card/${i.slug}`} className="card-surface group flex w-[150px] shrink-0 snap-start flex-col overflow-hidden hover:border-brand/60 sm:w-[168px]">
       <span className="relative block aspect-square bg-white">
         {i.image && <img src={i.image} alt={i.name} width={200} height={200} loading="lazy" decoding="async" className="h-full w-full object-contain p-2 transition group-hover:scale-[1.03]" />}
-        {pr?.saving && <span className="absolute left-1.5 top-1.5 rounded-md bg-buy px-1.5 py-0.5 text-[11px] font-black text-white shadow">−{pr.saving.pct}%</span>}
-        {i.releasesOn && <span className="absolute right-1.5 top-1.5 rounded-md bg-brand px-1.5 py-0.5 text-[11px] font-black text-ink-950 shadow">Pre-order</span>}
+        {pr?.saving && <span className="absolute left-1.5 top-1.5 rounded-md bg-buy px-1.5 py-0.5 text-[11px] font-black text-[#03160b] shadow">−{pr.saving.pct}%</span>}
+        {i.releasesOn && <span className="absolute right-1.5 top-1.5 rounded-md bg-brand px-1.5 py-0.5 text-[11px] font-black text-onbrand shadow">Pre-order</span>}
       </span>
       <span className="flex flex-1 flex-col gap-0.5 p-2.5">
         <span className="line-clamp-2 text-sm font-semibold leading-tight">{i.name}</span>

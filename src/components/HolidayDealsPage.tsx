@@ -63,8 +63,8 @@ export function HolidayDealsPage({ event }: { event: HolidayEvent }) {
   return (
     <article className="flex max-w-4xl flex-col gap-8">
       <header className="flex flex-col gap-2">
-        <h1 className="font-display text-3xl font-black">{SITE.gameShort} {EVENT_NAME[event]} deals {year}</h1>
-        <p className="text-muted">
+        <h1 className="page-title">{SITE.gameShort} {EVENT_NAME[event]} deals {year}</h1>
+        <p className="page-lede">
           {event === "black-friday" ? <>Black Friday is {longDate(bf)} and Cyber Monday is {longDate(cm)} {year}.{" "}</> : <>Cyber Monday is {longDate(cm)} {year}, the Monday after Black Friday ({longDate(bf)}).{" "}</>}
           {before ? "Stores often start their sales earlier. " : ""}
           Below is everything {SITE.stores.length} stores sell under TCGplayer&apos;s market price right now, in stock, rebuilt from each day&apos;s prices
@@ -77,7 +77,7 @@ export function HolidayDealsPage({ event }: { event: HolidayEvent }) {
 
       {others.map((m) => (
         <section key={m} id={m.toLowerCase()} className="flex scroll-mt-20 flex-col gap-4">
-          <h2 className="text-2xl font-bold">{EVENT_NAME[event]} deals in {ADJ[m]} stores</h2>
+          <h2 className="sec-title">{EVENT_NAME[event]} deals in {ADJ[m]} stores</h2>
           <UnderStores title={`Sealed product under other ${ADJ[m]} stores`} rows={storeDealsIn(m, 12, "sealed")} m={m} />
           <UnderStores title={`Cards under other ${ADJ[m]} stores`} rows={storeDealsIn(m, 12, "card")} m={m} />
         </section>
@@ -85,7 +85,7 @@ export function HolidayDealsPage({ event }: { event: HolidayEvent }) {
 
       <FamilyCluster cluster="cards" kind="deal" />
       <section className="card-surface flex flex-col gap-2 p-4 text-sm">
-        <h2 className="text-lg font-bold">How to read this</h2>
+        <h2 className="sec-title">How to read this</h2>
         <p>Each US row is the cheapest in-stock US store price we found (stores only, never eBay or Amazon), 8% to 60% under TCGplayer&apos;s market price, for products worth $5 or more. Item prices before shipping, in US dollars on both sides.{others.length ? " Every other country's rows are its own stores, at least 10% under the middle price of three or more stores there, in its own currency, never converted." : ""}</p>
         <p>We only see what a store asks when we read its prices, so a sale can start or end between updates. Always check the price on the store&apos;s page before you buy.</p>
         <p>
@@ -100,7 +100,7 @@ export function HolidayDealsPage({ event }: { event: HolidayEvent }) {
       </section>
 
       <section className="flex flex-col gap-3">
-        <h2 className="text-lg font-bold">{EVENT_NAME[event]} {year}: questions</h2>
+        <h2 className="sec-title">{EVENT_NAME[event]} {year}: questions</h2>
         {faq.map((f) => (
           <div key={f.q} className="text-sm">
             <h3 className="font-semibold">{f.q}</h3>
@@ -115,7 +115,7 @@ export function HolidayDealsPage({ event }: { event: HolidayEvent }) {
 function Section({ title, rows, empty }: { title: string; rows: Deal[]; empty: string }) {
   return (
     <section className="flex flex-col gap-2">
-      <h2 className="text-lg font-bold">{title}</h2>
+      <h2 className="sec-title">{title}</h2>
       {!rows.length ? (
         <p className="text-sm text-muted">{empty}</p>
       ) : (

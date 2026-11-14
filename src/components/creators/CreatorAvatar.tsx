@@ -18,7 +18,7 @@ export function CreatorAvatar({ creator, size, eager = false, decorative = false
       />
     );
   return (
-    <span aria-hidden className={`flex items-center justify-center rounded-full bg-brand font-bold text-ink-950 ${className}`} style={{ ...style, fontSize: size / 3 }}>
+    <span aria-hidden className={`flex items-center justify-center rounded-full bg-brand font-bold text-onbrand ${className}`} style={{ ...style, fontSize: size / 3 }}>
       {initials(creator.name)}
     </span>
   );

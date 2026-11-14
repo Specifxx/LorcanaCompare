@@ -17,8 +17,8 @@ export default function Page() {
   const puzzles = upcomingPuzzles(dailyCards(), dayKey(new Date()));
   return (
     <div>
-      <h1 className="font-display text-3xl font-black">{SITE.gameShort} Price Duel</h1>
-      <p className="mt-2 max-w-3xl text-muted">
+      <h1 className="page-title">{SITE.gameShort} Price Duel</h1>
+      <p className="page-lede">
         Ten pairs of cards. Tap the one worth more at TCGplayer&apos;s US market price. A new puzzle every day at midnight UTC, the same for everyone, so you can compare scores with friends.
       </p>
       {puzzles.length ? <DailyGame puzzles={puzzles} game={SITE.gameShort} /> : <p className="mt-6 text-muted">Today&apos;s puzzle isn&apos;t ready yet. Check back soon.</p>}

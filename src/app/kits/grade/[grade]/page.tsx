@@ -34,8 +34,8 @@ export default function GradePage({ params }: { params: { grade: string } }) {
     <div className="flex flex-col gap-8">
       <header>
         <Breadcrumbs items={[{ name: SITE.kits.label, href: "/kits" }, { name: h.label }]} />
-        <h1 className="font-display text-3xl font-black">{h.label} {SITE.kits.label} prices</h1>
-        <p className="mt-2 text-muted">{h.items.length} kits, the ones most shops have in stock first. Open a kit to compare every shop.</p>
+        <h1 className="page-title">{h.label} {SITE.kits.label} prices</h1>
+        <p className="page-lede">{h.items.length} kits, the ones most shops have in stock first. Open a kit to compare every shop.</p>
       </header>
       <nav aria-label="Grades" className="flex flex-wrap gap-2">
         {gradeHubs().map((g) => (
@@ -46,7 +46,7 @@ export default function GradePage({ params }: { params: { grade: string } }) {
       <KitEbayStrip tiles={kitAdTiles(h.items, 12)} page="kit-grade" title={`${h.label} ${SITE.kits.label} on eBay`} />
       {rest.length > 0 && (
         <section>
-          <h2 className="mb-3 text-xl font-bold">More {h.label} kits</h2>
+          <h2 className="mb-3 sec-title">More {h.label} kits</h2>
           <ul className="grid gap-x-6 gap-y-1 text-sm sm:grid-cols-2 lg:grid-cols-3">
             {rest.map((k) => (
               <li key={k.jan} className="flex min-w-0 items-baseline justify-between gap-3 border-b border-ink-800 py-1.5">

@@ -150,8 +150,8 @@ export default function CreatorsPage() {
 
       <header className="mt-4 max-w-2xl">
         <p className="text-xs font-semibold uppercase tracking-wide text-brand-400">Creators</p>
-        <h1 className="mt-2 font-display text-3xl font-black md:text-5xl">{SITE.gameShort} creators we love</h1>
-        <p className="mt-3 text-lg leading-8 text-muted">
+        <h1 className="page-title mt-2 sm:text-5xl">{SITE.gameShort} creators we love</h1>
+        <p className="page-lede">
           The players who make {SITE.game} fun to follow. Have a look at their work, follow them, and tell them {SITE.name} sent you.
         </p>
       </header>
@@ -164,7 +164,7 @@ export default function CreatorsPage() {
 
       {rest.length > 0 && (
         <section className="mt-10">
-          <h2 className="text-2xl font-bold">More creators</h2>
+          <h2 className="sec-title">More creators</h2>
           <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {rest.map((c) => <CreatorCard key={c.slug} c={c} />)}
           </div>
@@ -172,7 +172,7 @@ export default function CreatorsPage() {
       )}
 
       <section id="get-featured" className="card-surface mt-10 scroll-mt-24 border-dashed p-6 sm:p-8">
-        <h2 className="text-2xl font-bold">Make {SITE.gameShort} content? Get featured, free</h2>
+        <h2 className="sec-title">Make {SITE.gameShort} content? Get featured, free</h2>
         <p className="mt-2 max-w-2xl text-[15px] leading-7 text-muted">
           Deck techs, pack openings, rules explainers or game nights: if you make {SITE.game} content regularly, we&rsquo;d love to feature you here and on our homepage. Mention {SITE.name} in your content now and then, and we send {SITE.gameShort} players your way.
         </p>

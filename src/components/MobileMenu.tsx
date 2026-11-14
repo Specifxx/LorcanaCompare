@@ -12,7 +12,7 @@ export function MobileMenu({ groups }: { groups: NavGroup[] }) {
   const close = () => ref.current?.close();
   return (
     <>
-      <button type="button" onClick={() => ref.current?.showModal()} className="shrink-0 rounded-full bg-ink-800 px-3 py-1 text-sm font-semibold text-fg" aria-haspopup="dialog">
+      <button type="button" onClick={() => ref.current?.showModal()} className="inline-flex min-h-10 shrink-0 items-center rounded-full bg-ink-800 px-3.5 text-sm font-semibold text-fg transition-colors hover:bg-ink-700" aria-haspopup="dialog">
         ☰ Menu
       </button>
       <dialog ref={ref} aria-label="Site menu" onClick={(e) => { if (e.target === ref.current) close(); }} className="m-0 h-full max-h-none w-[min(22rem,92vw)] max-w-none bg-ink-950 p-0 text-fg backdrop:bg-black/60">

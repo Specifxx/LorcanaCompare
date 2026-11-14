@@ -37,8 +37,8 @@ export default function GamePage({ params }: { params: { slug: string } }) {
       <div>
         <Breadcrumbs items={[{ name: "Games", href: "/games" }, { name: line.name }]} />
         <header className="game-hero">
-          <h1 className="font-display text-3xl font-black md:text-4xl">{line.name} prices</h1>
-          <p className="mt-2 max-w-2xl text-muted">{line.blurb}</p>
+          <h1 className="page-title">{line.name} prices</h1>
+          <p className="page-lede">{line.blurb}</p>
           <p className="mt-2 text-sm text-muted">{v.sets.length} sets · {v.cards.toLocaleString()} cards · {v.sealed} sealed products, compared across TCGplayer, eBay and {SITE.stores.length} stores.</p>
           {v.newest && <p className="mt-3"><Link className="btn-primary" href={`/sets/${v.newest.slug}`}>Newest set: {v.newest.name} →</Link></p>}
         </header>
@@ -46,21 +46,21 @@ export default function GamePage({ params }: { params: { slug: string } }) {
 
       {v.boxes.length > 0 && (
         <section>
-          <h2 className="mb-3 text-xl font-bold">{line.name} booster boxes</h2>
+          <h2 className="mb-3 sec-title">{line.name} booster boxes</h2>
           <TileGrid items={v.boxes.slice(0, 6)} />
         </section>
       )}
 
       {v.topCards.length > 0 && (
         <section>
-          <h2 className="mb-3 text-xl font-bold">Most valuable {line.name} cards</h2>
+          <h2 className="mb-3 sec-title">Most valuable {line.name} cards</h2>
           <TileGrid items={v.topCards} />
         </section>
       )}
 
 
       <section>
-        <h2 className="mb-3 text-xl font-bold">Every {line.name} set, newest first</h2>
+        <h2 className="mb-3 sec-title">Every {line.name} set, newest first</h2>
         <div className="overflow-hidden rounded-xl border border-ink-700/60">
           <table className="w-full text-sm">
             <thead className="bg-ink-850 text-left text-xs uppercase text-muted">

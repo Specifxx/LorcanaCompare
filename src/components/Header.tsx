@@ -53,10 +53,10 @@ export function Header() {
         </div>
         <CartHeaderLink className="text-fg/85" />
       </div>
-      <nav className="flex items-center gap-1 overflow-x-auto px-4 pb-2 lg:hidden" aria-label="Main">
+      <nav className="flex items-center gap-1 overflow-x-auto px-4 pb-1.5 lg:hidden" aria-label="Main">
         <MobileMenu groups={navGroups(opts)} />
         {nav.map((n) => (
-          <Link key={n.href} href={n.href} className="shrink-0 rounded-full px-3 py-1 text-sm text-fg/85 hover:bg-ink-800">
+          <Link key={n.href} href={n.href} className="inline-flex min-h-10 shrink-0 items-center rounded-full px-3 text-sm text-fg/85 transition-colors hover:bg-ink-800">
             {n.label}
           </Link>
         ))}

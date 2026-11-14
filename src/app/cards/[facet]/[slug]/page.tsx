@@ -45,8 +45,8 @@ export default function AttrHubPage({ params }: { params: { facet: string; slug:
     <div className="flex flex-col gap-6">
       <Breadcrumbs items={[{ name: "Cards", href: "/cards" }, { name: `By ${f.cfg.noun[0]}`, href: `/cards/${f.cfg.facet}` }, { name: h.label }]} />
       <header>
-        <h1 className="font-display text-3xl font-black">{name}: prices</h1>
-        <p className="mt-2 text-muted">
+        <h1 className="page-title">{name}: prices</h1>
+        <p className="page-lede">
           {h.items.length} {h.label} cards
           {priced.length ? `, from ${money(refCents(priced[priced.length - 1].id))} to ${money(refCents(priced[0].id))}` : ""}
           {over10 ? `; ${over10} of them are worth $10 or more` : ""}.
@@ -57,17 +57,17 @@ export default function AttrHubPage({ params }: { params: { facet: string; slug:
       {h.items.length > 120 && <p className="text-sm text-muted">Showing the 120 most valuable of {h.items.length}. <Link className="link" href="/cards">Search every card</Link>.</p>}
       {setChips.length > 1 && (
         <section>
-          <h2 className="mb-3 text-lg font-bold">{h.label} cards by set</h2>
+          <h2 className="mb-3 sec-title">{h.label} cards by set</h2>
           <ChipList items={setChips} more="sets" />
         </section>
       )}
       <section>
-        <h2 className="mb-3 text-lg font-bold">Other {f.cfg.noun[1]}</h2>
+        <h2 className="mb-3 sec-title">Other {f.cfg.noun[1]}</h2>
         <ChipList items={f.hubs.filter((x) => x.slug !== h.slug).map((x) => ({ key: x.slug, href: `/cards/${f.cfg.facet}/${x.slug}`, label: x.label }))} more={f.cfg.noun[1]} />
       </section>
       {others.map((o) => (
         <section key={o.cfg.facet}>
-          <h2 className="mb-3 text-lg font-bold">Browse by {o.cfg.noun[0]}</h2>
+          <h2 className="mb-3 sec-title">Browse by {o.cfg.noun[0]}</h2>
           <ChipList items={o.hubs.map((x) => ({ key: x.slug, href: `/cards/${o.cfg.facet}/${x.slug}`, label: x.label }))} more={o.cfg.noun[1]} />
         </section>
       ))}

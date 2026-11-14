@@ -12,7 +12,7 @@ export function ChipList({ items, limit = 12, more = "more" }: { items: Chip[]; 
       <div className="flex flex-wrap gap-2">{items.slice(0, limit).map(chip)}</div>
       {rest.length > 0 && (
         <details className="group mt-2">
-          <summary className="cursor-pointer text-sm text-brand hover:underline group-open:mb-2">
+          <summary className="cursor-pointer text-sm text-brand-400 hover:underline group-open:mb-2">
             <span className="group-open:hidden">Show {rest.length} {more}</span>
             <span className="hidden group-open:inline">Show fewer</span>
           </summary>
