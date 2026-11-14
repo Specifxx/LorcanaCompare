@@ -35,6 +35,7 @@ export default function Cards() {
         <div className="mt-5 max-w-xl"><SearchBox /></div>
         <Suspense fallback={<SearchSlot />}><CardSearch /></Suspense>
       </header>
+      <InlineAds page="cards" />
 
       <section>
         <h2 className="mb-3 sec-title">Most valuable {SITE.gameShort} cards</h2>
@@ -51,7 +52,6 @@ export default function Cards() {
         </section>
       )}
 
-      <InlineAds page="cards" />
 
       <section>
         <div className="mb-3 flex items-baseline justify-between gap-3">

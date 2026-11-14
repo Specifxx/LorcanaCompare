@@ -25,6 +25,7 @@ export default function Sealed() {
         <h1 className="page-title">{SITE.gameShort} booster box and sealed prices</h1>
         <p className="page-lede">Newest sets first within each type. Open any product to compare every store.</p>
       </header>
+      <InlineAds page="sealed" />
       {/* On a phone each type is one sideways row, like the home page's sealed shelf (2026-11-14); a grid from a tablet up. */}
       {groups.map((g) => (
         <section key={g.t} className="shelf-phone">
@@ -32,7 +33,6 @@ export default function Sealed() {
           <TileGrid items={g.items.sort((a, b) => (setById(b.setId)?.releasedOn ?? "").localeCompare(setById(a.setId)?.releasedOn ?? "")).slice(0, 24)} />
         </section>
       ))}
-      <InlineAds page="sealed" />
     </div>
   );
 }

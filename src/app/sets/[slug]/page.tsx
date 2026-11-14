@@ -82,6 +82,7 @@ export default function SetPage({ params }: { params: { slug: string } }) {
         )}
       </header>
       </div>
+      <InlineAds page="set" />
       {/* Booster boxes first with a buy button each (components/SealedQuickBuy.tsx), before the card list. */}
       <SealedQuickBuy
         title={`Buy ${s.name} booster boxes and sealed`}
@@ -89,7 +90,6 @@ export default function SetPage({ params }: { params: { slug: string } }) {
       />
       {cards.length > 0 && (<section><h2 className="mb-3 sec-title">Most valuable {s.name} cards</h2><TileGrid items={cards.slice(0, 18)} /></section>)}
       {sealed.length > 0 && (<section><h2 className="mb-3 sec-title">{s.name} booster boxes and sealed</h2><TileGrid items={sealed.slice(0, 12)} /></section>)}
-      <InlineAds page="set" />
       {cards.length > 0 && (
         <section>
           <h2 className="mb-3 sec-title">Full {s.name} card list with prices</h2>
