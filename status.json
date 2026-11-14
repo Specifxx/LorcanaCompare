@@ -1,0 +1,48 @@
+{
+ "v": 1,
+ "site": "www.lorcanacompare.com",
+ "at": "2026-11-14T11:01:30.063Z",
+ "overall": "warn",
+ "checks": [
+  {
+   "name": "Live site",
+   "status": "ok",
+   "detail": "200"
+  },
+  {
+   "name": "A card page",
+   "status": "ok",
+   "detail": "200"
+  },
+  {
+   "name": "Daily price import",
+   "status": "ok",
+   "detail": "20.4h old"
+  },
+  {
+   "name": "Store imports",
+   "status": "warn",
+   "detail": "cardhouse: 0 matched; millenniumcomics: https://millenniumcomics.com.au/collections/lorcana-singles/products.json?limit=250&page=1&country=AU: HTTP 429; diademhobbies: 0 matched; envcollectible: 0 matched; nordiclegends: 0 matched; bentonville: 0 matched; five6gaming: 0 matched; southtexastcg: https://southtexastcg.com/collections/menu-lorcana/products.json?limit=250&page=1&country=US: HTTP 401 "
+  },
+  {
+   "name": "eBay budget",
+   "status": "ok",
+   "detail": "1048/1150 calls on 2026-11-13, 619 eligible"
+  },
+  {
+   "name": "Family feed",
+   "status": "ok",
+   "detail": "7 items, 20.2h old; 9 sister feeds (rift, op, dex, mtg, wax, gundam, ygo, cyberpunk, bandai)"
+  },
+  {
+   "name": "Amazon ASIN finder",
+   "status": "ok",
+   "detail": "AU: refused, 0 ASINs, 20h ago; CA: ok, 0 ASINs, 20h ago; EU: ok, 0 ASINs, 20h ago; UK: ok, 0 ASINs, 20h ago; US: ok, 40 ASINs, 20h ago"
+  },
+  {
+   "name": "Fetch TCG row",
+   "status": "ok",
+   "detail": "the Fetch TCG row is on /card/fru-fru-vip-guest"
+  }
+ ]
+}
