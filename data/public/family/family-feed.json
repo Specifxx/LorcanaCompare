@@ -1,7 +1,7 @@
 {
  "v": 1,
  "site": "lorcana",
- "generatedAt": "2026-11-14T13:46:19.546Z",
+ "generatedAt": "2026-11-15T14:10:13.391Z",
  "links": {
   "US": {
    "deals": "https://www.lorcanacompare.com/black-friday",
@@ -19,7 +19,7 @@
    "currency": "USD",
    "store": "Red Raccoon Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/652709_200w.jpg",
-   "refCents": 11455,
+   "refCents": 11376,
    "refLabel": "TCGplayer market price",
    "savingPct": 56
   },
@@ -47,7 +47,7 @@
    "currency": "USD",
    "store": "Red Raccoon Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/543859_200w.jpg",
-   "refCents": 13078,
+   "refCents": 13114,
    "refLabel": "TCGplayer market price",
    "savingPct": 31
   },
@@ -69,28 +69,28 @@
    "kind": "deal",
    "cluster": "cards",
    "region": "US",
-   "title": "Into the Inkdark Booster Box Case",
-   "url": "https://www.lorcanacompare.com/card/disney-lorcana-into-the-inkdark-booster-box-case",
-   "cents": 76999,
-   "currency": "USD",
-   "store": "The Castle Games",
-   "refCents": 99999,
-   "refLabel": "TCGplayer market price",
-   "savingPct": 23
-  },
-  {
-   "kind": "deal",
-   "cluster": "cards",
-   "region": "US",
    "title": "Attack of the Vine! Booster Box",
    "url": "https://www.lorcanacompare.com/card/disney-lorcana-attack-of-the-vine-booster-box",
    "cents": 14399,
    "currency": "USD",
    "store": "Red Raccoon Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/690384_200w.jpg",
-   "refCents": 18044,
+   "refCents": 18002,
    "refLabel": "TCGplayer market price",
    "savingPct": 20
+  },
+  {
+   "kind": "deal",
+   "cluster": "cards",
+   "region": "US",
+   "title": "Into the Inkdark Booster Box Case",
+   "url": "https://www.lorcanacompare.com/card/disney-lorcana-into-the-inkdark-booster-box-case",
+   "cents": 76999,
+   "currency": "USD",
+   "store": "The Castle Games",
+   "refCents": 93244,
+   "refLabel": "TCGplayer market price",
+   "savingPct": 17
   },
   {
    "kind": "preorder",
