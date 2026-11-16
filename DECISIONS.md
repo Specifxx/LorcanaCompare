@@ -1975,3 +1975,7 @@ HTML with scripts off, the commit before the pass against this branch, on 17 URL
 h1 and h2 texts, internal links and indexed words, and the same sponsored links in the same order with the same words and
 hrefs. So the 19 November clicks-per-placement recheck is unaffected. No `revalidate` change, no new font, library or
 database read.
+
+## 2026-11-17 — Urgent release for the header-menu click fix
+
+The dropdown items could not be clicked in Safari and Firefox on macOS (the menu closed on mousedown, before the click) and the owner asked for an urgent deploy. The fix was merged earlier on 2026-11-16 without a marker and the manual release was skipped by the 12-hour gap, so this entry lands with `[deploy] [urgent]` in its merge subject (owner: "deploy urgently"). One build.
