@@ -13,6 +13,7 @@ import { PriceTable } from "./PriceTable";
 import { ShareButton } from "./ShareButton";
 import { closeQuickViewUrl, onQuickViewHistory, openQuickViewUrl } from "@/lib/quick-view-url";
 
+import type { FetchRows } from "@/lib/fetchtcg";
 interface Head {
   slug: string;
   name: string;
@@ -27,6 +28,7 @@ interface Data {
   name: string;
   sub: string;
   img: string | null;
+  fetchTcg?: FetchRows | null;
 }
 
 // Every link to a card or sealed page opens it (owner, 2026-10-31: "whenever I
@@ -150,7 +152,7 @@ export function QuickView() {
             <Skeleton />
           ) : data ? (
             <>
-              <PriceTable offers={data.offers} fx={data.fx} productId={data.id} page="quickview" amazon={data.amazon} tableId={null} />
+              <PriceTable offers={data.offers} fx={data.fx} productId={data.id} page="quickview" amazon={data.amazon} tableId={null} fetchTcg={data.fetchTcg ?? null} image={data.img} cartTitle={data.name} />
               {/* The small eBay + TCGplayer pair, as on the card page (owner, 2026-11-03). Never Amazon here. */}
             </>
           ) : (
