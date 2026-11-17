@@ -2011,3 +2011,7 @@ an absent header is left alone. A bot is still sent on, untagged, and nothing is
 ## 2026-11-17: Quick view: price history at the very bottom, at most 10 rows (owner)
 
 Owner, 2026-11-17: the price-history chart at the top of the quick view is "not even that valuable". It now sits at the very bottom of the panel, below the rows and the ad pair, and the quick view lists at most 10 rows (`maxRows`): the pinned eBay and TCGplayer rows first, then the cheapest others, with "N more listings on the full page" (the page and "See price history and details" still show everything). The Cheapest price box and the Add to cart buttons are unchanged. Paid rows, their order and wording are untouched in every A/B arm (Dex and MTG tests, 20 Nov to 3 Dec).
+
+## 2026-11-17: retire two stores that have refused us for weeks
+
+Millennium Comics (AU) has answered HTTP 429 since 1 November and South Texas TCG (US) HTTP 401 since 29 October; neither has had a good read since, their carried offers expired after 72 hours, and the ops monitor's "Store imports" check has warned about them every run. Per the rule that a 401, 403 or 429 stops a store and is never worked around, both are removed from `src/content/stores.ts`. Nothing on a page changes (no offer from either has been shown for weeks). A store can be added back when it is known to allow reads.
