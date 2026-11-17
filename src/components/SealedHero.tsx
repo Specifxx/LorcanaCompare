@@ -50,6 +50,7 @@ export function SealedHero({ data, game, sealedHref }: { data: SealedHeroData; g
   const [tab, setTab] = useState(0);
   const tabs = [
     { key: "boxes", label: "Booster boxes", items: data.featured, href: sealedHref, more: "All sealed prices", sub: null as string | null },
+    { key: "packs", label: "Booster packs", items: data.packs, href: "/sealed/booster-pack", more: "All booster pack prices", sub: null as string | null },
     ...data.preorders.map((s) => ({ key: s.href, label: `Pre-order · ${s.name}`, items: s.items, href: s.href, more: "Every store's pre-order price", sub: `Out ${date(s.releasesOn)}` })),
   ].filter((t) => t.items.length > 0);
   if (!tabs.length) return null;
