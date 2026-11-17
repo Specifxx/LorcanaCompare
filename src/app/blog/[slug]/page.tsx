@@ -58,10 +58,6 @@ export default function PostPage({ params }: { params: { slug: string } }) {
           <ul className="mt-2 space-y-2">{TOOLS.slice(0, 4).map((t) => <li key={t.href}><Link className="link" href={t.href}>{t.name}</Link></li>)}</ul>
         </div>
       </nav>
-      <aside className="mt-8 border-t border-ink-800 pt-6 text-sm">
-        <p className="font-semibold">Also from us</p>
-        <p className="mt-1 text-muted">{SITE.sisterSites.map((s, i) => (<span key={s.url}>{i ? " · " : ""}<a className="link" href={s.url} rel="noopener">{s.anchor ?? s.name}</a> ({s.anchor ? s.name : s.game})</span>))}</p>
-      </aside>
     </article>
   );
 }
