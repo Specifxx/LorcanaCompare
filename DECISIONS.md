@@ -2015,3 +2015,15 @@ Owner, 2026-11-17: the price-history chart at the top of the quick view is "not 
 ## 2026-11-17: retire two stores that have refused us for weeks
 
 Millennium Comics (AU) has answered HTTP 429 since 1 November and South Texas TCG (US) HTTP 401 since 29 October; neither has had a good read since, their carried offers expired after 72 hours, and the ops monitor's "Store imports" check has warned about them every run. Per the rule that a 401, 403 or 429 stops a store and is never worked around, both are removed from `src/content/stores.ts`. Nothing on a page changes (no offer from either has been shown for weeks). A store can be added back when it is known to allow reads.
+
+## 2026-11-17: Fiverr first-time-shopper review of DexCompare, applied here (owner)
+
+The owner bought a professional first-time-shopper QA review of DexCompare and asked for every finding that generalises to reach every site.
+Applied here (the full reasoning is in DexCompare's DECISIONS.md, same date):
+
+- **Cart hand-off:** the cart drawer opens with "You pay each store on its own site. We never take payment." (normal-size text, first thing in the
+  drawer); "Total before postage" became "Estimated total (before postage)"; the add button's tooltip says you pay at the store. The label stays
+  "Add to cart" (owner, 2026-11-14: a literal "Add to cart" on every row).
+- **The quick view sets the tab title and description while it is open** and restores them on close (the tab used to keep the list's title).
+- **A total beside the shipping figure** on a row that charges postage ("+ $X shipping · ≈ $Y total").
+- Already true here, no change: an eBay or Amazon row is never "the cheapest" or "Best price" (`neverCheapest`), so the table never contradicts its own headline.

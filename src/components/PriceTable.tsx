@@ -198,6 +198,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false, maxRo
                     {!o.inStock && <span className="chip mr-1">Out of stock</span>}
                     {o.source === "tcgplayer" && <span>Lowest listing</span>}
                     {o.shippingCents != null && <span>+{money(o.shippingCents, o.currency)} shipping</span>}
+                    {o.shippingCents != null && o.shippingCents > 0 && <span className="ml-1 font-semibold text-ink">· ≈ {money(o.cents + o.shippingCents, o.currency)} total</span>}
                   </td>
                   <td className="px-3 py-2.5 text-right font-semibold tabular-nums">
                     {money(o.cents, o.currency)}
