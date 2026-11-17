@@ -1997,3 +1997,7 @@ on every card page, non-card sisters in `SITE.sisterSites`) it is removed. A con
 DexCompare's links read dexcompare.io (the old host is still accepted in a feed until Dex republishes). Not changed: price alerts,
 `alert-feed.json`, the family feeds and the sister data reads: they are data, not links. Also a "URL freeze" rule in CLAUDE.md:
 no mass path change without a redirect map, agents never flip hosts, no pop-unders or surprise navigation (this repo had none).
+
+## 2026-11-17: TCGplayer data notice in the footer
+
+Grok growth report (2026-11-17), item 8 ("plain not-affiliated footer lines"), and the image-licence report (`/mnt/project-files/seo/grok-2026-11-17/image-licence-report.md`, item 11): TCGplayer's API terms ask for the notice "This product uses TCGplayer data but is not endorsed or certified by TCGplayer.", and no footer carried it. It is now one plain line in the footer, beside the existing not-affiliated lines (which are unchanged). Nothing else changed: no price, link, order or cache rule.
