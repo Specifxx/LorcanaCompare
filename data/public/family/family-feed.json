@@ -1,7 +1,7 @@
 {
  "v": 1,
  "site": "lorcana",
- "generatedAt": "2026-11-16T16:02:38.912Z",
+ "generatedAt": "2026-11-17T16:15:30.823Z",
  "links": {
   "US": {
    "deals": "https://www.lorcanacompare.com/black-friday",
@@ -41,29 +41,29 @@
    "kind": "deal",
    "cluster": "cards",
    "region": "US",
+   "title": "Into the Inkdark Illumineer's Trove",
+   "url": "https://www.lorcanacompare.com/card/disney-lorcana-into-the-inkdark-illumineers-trove",
+   "cents": 7495,
+   "currency": "USD",
+   "store": "Lazarus Games",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/723343_200w.jpg",
+   "refCents": 11190,
+   "refLabel": "TCGplayer market price",
+   "savingPct": 33
+  },
+  {
+   "kind": "deal",
+   "cluster": "cards",
+   "region": "US",
    "title": "Ursula's Return Booster Box",
    "url": "https://www.lorcanacompare.com/card/disney-lorcana-ursulas-return-booster-box",
    "cents": 9000,
    "currency": "USD",
    "store": "Red Raccoon Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/543859_200w.jpg",
-   "refCents": 13114,
+   "refCents": 13186,
    "refLabel": "TCGplayer market price",
-   "savingPct": 31
-  },
-  {
-   "kind": "deal",
-   "cluster": "cards",
-   "region": "US",
-   "title": "Into the Inkdark Illumineer's Trove",
-   "url": "https://www.lorcanacompare.com/card/disney-lorcana-into-the-inkdark-illumineers-trove",
-   "cents": 7995,
-   "currency": "USD",
-   "store": "Lazarus Games",
-   "image": "https://tcgplayer-cdn.tcgplayer.com/product/723343_200w.jpg",
-   "refCents": 11329,
-   "refLabel": "TCGplayer market price",
-   "savingPct": 29
+   "savingPct": 32
   },
   {
    "kind": "deal",
@@ -75,9 +75,9 @@
    "currency": "USD",
    "store": "Red Raccoon Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/690384_200w.jpg",
-   "refCents": 17910,
+   "refCents": 17807,
    "refLabel": "TCGplayer market price",
-   "savingPct": 20
+   "savingPct": 19
   },
   {
    "kind": "deal",
