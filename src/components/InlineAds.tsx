@@ -10,6 +10,7 @@
 //   • One of each per page, never beside a buy button, never in the quick view, no pop-up, nothing floating, only these two retailers, eBay never
 //     marked best. Every link is rel sponsored, through /go under `<page>-banner-ebay` / `<page>-banner-tcg` (and `-all`).
 import { useEffect, useRef, useState } from "react";
+import { applyAdLook } from "@/lib/ad-look";
 import { SITE } from "@/site.config";
 import { goHref, ebaySearchUrl } from "@/lib/affiliate";
 import type { AdTile } from "@/lib/card-ads";
@@ -57,6 +58,7 @@ function Banner({ brand, headline, cta, ctaHref, note, tiles, tileHref, line }: 
 }
 
 export function InlineAds({ page = "page" }: { page?: string }) {
+  useEffect(() => applyAdLook(), []);
   const ref = useRef<HTMLDivElement>(null);
   const [data, setData] = useState<AdPayload | null>(null);
   const [gone, setGone] = useState(false);
