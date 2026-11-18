@@ -41,6 +41,7 @@ export function BuyClickTracker() {
           host,
           link_type: q.get("c") === "1" ? "checkout" : "product",
           nudge_arm: (() => { try { return localStorage.getItem("rn-arm") ?? ""; } catch { return ""; } })(),
+          leave_arm: (() => { try { return localStorage.getItem("ln-arm") ?? ""; } catch { return ""; } })(),
         });
       } catch {}
     };
