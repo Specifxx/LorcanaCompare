@@ -2096,3 +2096,11 @@ YGO, Gundam, Bandai, Lorcana and Cyberpunk Compare: its own icons and its own "c
 ## 2026-11-18: llms.txt points AI agents at the free price file
 
 `/prices.json` already existed, but nothing an agent reads said so. `llms.txt` now has a "Free price data and citing" block: the file, that it is free and open to every origin, the date to quote and a suggested credit line. No new route, no spend.
+
+## 2026-11-18: an eBay row may be "Best price" again (owner)
+
+The owner withdrew the 2026-11-14 rule that eBay is never "the cheapest" or "Best price": the genuinely cheapest row carries the badge and
+the "Cheapest in" line, whichever row it is. `cheapestOf` (`lib/price-rows.ts`): an in-stock eBay listing strictly cheaper than the cheapest
+store, and not more than 25% under it (`EBAY_MAX_UNDER_STORES`: that is a wrong product, not a deal), is the cheapest; TCGplayer was always a
+candidate. Amazon still never is (its price is licensed for 24 hours and is not in the data). The summary (list tiles, alerts, reports, the
+alert feed) stays stores only. Row order unchanged: eBay, TCGplayer, Amazon, then the stores.
