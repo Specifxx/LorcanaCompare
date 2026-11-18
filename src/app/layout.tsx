@@ -33,6 +33,7 @@ import { navGroups } from "@/lib/nav";
 import { shopNav } from "@/lib/shop-nav";
 import { historyOn } from "@/lib/data";
 import { fitDescription } from "@/lib/seo-title";
+import { ReturnBeacon } from "@/components/ReturnBeacon";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -97,6 +98,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ReturnNudge />
         <LeaveNudge />
         <ShareArrival />
+        <ReturnBeacon />
       </body>
     </html>
   );
