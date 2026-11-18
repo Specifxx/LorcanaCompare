@@ -2092,3 +2092,7 @@ YGO, Gundam, Bandai, Lorcana and Cyberpunk Compare: its own icons and its own "c
   (shows at the top flush to the screen's edge, hides on scroll down, back on the first flick up, every tab works, never over an Add to
   cart on a product page swept top to bottom and back, no layout shift, hidden while pinch-zoomed, never on a desktop): all pass. At 4x
   CPU throttle, no frame over 33 ms with or without the bar.
+
+## 2026-11-18: llms.txt points AI agents at the free price file
+
+`/prices.json` already existed, but nothing an agent reads said so. `llms.txt` now has a "Free price data and citing" block: the file, that it is free and open to every origin, the date to quote and a suggested credit line. No new route, no spend.
