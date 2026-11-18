@@ -179,3 +179,29 @@ test("Japanese boxes and wrong set codes never match (Gundam Compare, live 2026-
   // The deck build box carries its parent set's code.
   assert.equal(matchSealed("Gundam Freedom Ascension Deck Build Box [GD05]", gidx)?.product.id, 693625);
 });
+
+test("set named with its set number in brackets: \"Name - Set (12) NM\" (Diadem, 2026-11-18)", () => {
+  const s = [{ ...set(12, "Wilds Unknown"), code: "12" }, { ...set(11, "Winterspell"), code: "11" }];
+  const i = buildIndex(
+    [
+      card(1, "Ursula - Deal Maker", "161/204", 12, "Legendary"),
+      card(2, "Mickey Mouse - Expedition Leader", "12/204", 12),
+      card(3, "Eeyore - In the Way (Enchanted)", "210/204", 11, "Enchanted"),
+      card(4, "Eeyore - In the Way", "40/204", 11),
+      card(5, "Touch the Sky", "30/204", 12),
+    ],
+    s,
+    "fraction",
+  );
+  assert.equal(matchCard("Ursula - Deal Maker - Wilds Unknown (12) NM", i)?.product.id, 1);
+  assert.equal(matchCard("Touch the Sky - Wilds Unknown (12) NM", i)?.product.id, 5);
+  assert.equal(matchCard("Bruno Madrigal - Oasis Oracle - Wilds Unknown (12) nm", i), null); // not in the catalogue
+  assert.equal(matchCard("Eeyore - In the Way (Enchanted) - Winterspell (11) NM *FOIL*", i)?.product.id, 3);
+  assert.equal(matchCard("Eeyore - In the Way - Winterspell (11) NM", i)?.product.id, 4);
+  // (12) is the set, never card #12 (Mickey Mouse) of that set.
+  assert.equal(matchCard("Merida - Formidable Archer - Wilds Unknown (12) NM", i), null);
+  // Not near mint: not the NM price.
+  assert.equal(matchCard("Ursula - Deal Maker - Wilds Unknown (12) LP", i), null);
+  // The code and the name must name the same set.
+  assert.equal(matchCard("Ursula - Deal Maker - Winterspell (12) NM", i), null);
+});
