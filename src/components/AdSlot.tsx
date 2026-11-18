@@ -1,21 +1,5 @@
-"use client";
-import { useEffect } from "react";
-
-const CLIENT = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
-
-/** One AdSense display unit (future). Renders nothing until a client and slot id are configured.
- */
-export function AdSlot({ slot, className = "" }: { slot?: string; className?: string }) {
-  useEffect(() => {
-    if (!CLIENT || !slot) return;
-    try {
-      ((window as unknown as { adsbygoogle: unknown[] }).adsbygoogle ||= []).push({});
-    } catch {}
-  }, [slot]);
-  if (!CLIENT || !slot) return null;
-  return (
-    <div data-ad className={className}>
-      <ins className="adsbygoogle block" data-ad-client={CLIENT} data-ad-slot={slot} data-ad-format="auto" data-full-width-responsive="true" />
-    </div>
-  );
+/** An AdSense unit's old place. AdSense is off (owner, 2026-11-18) and its script left the layout, so a unit
+ * would only be an empty box: it renders nothing. */
+export function AdSlot(_props: { slot?: string; className?: string }) {
+  return null;
 }
