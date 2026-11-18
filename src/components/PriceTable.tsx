@@ -123,7 +123,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false, maxRo
       <td className="px-3 py-2.5 text-right">
         <span className="inline-flex items-center justify-end gap-2">
           {!compact && amazonCart && <CartAddButton {...amazonCart} className="hidden text-muted sm:inline-flex" />}
-          <a href={goHref({ url: amazonUrl, source: "amazon", market }, productId, `${page}_pinned`)} rel="sponsored nofollow noopener" target="_blank" className="btn-ghost min-h-10 whitespace-nowrap px-3 py-1.5">
+          <a href={goHref({ url: amazonUrl, source: "amazon", market }, productId, `${page}_pinned`)} rel="sponsored nofollow noopener" target="_blank" className="btn-amazon min-h-10 whitespace-nowrap px-3 py-1.5">
             View deal <span aria-hidden="true">↗</span>
           </a>
         </span>
