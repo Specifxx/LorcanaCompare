@@ -39,9 +39,9 @@ test("one block per page, in the page's content and never in the layout or the q
   for (const f of ["src/app/layout.tsx", "src/components/QuickView.tsx", "src/app/api/quick/[slug]/route.ts", "src/components/PriceTable.tsx", "src/components/CardBuy.tsx"]) assert.doesNotMatch(read(f), /InlineAds|CompactCardAds|card-ads/, f);
   assert.equal(fs.existsSync("src/components/CardAds.tsx"), false, "the old strips are replaced, not duplicated");
   const card = read("src/app/card/[slug]/page.tsx");
-  assert.ok(card.indexOf("<PriceTable") > card.indexOf("<InlineAds"), "the banners are at the top (owner, 2026-11-14)");
+  assert.ok(card.indexOf("<InlineAds") > card.indexOf("<PriceTable"), "below the price table (2026-11-19, core-update quality pass)");
   const home = read("src/app/page.tsx");
-  assert.ok(home.indexOf("<InlineAds") > home.indexOf("</section>") && home.indexOf("<InlineAds") < home.indexOf("<GameTiles"), "directly under the hero, not in it");
+  assert.ok(home.indexOf("<InlineAds") > home.indexOf("Frequently asked questions"), "below the page's own content, never under the hero");
 });
 
 test("no rail is left: no fixed column, no CSS for one, the dock stays", () => {

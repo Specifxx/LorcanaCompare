@@ -37,7 +37,15 @@ test("card pages with no price and no listing are kept out of the index", async 
   assert.equal(cardIndexable({ kind: "sealed", sealedType: "Insert" }, 5000, 3, { upcoming: false }), false);
   assert.equal(priceValidUntil(Date.UTC(2026, 10, 4, 12)), "2026-11-05");
   const src = read("src/app/card/[slug]/page.tsx");
-  assert.match(src, /cardIndexable\(/);
+  assert.match(src, /cardAsksIndex\(/);
+  // 2026-11-19: a single also needs search demand, an upcoming set, or US$5+ on TCGplayer and a store selling it.
+  const { cardAsksIndex } = await import("../src/lib/indexing");
+  const single = { kind: "card" as const, sealedType: null };
+  assert.equal(cardAsksIndex(single, 250, 2, 1, { upcoming: false }, false), false, "a US$2.50 single is noindex");
+  assert.equal(cardAsksIndex(single, 250, 2, 1, { upcoming: false }, true), true, "unless search finds it");
+  assert.equal(cardAsksIndex(single, 900, 2, 1, { upcoming: false }, false), true);
+  assert.equal(cardAsksIndex(single, 900, 1, 0, { upcoming: false }, false), false, "no store sells it");
+  assert.equal(cardAsksIndex({ kind: "sealed", sealedType: "Booster Box" }, null, 1, 1, { upcoming: false }, false), true);
   assert.match(src, /priceValidUntil: priceValidUntil\(\)/);
   // A Product with no offers is a Search Console error (Gundam, 20 pages, 2026-11-04):
   // the block is rendered only when an in-stock US offer backs it.

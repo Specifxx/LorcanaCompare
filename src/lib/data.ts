@@ -96,6 +96,8 @@ export function summaryOf(id: number): Summary {
 export const featureMin = (): number => SITE.featureMinCents ?? 0;
 export const worthFeaturing = (id: number): boolean => (refCents(id) ?? 0) >= featureMin();
 export const refCents = (id: number): number | null => referenceCents(summaryOf(id).tcg);
+/** Stores (not eBay, TCGplayer or Amazon) with a price row for this product. */
+export const storeCountOf = (id: number): number => new Set(priceOf(id).offers.filter((o) => !["ebay", "tcgplayer", "amazon"].includes(o.source)).map((o) => o.source)).size;
 
 export function historyOf(p: Product): Series {
   const h = read<Record<string, Series>>(`history/${p.setId}.json`, {});

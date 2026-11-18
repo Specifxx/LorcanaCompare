@@ -14,6 +14,27 @@ export function cardIndexable(p: { kind: "card" | "sealed"; sealedType: string |
   return refCents != null || offerCount > 0;
 }
 
+/**
+ * The stricter rule after the November 2026 core update (2026-11-19): on Lorcana Compare 1,499 card pages asked to be
+ * indexed and Search Console showed people finding 49 of them in 56 days; the long tail of cheap singles with no store
+ * listing reads as a template. A single now asks to be indexed when it is in an upcoming set, when search already finds
+ * it (lib/search-demand.ts), or when it is worth CARD_INDEX_MIN_CENTS+ on TCGplayer AND a store sells it. Sealed products
+ * keep the zero-data rule. The rest stay live, linked, noindex, follow. DECISIONS.md, 2026-11-19.
+ */
+export const CARD_INDEX_MIN_CENTS = 500;
+export function cardAsksIndex(
+  p: { kind: "card" | "sealed"; sealedType: string | null },
+  refCents: number | null,
+  offerCount: number,
+  storeCount: number,
+  set: { upcoming: boolean } | null | undefined,
+  found: boolean,
+): boolean {
+  if (!cardIndexable(p, refCents, offerCount, set)) return false;
+  if (p.kind === "sealed" || set?.upcoming || found) return true;
+  return (refCents ?? 0) >= CARD_INDEX_MIN_CENTS && storeCount > 0;
+}
+
 /** Store prices refresh on the daily import, so a price in JSON-LD is good until tomorrow (schema.org priceValidUntil, YYYY-MM-DD). */
 export function priceValidUntil(now = Date.now()): string {
   return new Date(now + 86400e3).toISOString().slice(0, 10);

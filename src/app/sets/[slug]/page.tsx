@@ -84,7 +84,6 @@ export default function SetPage({ params }: { params: { slug: string } }) {
         )}
       </header>
       </div>
-      <InlineAds page="set" />
       {/* Booster boxes first with a buy button each (components/SealedQuickBuy.tsx), before the card list. */}
       <SealedQuickBuy
         title={`Buy ${s.name} booster boxes and sealed`}
@@ -133,6 +132,8 @@ export default function SetPage({ params }: { params: { slug: string } }) {
           <div className="flex flex-wrap gap-2">{others.map((x) => <Link key={x.id} href={`/sets/${x.slug}`} className="chip hover:border-brand">{x.name}</Link>)}</div>
         </section>
       )}
+      {/* Ads sit below the page's own content, never above it (2026-11-19, core-update quality pass). */}
+      <InlineAds page="set" />
     </div>
   );
 }

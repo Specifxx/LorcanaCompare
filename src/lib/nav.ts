@@ -7,7 +7,6 @@
 // src/site.config.ts (kits, lines, creators), never from here.
 import { SITE } from "@/site.config";
 import { TOOLS } from "@/lib/tool-list";
-import { creatorsOn } from "@/lib/creators";
 
 // Pages that are empty until a week of daily prices exists. The caller (a server
 // component) passes `history` from lib/data.ts historyOn(); this file is also read
@@ -46,14 +45,12 @@ export function navGroups(o: NavOptions = {}): NavGroup[] {
     { href: "/movers", label: "Price movers" },
     { href: "/stores", label: "Stores we track" },
   ];
-  const tools: NavLink[] = TOOLS.filter((t) => t.href !== "/tools/deal-finder").map((t) => ({ href: t.href, label: t.name }));
+  // Three tools and the tools page, not every tool on every page (2026-11-19, "Fewer links on every page").
+  const tools: NavLink[] = [...TOOLS.filter((t) => t.href !== "/tools/deal-finder").slice(0, 3).map((t) => ({ href: t.href, label: t.name })), { href: "/tools", label: "All free tools" }];
   const guides: NavLink[] = [
     { href: "/blog", label: "Guides" },
     { href: "/price-report", label: "Monthly price report" },
-    { href: "/forum", label: "Community forum" },
-    ...(creatorsOn() ? [{ href: "/creators", label: `${SITE.gameShort} creators` }] : []),
-    { href: "/about", label: "About" },
-    { href: "/feedback", label: "Send feedback" },
+    { href: "/about", label: "Who runs this site" },
   ];
   if (o.shop?.length) {
     // The dimensions of the game come first (owner, 2026-11-09), so the flat list keeps only what they do not cover.
@@ -82,6 +79,5 @@ export function phoneNav(o: NavOptions = {}): NavLink[] {
     { href: "/movers", label: "Movers" },
     { href: "/tools", label: "Tools" },
     { href: "/blog", label: "Guides" },
-    { href: "/forum", label: "Forum" },
   ].filter(ready);
 }

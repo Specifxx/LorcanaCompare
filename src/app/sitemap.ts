@@ -1,6 +1,8 @@
 import { LINES } from "@/lib/lines";
 import type { MetadataRoute } from "next";
-import { meta, products, refCents, sets } from "@/lib/data";
+import { meta, priceOf, products, refCents, setById, sets, storeCountOf } from "@/lib/data";
+import { cardAsksIndex } from "@/lib/indexing";
+import { searchFound } from "@/lib/search-demand";
 import { posts } from "@/lib/posts";
 import { attrFacets, preorderSetList, rarityHubs, sealedHubs } from "@/lib/hubs";
 import { preorderPath } from "@/lib/preorders";
@@ -36,6 +38,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...sets().filter((s) => s.productCount > 0).map((s) => ({ url: `${SITE_URL}/sets/${s.slug}`, lastModified: at, priority: 0.7 })),
     ...products()
       .filter((p) => (p.kind === "sealed" ? p.sealedType !== "Insert" : (refCents(p.id) ?? 0) >= (SITE.sitemapMinCardCents ?? 50)))
+      // Only pages that ask to be indexed (lib/indexing.ts cardAsksIndex, 2026-11-19).
+      .filter((p) => cardAsksIndex(p, refCents(p.id), priceOf(p.id).offers.length, storeCountOf(p.id), setById(p.setId), searchFound(`/card/${p.slug}`)))
       .map((p) => ({ url: `${SITE_URL}/card/${p.slug}`, lastModified: at, priority: 0.5 })),
     // Model kits (SITE.kits): the hub, a page per grade and per kit.
     ...(SITE.kits && kits().length
