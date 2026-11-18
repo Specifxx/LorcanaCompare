@@ -75,7 +75,7 @@ async function market(m: Market, idx: MatchIndex) {
 }
 
 async function main() {
-  const idx = buildIndex(products(), sets(), SITE.numberStyle, { rarityMustAgree: SITE.rarityMustAgree, rarityAliases: SITE.rarityAliases, setEditions: SITE.setEditions });
+  const idx = buildIndex(products(), sets(), SITE.numberStyle, { rarityMustAgree: SITE.rarityMustAgree, rarityAliases: SITE.rarityAliases, setEditions: SITE.setEditions, setNameMustAgree: SITE.setNameMustAgree });
   for (const m of API_MARKETS) await market(m, idx).catch((e) => console.log(`Amazon ASINs ${m} skipped: ${(e as Error).message}`));
 }
 

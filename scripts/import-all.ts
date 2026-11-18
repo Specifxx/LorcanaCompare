@@ -89,7 +89,7 @@ async function main() {
   const fx = await fxRates(prevMeta?.fx ?? {});
 
   // 2. Stores
-  const idx = buildIndex(products, sets, SITE.numberStyle, { rarityMustAgree: SITE.rarityMustAgree, rarityAliases: SITE.rarityAliases, setEditions: SITE.setEditions });
+  const idx = buildIndex(products, sets, SITE.numberStyle, { rarityMustAgree: SITE.rarityMustAgree, rarityAliases: SITE.rarityAliases, setEditions: SITE.setEditions, setNameMustAgree: SITE.setNameMustAgree });
   useSetEditions(sets);
   const storeOffers = new Map<number, Offer[]>();
   const storeStatus: Record<string, StoreStatus> = {};

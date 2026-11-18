@@ -85,3 +85,24 @@ test("a single titled \"Card [Set]\" is never sealed, even when the set is a sta
   assert.equal(looksSealed("MT0D12 Flathead [B015 - Uncommon] - The Heist - Beta Starter Deck", "", "plain"), false);
   assert.equal(looksSealed("Cyberpunk TCG: Booster Display – Welcome to Night City (24 packs)", "", "plain"), true);
 });
+
+test("setNameMustAgree: a title naming another set never takes a promo's card (2026-11-19)", () => {
+  const ss = [set(2, "Welcome to Night City - Retail"), set(5, "Pre-Release Retail"), set(6, "Night City Brawl Season 1")];
+  const ps = [
+    { ...card(30, "Adam Smasher - Ender of Legends (Epic)", "001", 2), rarity: "Epic" },
+    { ...card(31, "Adam Smasher - Ender of Legends", "001", 5), rarity: "Epic" },
+    { ...card(32, "Kerry Eurodyne - The Last Rockerboy", "001", 6), rarity: "Nova Rare" },
+  ];
+  const strict = buildIndex(ps, ss, "plain", { setEditions: EDITIONS, setNameMustAgree: true });
+  const loose = buildIndex(ps, ss, "plain", { setEditions: EDITIONS });
+  // Mint Collectables, 2026-11-18: the main set's Epic at A$3.50, sat on the US$8.81 promo's page.
+  const mint = "Adam Smasher - Ender of Legends - 001 - Welcome to Night City Retail Foil";
+  assert.equal(matchCard(mint, loose)?.product.id, 31);
+  assert.equal(matchCard(mint, strict), null);
+  // The promo's own titles still match, however "Pre-Release" is written.
+  assert.equal(matchCard("Adam Smasher - Ender of Legends - 001 - Prerelease Retail Foil", strict)?.product.id, 31);
+  assert.equal(matchCard("Adam Smasher - Ender of Legends 001 Pre-Release Retail", strict)?.product.id, 31);
+  assert.equal(matchCard("Adam Smasher - Ender of Legends (Epic) - 001 - Welcome to Night City Retail Foil", strict)?.product.id, 30);
+  // A title naming its own set as well as another is still its own.
+  assert.equal(matchCard("Kerry Eurodyne - The Last Rockerboy 001 Night City Brawl Season 1", strict)?.product.id, 32);
+});
