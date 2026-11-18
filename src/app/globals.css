@@ -51,6 +51,8 @@ body { background: var(--page-bg); min-height: 100vh; overflow-x: clip; }
 .btn-tcg { @apply btn bg-[#1d4ed8] text-white hover:bg-[#2563eb]; }
 /* Green is money; its words are near-black, which reads 5.8:1 on the green where white read 3.2:1. */
 .btn-buy { @apply btn bg-buy text-[#03160b] hover:bg-[#27b866] px-3 py-1.5; }
+/* Amazon's button (owner, 2026-11-18): a calm amber with near-black words (9:1) in both themes, so it never reads as the site's own buy button or as eBay's or TCGplayer's. */
+.btn-amazon { @apply btn border border-[#E08A00] bg-[#FFA41C] text-[#111111] hover:bg-[#FA8900]; }
 .btn-ghost { @apply btn border border-ink-700 text-fg hover:border-ink-600 hover:bg-ink-800; }
 @media (prefers-reduced-motion: reduce) { .btn { @apply active:scale-100; } }
 .chip { @apply inline-flex items-center rounded-full border border-ink-700 px-2.5 py-0.5 text-xs text-muted; }
