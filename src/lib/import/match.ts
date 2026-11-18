@@ -40,6 +40,9 @@ export interface MatchIndex {
   editions: SetEdition[] | null;
   /** set id → the edition word its name carries ("beta"), or null. */
   setEdition: Map<number, string | null>;
+  /** SITE.setNameMustAgree: set id → its name run together without stop or
+   *  edition words ("welcometonightcity"), or null when the option is off. */
+  setCompact: Map<number, string> | null;
 }
 
 /** A game that prints one set in several editions with the same card and
@@ -203,6 +206,7 @@ export interface IndexOptions {
   rarityMustAgree?: boolean;
   rarityAliases?: Record<string, string[]>;
   setEditions?: SetEdition[];
+  setNameMustAgree?: boolean;
 }
 
 /** The edition a title points at: a word, null (none, and no default), or
@@ -269,7 +273,26 @@ export function buildIndex(products: Product[], sets: SetInfo[], style: NumberSt
   const rarities = opts.rarityMustAgree
     ? rarityPatterns(products.map((p) => p.rarity).filter((r): r is string => !!r), opts.rarityAliases)
     : null;
-  return { byNumber, bySetNumber, bySetName, setByCode, sealed, setName, style, rarities, editions, setEdition };
+  const setCompact = opts.setNameMustAgree
+    ? new Map([...setName].map(([id, t]) => [id, t.join("")] as [number, string]).filter(([, c]) => c.length >= 6))
+    : null;
+  return { byNumber, bySetNumber, bySetName, setByCode, sealed, setName, style, rarities, editions, setEdition, setCompact };
+}
+
+/** SITE.setNameMustAgree (Cyberpunk Compare, 2026-11-19): a title that names
+ *  ANOTHER set and not the product's own is a different printing. Mint
+ *  Collectables' "Adam Smasher - Ender of Legends - 001 - Welcome to Night City
+ *  Retail Foil" (A$3.50, the main set's Epic, whose name carries "(Epic)") sat
+ *  on the Pre-Release Retail promo's page (US$8.81) because the promo's plain
+ *  name was the only one left. Set names are compared run together, so
+ *  "Prerelease" names "Pre-Release Retail". Refuses only. */
+export function setNameAgrees(p: Product, title: string, idx: MatchIndex): boolean {
+  if (!idx.setCompact) return true;
+  const compact = tokens(title).filter((t) => !STOP.has(t)).join("");
+  const own = idx.setCompact.get(p.setId);
+  if (own && compact.includes(own)) return true;
+  for (const [id, c] of idx.setCompact) if (id !== p.setId && c !== own && compact.includes(c)) return false;
+  return true;
 }
 
 function overlap(need: string[], have: Set<string>): number {
@@ -393,6 +416,7 @@ export function matchCard(title: string, idx: MatchIndex, context = ""): MatchRe
       if (!markersAgree(p.name, p.rarity, title)) continue;
       if (!rarityAgrees(p, title, idx.rarities)) continue;
       if (!editionAgrees(p, title, idx)) continue;
+      if (!setNameAgrees(p, title, idx)) continue;
       const setScore = overlap(idx.setName.get(p.setId) ?? [], have);
       scored.push({ product: p, score: nameScore + 0.5 * setScore });
     }

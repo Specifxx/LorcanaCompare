@@ -167,6 +167,9 @@ export interface SiteConfig {
   /** One set printed in several editions under the same names (Cyberpunk
    *  TCG's Beta and Retail): see SetEdition in lib/import/match.ts. Off unless set. */
   setEditions?: SetEdition[];
+  /** A card title that names another set and not the card's own matches
+   *  nothing (setNameAgrees in lib/import/match.ts). Off unless set. */
+  setNameMustAgree?: boolean;
   /** Booster boxes in one Booster Box Case (Lorcana 4, Cyberpunk 6), or per
    *  game on a multi-game site ({ ua: 16, fw: 12, dg: 12 }). An eBay listing of
    *  a Booster Box Case whose stated box counts are none of it ("Half Case (6
