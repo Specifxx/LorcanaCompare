@@ -34,6 +34,7 @@ import { shopNav } from "@/lib/shop-nav";
 import { historyOn } from "@/lib/data";
 import { fitDescription } from "@/lib/seo-title";
 import { ReturnBeacon } from "@/components/ReturnBeacon";
+import { SinceLastVisit } from "@/components/SinceLastVisit";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -82,7 +83,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Header />
             <HolidayStrip />
             <PreorderStrip />
-            <main className="mx-auto max-w-7xl px-4 py-6">{children}</main>
+            <main className="mx-auto max-w-7xl px-4 py-6">
+              {SITE.priceAlerts && <SinceLastVisit />}
+              {children}
+            </main>
             <Footer />
           </div>
           {/* The phone dock (PhoneDock.tsx): browser-only, after a scroll, narrow screens only; wide screens get the in-page ad block. */}

@@ -8,7 +8,7 @@ import { refCents, setById, summaryOf } from "@/lib/data";
 import { isPreorder } from "@/lib/preorders";
 import { rankItems, type DemandFile, type RankFacts } from "./home-rank";
 
-export const HOME_DEMAND = raw as DemandFile;
+export const HOME_DEMAND = raw as unknown as DemandFile; // a JSON import widens [a, b] to number[]: read through unknown
 
 const NOT_A_STORE = new Set(["ebay", "amazon", "tcgplayer"]);
 
