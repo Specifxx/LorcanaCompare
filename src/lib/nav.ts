@@ -53,6 +53,7 @@ export function navGroups(o: NavOptions = {}): NavGroup[] {
     { href: "/forum", label: "Community forum" },
     ...(creatorsOn() ? [{ href: "/creators", label: `${SITE.gameShort} creators` }] : []),
     { href: "/about", label: "About" },
+    { href: "/feedback", label: "Send feedback" },
   ];
   if (o.shop?.length) {
     // The dimensions of the game come first (owner, 2026-11-09), so the flat list keeps only what they do not cover.
