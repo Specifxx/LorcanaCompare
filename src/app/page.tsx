@@ -25,6 +25,7 @@ import { SealedHero } from "@/components/SealedHero";
 import { SiteReviews } from "@/components/site-reviews/SiteReviews";
 import { sealedHero } from "@/lib/sealed-hero";
 import { GameTiles } from "@/components/GameTiles";
+import { rankBy, rankProducts } from "@/lib/home-demand";
 
 // The homepage leads with "<game> Card Prices" and the number of stores compared, as Rift Compare's does.
 export function generateMetadata(): Metadata {
@@ -56,13 +57,14 @@ export default function Home() {
   const latest = latestReleasedSet();
   const releases = preorderSetList();
   const upcoming = releases.find((s) => isPreorder(s)) ?? null;
-  const chase = latest ? byValue(productsInSet(latest.id).filter((p) => p.kind === "card")).slice(0, 12) : [];
+  const chase = latest ? rankProducts(byValue(productsInSet(latest.id).filter((p) => p.kind === "card"))).slice(0, 12) : [];
   // Trending chips: the most valuable chase-rarity cards (SITE.chaseRarities), so a
   // tokens-and-markers catalogue never fills the row with "Energy Marker" (BandaiCompare).
   const cards = products().filter((p) => p.kind === "card");
   const chaseOnly = cards.filter((p) => p.rarity && SITE.chaseRarities.includes(p.rarity));
-  const trending = byValue(chaseOnly.length >= 6 ? chaseOnly : cards.filter((p) => p.rarity)).slice(0, 6);
-  const topDeals = deals(6);
+  const trending = rankProducts(byValue(chaseOnly.length >= 6 ? chaseOnly : cards.filter((p) => p.rarity))).slice(0, 6);
+  // Most likely to earn first (owner, 2026-11-18; lib/home-rank.ts): demand × value over three times as many deals.
+  const topDeals = rankBy(deals(18), (d) => d.p).slice(0, 6);
   const shelf = featuredSealed(6);
   const sealedLinks = sealedHubs();
   // The sealed shelf: one tabbed, swipeable row (components/SealedHero.tsx) on every site.
