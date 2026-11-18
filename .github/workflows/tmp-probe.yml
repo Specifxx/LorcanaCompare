@@ -1,0 +1,30 @@
+name: tmp probe (remove)
+on:
+  push:
+    branches: [claude/project-thread-elun8t]
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          UA="LorcanaCompare price checker (+https://lorcanacompare.com)"
+          for b in https://www.cardhouse.com.au https://envcollectible.com https://bentonville.geargamingstore.com https://bluejayscauldron.com https://www.five6gaming.com https://diademhobbies.com https://nordic-legends.com https://www.pullbighits.com https://toneaus.com; do
+            echo "=== $b"
+            curl -s -m 20 -A "$UA" "$b/robots.txt" | grep -i -E 'collections|products.json' | head -5
+            for p in 1 2 3; do curl -s -m 20 -A "$UA" "$b/collections.json?limit=250&page=$p"; sleep 1; done | python3 -c "
+          import sys,json,re
+          d=sys.stdin.read()
+          for chunk in re.findall(r'\{\"collections\".*?\]\}', d, re.S) or [d]:
+            try: cs=json.loads(chunk)['collections']
+            except Exception as e: print('ERR',d[:200]); break
+            for c in cs:
+              t=(c['handle']+' '+c['title']).lower()
+              if 'lorcana' in t or 'disney' in t: print(c['handle'],'|',c['title'],'|',c.get('products_count'))
+          "
+          done
+      - run: |
+          UA="LorcanaCompare price checker (+https://lorcanacompare.com)"
+          echo "== diadem sample"; curl -s -m 20 -A "$UA" "https://diademhobbies.com/collections/disney-lorcana/products.json?limit=40" | python3 -c "import sys,json;[print(p['title'],'|',p['product_type'],'|',[v.get('sku') for v in p['variants']][:2],'|',p['variants'][0]['price']) for p in json.load(sys.stdin)['products']]"
+          echo "== pullbighits sample"; curl -s -m 20 -A "$UA" "https://www.pullbighits.com/collections/disney-lorcana-singles-copy/products.json?limit=40" | python3 -c "import sys,json;[print(p['title'],'|',p['product_type'],'|',[v.get('title') for v in p['variants']][:3],'|',p['variants'][0]['price']) for p in json.load(sys.stdin)['products']]"
+          echo "== nordic sample"; curl -s -m 20 -A "$UA" "https://nordic-legends.com/collections/lorcana/products.json?limit=20" | python3 -c "import sys,json;[print(p['title'],'|',p['product_type'],'|',p['variants'][0]['price']) for p in json.load(sys.stdin)['products']]"
+          echo "== toneaus sample"; curl -s -m 20 -A "$UA" "https://toneaus.com/collections/all/products.json?limit=5" | head -c 300
