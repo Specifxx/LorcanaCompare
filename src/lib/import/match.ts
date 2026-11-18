@@ -344,9 +344,33 @@ function fractionFallback(title: string, context: string, idx: MatchIndex): Prod
   return out;
 }
 
+/** "Ursula - Deal Maker - Wilds Unknown (12) NM *FOIL*" (Diadem Cards &
+ *  Hobbies, 2026-11-18): the bracketed number is the SET's number, not the
+ *  card's, and the set is named right before it. Read as the exact full name
+ *  inside that set, only when the code AND the name both point at the same
+ *  set, only near mint (an LP copy is not the NM price), and only when exactly
+ *  one product fits. `undefined` means the title is not in this format. */
+const SET_SUFFIX = /^(.+?)\s+-\s+([^-]+?)\s+\(([A-Za-z0-9]{1,4})\)\s+([A-Za-z]{2,3})(?:\s+\*?foil\*?)?\s*$/i;
+function setSuffixMatch(title: string, idx: MatchIndex): MatchResult | null | undefined {
+  const m = title.match(SET_SUFFIX);
+  if (!m) return undefined;
+  const named = new Set(tokens(m[2]));
+  const setIds = (idx.setByCode.get(m[3].toUpperCase()) ?? []).filter((id) => {
+    const t = idx.setName.get(id) ?? [];
+    return t.length > 0 && t.every((x) => named.has(x)) && tokens(m[2]).every((x) => STOP.has(x) || t.includes(x));
+  });
+  if (!setIds.length) return undefined;
+  if (m[4].toUpperCase() !== "NM") return null;
+  const want = tokens(m[1]).join(" ");
+  const hits = setIds.flatMap((id) => idx.bySetName.get(`${id}|${want}`) ?? []).filter((p) => editionAgrees(p, title, idx));
+  return hits.length === 1 ? { product: hits[0], score: 1 } : null;
+}
+
 /** `context` is extra text that may name the set (Shopify product_type / tags). */
 export function matchCard(title: string, idx: MatchIndex, context = ""): MatchResult | null {
   if (isForeign(title)) return null;
+  const suffixed = setSuffixMatch(title, idx);
+  if (suffixed !== undefined) return suffixed;
   const have = new Set(tokens(title));
   const scored: MatchResult[] = [];
   let candidates = [...new Set(numbersInTitle(title, idx.style).flatMap((n) => idx.byNumber.get(n) ?? []))];

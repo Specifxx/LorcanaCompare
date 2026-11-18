@@ -2313,3 +2313,16 @@ sitting on top of it.
   `var(--bn-space)` + a small gap up, and the body's bottom padding follows it. Hidden, it slides fully off-screen (transform only, CLS 0).
 - **Measured** (local build, dock stacked): Pixel 7 412×915 nav + dock take 129px (14.1%); iPhone 15 393×852 with a 34px safe area
   143px (16.8%); iPhone SE 375×667 129px (19.3%); the old flush bar took about the same plus the full safe area.
+
+## 2026-11-18 — Stores that priced nothing: "Name - Set (12) NM" titles, and moved collections
+
+The ops monitor's store warning listed nine stores with 0 matched. A probe of their `collections.json` from GitHub Actions showed why:
+
+- **Diadem Cards & Hobbies** (CA, 262 listings) titles every single "Ursula - Deal Maker - Wilds Unknown (12) NM": the bracketed
+  number is the SET's number, and the bare-number fallback read it as card #12 of that set, so the name check refused all of them.
+  `matchCard` now reads this format first (`setSuffixMatch`): the code and the set name must name the same set, the rest of the title
+  must be one product's exact full name inside it, and only NM is taken (an LP copy is not the NM price). A title that does not fit
+  falls through to the old rules unchanged. Real titles in `tests/match.test.ts`. Engine code: same change in Cyberpunk Compare.
+- **FIVE6 Gaming** renamed its collections (`in-stock-lorcana-singles`, 1,359 products; `lorcana-sealed`). **Do Big Things** files
+  Star Wars Unlimited under `disney-lorcana-singles-copy`; it is swapped for `disney-lorcana`.
+- Left as they are: The Card House, Blue Jay's Cauldron and ENV Collectible list no Lorcana stock today; Gear Gaming's host 301s.
