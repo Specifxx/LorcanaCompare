@@ -3,11 +3,14 @@ import { RateUsLink } from "./site-reviews/SiteReviews";
 import { SITE } from "@/site.config";
 import { creatorsOn } from "@/lib/creators";
 import { historyOn } from "@/lib/data";
+import { FeedbackAsk } from "@/components/FeedbackAsk";
 
 export function Footer() {
   const history = historyOn();
   return (
     <footer className="mt-16 border-t border-ink-700/60 bg-ink-950">
+      {/* "Was this page useful?" (owner, 2026-11-18: more feedback). One inline line, never a pop-up. */}
+      <div className="mx-auto max-w-7xl px-4 pt-8"><FeedbackAsk email={SITE.supportEmail} /></div>
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 text-sm md:grid-cols-4">
         <div>
           <p className="flex items-center gap-2 font-display font-black"><img src="/icon.svg" alt={`${SITE.name} logo`} width={24} height={24} className="h-6 w-6 rounded-md" /><span className="wordmark">{SITE.wordmark[0]}</span> {SITE.wordmark[1]}</p>
@@ -45,6 +48,7 @@ export function Footer() {
             <li><Link href="/blog">Guides</Link></li>
             <li><Link href="/forum">Community forum</Link> <span className="text-xs">· beta</span></li>
             {creatorsOn() && <li><Link href="/creators">Creators</Link></li>}
+            <li><Link href="/feedback">Send feedback</Link></li>
             <li><Link href="/contact">Contact</Link></li>
             <li><RateUsLink className="hover:underline">Rate us</RateUsLink></li>
             <li><Link href="/list-your-store">List your store</Link></li>
