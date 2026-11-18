@@ -15,7 +15,7 @@ export function cardIndexable(p: { kind: "card" | "sealed"; sealedType: string |
 }
 
 /**
- * The stricter rule after the November 2026 core update (2026-11-19): on Lorcana Compare 1,499 card pages asked to be
+ * The stricter rule after the November 2026 core update (2026-11-19): on one site of this engine 1,499 card pages asked to be
  * indexed and Search Console showed people finding 49 of them in 56 days; the long tail of cheap singles with no store
  * listing reads as a template. A single now asks to be indexed when it is in an upcoming set, when search already finds
  * it (lib/search-demand.ts), or when it is worth CARD_INDEX_MIN_CENTS+ on TCGplayer AND a store sells it. Sealed products
