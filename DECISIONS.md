@@ -2273,3 +2273,15 @@ price-drop alert as before; with none it is "Email me when it's back in stock" (
 inline, never a pop-up, on the card page and the top watch strip. A sold-out product is not in `/alert-feed.json`; the service
 holds a restock watch while its item is missing and fires on the first in-stock price. Event `restock_signup` {member, region},
 read per site with the retention programme on 2 Dec. `tests/restock-alert.test.ts`.
+
+## 2026-11-18: A plain store that is cheapest gets a plain "Best price" tag, not the loud green
+
+Owner, 2026-11-18. The row carrying the Best price badge was drawn loudly (green tint, green chip, the table's one filled button), and
+when that row was a store that pays us nothing it pulled clicks away from our paid rows (eBay, TCGplayer, Amazon, Awin / Impact
+stores). `bestTreatment()` in `lib/best-price.ts`: when the cheapest row is paid (`isPaidRow`: eBay, TCGplayer, Amazon, or a store whose
+link goes through one of our programmes) everything stays exactly as it was; when it is a plain store, the row has no tint, the tag is a
+small neutral chip (`BestPriceTag`), the price stays fully visible, the button is the calm one, and an "i" (title, aria-label, tap to
+show a line) says "Prices and stock change: also check eBay and TCGplayer", naming only the rows the list really has and only when it
+has one; never that eBay is cheaper. The phone top buy block and sticky bar (`CardBuy`) and the set quick-buy list use the same
+test for their button. Not touched: sort order, which row is cheapest, links, rel, tracking, labels, JSON-LD, feeds, alerts, deal and
+price-drop badges. Measure: paid clicks per 100 buy clicks (`buy_click`) before and after. `tests/best-price.test.ts`.
