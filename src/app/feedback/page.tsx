@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import { FeedbackForm } from "@/components/FeedbackAsk";
 import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
+import { fitDescription } from "@/lib/seo-title";
 import { StaticPage } from "@/components/StaticPage";
 
 // /feedback (owner, 2026-11-18: "we need more feedback"): the full feedback form (components/FeedbackAsk.tsx, filed with the
 // reports for the daily triage) and what visitors' notes have already changed. Linked from the footer and the menu; noindex.
 export const revalidate = 86400;
-export const metadata: Metadata = { title: "Send feedback", description: `Tell ${SITE.name} what to build or fix next.`, ...canon("/feedback"), robots: { index: false, follow: true } };
+export const metadata: Metadata = { title: "Send feedback", description: fitDescription(`Tell ${SITE.name} what to build or fix next.`), ...canon("/feedback"), robots: { index: false, follow: true } };
 
 // What visitors asked for and we built, newest first. Add a line when a note leads to a change (the daily feedback triage).
 const BUILT: { date: string; what: string; from: string }[] = [
