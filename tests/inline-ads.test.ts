@@ -36,7 +36,11 @@ test("two banners, eBay and TCGplayer apart: client-only, height reserved, label
 test("one block per page, in the page's content and never in the layout or the quick view", () => {
   const withBlock = ["src/app/page.tsx", "src/app/card/[slug]/page.tsx", "src/app/sets/[slug]/page.tsx", "src/app/cards/page.tsx", "src/app/sealed/page.tsx", "src/app/sealed/[type]/page.tsx"];
   for (const f of withBlock) assert.equal((read(f).match(/<InlineAds /g) ?? []).length, 1, f);
-  for (const f of ["src/app/layout.tsx", "src/components/QuickView.tsx", "src/app/api/quick/[slug]/route.ts", "src/components/PriceTable.tsx", "src/components/CardBuy.tsx"]) assert.doesNotMatch(read(f), /InlineAds|CompactCardAds|card-ads/, f);
+  for (const f of ["src/app/layout.tsx", "src/components/PriceTable.tsx", "src/components/CardBuy.tsx"]) assert.doesNotMatch(read(f), /InlineAds|CompactCardAds|card-ads/, f);
+  // The quick view carries its own small ad pair (owner, 2026-11-18: "ads can show in the quick view"), never the page's block.
+  assert.doesNotMatch(read("src/components/QuickView.tsx"), /InlineAds|CompactCardAds/);
+  assert.match(read("src/components/QuickView.tsx"), /<QuickAds /);
+  assert.doesNotMatch(read("src/components/QuickAds.tsx"), /ads\.amazon|source: "amazon"/, "never Amazon in the quick view");
   assert.equal(fs.existsSync("src/components/CardAds.tsx"), false, "the old strips are replaced, not duplicated");
   const card = read("src/app/card/[slug]/page.tsx");
   assert.ok(card.indexOf("<InlineAds") > card.indexOf("<PriceTable"), "below the price table (2026-11-19, core-update quality pass)");

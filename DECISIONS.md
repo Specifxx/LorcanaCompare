@@ -2347,3 +2347,15 @@ Console showed people finding 49.
 - **Who runs it**: the about page draws its own words from `src/content/about.ts` (each site writes its own, not engine):
   the co-founders (Bill and George), how AI tools are used, and the running cost (about A$790 a month for the group, our
   books to 15 Nov 2026). It no longer links to the sister sites from the body.
+
+## 2026-11-18: An eBay and TCGplayer ad pair in the quick view (owner)
+
+Owner, 2026-11-18, while moving every ad that could hurt indexing below the page's own content: "Ads can show in the quick
+view for example". The quick view opens only when a visitor clicks a product, so an ad there comes after engagement and is
+never in a crawled page's HTML. `QuickAds.tsx` draws a slim box under the quick view's price rows: up to six eBay Buy It Now
+listings from the product's own set (the visitor's market, else eBay US) and six TCGplayer market prices, each row with a
+"See all" link. The tiles come from `cardAds({ setId, kind, exclude, fill: true, limit: 6 })` in `/api/quick/<slug>`,
+which the CDN already keeps for six hours, so the change adds no function call. It is labelled "Ad", every link is
+`rel="sponsored nofollow noopener"` through /go under `quickview-mini-ebay` / `quickview-mini-tcg`, and it is never Amazon,
+never a price row and never "the cheapest". The page's one inline block stays out of the quick view
+(`tests/inline-ads.test.ts`). Clicks are read by the buy_click placement on 2 Dec beside the other ad tests.
