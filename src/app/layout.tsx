@@ -10,6 +10,7 @@ import "@/components/site-reviews/site-reviews.css";
 // on a site that needs none). Game-specific, so it lives outside the engine.
 import "@/content/site.css";
 import { SITE } from "@/site.config";
+import { BottomNav } from "@/components/BottomNav";
 import { SITE_URL } from "@/lib/site";
 import { themeCss } from "@/lib/theme-vars";
 import { DEFAULT_MODE, SEARCH_BOOT_SCRIPT, THEME_BOOT_SCRIPT } from "@/lib/theme";
@@ -84,6 +85,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
           {/* The phone dock (PhoneDock.tsx): browser-only, after a scroll, narrow screens only; wide screens get the in-page ad block. */}
           <PhoneDockAds />
+          {/* The phone bottom nav (BottomNav.tsx, owner 2026-11-18): SITE.bottomNav "optin" (?bn=1 only), "on" or "off" (the rollback). */}
+          {(SITE.bottomNav ?? "off") !== "off" && <BottomNav mode={SITE.bottomNav ?? "off"} />}
           <QuickView />
           {/* Rate us (owner, 2026-11-03): the corner card, asking only after real use; RiftCompare keeps the ratings. */}
           <RateCard />
