@@ -10,6 +10,7 @@ import { AdSlot } from "@/components/AdSlot";
 import { abs } from "@/lib/site";
 import { renderPost } from "@/lib/post-render";
 import { fitDescription } from "@/lib/seo-title";
+import { ShareButton } from "@/components/ShareButton";
 
 export const revalidate = 86400;
 // Blog posts are code, not database rows: prerendering them costs nothing.
@@ -33,6 +34,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
       <Breadcrumbs items={[{ name: "Guides", href: "/blog" }, { name: p.title }]} />
       <p className="text-xs font-medium uppercase tracking-wider text-muted">{p.updated ? `Updated ${p.updated}` : p.date}</p>
       <h1 className="mt-2 page-title">{p.title}</h1>
+      <ShareButton path={`/blog/${p.slug}`} name={p.title} medium="guide" text={`${p.title}, on ${SITE.name}`} className="mt-3" />
       <p className="page-lede">{p.description}</p>
       {p.image && (
         // The post's own thumbnail, a static file in public/blog: no optimiser, no function.
