@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 // The cart list's styles (components/cart): imported here, never from a component, so node tests can load them.
@@ -56,24 +57,38 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = { themeColor: DEFAULT_MODE === "light" ? SITE.theme.pageLight ?? "#f4f5fa" : SITE.theme.pageDark, colorScheme: "dark light" };
 
-const ADSENSE = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
-// Inter for text and the site's display face for headings (owner, 2026-11-03: the old game-styled
-// display fonts were "way too tacky"; every site now names Plus Jakarta Sans, smooth and inviting,
-// in SITE.theme.displayFont). Weights 700 and 800: Tailwind's font-black falls back to 800.
-const fontHref = `https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=${encodeURIComponent(SITE.theme.displayFont)}:wght@700;800&display=swap`;
+// Inter for text and Plus Jakarta Sans for headings (owner, 2026-11-03: the old game-styled display
+// fonts were "way too tacky"; every site names Plus Jakarta Sans in SITE.theme.displayFont). Both are
+// served from this site and preloaded (2026-11-19): the Google Fonts stylesheet they replace blocked
+// the first paint for about 2 s on a phone (Lighthouse mobile, live home). "optional" never swaps a
+// face in after the first paint, so text never shifts; the fallback is metric-matched. No AdSense
+// script (owner, 2026-11-18: AdSense is off).
+const inter = localFont({
+  src: "./fonts/Inter-latin.woff2",
+  weight: "100 900",
+  style: "normal",
+  display: "optional",
+  variable: "--font-inter",
+  adjustFontFallback: "Arial",
+});
+const jakarta = localFont({
+  src: "./fonts/PlusJakartaSans-latin.woff2",
+  weight: "200 800",
+  style: "normal",
+  display: "optional",
+  variable: "--font-jakarta",
+  adjustFontFallback: "Arial",
+});
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-theme={DEFAULT_MODE} data-festive={CHRISTMAS_FESTIVE_LAYER ? "on" : undefined} suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${jakarta.variable}`} data-theme={DEFAULT_MODE} data-festive={CHRISTMAS_FESTIVE_LAYER ? "on" : undefined} suppressHydrationWarning>
       <head>
         <style dangerouslySetInnerHTML={{ __html: themeCss() }} />
         <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT + SEASON_BOOT_SCRIPT + SEARCH_BOOT_SCRIPT }} />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link rel="stylesheet" href={fontHref} />
         <link rel="preconnect" href="https://tcgplayer-cdn.tcgplayer.com" />
         {/* Impact's verifier reads the tag exactly as it issues it: `value`, not `content`. */}
         {SITE.impactSiteVerification && <meta name="impact-site-verification" {...{ value: SITE.impactSiteVerification }} />}
-        {ADSENSE && <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE}`} crossOrigin="anonymous" />}
       </head>
       <body className="font-sans antialiased">
         <PrefsProvider>
