@@ -1,10 +1,10 @@
 import Link from "@/components/Link";
-import { RateUsLink } from "./site-reviews/SiteReviews";
 import { SITE } from "@/site.config";
-import { creatorsOn } from "@/lib/creators";
 import { historyOn } from "@/lib/data";
 import { FeedbackAsk } from "@/components/FeedbackAsk";
 
+// Fewer links on every page (2026-11-19, core-update quality pass): the footer keeps the main price pages and who we are;
+// the header menus reach the tools, seasonal sales and community pages.
 export function Footer() {
   const history = historyOn();
   return (
@@ -24,34 +24,16 @@ export function Footer() {
             <li><Link href="/sealed">Booster box prices</Link></li>
             {SITE.kits && <li><Link href="/kits">{SITE.kits.label} prices</Link></li>}
             {history && <li><Link href="/movers">Price movers</Link></li>}
-            {history && <li><Link href="/price-report">Monthly price report</Link></li>}
-            <li><Link href="/black-friday">Black Friday deals</Link></li>
-            <li><Link href="/cyber-monday">Cyber Monday deals</Link></li>
-            <li><Link href="/boxing-day">Boxing Day deals</Link></li>
-            <li><Link href="/january-sales">January sales</Link></li>
-            <li><Link href="/lunar-new-year">Lunar New Year deals</Link></li>
-            <li><Link href="/embed">Free price widgets</Link></li>
-            <li><Link href="/tools/deal-finder">Deal Finder</Link></li>
-            {history && <li><Link href="/tools/rising">Rising cards</Link></li>}
-            <li><Link href="/tools/demand">Demand Finder</Link></li>
-            <li><Link href="/tools/best-basket">Best Basket</Link></li>
-            <li><Link href="/preorders">Pre-orders</Link></li>
+            <li><Link href="/tools/deal-finder">Today&apos;s deals</Link></li>
           </ul>
         </div>
         <div>
           <p className="mb-2 font-semibold">{SITE.name}</p>
           <ul className="space-y-1 text-muted">
-            <li><Link href="/about">About</Link></li>
-            <li><Link href="/collection">My collection</Link></li>
+            <li><Link href="/about">Who runs this site</Link></li>
             <li><Link href="/methodology">How prices work</Link></li>
-            <li><Link href="/stores">Stores we track</Link></li>
             <li><Link href="/blog">Guides</Link></li>
-            <li><Link href="/forum">Community forum</Link> <span className="text-xs">· beta</span></li>
-            {creatorsOn() && <li><Link href="/creators">Creators</Link></li>}
-            <li><Link href="/feedback">Send feedback</Link></li>
             <li><Link href="/contact">Contact</Link></li>
-            <li><RateUsLink className="hover:underline">Rate us</RateUsLink></li>
-            <li><Link href="/list-your-store">List your store</Link></li>
             <li><Link href="/how-we-pick-stores">How we pick stores</Link></li>
             <li><a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a></li>
             <li><Link href="/privacy">Privacy</Link> · <Link href="/terms">Terms</Link></li>

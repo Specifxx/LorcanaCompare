@@ -2326,3 +2326,24 @@ The ops monitor's store warning listed nine stores with 0 matched. A probe of th
 - **FIVE6 Gaming** renamed its collections (`in-stock-lorcana-singles`, 1,359 products; `lorcana-sealed`). **Do Big Things** files
   Star Wars Unlimited under `disney-lorcana-singles-copy`; it is swapped for `disney-lorcana`.
 - Left as they are: The Card House, Blue Jay's Cauldron and ENV Collectible list no Lorcana stock today; Gear Gaming's host 301s.
+
+## 2026-11-19: Core-update quality pass: stricter card indexing, fewer links, ads below content, no leave pop-up, who runs the site
+
+Google's November 2026 core update took sister sites on this engine's old shape (YGO, Gundam) to near-zero impressions,
+and Cyberpunk Compare slid from ~287 a day to ~28. URL Inspection showed formerly ranking pages "Crawled - currently not
+indexed" with no technical fault: a quality verdict. On Lorcana Compare 1,499 card pages asked to be indexed and Search
+Console showed people finding 49.
+
+- **Indexing** (`lib/indexing.ts` `cardAsksIndex`, card page and sitemap): a single asks to be indexed when its set is
+  upcoming, when Search Console shows people finding it (`lib/search-demand.ts`, a click or 10+ impressions in 56 days,
+  copied daily from the `demand` branch to `data/public/search-demand.json` by `refresh-prices.yml`), or when it is worth
+  US$5+ on TCGplayer and a store sells it. Sealed keeps the zero-data rule. Lorcana: 1,499 → about 575 pages, keeping ~80%
+  of the impressions. The rest stay live, linked, noindex, follow.
+- **Fewer links**: menus and the sidebar show 2 card dimensions with 6 links each (was 4 × 8 and every dimension × 10), 6
+  sets, 6 sealed types, three tools and the tools page; no forum, creators or feedback link. The footer drops seasonal sale
+  pages, tools, widgets, forum, creators, feedback, rate-us and list-your-store (~33 → 13). Cross-site cluster tiles off.
+- **Ads below content**: the one ad block sits after each page's own content (after the price table, the grid, the FAQ),
+  never under the hero or the breadcrumbs. The exit "leave nudge" pop-up is off (`LEAVE_NUDGE_ON = false`).
+- **Who runs it**: the about page draws its own words from `src/content/about.ts` (each site writes its own, not engine):
+  the co-founders (Bill and George), how AI tools are used, and the running cost (about A$790 a month for the group, our
+  books to 15 Nov 2026). It no longer links to the sister sites from the body.

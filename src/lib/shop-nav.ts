@@ -13,8 +13,10 @@ export interface MenuColumn { title: string; href: string; links: NavLink[] }
 export interface MenuItem { label: string; href: string; also?: string[]; columns: MenuColumn[] }
 export interface ShopNav { menus: MenuItem[]; groups: NavGroup[] }
 
-const MENU_LINKS = 8;
-const RAIL_LINKS = 10;
+// Short lists per group (2026-11-19, the core-update quality pass): each shows its first few links and an "All ..." link;
+// the hubs themselves list the rest. DECISIONS.md, 2026-11-19 "Fewer links on every page".
+const MENU_LINKS = 6;
+const RAIL_LINKS = MENU_LINKS;
 const cap = (list: NavLink[], n: number, all: NavLink): NavLink[] => (list.length > n ? [...list.slice(0, n), all] : list);
 
 let memo: { at: unknown; v: ShopNav } | null = null;
@@ -59,21 +61,21 @@ function buildShopNav(): ShopNav {
   const sealedLinks: NavLink[] = sealed.map((h) => ({ href: `/sealed/${h.slug}`, label: h.label }));
 
   const menus: MenuItem[] = [
-    { label: "Cards", href: "/cards", also: ["/card"], columns: dims.slice(0, 4).map((d) => ({ title: d.title, href: d.href, links: cap(d.links, MENU_LINKS, d.all) })) },
+    { label: "Cards", href: "/cards", also: ["/card"], columns: dims.slice(0, 2).map((d) => ({ title: d.title, href: d.href, links: cap(d.links, MENU_LINKS, d.all) })) },
     {
       label: "Sets",
       href: "/sets",
       columns: [
-        { title: "Newest sets", href: "/sets", links: cap(setLinks, 10, { href: "/sets", label: `All ${listed.length} sets` }) },
+        { title: "Newest sets", href: "/sets", links: cap(setLinks, MENU_LINKS, { href: "/sets", label: `All ${listed.length} sets` }) },
         { title: "Coming soon", href: "/preorders", links: [{ href: "/preorders", label: "Pre-orders and releases" }] },
       ],
     },
   ];
-  if (sealedLinks.length) menus.push({ label: "Sealed", href: "/sealed", columns: [{ title: "By product type", href: "/sealed", links: [...sealedLinks, { href: "/sealed", label: "All sealed" }] }] });
+  if (sealedLinks.length) menus.push({ label: "Sealed", href: "/sealed", columns: [{ title: "By product type", href: "/sealed", links: cap(sealedLinks, MENU_LINKS, { href: "/sealed", label: "All sealed" }) }] });
 
-  const groups: NavGroup[] = dims.map((d, i) => ({ title: d.title.replace(/^By /, "Shop by "), links: [...(i === 0 ? [{ href: "/cards", label: "All cards" }] : []), ...cap(d.links, RAIL_LINKS, d.all)] }));
-  groups.push({ title: "Sets", links: cap(setLinks, 10, { href: "/sets", label: "Every set" }) });
-  if (sealedLinks.length) groups.push({ title: "Sealed by type", links: [...sealedLinks, { href: "/sealed", label: "All sealed" }] });
+  const groups: NavGroup[] = dims.slice(0, 2).map((d, i) => ({ title: d.title.replace(/^By /, "Shop by "), links: [...(i === 0 ? [{ href: "/cards", label: "All cards" }] : []), ...cap(d.links, RAIL_LINKS, d.all)] }));
+  groups.push({ title: "Sets", links: cap(setLinks, RAIL_LINKS, { href: "/sets", label: "Every set" }) });
+  if (sealedLinks.length) groups.push({ title: "Sealed by type", links: cap(sealedLinks, RAIL_LINKS, { href: "/sealed", label: "All sealed" }) });
   // A link the rail already shows (the "All cards" that closes a long list) is not repeated further down.
   const seen = new Set<string>();
   const unique = groups.map((g) => ({ ...g, links: g.links.filter((l) => !seen.has(l.href) && !!seen.add(l.href)) })).filter((g) => g.links.length);

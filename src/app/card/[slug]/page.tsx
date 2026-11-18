@@ -4,7 +4,7 @@ import { Fragment } from "react";
 import { notFound, permanentRedirect } from "next/navigation";
 import { culledSetSlug } from "@/lib/culled";
 import { SITE } from "@/site.config";
-import { byValue, historyOf, meta, priceOf, productBySlug, productsInSet, refCents, setById } from "@/lib/data";
+import { byValue, historyOf, meta, priceOf, productBySlug, productsInSet, refCents, setById, storeCountOf } from "@/lib/data";
 import { imageAt } from "@/lib/image";
 import { money, pct } from "@/lib/format";
 import { shortName } from "@/lib/names";
@@ -30,7 +30,8 @@ import { ShareButton } from "@/components/ShareButton";
 import { attrHref, rarityHref, sealedHref } from "@/lib/hubs";
 
 import { cardTitleCandidates, fitTitle, fitDescription } from "@/lib/seo-title";
-import { cardIndexable, priceValidUntil } from "@/lib/indexing";
+import { cardAsksIndex, priceValidUntil } from "@/lib/indexing";
+import { searchFound } from "@/lib/search-demand";
 import { gtinLabel, gtinLd } from "@/lib/gtin";
 
 export const dynamic = "force-dynamic"; // one CDN copy per URL (next.config.js CDN_PAGES), never ISR
@@ -51,7 +52,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
     alternates: { canonical: `/card/${p.slug}` },
     // Pack inserts (worth cents, DECISIONS.md 2026-10-28) and cards with no
     // price and no listing at all (lib/indexing.ts) stay out of the index.
-    ...(cardIndexable(p, ref, priceOf(p.id).offers.length, set) ? {} : { robots: { index: false, follow: true } }),
+    ...(cardAsksIndex(p, ref, priceOf(p.id).offers.length, storeCountOf(p.id), set, searchFound(`/card/${p.slug}`)) ? {} : { robots: { index: false, follow: true } }),
     // The image is ./opengraph-image.tsx: the card and its real price gap (lib/share.ts).
     openGraph: { type: "website", siteName: SITE.name, url: `/card/${p.slug}`, title, description },
     twitter: { card: "summary_large_image" },
@@ -111,7 +112,6 @@ export default function CardPage({ params }: { params: { slug: string } }) {
         />
       )}
       <Breadcrumbs items={[{ name: p.kind === "sealed" ? "Sealed" : "Cards", href: p.kind === "sealed" ? "/sealed" : "/cards" }, ...(set ? [{ name: set.name, href: `/sets/${set.slug}` }] : []), { name }]} />
-      <InlineAds page="card" />
       <div className="grid gap-8 md:grid-cols-[minmax(0,320px)_1fr]">
         {/* Phones: the name, price and Buy come first; the big image and the
             details follow the prices (RiftCompare's card page, 2026-09-26). */}
@@ -181,6 +181,8 @@ export default function CardPage({ params }: { params: { slug: string } }) {
         </section>
       )}
       <CardStickyBuyBar offers={e.offers} productId={p.id} />
+      {/* Ads sit below the page's own content, never above it (2026-11-19, core-update quality pass). */}
+      <InlineAds page="card" />
     </article>
   );
 }

@@ -40,7 +40,6 @@ export default function SealedHub({ params }: { params: { type: string } }) {
         <h1 className="page-title">{SITE.gameShort} {h.label.toLowerCase()}</h1>
         <p className="page-lede">{h.items.length} products, newest set first. Open any one to compare every store and eBay.</p>
       </header>
-      <InlineAds page="sealed-type" />
       <TileGrid items={items} />
       <section>
         <h2 className="mb-3 sec-title">Other sealed products</h2>
@@ -48,6 +47,8 @@ export default function SealedHub({ params }: { params: { type: string } }) {
           {sealedHubs().filter((x) => x.slug !== h.slug).map((x) => <Link key={x.slug} href={`/sealed/${x.slug}`} className="chip hover:border-brand">{x.label}</Link>)}
         </div>
       </section>
+      {/* Ads sit below the page's own content, never above it (2026-11-19, core-update quality pass). */}
+      <InlineAds page="sealed-type" />
     </div>
   );
 }

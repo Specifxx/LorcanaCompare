@@ -35,7 +35,6 @@ export default function Cards() {
         <div className="mt-5 max-w-xl"><SearchBox /></div>
         <Suspense fallback={<SearchSlot />}><CardSearch /></Suspense>
       </header>
-      <InlineAds page="cards" />
 
       <section>
         <h2 className="mb-3 sec-title">Most valuable {SITE.gameShort} cards</h2>
@@ -75,6 +74,8 @@ export default function Cards() {
           <ChipList items={f.hubs.map((h) => ({ key: h.slug, href: `/cards/${f.cfg.facet}/${h.slug}`, label: h.label }))} more={f.cfg.noun[1]} />
         </section>
       ))}
+      {/* Ads sit below the page's own content, never above it (2026-11-19, core-update quality pass). */}
+      <InlineAds page="cards" />
     </div>
   );
 }

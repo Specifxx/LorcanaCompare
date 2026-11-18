@@ -141,7 +141,6 @@ export default function Home() {
         <p className="mt-3 text-sm"><Link href="/cards" className="link font-semibold">All {m?.counts.cards.toLocaleString() ?? ""} cards in the database →</Link></p>
       </section>
 
-      <InlineAds page="home" />
       {/* Multi-game sites (SITE.lines): one tile per game, straight under the hero. */}
       <GameTiles />
 
@@ -217,6 +216,8 @@ export default function Home() {
           </details>
         ))}
       </section>
+      {/* Ads sit below the page's own content, never above it (2026-11-19, core-update quality pass). */}
+      <InlineAds page="home" />
       <p className="sr-only">{products().length} products tracked</p>
     </div>
   );
