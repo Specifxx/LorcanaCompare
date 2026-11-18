@@ -9,6 +9,7 @@ import { ChristmasGifts } from "@/components/ChristmasGifts";
 import { TileGrid } from "@/components/ProductTile";
 import { byValue, deals, latestReleasedSet, meta, products, productsInSet } from "@/lib/data";
 import { ago, money } from "@/lib/format";
+import { LiveAgo } from "@/components/LiveAgo";
 import { posts } from "@/lib/posts";
 import { shortName } from "@/lib/names";
 import { JsonLd } from "@/components/JsonLd";
@@ -127,7 +128,14 @@ export default function Home() {
           </div>
         )}
         <p className="mt-5 text-xs text-muted">
-          {m ? `${m.counts.cards.toLocaleString()} cards · ${m.counts.sealed} sealed products · ${storeCount} stores · prices updated ${ago(m.updatedAt)}` : "Prices update daily"}
+          {m ? (
+            <>
+              {`${m.counts.cards.toLocaleString()} cards · ${m.counts.sealed} sealed products · ${storeCount} stores · prices updated `}
+              <LiveAgo iso={m.updatedAt} initial={ago(m.updatedAt)} />
+            </>
+          ) : (
+            "Prices update daily"
+          )}
           {upcoming && <> · <Link className="link" href={preorderPath(upcoming)}>{upcoming.name} pre-orders →</Link></>}
         </p>
         <p className="mt-3 text-sm"><Link href="/cards" className="link font-semibold">All {m?.counts.cards.toLocaleString() ?? ""} cards in the database →</Link></p>
