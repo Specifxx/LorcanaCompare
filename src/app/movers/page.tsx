@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import Link from "@/components/Link";
 import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
-import { movers } from "@/lib/data";
+import { movers, type Mover } from "@/lib/data";
 import { money, pct } from "@/lib/format";
 import { shortName } from "@/lib/names";
+import { MoversTable, type MoverTableRow } from "@/components/MoversTable";
 import { fitDescription } from "@/lib/seo-title";
 
 export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
@@ -20,7 +21,8 @@ export default function Movers() {
   return (
     <div className="flex flex-col gap-8">
       <h1 className="page-title">{SITE.gameShort} price movers</h1>
-      <div className="grid gap-6 lg:grid-cols-2">
+      <MoversTable rows={tableRows(w, mo)} noun="cards" />
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <List title="Risers this week" rows={w.up} />
         <List title="Fallers this week" rows={w.down} />
         <List title="Risers this month" rows={mo.up} />
@@ -48,4 +50,19 @@ function List({ title, rows }: { title: string; rows: ReturnType<typeof movers>[
       </ol>
     </section>
   );
+}
+
+// The four lists' rows merged per product, with both its 7-day and 30-day change,
+// for the searchable % sort (visitor feedback, 2026-11-18). Same rows, no new data.
+function tableRows(w: { up: Mover[]; down: Mover[] }, mo: { up: Mover[]; down: Mover[] }): MoverTableRow[] {
+  const byId = new Map<string, MoverTableRow>();
+  const add = (r: Mover, key: "d7" | "d30") => {
+    const id = String(r.p.id);
+    const row = byId.get(id) ?? { id, slug: r.p.slug, name: shortName(r.p.name), cents: r.cents, d7: null, d30: null };
+    row[key] = r.change;
+    byId.set(id, row);
+  };
+  for (const r of [...w.up, ...w.down]) add(r, "d7");
+  for (const r of [...mo.up, ...mo.down]) add(r, "d30");
+  return [...byId.values()];
 }
