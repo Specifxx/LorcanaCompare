@@ -1,18 +1,21 @@
 import type { Metadata } from "next";
 import Link from "@/components/Link";
 import { SITE } from "@/site.config";
-import { canon } from "@/lib/site";
 import { movers, type Mover } from "@/lib/data";
 import { money, pct } from "@/lib/format";
 import { shortName } from "@/lib/names";
 import { MoversTable, type MoverTableRow } from "@/components/MoversTable";
 import { fitDescription } from "@/lib/seo-title";
+import { ShareButton } from "@/components/ShareButton";
 
 export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
 export const metadata: Metadata = {
   title: `${SITE.gameShort} price movers — biggest risers and fallers`,
   description: fitDescription(`The ${SITE.game} cards whose prices moved most this week and this month, from daily TCGplayer market prices.`),
-  ...canon("/movers"),
+  // No `images` key: the sibling opengraph-image.tsx is the preview (more shareable artefacts, 2026-11-18).
+  alternates: { canonical: "/movers" },
+  openGraph: { type: "website", siteName: SITE.name, url: "/movers" },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function Movers() {
@@ -21,6 +24,7 @@ export default function Movers() {
   return (
     <div className="flex flex-col gap-8">
       <h1 className="page-title">{SITE.gameShort} price movers</h1>
+      <ShareButton path="/movers" name={`${SITE.gameShort} price movers`} medium="movers" text={`This week's biggest ${SITE.gameShort} price moves, from daily TCGplayer market prices`} className="mt-2" />
       <MoversTable rows={tableRows(w, mo)} noun="cards" />
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <List title="Risers this week" rows={w.up} />
