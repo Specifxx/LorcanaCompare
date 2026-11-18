@@ -12,6 +12,7 @@ import { amazonSearchUrls } from "@/lib/affiliate";
 import { amazonCarries, amazonCells } from "@/lib/amazon-live";
 import { fetchRowsFor } from "@/lib/fetchtcg";
 import { SITE } from "@/site.config";
+import { adSearch, cardAds } from "@/lib/card-ads";
 
 /** The card page's Amazon links (the item's own page where the ASIN is known, else the tagged search), without a price. */
 function amazonLinks(id: number, name: string): Record<string, string> | null {
@@ -34,6 +35,9 @@ export function GET(_req: Request, { params }: { params: { slug: string } }) {
       // Fetch TCG's own AU listing, the rows the card page draws (owner, 2026-11-16: the quick view must list what the page lists).
       fetchTcg: p.kind === "card" ? fetchRowsFor({ name: p.name, number: p.number, setName: setById(p.setId)?.name ?? null }) : null,
       amazon: p.kind === "sealed" && amazonCarries(p) ? amazonLinks(p.id, shortName(p.name)) : null,
+      // The quick view's ad pair (owner, 2026-11-18: "ads can show in the quick view"): this set's eBay and TCGplayer tiles.
+      ads: cardAds({ setId: p.setId, kind: p.kind, exclude: p.id, fill: true, limit: 6 }),
+      adSearch: adSearch(setById(p.setId)?.name, setById(p.setId)),
       // As the tile sends them (ProductTile.tsx), for a quick view opened from a plain link.
       name: shortName(p.name),
       sub: [setById(p.setId)?.name, p.number].filter(Boolean).join(" · "),
