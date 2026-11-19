@@ -2412,6 +2412,20 @@ content "spread across a large network of sites" and re-dating pages to look fre
 
 Black Friday and Cyber Monday pages are unchanged (in season). Judge the effect on 1 to 8 Dec against 3 to 9 Nov.
 
+## 2026-11-19: The price history chart draws two lines, OP Compare's look (owner)
+
+Owner: "I really really like opcompare's price history where you have the tcgplayer market price as well as the cheapest
+price locally. Can we pls copy it across all our tcg websites?" `components/PriceHistory.tsx` replaces `PriceChart.tsx` on
+the card page and in the quick view (which lists at most 10 rows): the cheapest in-stock store price in the visitor's market
+(solid red) against TCGplayer's market price (dashed gold, `data/history`, converted at the import's rate outside the US and
+labelled "converted"), Now / Low / High / change from the store line, 7D / 30D / 90D / All tabs only where the history is
+longer, and a crosshair tooltip with both lines. Either line draws alone where the other has no data. The axis ends on the
+import's own day (`historyThrough()`), never the clock, so server and browser draw the same chart.
+
+The store line is new data: the daily import now records the cheapest in-stock store price per product per market
+(`lib/import/store-lows.ts`, `data/store-lows/<setId>.json`, change-only points in the market's own cents, 0 = nothing in
+stock, never eBay, Amazon, TCGplayer or a pre-order; 730 days kept), the same file TCG Prices keeps. It was seeded once from TCG Prices' own record of the same sealed products (`tcgcompare` `data/store-lows`, kept since 2026-11-16 from this site's published prices), matched by TCGplayer product id; cards start from the next import.
+Pure maths in `lib/history-chart.ts`, pinned by `tests/history-chart.test.ts`.
 ## 2026-11-19 — A graded-slab variant never prices the raw card
 
 A store can sell a raw card and its slabs as variants of ONE Shopify product ("Near Mint" A$344, "Graded - Beckett
