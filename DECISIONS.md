@@ -2501,3 +2501,11 @@ against the $6 cap: every build rewrites the ISR cache and burns build CPU. `scr
 So one site builds at most three times a day, and the 19 production projects at most 57 a day (normally about 25).
 Batch urgent changes into one release instead of one per merge. Pinned by `tests/deploy-gap.test.ts`. The same change
 went to every Compare site's gate.
+
+## 2026-11-19: Weekly releases: import daily, build on Mondays
+
+The owner approved the boardroom plan's capacity move ("Let's do it", 19 Nov): Lorcana Compare releases once a week. `refresh-prices.yml`
+still imports every day (eBay, stores, the alert feed's inputs and the data history keep their daily rhythm), but only
+Monday's (UTC) data commit carries `[deploy]`; the other days' data rides it. The fallback in `production-deploy.yml` runs
+on Mondays at 22:00 UTC and releases only when nothing has in six days. What visitors see, the alert feed included, is
+refreshed weekly. Why: the build budget goes to the sites that earn.
