@@ -7,6 +7,7 @@ import { navGroups, phoneNav } from "@/lib/nav";
 import { shopNav } from "@/lib/shop-nav";
 import { HeaderMenus } from "./HeaderMenus";
 import { MobileMenu } from "./MobileMenu";
+import { AccountHeaderLink, PremiumHeaderLink } from "./premium/AccountHeaderLink";
 import { historyOn } from "@/lib/data";
 import { holidayNav } from "@/lib/holiday-nav";
 
@@ -41,7 +42,13 @@ export function Header() {
           <Link href="/blog" className="hidden rounded-full px-3 py-1.5 text-sm text-fg/85 hover:bg-ink-800 lg:inline-block xl:hidden 2xl:inline-block">Guides</Link>
           <Link href="/tools" className="hidden rounded-full px-3 py-1.5 text-sm text-fg/85 hover:bg-ink-800 lg:inline-block xl:hidden 2xl:inline-block">Tools</Link>
           <MarketPicker />
-          <ThemeToggle />
+          {/* Day/night sits in the phone menu below sm, so Sign in fits beside the name (2026-11-19). */}
+          <span className="hidden sm:contents">
+            <ThemeToggle />
+          </span>
+          {/* Sign in and Premium (owner, 2026-11-19: "the login/signup button should be visible for all sites", "premium should also be visible"). */}
+          <PremiumHeaderLink className="hidden xl:inline-flex" />
+          <AccountHeaderLink />
           {/* The cart list (components/cart, owner 2026-11-06), with its count: here from md, beside the search on phones. */}
           <CartHeaderLink className="hidden text-fg/85 md:inline-flex" />
         </div>

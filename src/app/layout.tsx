@@ -1,4 +1,6 @@
 import type { Metadata, Viewport } from "next";
+import { ADFREE_BOOT_SCRIPT } from "@/lib/premium-member";
+import { AdFreeSync } from "@/components/premium/AdFreeSync";
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
@@ -86,7 +88,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${inter.variable} ${jakarta.variable}`} data-theme={DEFAULT_MODE} data-festive={CHRISTMAS_FESTIVE_LAYER ? "on" : undefined} suppressHydrationWarning>
       <head>
         <style dangerouslySetInnerHTML={{ __html: themeCss() }} />
-        <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT + SEASON_BOOT_SCRIPT + SEARCH_BOOT_SCRIPT }} />
+        <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT + SEASON_BOOT_SCRIPT + SEARCH_BOOT_SCRIPT + ADFREE_BOOT_SCRIPT }} />
         <link rel="preconnect" href="https://tcgplayer-cdn.tcgplayer.com" />
         {/* Impact's verifier reads the tag exactly as it issues it: `value`, not `content`. */}
         {SITE.impactSiteVerification && <meta name="impact-site-verification" {...{ value: SITE.impactSiteVerification }} />}
@@ -118,6 +120,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ReturnNudge />
         <LeaveNudge />
         <ShareArrival />
+        <AdFreeSync />
         <ReturnBeacon />
       </body>
     </html>
