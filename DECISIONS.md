@@ -2360,6 +2360,13 @@ which the CDN already keeps for six hours, so the change adds no function call. 
 never a price row and never "the cheapest". The page's one inline block stays out of the quick view
 (`tests/inline-ads.test.ts`). Clicks are read by the buy_click placement on 2 Dec beside the other ad tests.
 
+## 2026-11-19: The dock A/B ends: the phone ad strip sits above the bottom nav for everyone (owner)
+
+The owner, 2026-11-19: "I want it for all the sites, so people have like an ad on their phone right there." The dock A/B of
+2026-11-18 (`lib/dock-arm.ts`) ends early with its "on" arm for every visitor: the eBay (and, where the site has it, TCGplayer) dock is
+stacked just above the phone bottom nav whenever it shows, instead of taking turns with the nav. Its own rules are unchanged: after a
+scroll, labelled "Ad", ✕ for the visit, never Amazon. `dock_arm` on buy_click now always reads "on".
+
 ## 2026-11-19: eBay calls go to sealed first, the most popular first; cards get what is left (owner)
 
 The owner, once singles were live on several sites: "we cannot go past the eBay quota … everything goes to sealed
