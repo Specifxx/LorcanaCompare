@@ -2360,6 +2360,33 @@ which the CDN already keeps for six hours, so the change adds no function call. 
 never a price row and never "the cheapest". The page's one inline block stays out of the quick view
 (`tests/inline-ads.test.ts`). Clicks are read by the buy_click placement on 2 Dec beside the other ad tests.
 
+## 2026-11-19: The dock A/B ends: the phone ad strip sits above the bottom nav for everyone (owner)
+
+The owner, 2026-11-19: "I want it for all the sites, so people have like an ad on their phone right there." The dock A/B of
+2026-11-18 (`lib/dock-arm.ts`) ends early with its "on" arm for every visitor: the eBay (and, where the site has it, TCGplayer) dock is
+stacked just above the phone bottom nav whenever it shows, instead of taking turns with the nav. Its own rules are unchanged: after a
+scroll, labelled "Ad", ✕ for the visit, never Amazon. `dock_arm` on buy_click now always reads "on".
+
+## 2026-11-19: eBay calls go to sealed first, the most popular first; cards get what is left (owner)
+
+The owner, once singles were live on several sites: "we cannot go past the eBay quota … everything goes to sealed
+products first, or at least the most in-demand sealed products, and not the least popular ones … they have TCGplayer
+prices, and they also have their own store prices … we cannot kill the eBay quota." A card page already shows
+TCGplayer's market price and the stores'; a sealed product's eBay price is the one shoppers compare against. So every
+eBay plan now searches every due sealed product, ordered by demand, before any single, and a single gets a call only
+from what sealed leaves. Measured 17-18 Nov before the change: no keyset ran out, but several shared ones ended the
+day at 88-96% of 5,000, and on RiftCompare the singles pass (2,081 calls on 18 Nov) ran before the sealed pass with
+no ceiling of its own.
+
+Engine: `planEbayRefresh` ranks every sealed product above every card (`sealedFirst`), the most clicked first, and in
+each market a due sealed product goes before a due card. The daily budget (`SITE.ebay.dailyBudget`) and the app's
+live remaining count are unchanged. `tests/ebay-plan.test.ts` pins it.
+
+## 2026-11-19: No ads on Premium, account, collection, watches, sign-in or giveaway pages
+
+A production check on a sister site found /premium opening on phones under ad blocks. Premium promises no ads, and these are
+conversion and utility pages, so the layout's ad units (PhoneDockAds) stand down on them (`lib/ad-free-paths.ts`,
+`AdRouteGate.tsx`, `tests/ad-free-paths.test.ts`).
 ## 2026-11-19 — A calmer home page on a phone
 
 Owner, 2026-11-19: "way too much going on in the mobile version of the home page" (KaeYoung first; the same pass on every
