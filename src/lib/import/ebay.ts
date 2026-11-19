@@ -111,6 +111,9 @@ export function intervalHours(usd: number, clicks: number, boosted: boolean): nu
   return h;
 }
 
+/** Sealed before cards: negative when `a` is sealed and `b` a card. */
+export const sealedFirst = (a: Product, b: Product): number => Number(a.kind !== "sealed") - Number(b.kind !== "sealed");
+
 export function planEbayRefresh(input: PlanInput, shares: Partial<Record<Market, number>> = MARKET_SHARE): { calls: PlannedCall[]; eligible: number } {
   const minCents = SITE.ebay.minPriceUsd * 100;
   const ranked: { product: Product; score: number; interval: number }[] = [];
@@ -132,7 +135,10 @@ export function planEbayRefresh(input: PlanInput, shares: Partial<Record<Market,
     const interval = p.kind === "sealed" ? Math.min(48, intervalHours(ref / 100, clicks, boosted)) : intervalHours(ref / 100, clicks, boosted);
     ranked.push({ product: p, score: Math.max(0.5, value) * demand * boost, interval });
   }
-  ranked.sort((a, b) => b.score - a.score);
+  // SEALED FIRST (owner, 2026-11-19: "everything goes to sealed products first … the most in-demand sealed products,
+  // and not the least popular ones"): every sealed product ranks above every card, the most popular first. Cards
+  // already show TCGplayer's and the stores' prices; they get eBay calls only when sealed leaves some.
+  ranked.sort((a, b) => sealedFirst(a.product, b.product) || b.score - a.score);
 
   const calls: PlannedCall[] = [];
   const usLeft: PlannedCall[] = [];
@@ -148,7 +154,8 @@ export function planEbayRefresh(input: PlanInput, shares: Partial<Record<Market,
       const overdue = Math.min(3, ageH / r.interval);
       return { ...r, due: ageH >= r.interval, priority: r.score * (Number.isFinite(overdue) ? overdue : 3) };
     });
-    withAge.sort((a, b) => Number(b.due) - Number(a.due) || b.priority - a.priority);
+    // Due before not-due, then sealed before cards (a due card never jumps a due sealed product), then priority.
+    withAge.sort((a, b) => Number(b.due) - Number(a.due) || sealedFirst(a.product, b.product) || b.priority - a.priority);
     withAge.forEach((r, i) => {
       // A not-due product checked in the last 12 hours is never worth a call.
       const last = input.state[r.product.id]?.[market]?.at;

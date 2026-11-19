@@ -2359,3 +2359,18 @@ which the CDN already keeps for six hours, so the change adds no function call. 
 `rel="sponsored nofollow noopener"` through /go under `quickview-mini-ebay` / `quickview-mini-tcg`, and it is never Amazon,
 never a price row and never "the cheapest". The page's one inline block stays out of the quick view
 (`tests/inline-ads.test.ts`). Clicks are read by the buy_click placement on 2 Dec beside the other ad tests.
+
+## 2026-11-19: eBay calls go to sealed first, the most popular first; cards get what is left (owner)
+
+The owner, once singles were live on several sites: "we cannot go past the eBay quota … everything goes to sealed
+products first, or at least the most in-demand sealed products, and not the least popular ones … they have TCGplayer
+prices, and they also have their own store prices … we cannot kill the eBay quota." A card page already shows
+TCGplayer's market price and the stores'; a sealed product's eBay price is the one shoppers compare against. So every
+eBay plan now searches every due sealed product, ordered by demand, before any single, and a single gets a call only
+from what sealed leaves. Measured 17-18 Nov before the change: no keyset ran out, but several shared ones ended the
+day at 88-96% of 5,000, and on RiftCompare the singles pass (2,081 calls on 18 Nov) ran before the sealed pass with
+no ceiling of its own.
+
+Engine: `planEbayRefresh` ranks every sealed product above every card (`sealedFirst`), the most clicked first, and in
+each market a due sealed product goes before a due card. The daily budget (`SITE.ebay.dailyBudget`) and the app's
+live remaining count are unchanged. `tests/ebay-plan.test.ts` pins it.
