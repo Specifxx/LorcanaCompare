@@ -67,7 +67,8 @@ One eBay app (5,000 Browse calls/day) is shared with Gundam Compare and
 YGO Compare: Lorcana and Gundam 1,150 each, YGO
 2,200 (2026-10-28; 1,500 each from the owner's 2026-10-26 split), counted in
 `data/state/ebay-usage.json`. Cards under $10 get no call; every
-sealed product does. The
+sealed product does. Sealed first (owner, 2026-11-19): every sealed product, most
+clicked first, is planned before any card (`sealedFirst`); cards get what is left. The
 plan is `planEbayRefresh` in `src/lib/import/ebay.ts`, pinned by
 `tests/ebay-plan.test.ts`. The split between eBay sites is `SITE.ebay.marketShares`
 (owner's region split, 2026-11-10: US 0.625, UK, Australia and Canada 0.125 each; the US
