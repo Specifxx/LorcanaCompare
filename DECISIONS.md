@@ -2381,3 +2381,9 @@ no ceiling of its own.
 Engine: `planEbayRefresh` ranks every sealed product above every card (`sealedFirst`), the most clicked first, and in
 each market a due sealed product goes before a due card. The daily budget (`SITE.ebay.dailyBudget`) and the app's
 live remaining count are unchanged. `tests/ebay-plan.test.ts` pins it.
+
+## 2026-11-19: No ads on Premium, account, collection, watches, sign-in or giveaway pages
+
+A production check on a sister site found /premium opening on phones under ad blocks. Premium promises no ads, and these are
+conversion and utility pages, so the layout's ad units (PhoneDockAds) stand down on them (`lib/ad-free-paths.ts`,
+`AdRouteGate.tsx`, `tests/ad-free-paths.test.ts`).

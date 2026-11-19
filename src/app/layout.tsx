@@ -36,6 +36,7 @@ import { historyOn } from "@/lib/data";
 import { fitDescription } from "@/lib/seo-title";
 import { ReturnBeacon } from "@/components/ReturnBeacon";
 import { SinceLastVisit } from "@/components/SinceLastVisit";
+import { AdRouteGate } from "@/components/AdRouteGate";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -105,7 +106,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Footer />
           </div>
           {/* The phone dock (PhoneDock.tsx): browser-only, after a scroll, narrow screens only; wide screens get the in-page ad block. */}
-          <PhoneDockAds />
+          <AdRouteGate><PhoneDockAds /></AdRouteGate>
           {/* The phone bottom nav (BottomNav.tsx, owner 2026-11-18): SITE.bottomNav "optin" (?bn=1 only), "on" or "off" (the rollback). */}
           {(SITE.bottomNav ?? "off") !== "off" && <BottomNav mode={SITE.bottomNav ?? "off"} />}
           <QuickView />
