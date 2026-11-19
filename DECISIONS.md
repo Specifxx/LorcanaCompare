@@ -2518,3 +2518,11 @@ TCGplayer photo and #2 to #6 beside it with theirs, each with its real 7-day ris
 lists. The photos (TCGplayer's 200-pixel images) are fetched when the image is drawn, once a day (ISR, a day), each with a
 six-second timeout and kept only as PNG or JPEG (`src/lib/og-photo.ts`); a photo that fails draws a plain tile. Every other
 share image stays text only (the Vercel cost cap, 2026-11-08): this is the one a link post lives on.
+
+
+## 2026-11-20: The Hot 100 share image shows rises AND drops (owner)
+
+A Reddit reply to a Hot 100 link post asked for "the biggest drops. I just want to rip and play"; the owner: every snapshot
+thumbnail is half biggest rises, half biggest drops. `hotDrops` in `lib/hot100.ts` is the chart's rule the other way (the same
+seven days and $3 floor, biggest fall first, from the same history); the share image draws the week's top rises beside its top
+drops, and `/hot-100` lists up to 20 drops under the chart. Nothing new is read. `tests/hot100.test.ts`.
