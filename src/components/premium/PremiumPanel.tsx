@@ -14,6 +14,7 @@ const PLANS: Record<Plan, { price: string; per: string; note: string }> = {
 const FEATURES = [
   "No banner ads, on every page and on your phone",
   "Up to 200 price alerts (free: 25)",
+  "Your collection: a year of value history and a spreadsheet export",
   "Your watch list with today's lowest price",
   "One account across our card sites, with the same sign-in",
 ];

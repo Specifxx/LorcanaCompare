@@ -38,6 +38,7 @@ export default function PremiumPage() {
         <ul>
           <li><strong>No banner ads.</strong> The sponsored banners and the phone dock disappear while you are signed in. Price tables, the stores in them and their order do not change.</li>
           <li><strong>Up to 200 price alerts</strong> instead of 25.</li>
+          <li><strong>Your collection, kept longer:</strong> a year of daily value history (free: 60 days) and an export to a spreadsheet.</li>
           <li><strong>A watch list</strong> at <a href="/watches">My watches</a>: every alert you have set, with the lowest in-stock price now, and a button to stop each.</li>
         </ul>
         <h2>How it works</h2>
