@@ -37,7 +37,7 @@ export function Header() {
           {sale && <Link href={sale.href} className="hidden rounded-full px-3 py-1.5 text-sm font-semibold text-brand-400 hover:bg-ink-800 lg:inline-block">{sale.label}</Link>}
           {/* xl: Cards, Sets and Sealed open dropdowns (lib/shop-nav.ts); lg has the rail, so only the short row. */}
           <HeaderMenus menus={shop.menus} />
-          <Link href="/tools/deal-finder" className="hidden rounded-full px-3 py-1.5 text-sm text-fg/85 hover:bg-ink-800 xl:inline-block">Deals</Link>
+          <Link href="/tools/deal-finder" className="hidden rounded-full px-3 py-1.5 text-sm text-fg/85 hover:bg-ink-800 2xl:inline-block">Deals</Link>
           <Link href="/sealed" className="hidden rounded-full px-3 py-1.5 text-sm text-fg/85 hover:bg-ink-800 lg:inline-block xl:hidden">Sealed</Link>
           <Link href="/blog" className="hidden rounded-full px-3 py-1.5 text-sm text-fg/85 hover:bg-ink-800 lg:inline-block xl:hidden 2xl:inline-block">Guides</Link>
           <Link href="/tools" className="hidden rounded-full px-3 py-1.5 text-sm text-fg/85 hover:bg-ink-800 lg:inline-block xl:hidden 2xl:inline-block">Tools</Link>
