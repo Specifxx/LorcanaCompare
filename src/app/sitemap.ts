@@ -10,6 +10,7 @@ import { SITE_URL } from "@/lib/site";
 import { creatorsOn } from "@/lib/creators";
 import { SITE } from "@/site.config";
 import { gradeHubs, kits } from "@/lib/kits";
+import { withoutOffSeasonSales } from "@/lib/sale-seasons";
 
 export const revalidate = 86400;
 
@@ -19,11 +20,15 @@ export const revalidate = 86400;
 // So are sealed "Insert" products (Lorcana's puzzle inserts and ink drops,
 // a few cents each: 157 of Lorcana's 1,364 sitemap URLs on 2026-10-28); their
 // pages are noindex too (card/[slug]).
+// Pages whose words do not change with the day's prices carry no lastmod: dating them "today" on every build is the
+// re-dating to look fresh that Google's guidance calls search-engine-first (search-engine-first audit, 2026-11-19).
+const PROSE_PAGES = new Set(["/about", "/methodology", "/list-your-store", "/how-we-pick-stores", "/creators", "/embed", "/tools/selling-fees"]);
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const at = meta()?.updatedAt ? new Date(meta()!.updatedAt) : new Date();
-  const fixed = ["", "/cards", "/sets", "/sealed", "/movers", "/hot-100", "/price-report", "/black-friday", "/cyber-monday", "/boxing-day", "/january-sales", "/lunar-new-year", "/embed", "/tools", "/daily", "/tools/deal-finder", "/tools/is-this-a-good-price", "/tools/rising", "/tools/demand", "/tools/best-basket", "/tools/trade", "/tools/selling-fees", "/preorders", "/blog", "/about", "/methodology", "/stores", "/how-we-pick-stores", "/list-your-store", ...(creatorsOn() ? ["/creators"] : [])];
+  const fixed = ["", "/cards", "/sets", "/sealed", "/movers", "/hot-100", "/price-report", "/black-friday", "/cyber-monday", ...withoutOffSeasonSales(["/boxing-day", "/january-sales"], new Date().toISOString().slice(0, 10)), "/embed", "/tools", "/daily", "/tools/deal-finder", "/tools/is-this-a-good-price", "/tools/rising", "/tools/demand", "/tools/best-basket", "/tools/trade", "/tools/selling-fees", "/preorders", "/blog", "/about", "/methodology", "/stores", "/how-we-pick-stores", "/list-your-store", ...(creatorsOn() ? ["/creators"] : [])];
   return [
-    ...fixed.map((p) => ({ url: `${SITE_URL}${p}`, lastModified: at, changeFrequency: "daily" as const, priority: p === "" ? 1 : 0.8 })),
+    ...fixed.map((p) => ({ url: `${SITE_URL}${p}`, ...(PROSE_PAGES.has(p) ? {} : { lastModified: at }), changeFrequency: "daily" as const, priority: p === "" ? 1 : 0.8 })),
     ...preorderSetList().map((s) => ({ url: `${SITE_URL}${preorderPath(s)}`, lastModified: at, changeFrequency: "daily" as const, priority: 0.8 })),
     ...posts().map((p) => ({ url: `${SITE_URL}/blog/${p.slug}`, lastModified: new Date(p.updated ?? p.date), priority: 0.7 })),
     ...rarityHubs().map((h) => ({ url: `${SITE_URL}/cards/rarity/${h.slug}`, lastModified: at, priority: 0.6 })),
