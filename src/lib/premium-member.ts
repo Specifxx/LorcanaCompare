@@ -215,3 +215,6 @@ export function trackPremium(event: string, params: Record<string, unknown> = {}
     /* analytics is best-effort */
   }
 }
+
+/** Longest history a member's collection keeps, in days; everyone else keeps 60 (lib/vault.ts). */
+export const MEMBER_HISTORY_DAYS = 365;

@@ -56,7 +56,7 @@ function AccountHub() {
       ) : (
         <a href="/premium" className="mt-6 block rounded-xl bg-gradient-to-br from-[#2557c9] to-[#0f2a6b] p-4 text-white">
           <span className="block text-xs font-bold uppercase tracking-widest text-amber-300">★ Premium · 14 days free</span>
-          <span className="mt-1 block text-sm">No banner ads and up to 200 price alerts. Start the free trial →</span>
+          <span className="mt-1 block text-sm">A year of collection history and a spreadsheet export, 200 price alerts and no banner ads. Start the free trial →</span>
         </a>
       )}
       <button type="button" className="mt-6 text-sm text-muted underline" onClick={() => { writeStored(null); location.reload(); }}>

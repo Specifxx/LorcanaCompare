@@ -2448,3 +2448,10 @@ engine-agnostic through `SITE.key`.
 - **My collection needs an account**: "I own this" sends a signed-out visitor to sign in and back; `/collection` shows the way in. The
   list itself still lives in the browser. The phone bar's last tab is Collection; the header keeps its Menu button.
 - Header: Sign in at every width (Premium from xl); day/night moves into the phone menu below `sm`.
+
+## 2026-11-19 — Premium keeps what it promises: a year of collection history and a spreadsheet export
+
+Premium's copy promised "a year of value history and a spreadsheet export" for the collection; YGO Compare and MTG Compare had them
+and this site did not. Ported from YGO Compare: a member's collection keeps 365 days of daily value (`MEMBER_HISTORY_DAYS`, free: 60),
+drawn as a line under each market's total, and "Export to spreadsheet (CSV)" (`collectionCsv`, formula-safe cells). Everything still
+lives in the visitor's browser; nothing is sent anywhere.
