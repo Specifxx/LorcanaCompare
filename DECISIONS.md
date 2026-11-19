@@ -2359,3 +2359,13 @@ which the CDN already keeps for six hours, so the change adds no function call. 
 `rel="sponsored nofollow noopener"` through /go under `quickview-mini-ebay` / `quickview-mini-tcg`, and it is never Amazon,
 never a price row and never "the cheapest". The page's one inline block stays out of the quick view
 (`tests/inline-ads.test.ts`). Clicks are read by the buy_click placement on 2 Dec beside the other ad tests.
+
+## 2026-11-19 — A calmer home page on a phone
+
+Owner, 2026-11-19: "way too much going on in the mobile version of the home page" (KaeYoung first; the same pass on every
+site). Below sm the hero is the headline, the words and the link to every card; the creators bubble, the market row,
+trending chips and the counts line show from sm up (the header already carries the search and the market). The kits and
+chase-card shelves are ONE sideways row each on a phone (`shelf-phone`, the sealed page's rule), and the guide cards
+show from sm up. Measured on a 390px phone: 7,455 px tall before, 4,439 after. Layout only: URLs, titles, the h1 and the h2 outline, metadata
+and JSON-LD are the same, the server HTML is the same at every width, and the desktop page is unchanged. Before adding a
+block to the phone home page, say what it replaces.
