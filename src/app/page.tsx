@@ -94,9 +94,13 @@ export default function Home() {
           its one action, the living background behind it (HeroSparks) and the
           creators bubble in its corner. `hero-bleed` (globals.css) breaks out of
           the page container; `hero-search` keeps the suggestions above what follows. */}
-      <section className="hero-band hero-bleed relative -mt-6 flex flex-col items-center justify-center overflow-x-clip px-4 pb-10 pt-8 text-center sm:px-8 sm:pb-14 sm:pt-12">
+      <section className="hero-band hero-bleed relative -mt-6 flex flex-col items-center justify-center overflow-x-clip px-4 pb-6 pt-6 text-center sm:px-8 sm:pb-14 sm:pt-12">
         <HeroSparks />
-        <CreatorsBubble />
+        {/* Phone hero, 2026-11-19 (owner: "way too much going on in the mobile version of the home page"): the headline, the
+            words and the link to every card. The header already has the search and the market, so the creators bubble, the
+            market row, trending chips and counts show from sm up; the sealed shelf follows straight after. Same HTML at
+            every width. */}
+        <div className="hidden sm:contents"><CreatorsBubble /></div>
         <ChristmasGifts />
         <p className="mx-auto hidden items-center justify-center gap-2 font-display text-base font-black sm:flex">
           <img src="/icon.svg" alt={`${SITE.name} logo`} width={28} height={28} className="h-7 w-7 rounded-lg" />
@@ -111,10 +115,12 @@ export default function Home() {
           Price check any card or sealed product and find the cheapest place to buy: live prices from TCGplayer, eBay and {storeCount} stores in the US, UK, Canada, Australia and Europe, in your own currency, updated daily.
         </p>
         <div className="hero-search relative z-30 mx-auto mt-6 hidden w-full max-w-3xl sm:block"><SearchBox big /></div>
-        <p className="mt-6 text-[11px] font-bold uppercase tracking-widest text-muted">Shopping from</p>
-        <MarketChooser className="mt-2 justify-center" bare />
+        <div className="hidden sm:block">
+          <p className="mt-6 text-[11px] font-bold uppercase tracking-widest text-muted">Shopping from</p>
+          <MarketChooser className="mt-2 justify-center" bare />
+        </div>
         {trending.length > 0 && (
-          <div className="mx-auto mt-5 w-full max-w-3xl">
+          <div className="mx-auto mt-5 hidden w-full max-w-3xl sm:block">
             <p className="text-[11px] font-bold uppercase tracking-widest text-muted">Trending</p>
             <ul className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-3">
               {trending.map((p) => (
@@ -127,7 +133,7 @@ export default function Home() {
             </ul>
           </div>
         )}
-        <p className="mt-5 text-xs text-muted">
+        <p className="mt-5 hidden text-xs text-muted sm:block">
           {m ? (
             <>
               {`${m.counts.cards.toLocaleString()} cards · ${m.counts.sealed} sealed products · ${storeCount} stores · prices updated `}
@@ -138,7 +144,7 @@ export default function Home() {
           )}
           {upcoming && <> · <Link className="link" href={preorderPath(upcoming)}>{upcoming.name} pre-orders →</Link></>}
         </p>
-        <p className="mt-3 text-sm"><Link href="/cards" className="link font-semibold">All {m?.counts.cards.toLocaleString() ?? ""} cards in the database →</Link></p>
+        <p className="mt-4 text-sm sm:mt-3"><Link href="/cards" className="link font-semibold">All {m?.counts.cards.toLocaleString() ?? ""} cards in the database →</Link></p>
       </section>
 
       {/* Multi-game sites (SITE.lines): one tile per game, straight under the hero. */}
@@ -153,14 +159,15 @@ export default function Home() {
 
       {/* Model kits (SITE.kits): the kits most shops have in stock. */}
       {SITE.kits && kitsOn() && (
-        <section className="sd">
+        <section className="sd shelf-phone">
           <Header title={`${SITE.kits.label} prices`} href="/kits" sub={`${kits().length.toLocaleString()} ${SITE.kits.noun} across ${SITE.kits.stores.length} hobby shops, matched by barcode.`} />
           <KitGrid items={popular(kits()).slice(0, 6)} />
         </section>
       )}
 
+      {/* The kits and chase cards are one sideways row on a phone (`shelf-phone`, 2026-11-19), the grid from sm up. */}
       {latest && chase.length > 0 && (
-        <section className="sd">
+        <section className="sd shelf-phone">
           <Header title={`${latest.name} chase cards`} href={`/sets/${latest.slug}`} sub="The most valuable cards in the newest set, with every store's price." all="Full set price guide" />
           <TileGrid items={chase} />
         </section>
@@ -193,8 +200,9 @@ export default function Home() {
       {/* The site's own star score and approved reviews (owner, 2026-11-03), loaded in the browser; nothing until there is a rating. */}
       <SiteReviews />
 
+      {/* The guide cards from sm up (2026-11-19): on a phone the menu and footer reach the blog. */}
       {posts().length > 0 && (
-        <section className="sd">
+        <section className="sd hidden sm:block">
           <Header title="Guides" href="/blog" sub={`Buying guides and price explainers for ${SITE.gameShort}.`} />
           <div className="sd-stagger grid gap-3 md:grid-cols-3">
             {posts().slice(0, 3).map((p) => (
