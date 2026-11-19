@@ -39,6 +39,7 @@ import { readAllPrices, writePrices } from "@/lib/price-store";
 const PUBLIC = path.join(process.cwd(), "data", "public");
 const STATE = path.join(process.cwd(), "data", "state");
 const EBAY_MAX_AGE_H = 120; // an eBay result older than 5 days is not shown
+const MISSED_SAMPLE = 8; // refused titles logged per low-matching store
 const STORE_CARRY_H = 72; // a failed store's previous offers are kept this long
 
 function readJson<T>(file: string, fallback: T): T {
@@ -109,6 +110,9 @@ async function main() {
           throw new Error(`store charges ${cur}, but is configured for ${store.market} (${CURRENCY[store.market]}) — fix its market in src/content/stores.ts`);
         const items = await fetchStore(store);
         let matched = 0;
+        // A few titles the matcher refused, printed for a store that matches
+        // little, so the next matching fix starts from real titles (log only).
+        const missed: string[] = [];
         // Several listings can match one product (NM / foil / pre-order rows):
         // keep the cheapest in-stock one per printing.
         const best = new Map<string, Offer>();
@@ -117,7 +121,10 @@ async function main() {
           if (isForeign(handleOf(it.url))) continue;
           const sealed = looksSealed(it.title, it.productType, SITE.numberStyle);
           const m = sealed ? matchSealed(it.title, idx) : matchCard(it.title, idx, `${it.productType} | ${it.tags.join(" | ")}`);
-          if (!m) continue;
+          if (!m) {
+            if (missed.length < MISSED_SAMPLE) missed.push(it.title);
+            continue;
+          }
           matched++;
           // Price sanity: a store price under a quarter or over four times the
           // TCGplayer reference is far likelier a bad match (or a damaged /
@@ -144,6 +151,8 @@ async function main() {
         for (const [k, o] of best) addOffer(Number(k.split("|")[0]), o);
         storeStatus[store.key] = { ok: true, products: items.length, matched, at: now.toISOString() };
         console.log(`[store] ${store.key}: ${items.length} listings, ${matched} matched, ${best.size} offers`);
+        if (items.length >= 40 && matched / items.length < 0.2 && missed.length)
+          console.log(`[store] ${store.key} unmatched sample: ${missed.map((t) => JSON.stringify(t)).join(" · ")}`);
       } catch (e) {
         const msg = (e as Error).message.slice(0, 300);
         console.warn(`[store] ${store.key} FAILED: ${msg}`);
