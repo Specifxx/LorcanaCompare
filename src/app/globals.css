@@ -571,3 +571,7 @@ html[data-adlook="b"] [data-leave-nudge]::before {
   html[data-adlook="b"] aside[aria-label^="Sponsored"] li > a { transition: none; }
   html[data-adlook="b"] aside[aria-label^="Sponsored"] li > a:hover { transform: none; }
 }
+
+/* Premium members see no banner ads (owner, 2026-11-19; lib/premium-member.ts ADFREE_BOOT_SCRIPT, set before paint): every ad unit marked
+   [data-ad]. Price tables, the stores in them, their order and the eBay and TCGplayer rows inside them are untouched. */
+html[data-adfree] [data-ad] { display: none !important; }

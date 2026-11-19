@@ -2432,3 +2432,19 @@ A store can sell a raw card and its slabs as variants of ONE Shopify product ("N
 9.5" US$115, found on OP Compare). `pickVariant` took the cheapest in-stock variant, so the slab priced the card.
 It now drops every variant `isGradedVariant` reads as a slab (PSA, BGS, CGC, SGC, Beckett, TAG/AGS grades, Graded,
 Slab, ACE grading) before choosing; a product with only slabs gives no offer. `tests/graded-variant.test.ts`.
+
+## 2026-11-19 — Accounts, Premium and the collection behind sign-in
+
+**Owner (2026-11-19):** "we want accounts for every single one of our compare sites now", with a Premium like RiftCompare's; and
+"you can only use my collection if you are signed in", "the login/signup button should be visible for all sites", "premium should also
+be visible", My Collection in the phone bar instead of Menu. Ported from Gundam Compare (its 2026-11-18 and 2026-11-19 entries), made
+engine-agnostic through `SITE.key`.
+
+- **One shared account (RiftCompare's)**: sign in on `/account` with Google, Discord or an emailed link; the browser keeps one signed
+  token in localStorage (`<SITE.key>_premium_v1`, `lib/premium-member.ts`), so every page stays the same CDN copy for everyone.
+- **Premium** (`/premium`, US$4.99 a month or US$39.99 a year, 14 days free, Stripe): no banner ads (every `[data-ad]` unit hidden from
+  before paint, and the phone dock not drawn: `AdRouteGate`), up to 200 price alerts, the watch list at `/watches`. Every price, row and
+  their order stay free and unchanged.
+- **My collection needs an account**: "I own this" sends a signed-out visitor to sign in and back; `/collection` shows the way in. The
+  list itself still lives in the browser. The phone bar's last tab is Collection; the header keeps its Menu button.
+- Header: Sign in at every width (Premium from xl); day/night moves into the phone menu below `sm`.
