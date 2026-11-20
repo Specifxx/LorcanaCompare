@@ -97,6 +97,9 @@ export interface SiteConfig {
   /** Price alerts through RiftCompare's shared alert service (DECISIONS.md, 2026-11-02): the card page's
    *  "Email me when the price drops" form and /alert-feed.json. The site's `key` must be registered there. */
   priceAlerts?: boolean;
+  /** This site's own never-expiring invite to the family's Discord hub "TCG Deals & Restocks" (its Invites list counts who
+   *  joined from here), or nothing. Drawn by components/KeepUpStrip.tsx. */
+  discordInvite?: string;
   /** The phone bottom nav: "optin" (?bn=1 only), "on" (everyone on a phone) or "off" (the rollback). */
   bottomNav?: "off" | "optin" | "on";
   /** The site's own Amazon US tracking ID (hard-coded, owner 2026-11-02); riftcompare-20 when unset. */

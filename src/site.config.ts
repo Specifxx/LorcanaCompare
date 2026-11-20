@@ -31,6 +31,8 @@ export const SITE: SiteConfig = {
 
   // TCGCSV mirrors TCGplayer's catalogue and prices daily (tcgcsv.com).
   priceAlerts: true,
+  // Lorcana Compare's own invite to the Discord hub (lands in #lorcana; owner, 2026-11-20: grow the Discord).
+  discordInvite: "https://discord.gg/SRrMNdKbDp",
   // The phone bottom nav (components/BottomNav.tsx, DECISIONS.md 2026-11-18): "optin" = only a visitor who opens any page with ?bn=1
   // sees it; "on" = everyone on a phone; "off" is the rollback (it ignores ?bn=1 too).
   bottomNav: "on",
