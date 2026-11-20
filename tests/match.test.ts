@@ -205,3 +205,50 @@ test("set named with its set number in brackets: \"Name - Set (12) NM\" (Diadem,
   // The code and the name must name the same set.
   assert.equal(matchCard("Ursula - Deal Maker - Winterspell (12) NM", i), null);
 });
+
+test("promo cards with a bare number, set codes before the number (20 Nov import samples)", () => {
+  const s = [
+    { ...set(1, "The First Chapter"), code: "1" },
+    { ...set(2, "Rise of the Floodborn"), code: "2" },
+    { ...set(9, "Fabled"), code: "9" },
+    { ...set(13, "Attack of the Vine!"), code: "13" },
+    { ...set(50, "Disney Lorcana Promo Cards"), code: "DLPC" },
+  ];
+  const i = buildIndex(
+    [
+      card(1, "Mickey Mouse - Detective", "8", 50, "Promo"),
+      card(2, "Minnie Mouse - Pirate Lookout", "12", 50, "Promo"),
+      card(3, "Goofy - Musketeer", "12", 50, "Promo"),
+      card(4, "Minnie Mouse - Pirate Lookout (Disney Cruise Promo)", "17", 50, "Promo"),
+      card(5, "Flotsam & Jetsam - Entangling Eels", "40", 50, "Promo"),
+      card(6, "Hiro Hamada - Armor Designer (Store Championship Participant)", "24A", 50, "Promo"),
+      card(10, "Strength of a Raging Fire", "201/204", 2),
+      card(11, "Strength of a Raging Fire", "201/204", 9),
+      card(12, "Maleficent - Monstrous Dragon", "113/204", 1, "Legendary"),
+      card(13, "Aladdin & Genie - Mischievous Pals", "59/207", 13),
+      card(14, "Aladdin & Genie - Mischievous Pals (Enchanted)", "232/207", 13, "Enchanted"),
+    ],
+    s,
+    "fraction",
+  );
+  // GamesPortal, Bastion, House of Cards: "(8) [Promo Cards]", the promo series' "(12/P2)".
+  assert.equal(matchCard("Mickey Mouse - Detective (8) [Promo Cards]", i)?.product.id, 1);
+  assert.equal(matchCard("Minnie Mouse - Pirate Lookout (12/P2) [Promo Cards]", i)?.product.id, 2);
+  assert.equal(matchCard("Minnie Mouse - Pirate Lookout (Disney Cruise Promo) (17/P3) [Promo Cards]", i)?.product.id, 4);
+  // TeamCardTitan: the set named after the number.
+  assert.equal(matchCard("Mickey Mouse - Detective (8) - Disney Lorcana Promo Cards Holofoil", i)?.product.id, 1);
+  // Alt F4, Cartes Leo: "[DLPC - 40]", "[1 - 113]".
+  assert.equal(matchCard("Flotsam & Jetsam - Entangling Eels [DLPC - 40]", i)?.product.id, 5);
+  assert.equal(matchCard("Maleficent - Monstrous Dragon [1 - 113]", i)?.product.id, 12);
+  // A reprint shares its number: the bracketed set code picks the printing.
+  assert.equal(matchCard("Strength of a Raging Fire [9 - 201/204] Near Mint / English / Normal", i)?.product.id, 11);
+  assert.equal(matchCard("Strength of a Raging Fire [2 - 201/204]", i)?.product.id, 10);
+  assert.equal(matchCard("Strength of a Raging Fire (201/204)", i), null); // still a tie without the code
+  assert.equal(matchCard("Strength of a Raging Fire [1 - 201/204]", i), null); // not in that set
+  // TCG King: "(013-232) - Set 13: …".
+  assert.equal(matchCard("Aladdin & Genie - Mischievous Pals (013-232) - Set 13: Attack of the Vine! - Disney Lorcana Enchanted", i)?.product.id, 14);
+  // Still refused: no set named, the number belongs to another card, a letter-suffixed number.
+  assert.equal(matchCard("Mickey Mouse - Detective (8)", i), null);
+  assert.equal(matchCard("Mickey Mouse - Detective (12) [Promo Cards]", i), null);
+  assert.equal(matchCard("Hiro Hamada - Armor Designer (24) [Promo Cards]", i), null);
+});
