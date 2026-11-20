@@ -7,7 +7,7 @@ import { CreatorsBubble } from "@/components/creators/CreatorsBubble";
 import { HeroSparks } from "@/components/HeroSparks";
 import { ChristmasGifts } from "@/components/ChristmasGifts";
 import { TileGrid } from "@/components/ProductTile";
-import { byValue, deals, latestReleasedSet, meta, products, productsInSet } from "@/lib/data";
+import { byValue, deals, latestReleasedSet, meta, products } from "@/lib/data";
 import { ago, money } from "@/lib/format";
 import { LiveAgo } from "@/components/LiveAgo";
 import { posts } from "@/lib/posts";
@@ -58,7 +58,11 @@ export default function Home() {
   const latest = latestReleasedSet();
   const releases = preorderSetList();
   const upcoming = releases.find((s) => isPreorder(s)) ?? null;
-  const chase = latest ? rankProducts(byValue(productsInSet(latest.id).filter((p) => p.kind === "card"))).slice(0, 12) : [];
+  // MOST POPULAR FIRST (owner, 2026-11-20: "maybe the chase cards, we can get rid of that section now … just have the most popular as
+  // the first, as what shows on the homepage, and this should be across all sites"): every priced card and sealed product (no
+  // inserts), ordered by what visitors opened and bought (lib/home-rank.ts, data/demand.json). It replaces the newest set's chase
+  // cards, which stay on that set's page.
+  const popularItems = rankProducts(byValue(products().filter((p) => p.kind === "card" || (p.kind === "sealed" && p.sealedType !== "Insert")))).slice(0, 12);
   // Trending chips: the most valuable chase-rarity cards (SITE.chaseRarities), so a
   // tokens-and-markers catalogue never fills the row with "Energy Marker" (BandaiCompare).
   const cards = products().filter((p) => p.kind === "card");
@@ -82,9 +86,9 @@ export default function Home() {
     <div className="flex flex-col gap-12">
       <JsonLd data={{ "@context": "https://schema.org", "@type": "Organization", "@id": `${SITE_URL}/#org`, name: SITE.name, url: SITE_URL, logo: `${SITE_URL}/icon.svg` }} />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "WebSite", name: SITE.name, url: SITE_URL, publisher: { "@id": `${SITE_URL}/#org` }, potentialAction: { "@type": "SearchAction", target: `${SITE_URL}/cards?q={q}`, "query-input": "required name=q" } }} />
-      {/* The products on this page, by their own URLs: the shelf and the newest set's chase cards (SEO audit, 2026-11-03). */}
-      {shelf.length + chase.length > 0 && (
-        <JsonLd data={{ "@context": "https://schema.org", "@type": "ItemList", name: `${SITE.gameShort} sealed and chase card prices`, itemListElement: [...shelf, ...chase].map((p, i) => ({ "@type": "ListItem", position: i + 1, url: `${SITE_URL}/card/${p.slug}`, name: p.name })) }} />
+      {/* The products on this page, by their own URLs: the most popular, then the sealed shelf (SEO audit, 2026-11-03; 2026-11-20). */}
+      {shelf.length + popularItems.length > 0 && (
+        <JsonLd data={{ "@context": "https://schema.org", "@type": "ItemList", name: `Most popular ${SITE.gameShort} card and sealed prices`, itemListElement: [...popularItems, ...shelf.filter((x) => !popularItems.some((y) => y.id === x.id))].map((p, i) => ({ "@type": "ListItem", position: i + 1, url: `${SITE_URL}/card/${p.slug}`, name: p.name })) }} />
       )}
       <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }} />
 
@@ -150,6 +154,14 @@ export default function Home() {
       {/* Multi-game sites (SITE.lines): one tile per game, straight under the hero. */}
       <GameTiles />
 
+      {/* Most popular first, straight under the hero and the game tiles (owner, 2026-11-20). One sideways row on a phone. */}
+      {popularItems.length > 0 && (
+        <section className="sd shelf-phone">
+          <Header title={`Most popular ${SITE.gameShort} prices`} href="/cards" sub="What shoppers open and buy most right now, each with every store's price." all="All cards" />
+          <TileGrid items={popularItems} />
+        </section>
+      )}
+
       {/* Sealed is as big a market as singles: one section the size of the chase-cards one, tabs for the boxes and each pre-order. */}
       {hero.featured.length + hero.preorders.length > 0 && (
         <div className="sd">
@@ -165,15 +177,7 @@ export default function Home() {
         </section>
       )}
 
-      {/* The kits and chase cards are one sideways row on a phone (`shelf-phone`, 2026-11-19), the grid from sm up. */}
-      {latest && chase.length > 0 && (
-        <section className="sd shelf-phone">
-          <Header title={`${latest.name} chase cards`} href={`/sets/${latest.slug}`} sub="The most valuable cards in the newest set, with every store's price." all="Full set price guide" />
-          <TileGrid items={chase} />
-        </section>
-      )}
-
-      {/* Today's top deals sit below the chase cards (owner, 2026-11-16). */}
+      {/* Today's top deals sit below the products (owner, 2026-11-16; Most popular replaced the chase cards 2026-11-20). */}
       {topDeals.length > 0 && (
         <section className="sd">
           <Header title="Today's top deals" href="/tools/deal-finder" sub="In-stock listings below TCGplayer market, refreshed daily." all="Browse all deals" />
