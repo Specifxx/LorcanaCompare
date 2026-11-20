@@ -241,6 +241,16 @@ export function buildIndex(products: Product[], sets: SetInfo[], style: NumberSt
     const nk = `${p.setId}|${tokens(p.name).join(" ")}`;
     if (!bySetName.has(nk)) bySetName.set(nk, []);
     bySetName.get(nk)!.push(p);
+    // Promo sets number their cards plainly ("25", no total): they get no
+    // number key, but a title that names the set and the number can still
+    // reach them through bySetNumber (fractionFallback). Letter-suffixed
+    // numbers ("24A" / "24B") are left out on purpose.
+    if (style === "fraction" && p.number && /^\d{1,3}$/.test(p.number.trim())) {
+      const sk = `${p.setId}|${parseInt(p.number, 10)}`;
+      if (!bySetNumber.has(sk)) bySetNumber.set(sk, []);
+      bySetNumber.get(sk)!.push(p);
+      continue;
+    }
     const k = p.number ? numberKey(p.number, style) : null;
     if (!k) continue;
     if (!byNumber.has(k)) byNumber.set(k, []);
@@ -345,14 +355,20 @@ function fractionFallback(title: string, context: string, idx: MatchIndex): Prod
   const add = (setIds: number[] | undefined, n: number) => {
     for (const id of setIds ?? []) for (const p of idx.bySetNumber.get(`${id}|${n}`) ?? []) if (!out.includes(p)) out.push(p);
   };
-  const coded = title.match(/(?:^|[\s(\[])(\d{1,2})?([A-Z]{2,5})?-(\d{1,3})(?=[\s)\],]|$)/);
+  // "[DLPC - 40]", "[1 - 113]": a set code and the number, spaced, alone in brackets.
+  // "(013-232) - Set 13: Attack of the Vine!": the set number, zero-padded, and the number.
+  const coded =
+    title.match(/\[()([A-Z]{2,5}|\d{1,2})\s+-\s+(\d{1,3})\]/) ??
+    title.match(/\(()0*(\d{1,2})-(\d{3})\)/) ??
+    title.match(/(?:^|[\s(\[])(\d{1,2})?([A-Z]{2,5})?-(\d{1,3})(?=[\s)\],]|$)/);
   if (coded && (coded[1] || coded[2])) {
     const n = parseInt(coded[3], 10);
     if (coded[1]) add(idx.setByCode.get(coded[1]), n);
     if (!out.length && coded[2]) add(idx.setByCode.get(coded[2]), n);
     if (out.length) return out;
   }
-  const bare = title.match(/\((\d{1,4})\)|#(\d{1,4})\b/);
+  // "(12/P2)": a promo's number in its promo series (P1, P2, P3), read as the bare number.
+  const bare = title.match(/\((\d{1,4})(?:\/P\d)?\)|#(\d{1,4})\b/);
   const n = bare ? parseInt(bare[1] ?? bare[2], 10) : 0;
   if (!n) return out;
   const ctxText = `${title} ${context}`;
@@ -397,6 +413,12 @@ export function matchCard(title: string, idx: MatchIndex, context = ""): MatchRe
   const have = new Set(tokens(title));
   const scored: MatchResult[] = [];
   let candidates = [...new Set(numbersInTitle(title, idx.style).flatMap((n) => idx.byNumber.get(n) ?? []))];
+  // "[9 - 201/204]", "[Wilds Unknown - 12 - 125/204]": the set's code before the
+  // number. A reprint shares its number with the original (Strength of a
+  // Raging Fire is 201/204 in sets 2 and 9), so keep only the named set's card.
+  const bracketSet = idx.style === "fraction" ? title.match(/\[(?:[^\]]*?\s-\s)?(\d{1,2}|[A-Z]{2,5})\s+-\s+\d{1,3}\s*\/\s*\d{1,3}\s*\]/) : null;
+  const namedSets = bracketSet ? idx.setByCode.get(bracketSet[1].toUpperCase()) : undefined;
+  if (namedSets?.length) candidates = candidates.filter((p) => namedSets.includes(p.setId));
   if (!candidates.length && idx.style === "fraction") candidates = fractionFallback(title, context, idx);
   if (!candidates.length && !numbersInTitle(title, idx.style).length) {
     // No number anywhere: only an EXACT full-name match inside a set the
