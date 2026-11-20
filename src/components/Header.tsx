@@ -21,10 +21,10 @@ export function Header() {
   const opts = { history: historyOn(), sale, shop: shop.groups };
   const nav = phoneNav(opts);
   return (
-    <header className="sticky top-0 z-50 border-b border-ink-800/70 bg-ink-950/85 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-ink-800/70 bg-ink-950/85 backdrop-blur xmas-garland">
       <div className="relative mx-auto flex max-w-7xl items-center gap-2 px-4 py-2.5 sm:gap-4">
         <Link href="/" className="flex min-w-0 shrink items-center gap-2 overflow-x-clip whitespace-nowrap font-display text-base font-black leading-none sm:shrink-0 sm:overflow-visible sm:text-lg lg:hidden" aria-label={`${SITE.name} home`}>
-          <span className="relative inline-flex shrink-0">
+          <span className="relative inline-flex shrink-0 xmas-cap">
             <img src="/icon.svg" alt={`${SITE.name} logo`} width={34} height={34} className="h-[30px] w-[30px] shrink-0 rounded-xl sm:h-[34px] sm:w-[34px]" />
           </span>
           <span className="wordmark">{SITE.wordmark[0]}</span> <span className="text-fg">{SITE.wordmark[1]}</span>
