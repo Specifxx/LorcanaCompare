@@ -105,10 +105,10 @@ export default function Hot100() {
               return (
                 <li key={r.item.id} className="flex items-center gap-2 border-t border-ink-800 text-sm first:border-t-0 sm:gap-3">
                   <span className="w-8 shrink-0 text-right font-display text-base font-bold tabular-nums">{r.rank}</span>
-                  <span className={`w-12 shrink-0 text-center text-xs font-semibold tabular-nums ${move === "NEW" ? "text-up" : move?.startsWith("▲") ? "text-up" : move?.startsWith("▼") ? "text-down" : "text-muted"}`} title={r.lastRank ? `#${r.lastRank} last week` : undefined}>
+                  <span className={`hidden w-12 shrink-0 text-center sm:block text-xs font-semibold tabular-nums ${move === "NEW" ? "text-up" : move?.startsWith("▲") ? "text-up" : move?.startsWith("▼") ? "text-down" : "text-muted"}`} title={r.lastRank ? `#${r.lastRank} last week` : undefined}>
                     {move ?? ""}
                   </span>
-                  <Link className="min-w-0 flex-1 truncate py-2.5 hover:underline" href={`/card/${r.item.slug}`}>{shortName(r.item.name)}</Link>
+                  <Link className="min-w-0 flex-1 my-2 leading-snug line-clamp-2 sm:line-clamp-1 hover:underline" href={`/card/${r.item.slug}`}>{shortName(r.item.name)}</Link>
                   <span className="hidden tabular-nums text-muted md:inline" title="TCGplayer market price">{money(r.cents)}</span>
                   <span className="w-14 shrink-0 text-right font-semibold tabular-nums text-up sm:w-16">{pct(r.change)}</span>
                   <HotBuy item={buyItem(r.item)} />
