@@ -1,7 +1,7 @@
 {
  "v": 1,
  "site": "lorcana",
- "generatedAt": "2026-11-20T15:38:02.618Z",
+ "generatedAt": "2026-11-21T14:49:44.656Z",
  "links": {
   "US": {
    "deals": "https://www.lorcanacompare.com/black-friday",
@@ -33,9 +33,9 @@
    "currency": "USD",
    "store": "Minted TCG",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/723336_200w.jpg",
-   "refCents": 29722,
+   "refCents": 29572,
    "refLabel": "TCGplayer market price",
-   "savingPct": 52
+   "savingPct": 51
   },
   {
    "kind": "deal",
@@ -61,9 +61,23 @@
    "currency": "USD",
    "store": "Red Raccoon Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/543859_200w.jpg",
-   "refCents": 13310,
+   "refCents": 13282,
    "refLabel": "TCGplayer market price",
    "savingPct": 32
+  },
+  {
+   "kind": "deal",
+   "cluster": "cards",
+   "region": "US",
+   "title": "Hyperia City Gift Box - Beast",
+   "url": "https://www.lorcanacompare.com/card/disney-lorcana-hyperia-city-gift-box-beast",
+   "cents": 4999,
+   "currency": "USD",
+   "store": "Phantomich",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/719729_200w.jpg",
+   "refCents": 6695,
+   "refLabel": "TCGplayer market price",
+   "savingPct": 25
   },
   {
    "kind": "deal",
@@ -75,20 +89,7 @@
    "currency": "USD",
    "store": "Red Raccoon Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/690384_200w.jpg",
-   "refCents": 17362,
-   "refLabel": "TCGplayer market price",
-   "savingPct": 17
-  },
-  {
-   "kind": "deal",
-   "cluster": "cards",
-   "region": "US",
-   "title": "Into the Inkdark Booster Box Case",
-   "url": "https://www.lorcanacompare.com/card/disney-lorcana-into-the-inkdark-booster-box-case",
-   "cents": 76999,
-   "currency": "USD",
-   "store": "The Castle Games",
-   "refCents": 93244,
+   "refCents": 17358,
    "refLabel": "TCGplayer market price",
    "savingPct": 17
   },
