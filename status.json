@@ -1,0 +1,48 @@
+{
+ "v": 1,
+ "site": "www.lorcanacompare.com",
+ "at": "2026-11-21T11:50:54.347Z",
+ "overall": "warn",
+ "checks": [
+  {
+   "name": "Live site",
+   "status": "ok",
+   "detail": "200"
+  },
+  {
+   "name": "A card page",
+   "status": "ok",
+   "detail": "200"
+  },
+  {
+   "name": "Daily price import",
+   "status": "ok",
+   "detail": "20.4h old"
+  },
+  {
+   "name": "Store imports",
+   "status": "warn",
+   "detail": "cardhouse: 0 matched; mintcollectables: 0 matched; envcollectible: 0 matched; nordiclegends: 0 matched; tierzerogames: https://tierzerogames.com/collections/lorcana/products.json?limit=250&page=1&country=GB: HTTP 401 ; bentonville: 0 matched"
+  },
+  {
+   "name": "eBay budget",
+   "status": "ok",
+   "detail": "1050/1150 calls on 2026-11-20, 621 eligible"
+  },
+  {
+   "name": "Family feed",
+   "status": "ok",
+   "detail": "7 items, 20.2h old; 9 sister feeds (rift, op, dex, mtg, gundam, ygo, cyberpunk, bandai, sealed)"
+  },
+  {
+   "name": "Amazon ASIN finder",
+   "status": "ok",
+   "detail": "AU: ok, 0 ASINs, 20h ago; CA: ok, 0 ASINs, 20h ago; EU: ok, 0 ASINs, 20h ago; UK: ok, 0 ASINs, 20h ago; US: ok, 40 ASINs, 20h ago"
+  },
+  {
+   "name": "Fetch TCG row",
+   "status": "ok",
+   "detail": "the Fetch TCG row is on /card/fru-fru-vip-guest"
+  }
+ ]
+}
