@@ -368,8 +368,10 @@ function fractionFallback(title: string, context: string, idx: MatchIndex): Prod
     if (out.length) return out;
   }
   // "(12/P2)": a promo's number in its promo series (P1, P2, P3), read as the bare number.
-  const bare = title.match(/\((\d{1,4})(?:\/P\d)?\)|#(\d{1,4})\b/);
-  const n = bare ? parseInt(bare[1] ?? bare[2], 10) : 0;
+  // "Rapunzel - Gifted with Healing - Disney Lorcana Promo Cards - 4" (Tier 1
+  // Games): the number last, after the set's name. The set must still be named.
+  const bare = title.match(/\((\d{1,4})(?:\/P\d)?\)|#(\d{1,4})\b|\s-\s(\d{1,3})\s*$/);
+  const n = bare ? parseInt(bare[1] ?? bare[2] ?? bare[3], 10) : 0;
   if (!n) return out;
   const ctxText = `${title} ${context}`;
   const ctx = new Set(tokens(ctxText));
@@ -552,6 +554,11 @@ export function looksSealed(title: string, productType = "", style?: NumberStyle
   // A "plain" card number is a single, whatever set it came in:
   // "MT0D12 Flathead [B015 - Uncommon] - The Heist - Beta Starter Deck".
   if (style === "plain" && numbersInTitle(title, "plain").length) return false;
+  // "Stitch - Alien Buccaneer (Stitch Collector's Gift Set Promo) (8) - Disney
+  // Lorcana Promo Cards Holofoil" (Team Card Titan): a promo card named after
+  // the gift set it came in. The promo set's name with a bare "(8)" card number is a
+  // single; the card matcher still needs the number and the name.
+  if (/\bpromo cards\b/i.test(title) && /\(\d{1,3}\)/.test(title)) return false;
   return /booster|display|\bbox\b|\bcase\b|\bpack\b|starter|deck|trove|gift set|collection|bundle|prerelease|\btin\b/i.test(
     `${title} ${productType}`,
   ) && !numbersInTitle(title, "fraction").length && !numbersInTitle(title, "code").length && !numbersInTitle(title, "ygo").length && !numbersInTitle(title, "series").length;
