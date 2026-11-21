@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import type { Product, SetInfo } from "@/lib/site-types";
-import { buildIndex, matchCard, matchSealed, markersAgree, numbersInTitle, printingOf } from "@/lib/import/match";
+import { buildIndex, looksSealed, matchCard, matchSealed, markersAgree, numbersInTitle, printingOf } from "@/lib/import/match";
 
 const set = (id: number, name: string): SetInfo => ({ id, name, code: String(id), slug: name, releasedOn: "2026-01-01", productCount: 1, upcoming: false });
 const card = (id: number, name: string, number: string, setId: number, rarity = "Rare"): Product => ({ id, slug: String(id), name, kind: "card", setId, number, rarity, attrs: {}, sealedType: null, image: null, tcgUrl: "", printings: [] });
@@ -251,4 +251,15 @@ test("promo cards with a bare number, set codes before the number (20 Nov import
   assert.equal(matchCard("Mickey Mouse - Detective (8)", i), null);
   assert.equal(matchCard("Mickey Mouse - Detective (12) [Promo Cards]", i), null);
   assert.equal(matchCard("Hiro Hamada - Armor Designer (24) [Promo Cards]", i), null);
+  // Tier 1 Games: the number last, after the set's name (21 Nov import's refused sample).
+  assert.equal(matchCard("Mickey Mouse - Detective - Disney Lorcana Promo Cards - 8", i)?.product.id, 1);
+  assert.equal(matchCard("Mickey Mouse - Detective - Disney Lorcana Promo Cards - 12", i), null); // another card's number
+  assert.equal(matchCard("Mickey Mouse - Detective - 8", i), null); // no set named
+});
+
+test("a promo card named after its gift set is a single, not sealed (Team Card Titan)", () => {
+  const t = "Stitch - Alien Buccaneer (Stitch Collector's Gift Set Promo) (8) - Disney Lorcana Promo Cards Holofoil";
+  assert.equal(looksSealed(t, "", "fraction"), false);
+  // The gift set itself is still sealed.
+  assert.equal(looksSealed("Disney Lorcana Stitch Collector's Gift Set", "", "fraction"), true);
 });
