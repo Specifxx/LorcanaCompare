@@ -1,7 +1,7 @@
 {
  "v": 1,
  "site": "lorcana",
- "generatedAt": "2026-11-21T14:49:44.656Z",
+ "generatedAt": "2026-11-22T14:45:20.620Z",
  "links": {
   "US": {
    "deals": "https://www.lorcanacompare.com/black-friday",
@@ -47,9 +47,9 @@
    "currency": "USD",
    "store": "Lazarus Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/723343_200w.jpg",
-   "refCents": 11190,
+   "refCents": 11275,
    "refLabel": "TCGplayer market price",
-   "savingPct": 33
+   "savingPct": 34
   },
   {
    "kind": "deal",
@@ -61,7 +61,7 @@
    "currency": "USD",
    "store": "Red Raccoon Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/543859_200w.jpg",
-   "refCents": 13282,
+   "refCents": 13254,
    "refLabel": "TCGplayer market price",
    "savingPct": 32
   },
@@ -75,7 +75,7 @@
    "currency": "USD",
    "store": "Phantomich",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/719729_200w.jpg",
-   "refCents": 6695,
+   "refCents": 6659,
    "refLabel": "TCGplayer market price",
    "savingPct": 25
   },
@@ -89,9 +89,9 @@
    "currency": "USD",
    "store": "Red Raccoon Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/690384_200w.jpg",
-   "refCents": 17358,
+   "refCents": 17124,
    "refLabel": "TCGplayer market price",
-   "savingPct": 17
+   "savingPct": 16
   },
   {
    "kind": "preorder",
