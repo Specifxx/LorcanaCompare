@@ -19,6 +19,8 @@ import { postsAbout } from "@/lib/posts";
 import { imageAt } from "@/lib/image";
 import { SealedQuickBuy } from "@/components/SealedQuickBuy";
 import { ShareButton } from "@/components/ShareButton";
+import { setCopy } from "@/content/sets";
+import type { Product, QA } from "@/lib/site-types";
 
 export const dynamic = "force-dynamic"; // one CDN copy per URL (next.config.js CDN_PAGES), never ISR
 
@@ -59,8 +61,12 @@ export default function SetPage({ params }: { params: { slug: string } }) {
   const older = i >= 0 && i < listed.length - 1 ? listed[i + 1] : null;
   const others = listed.filter((x) => x.id !== s.id && x.productCount > 20).slice(0, 12);
   const guides = postsAbout([s.name, s.code]).slice(0, 4);
+  const copy = setCopy(s);
+  const boxes = sealedInSet(s.id);
+  const faq = setFaq(s.name, copy?.faq ?? [], cards, boxes.find((p) => p.sealedType === "Booster Box") ?? null);
   return (
     <div className="flex flex-col gap-8">
+      {faq.length > 0 && <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }} />}
       {cards.length > 0 && (
         <JsonLd
           data={{
@@ -82,12 +88,19 @@ export default function SetPage({ params }: { params: { slug: string } }) {
         {preorderSetList().some((x) => x.id === s.id) && (
           <p className="mt-2"><Link className="link font-semibold" href={preorderPath(s)}>{isPreorder(s) ? `${s.name} pre-order prices at every store →` : `${s.name} booster box prices at every store →`}</Link></p>
         )}
+        {copy && copy.facts.length > 0 && (
+          <dl className="mt-4 grid max-w-3xl grid-cols-2 gap-3 md:grid-cols-4">
+            {copy.facts.map((f) => (
+              <div key={f.label} className="card-surface p-3"><dt className="text-xs text-muted">{f.label}</dt><dd className="font-semibold">{f.value}</dd></div>
+            ))}
+          </dl>
+        )}
       </header>
       </div>
       {/* Booster boxes first with a buy button each (components/SealedQuickBuy.tsx), before the card list. */}
       <SealedQuickBuy
         title={`Buy ${s.name} booster boxes and sealed`}
-        items={sealedInSet(s.id).slice(0, 6).map((p) => ({ id: p.id, slug: p.slug, name: shortName(p.name), image: imageAt(p.image, "200w"), best: summaryOf(p.id).best, stores: summaryOf(p.id).listedSources }))}
+        items={boxes.slice(0, 6).map((p) => ({ id: p.id, slug: p.slug, name: shortName(p.name), image: imageAt(p.image, "200w"), best: summaryOf(p.id).best, stores: summaryOf(p.id).listedSources }))}
       />
       {cards.length > 0 && (<section><h2 className="mb-3 sec-title">Most valuable {s.name} cards</h2><TileGrid items={cards.slice(0, 18)} /></section>)}
       {sealed.length > 0 && (<section><h2 className="mb-3 sec-title">{s.name} booster boxes and sealed</h2><TileGrid items={sealed.slice(0, 12)} /></section>)}
@@ -116,6 +129,14 @@ export default function SetPage({ params }: { params: { slug: string } }) {
           </div>
         </section>
       )}
+      {faq.length > 0 && (
+        <section className="max-w-3xl">
+          <h2 className="mb-3 sec-title">{s.name} FAQ</h2>
+          {faq.map((f) => (
+            <div key={f.q} className="border-b border-ink-800 py-3"><h3 className="font-medium">{f.q}</h3><p className="mt-1 text-sm text-muted">{f.a}</p></div>
+          ))}
+        </section>
+      )}
       {guides.length > 0 && (
         <section>
           <h2 className="mb-3 sec-title">{s.name} guides</h2>
@@ -136,4 +157,26 @@ export default function SetPage({ params }: { params: { slug: string } }) {
       <InlineAds page="set" />
     </div>
   );
+}
+
+/** The set's own questions (src/content/sets.ts), then two answered from today's data: its most valuable card and its booster box. */
+function setFaq(name: string, own: QA[], cards: Product[], box: Product | null): QA[] {
+  const out = [...own];
+  const top = cards.filter((p) => refCents(p.id)).slice(0, 3);
+  if (top.length > 0) {
+    const [first, ...rest] = top;
+    const label = (p: Product) => { const n = shortName(p.name); return `${n}${p.rarity && !n.includes(`(${p.rarity})`) ? ` (${p.rarity})` : ""} at ${money(refCents(p.id))}`; };
+    out.push({
+      q: `What is the most valuable ${name} card?`,
+      a: `Today it is ${label(first)} TCGplayer market${rest.length ? `, then ${rest.map(label).join(" and ")}` : ""}. Market prices move daily; the card list above is sorted by value.`,
+    });
+  }
+  const listed = box ? summaryOf(box.id).listedSources : 0;
+  if (box && listed > 0) {
+    out.push({
+      q: `Where is the cheapest ${name} booster box?`,
+      a: `It depends on your market and changes daily. ${listed} store${listed === 1 ? " lists" : "s list"} the booster box today; its page compares them in your currency, in-stock first, next to TCGplayer and eBay. Prices are item prices before shipping.`,
+    });
+  }
+  return out;
 }

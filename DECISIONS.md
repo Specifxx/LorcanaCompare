@@ -2581,3 +2581,14 @@ pasted URL or a translate proxy is "none" or "cross-site". "yandex" and "baidu" 
 builds, baiduboxapp). Now `looksLikeBot` (the one thing that untags) is only an empty User-Agent or a self-named crawler or
 script; the header checks moved to `suspectClick`, which at most leaves a click out of the server-side click log, never the tag.
 The 10-14 Nov crawler with full browser headers will reach the networks tagged again: accepted by the owner's rule.
+
+## 2026-11-22: Set pages carry their own facts and FAQ
+
+Set pages (`/sets/<slug>`) were a card table under one generated line, and a released set's pre-order page retires to it
+45 days after release, so Illumineer's Quest: The Great Hunny Rescue, Attack of the Vine! and every older set had no copy at
+all. The set page now shows a facts row and an FAQ (with FAQPage JSON-LD): a site's own questions from `src/content/sets.ts`
+(`setCopy`, `null` for a set with none), then two the engine answers from today's data, the three most valuable cards and how
+many stores list the booster box. For Lorcana every main set 1-14 states its Core Constructed status from the 2026 rotation
+(Fabled, Set 9, and later; research/news.md and its sources), the Illumineer's Quest releases say which one they are, and
+Attack of the Vine! and Hyperia City carry their sourced facts. No price or count is written into the copy: every number
+comes from the data.

@@ -282,6 +282,15 @@ export interface KitStoreConfig {
   platform?: "shopify" | "neto";
 }
 
+// ── Set pages (src/content/sets.ts) ─────────────────────────────────────────
+
+/** A set page's own copy: facts beside the lede and FAQ questions above the
+ *  ones the page answers from its data. Facts only from a dated source. */
+export interface SetPageCopy {
+  facts: { label: string; value: string }[];
+  faq: { q: string; a: string }[];
+}
+
 // ── Pre-order pages (src/content/preorders.ts) ──────────────────────────────
 
 export interface QA { q: string; a: string }
