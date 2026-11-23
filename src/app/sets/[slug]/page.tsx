@@ -20,6 +20,7 @@ import { imageAt } from "@/lib/image";
 import { SealedQuickBuy } from "@/components/SealedQuickBuy";
 import { ShareButton } from "@/components/ShareButton";
 import { setCopy } from "@/content/sets";
+import { setReadout } from "@/lib/set-readout";
 import type { Product, QA } from "@/lib/site-types";
 
 export const dynamic = "force-dynamic"; // one CDN copy per URL (next.config.js CDN_PAGES), never ISR
@@ -63,10 +64,12 @@ export default function SetPage({ params }: { params: { slug: string } }) {
   const guides = postsAbout([s.name, s.code]).slice(0, 4);
   const copy = setCopy(s);
   const boxes = sealedInSet(s.id);
+  const readout = setReadout(s.name, cards.map((p) => ({ name: shortName(p.name), rarity: p.rarity, cents: refCents(p.id), inStock: summaryOf(p.id).inStockSources > 0 })));
   const faq = setFaq(s.name, copy?.faq ?? [], cards, boxes.find((p) => p.sealedType === "Booster Box") ?? null);
   return (
     <div className="flex flex-col gap-8">
       {faq.length > 0 && <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }} />}
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "CollectionPage", name: `${s.name} card list & prices`, url: abs(`/sets/${s.slug}`), description: `Prices for every ${s.name} card and sealed product.` }} />
       {cards.length > 0 && (
         <JsonLd
           data={{
@@ -103,7 +106,6 @@ export default function SetPage({ params }: { params: { slug: string } }) {
         items={boxes.slice(0, 6).map((p) => ({ id: p.id, slug: p.slug, name: shortName(p.name), image: imageAt(p.image, "200w"), best: summaryOf(p.id).best, stores: summaryOf(p.id).listedSources }))}
       />
       {cards.length > 0 && (<section><h2 className="mb-3 sec-title">Most valuable {s.name} cards</h2><TileGrid items={cards.slice(0, 18)} /></section>)}
-      {sealed.length > 0 && (<section><h2 className="mb-3 sec-title">{s.name} booster boxes and sealed</h2><TileGrid items={sealed.slice(0, 12)} /></section>)}
       {cards.length > 0 && (
         <section>
           <h2 className="mb-3 sec-title">Full {s.name} card list with prices</h2>
@@ -129,6 +131,28 @@ export default function SetPage({ params }: { params: { slug: string } }) {
           </div>
         </section>
       )}
+      {/* Rift Compare's set template (DECISIONS.md 2026-11-24): under the list, the set's own read-out, written from its
+          rows (lib/set-readout.ts), then how to read the prices. Commercial blocks never sit above the page's own content. */}
+      {readout.about.length > 0 && (
+        <section className="max-w-3xl" data-set-intro>
+          <h2 className="mb-3 sec-title">About {s.name} prices</h2>
+          <div className="space-y-2.5 text-sm leading-relaxed text-muted">{readout.about.map((t) => <p key={t}>{t}</p>)}</div>
+        </section>
+      )}
+      {cards.length > 0 && !s.upcoming && (
+        <section className="max-w-3xl">
+          <h2 className="mb-3 sec-title">How to read {s.name} prices</h2>
+          <div className="space-y-2.5 text-sm leading-relaxed text-muted">
+            <p>
+              The Market column is TCGplayer&apos;s market price in US dollars, from recent sales, refreshed every day; 7d is its
+              change over the last week, and Stores counts the sellers we track with the card in stock today. Open any card for
+              every store&apos;s price in your own currency, cheapest first, with eBay beside them.
+            </p>
+            {readout.facts && <p>{readout.facts} The list above runs by rarity and card number; the tiles at the top of the page are the most valuable first.</p>}
+          </div>
+        </section>
+      )}
+      {sealed.length > 0 && (<section><h2 className="mb-3 sec-title">{s.name} booster boxes and sealed</h2><TileGrid items={sealed.slice(0, 12)} /></section>)}
       {faq.length > 0 && (
         <section className="max-w-3xl">
           <h2 className="mb-3 sec-title">{s.name} FAQ</h2>

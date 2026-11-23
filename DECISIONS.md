@@ -2627,3 +2627,14 @@ fetched once when the browser is idle (skipped on Save-Data and 2g); and a tap d
 in. The viewport prefetch `components/Link.tsx` turns off for cost stays off (`tests/nav-boost.test.ts`). Never `/go`, `/out`,
 `/api`, a sponsored link, a new-tab link or another host. Measured on TCG Prices (emulated phone, tap to first paint): a warmed
 tab 871 to 567 ms. Rollback: remove `<NavBoost>` from the layout.
+
+## 2026-11-24: Set pages take Rift Compare's set read-out
+
+The SEO read of 21 Nov names Lorcana and OP set pages as the weakest next to Rift Compare's, whose set pages rank around
+position 10 for "<set> card list". Lorcana's title and list already followed Rift's (`setTitleCandidates`); what it lacked
+was Rift's data-written prose under the list. `/sets/[slug]` now has, under the full card list, "About <set> prices"
+(`lib/set-readout.ts`, from the set's own rows: what one of each costs, the top ten's share and the three dearest, the middle
+card and how many cost a dollar or less, how many are in stock today) and "How to read <set> prices" (the columns, then the
+set's dearest and cheapest priced card and the rarity filling its top ten). The second sealed tile grid moved under them, so
+the list and its read-out come before it; the booster-box quick buy stays first (2026-10-26). A CollectionPage JSON-LD joins
+the ItemList. URLs, titles, canonicals and the H1 are unchanged. Engine code: the same change goes to Cyberpunk Compare.
