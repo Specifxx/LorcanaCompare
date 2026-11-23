@@ -543,10 +543,13 @@ export function isPreorder(title: string, tags: string[] = []): boolean {
   return /pre[-\s]?order|presale|pre[-\s]?sale/i.test(`${title} ${tags.join(" ")}`);
 }
 
+// "Quest" (2026-11-23): a boxed co-op product ("Illumineer's Quest: The Great Hunny Rescue
+// [Q3]", "Ursula's Return Illumineer's Quest - Deep Trouble") carries no card number, and
+// went to the card matcher, which never matches a box. A card's title has its number.
 // "Card Name [Set Name]" is how TCGplayer-synced stores title a single; a
 // starter-deck card ("MT0D12 Flathead [The Heist - Beta Starter Deck]") names
 // a sealed product only inside the brackets, so the brackets don't count.
-const SEALED_WORD = /booster|display|\bbox\b|\bcase\b|\bpack\b|starter|deck|trove|gift set|collection|bundle|prerelease|\btin\b|\bkit\b/i;
+const SEALED_WORD = /booster|display|\bbox\b|\bcase\b|\bpack\b|starter|deck|trove|gift set|collection|bundle|prerelease|\btin\b|\bkit\b|\bquest\b/i;
 
 export function looksSealed(title: string, productType = "", style?: NumberStyle): boolean {
   const single = title.match(/^([^[\]]+)\[[^\]]+\]\s*$/);
@@ -559,7 +562,7 @@ export function looksSealed(title: string, productType = "", style?: NumberStyle
   // the gift set it came in. The promo set's name with a bare "(8)" card number is a
   // single; the card matcher still needs the number and the name.
   if (/\bpromo cards\b/i.test(title) && /\(\d{1,3}\)/.test(title)) return false;
-  return /booster|display|\bbox\b|\bcase\b|\bpack\b|starter|deck|trove|gift set|collection|bundle|prerelease|\btin\b/i.test(
+  return /booster|display|\bbox\b|\bcase\b|\bpack\b|starter|deck|trove|gift set|collection|bundle|prerelease|\btin\b|\bquest\b/i.test(
     `${title} ${productType}`,
   ) && !numbersInTitle(title, "fraction").length && !numbersInTitle(title, "code").length && !numbersInTitle(title, "ygo").length && !numbersInTitle(title, "series").length;
 }
