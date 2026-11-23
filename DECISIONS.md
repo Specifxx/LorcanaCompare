@@ -2616,3 +2616,14 @@ one flat list per country, and the deal finder table put the price and the Buy b
 - Deal finder: below `sm` the Where, Market and Under columns fold into the name and price cells, so a row is name, price, Buy.
 
 Engine change: the same in every repo of `engine.json`. No URL, title, heading, prompt, banner or ad changed.
+
+
+## 2026-11-23: Clicks that feel instant, on the real URLs (NavBoost)
+
+Owner, 23 Nov: "I want the sites to be very, very fast to use ... clicking all the tabs". Ported from TCG Prices (its DECISIONS.md,
+same date). `components/NavBoost.tsx`, one delegated listener mounted once in the layout, nothing in the server HTML: a same-site
+link starts loading on touch-down, on a 65 ms hover and on keyboard focus (`router.prefetch`, once a visit); the main tabs are
+fetched once when the browser is idle (skipped on Save-Data and 2g); and a tap draws a line on the top edge until the new page is
+in. The viewport prefetch `components/Link.tsx` turns off for cost stays off (`tests/nav-boost.test.ts`). Never `/go`, `/out`,
+`/api`, a sponsored link, a new-tab link or another host. Measured on TCG Prices (emulated phone, tap to first paint): a warmed
+tab 871 to 567 ms. Rollback: remove `<NavBoost>` from the layout.

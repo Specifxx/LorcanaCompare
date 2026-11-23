@@ -1,3 +1,4 @@
+import { NavBoost } from "@/components/NavBoost";
 import type { Metadata, Viewport } from "next";
 import { ADFREE_BOOT_SCRIPT } from "@/lib/premium-member";
 import { AdFreeSync } from "@/components/premium/AdFreeSync";
@@ -94,6 +95,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {SITE.impactSiteVerification && <meta name="impact-site-verification" {...{ value: SITE.impactSiteVerification }} />}
       </head>
       <body className="font-sans antialiased">
+        {/* Clicks that feel instant on the real URLs: intent prefetch, the main tabs warmed when idle, a line on tap. */}
+        <NavBoost warm={["/", "/sealed", "/cards", "/sets", "/tools/deal-finder"]} />
         <PrefsProvider>
           {/* The left rail from lg up (SideNav.tsx); everything else keeps --sidenav-w of room for it (globals.css). */}
           <SideNav groups={navGroups({ history: historyOn(), sale: holidayNav(), shop: shopNav().groups })} />
