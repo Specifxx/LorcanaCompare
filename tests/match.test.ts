@@ -263,3 +263,18 @@ test("a promo card named after its gift set is a single, not sealed (Team Card T
   // The gift set itself is still sealed.
   assert.equal(looksSealed("Disney Lorcana Stitch Collector's Gift Set", "", "fraction"), true);
 });
+
+test("an Illumineer's Quest box goes to the sealed matcher (2026-11-23 import samples)", () => {
+  const qSets = [set(5, "Illumineer's Quest: The Great Hunny Rescue"), set(6, "Illumineer's Quest: Deep Trouble"), set(7, "Ursula's Return")];
+  const qIdx = buildIndex([sealed(30, "Illumineer's Quest: The Great Hunny Rescue", 5), sealed(31, "Disney Lorcana: Illumineer's Quest: Deep Trouble", 6), sealed(32, "Disney Lorcana: Ursula's Return Illumineer's Trove", 7)], qSets, "fraction");
+  for (const [t, id] of [
+    ["Illumineer's Quest: The Great Hunny Rescue [Q3]", 30],
+    ["Disney Lorcana Attack of The Vine Illumineer's Quest The Great Hunny Rescue", 30],
+    ["Lorcana: Ursula's Return Illumineer's Quest - Deep Trouble", 31],
+  ] as const) {
+    assert.equal(looksSealed(t), true, t);
+    assert.equal(matchSealed(t, qIdx)?.product.id, id, t);
+  }
+  // A card still has its number, so it stays a single.
+  assert.equal(looksSealed("Quest for the Lamp (150/204) [Fabled]"), false);
+});
