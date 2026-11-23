@@ -2603,3 +2603,16 @@ so ShareButton's share-for-a-deal A/B test is untouched; event `share { medium: 
 **Why.** On 22 Nov a CA$89.99 Delta Reign ETB pre-order at Cardboard Hero took ten referral orders in 41 minutes, almost none through
 a click we tracked: the store link had been pasted into a restock chat. People share drops anyway; this makes the link they paste ours.
 Owner, 2026-11-23: "apply all these learnings to all the other sites". Read `share` medium `drop` and `share_visit` a week after release.
+
+
+## 2026-11-23: The stores page folds, and the deal finder fits a phone
+
+Owner, 23 Nov ("we forgot the database pages, the filters, the guides, the hubs"). On a 390px phone `/stores` was 21,700 px of
+one flat list per country, and the deal finder table put the price and the Buy button off the right edge.
+
+- `/stores`: the US first, then the countries with the most stores (US-first, owner 22 Nov); each country by listings matched,
+  twelve showing and the rest behind "Show all", with a find box (`FoldFinder.tsx`). Every store is still in the HTML with
+  the same link; without scripts everything shows. 5,800 px.
+- Deal finder: below `sm` the Where, Market and Under columns fold into the name and price cells, so a row is name, price, Buy.
+
+Engine change: the same in every repo of `engine.json`. No URL, title, heading, prompt, banner or ad changed.
