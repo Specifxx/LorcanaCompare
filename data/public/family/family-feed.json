@@ -1,7 +1,7 @@
 {
  "v": 1,
  "site": "lorcana",
- "generatedAt": "2026-11-23T18:20:06.150Z",
+ "generatedAt": "2026-11-24T17:55:56.087Z",
  "links": {
   "US": {
    "deals": "https://www.lorcanacompare.com/black-friday",
@@ -19,7 +19,7 @@
    "currency": "USD",
    "store": "Red Raccoon Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/652709_200w.jpg",
-   "refCents": 11376,
+   "refCents": 11348,
    "refLabel": "TCGplayer market price",
    "savingPct": 56
   },
@@ -36,6 +36,20 @@
    "refCents": 29572,
    "refLabel": "TCGplayer market price",
    "savingPct": 51
+  },
+  {
+   "kind": "deal",
+   "cluster": "cards",
+   "region": "US",
+   "title": "Attack of the Vine! Prerelease Box",
+   "url": "https://www.lorcanacompare.com/card/disney-lorcana-attack-of-the-vine-prerelease-box",
+   "cents": 3495,
+   "currency": "USD",
+   "store": "Digital Heroes",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/690389_200w.jpg",
+   "refCents": 6373,
+   "refLabel": "TCGplayer market price",
+   "savingPct": 45
   },
   {
    "kind": "deal",
@@ -61,23 +75,9 @@
    "currency": "USD",
    "store": "Red Raccoon Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/543859_200w.jpg",
-   "refCents": 13178,
+   "refCents": 13047,
    "refLabel": "TCGplayer market price",
-   "savingPct": 32
-  },
-  {
-   "kind": "deal",
-   "cluster": "cards",
-   "region": "US",
-   "title": "Hyperia City Gift Box - Beast",
-   "url": "https://www.lorcanacompare.com/card/disney-lorcana-hyperia-city-gift-box-beast",
-   "cents": 4999,
-   "currency": "USD",
-   "store": "Phantomich",
-   "image": "https://tcgplayer-cdn.tcgplayer.com/product/719729_200w.jpg",
-   "refCents": 6659,
-   "refLabel": "TCGplayer market price",
-   "savingPct": 25
+   "savingPct": 31
   },
   {
    "kind": "deal",
@@ -89,7 +89,7 @@
    "currency": "USD",
    "store": "Red Raccoon Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/690384_200w.jpg",
-   "refCents": 17308,
+   "refCents": 17384,
    "refLabel": "TCGplayer market price",
    "savingPct": 17
   },
