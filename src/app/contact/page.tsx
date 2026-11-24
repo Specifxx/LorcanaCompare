@@ -5,7 +5,8 @@ import { StaticPage } from "@/components/StaticPage";
 import { fitDescription } from "@/lib/seo-title";
 
 export const revalidate = 86400;
-export const metadata: Metadata = { title: "Contact", description: fitDescription(`Contact ${SITE.name}, report a price or list your store.`), ...canon("/contact") };
+// Noindex (page scorecard 2026-11-23: past page 3, no clicks, almost no visits); its links stay followed.
+export const metadata: Metadata = { title: "Contact", description: fitDescription(`Contact ${SITE.name}, report a price or list your store.`), ...canon("/contact"), robots: { index: false, follow: true } };
 
 export default function Contact() {
   return (
