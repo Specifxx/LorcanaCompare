@@ -53,7 +53,7 @@ export default function AttrHubPage({ params }: { params: { facet: string; slug:
           {top ? <> The most valuable is <Link className="link" href={`/card/${top.slug}`}>{shortName(top.name)}</Link> at {money(refCents(top.id))}.</> : null} Open any card to compare every store and eBay.
         </p>
       </header>
-      <TileGrid items={h.items.slice(0, 120)} />
+      <TileGrid items={h.items.slice(0, 120)} controls="facet" />
       {h.items.length > 120 && <p className="text-sm text-muted">Showing the 120 most valuable of {h.items.length}. <Link className="link" href="/cards">Search every card</Link>.</p>}
       {setChips.length > 1 && (
         <section>

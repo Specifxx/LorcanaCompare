@@ -35,7 +35,7 @@ export default function RarityHub({ params }: { params: { slug: string } }) {
         <h1 className="page-title">{h.label} {SITE.gameShort} card prices</h1>
         <p className="page-lede">{h.items.length} {h.label} cards{priced.length ? `, from ${money(refCents(priced[priced.length - 1].id))} to ${money(refCents(priced[0].id))}` : ""}. Open any card to compare every store.</p>
       </header>
-      <TileGrid items={h.items.slice(0, 120)} />
+      <TileGrid items={h.items.slice(0, 120)} controls="rarity" />
       <section>
         <h2 className="mb-3 sec-title">Other rarities</h2>
         <ChipList items={rarityHubs().filter((x) => x.slug !== h.slug).map((x) => ({ key: x.slug, href: `/cards/rarity/${x.slug}`, label: x.label }))} more="rarities" />

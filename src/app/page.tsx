@@ -79,7 +79,7 @@ export default function Home() {
   const faqs = [
     { q: `What is ${SITE.name}?`, a: `${SITE.name} is a free ${SITE.game} price comparison site. It compares prices for every ${SITE.gameShort} card and sealed product across TCGplayer, eBay and ${storeCount} online game stores in the US, UK, Canada, Australia and Europe, and updates them every day.` },
     { q: `Where is the cheapest place to buy ${SITE.gameShort} cards?`, a: `It changes card by card. Search a card on ${SITE.name} to see every store's price for it, cheapest in-stock first, in your own currency, with a direct link to buy.` },
-    { q: `How often are ${SITE.gameShort} prices updated?`, a: `Every day. TCGplayer prices and store listings refresh daily; eBay listings for cards worth $${SITE.ebay.minPriceUsd} or more are re-checked every one to four days depending on value and demand.` },
+    { q: `How often are ${SITE.gameShort} prices updated?`, a: `We read TCGplayer and every store each day, and the site publishes those prices once a week, so every price page says when its prices were checked (in amber once they are over 12 hours old). eBay listings for cards worth $${SITE.ebay.minPriceUsd} or more are re-checked every one to four days depending on value and demand.` },
     { q: `Is ${SITE.name} free?`, a: `Yes, completely, and you don't need an account. ${SITE.name} is paid for by affiliate commissions: when you buy through some links, the store may pay us a small fee at no cost to you.` },
   ];
   return (
@@ -192,7 +192,7 @@ export default function Home() {
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-medium">{shortName(d.p.name)}</p>
                   <p className="text-xs text-muted">Market {money(d.market)}</p>
-                  <p className="text-sm"><b className="text-buy-400">{money(d.offer.cents, d.offer.currency)}</b> <span className="text-xs text-muted">({d.saving}% under)</span></p>
+                  <p className="text-sm"><b className="text-buy-400">{money(d.offer.cents, d.offer.currency)}</b> <span className="text-xs text-muted" title="How far under TCGplayer's market price (recent US sales) this store price is">({d.saving}% under TCGplayer)</span></p>
                 </div>
               </Link>
             ))}

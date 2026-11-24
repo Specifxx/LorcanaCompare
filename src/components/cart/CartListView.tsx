@@ -101,7 +101,7 @@ export function CartListView() {
         <div className="ce-cart-empty">
           <CartIcon size={36} />
           <p className="ce-cart-strong">Your cart is empty</p>
-          <p>Tap the cart button beside any store&apos;s price to add it. Add from as many stores as you like: each store gets its own checkout button here.</p>
+          <p>Tap Save beside any store&apos;s price to keep it here. We sell nothing: each store gets its own button here and you buy on its own site. Or start from <a href="/tools/deal-finder" className="link">today&apos;s deals</a>.</p>
           <a className="ce-cart-btn" href="/">
             Find prices
           </a>
@@ -232,7 +232,7 @@ export function CartListView() {
         type="button"
         className="ce-cart-clear"
         onClick={() => {
-          if (confirm("Empty your cart?")) writeCart([]);
+          if (confirm("Clear your shortlist?")) writeCart([]);
         }}
       >
         Empty cart

@@ -1,9 +1,12 @@
+import { SITE } from "@/site.config";
 import { NextResponse } from "next/server";
 import { products, refCents, setById } from "@/lib/data";
 import { money } from "@/lib/format";
 import { shortName } from "@/lib/names";
 import { tokens } from "@/lib/slug";
 import { kitBestByMarket, kitImage, kits } from "@/lib/kits";
+import { expandAliases, suggestWords } from "@/lib/fuzzy";
+import { summaryOf } from "@/lib/data";
 
 // A plain function on Vercel caches only through its CDN header (Rift Compare,
 // "Cached pages refresh every 6 to 24 hours"): six hours at the edge.
@@ -36,19 +39,31 @@ function kitHits(want: string[], limit: number) {
   return out;
 }
 
+// Every catalogue word and how many products carry it, for "did you mean" (lib/fuzzy.ts; owner, 2026-11-23 UX review, P0 5).
+let vocab: Map<string, number> | null = null;
+function vocabulary() {
+  if (vocab) return vocab;
+  vocab = new Map();
+  for (const { set } of haystacks()) for (const t of set) vocab.set(t, (vocab.get(t) ?? 0) + 1);
+  return vocab;
+}
+const knownWord = (w: string) => vocabulary().has(w) || [...vocabulary().keys()].some((t) => t.startsWith(w));
+
 export function GET(req: Request) {
   const u = new URL(req.url);
   const q = (u.searchParams.get("q") ?? "").slice(0, 80);
   const limit = Math.min(60, Number(u.searchParams.get("limit") ?? 8) || 8);
-  const want = tokens(q);
+  let want = expandAliases(tokens(q));
   if (u.searchParams.get("kind") === "kit")
     return NextResponse.json({ hits: kitHits(want, limit) }, { headers: { "Cache-Control": "public, s-maxage=21600, stale-while-revalidate=86400" } });
   const numQ = q.match(/\d+\s*\/\s*\d+|[A-Z]{1,4}\d{0,2}-\d{2,3}/i)?.[0]?.replace(/\s/g, "").toUpperCase();
   const idQ = /^\s*\d{5,14}\s*$/.test(q) ? q.trim() : null;
-  const scored: { s: number; i: number }[] = [];
+  let scored: { s: number; i: number }[] = [];
   const all = products();
   const idx = want.length ? haystacks() : [];
-  if (want.length) {
+  const run = () => {
+    scored = [];
+    if (!want.length) return;
     all.forEach((p, i) => {
       const { hay, set } = idx[i];
       let hit = 0;
@@ -60,6 +75,32 @@ export function GET(req: Request) {
       const ref = refCents(p.id) ?? 0;
       scored.push({ s: hit * 10 + Math.log10(1 + ref) + (p.kind === "card" ? 0.5 : 0), i });
     });
+  };
+  run();
+  let fixed: string | null = null;
+  // "lorcana booster box": the game's own name is on no product, so a word of it that stops every match is dropped.
+  const gameWords = new Set(tokens(`${SITE.game} ${SITE.gameShort}`));
+  if (!scored.length && want.some((w) => gameWords.has(w)) && want.some((w) => !gameWords.has(w))) {
+    want = want.filter((w) => !gameWords.has(w));
+    run();
+  }
+  // Typo tolerance: nothing matched, so each word the catalogue does not know becomes its nearest known word ("Showing results for").
+  if (!scored.length && want.length && !idQ && kitHits(want, 1).length === 0) {
+    const better = suggestWords(want, vocabulary(), knownWord);
+    if (better) {
+      want = better;
+      fixed = better.join(" ");
+      run();
+    }
+  }
+  // Still nothing: the most widely stocked products instead of a dead end (P0 5, P2 18), flagged so the box says so.
+  let popular = false;
+  if (!scored.length && want.length && kitHits(want, 1).length === 0) {
+    popular = true;
+    all.forEach((p, i) => {
+      const n = summaryOf(p.id).inStockSources;
+      if (n > 0 && p.kind === "sealed") scored.push({ s: n + Math.log10(1 + (refCents(p.id) ?? 0)) / 10, i });
+    });
   }
   scored.sort((a, b) => b.s - a.s);
   const hits = scored.slice(0, limit).map(({ i }) => {
@@ -67,6 +108,6 @@ export function GET(req: Request) {
     return { slug: p.slug, href: `/card/${p.slug}`, name: shortName(p.name), set: setById(p.setId)?.name ?? "", image: p.image, price: money(refCents(p.id)), kind: p.kind, number: p.number, rarity: p.rarity };
   });
   // Kits fill what the cards leave: "hg aerial" finds the kit, "aerial" the card first.
-  const all2 = [...hits, ...kitHits(want, Math.max(0, limit - hits.length))];
-  return NextResponse.json({ hits: all2 }, { headers: { "Cache-Control": "public, s-maxage=21600, stale-while-revalidate=86400" } });
+  const all2 = popular ? hits : [...hits, ...kitHits(want, Math.max(0, limit - hits.length))];
+  return NextResponse.json({ hits: all2, fixed, popular }, { headers: { "Cache-Control": "public, s-maxage=21600, stale-while-revalidate=86400" } });
 }
