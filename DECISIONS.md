@@ -2690,3 +2690,12 @@ review", P0 to P2). What fits this site:
   "% under TCGplayer" with the definition on hover. **Reliable images (P1 15):** a failed image is tried once more after 1.5 s, then
   hidden behind its plate (`ImageRescue`). **Accessibility (P2 21):** a visible focus ring everywhere and a reduced-motion catch-all.
 - Not done here: delivered price by default (P1 9: per-store shipping is not in this site's data), visual set logos (P2 17).
+
+## 2026-11-24: Daily releases again (owner)
+
+The owner, asked after the UX review whether weekly releases were worth the stale prices: "we definitely want as much
+price recency as possible." So every day's `refresh-prices.yml` data commit carries `[deploy]` again (one build a day,
+still under the 12-hour gate in `scripts/vercel-ignore-build.sh`), reversing the weekly release of 2026-11-19.
+`production-deploy.yml`'s fallback runs daily and releases only if nothing has in 26 hours. The ops check "Live prices
+age" is red past 36 hours (was 8 days), and the home FAQ and card page say prices are published the same day. The amber
+CheckedAgo past 12 hours stays. Cost: about six extra builds a week per site, inside the $5–6 a day Vercel cap.

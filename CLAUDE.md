@@ -30,10 +30,10 @@ so. `vercel.json` disables every branch except production (`"**": false`), so no
 Never dispatch a manual release just to ship a merge. DECISIONS.md, 2026-11-02.
 
 Production builds only when the commit SUBJECT carries `[deploy]`
-(`scripts/vercel-ignore-build.sh`). **Weekly releases (owner, 2026-11-19):** `refresh-prices.yml` imports daily, but only
-MONDAY's (UTC) data commit carries the marker; that is the one build a week. Never put
+(`scripts/vercel-ignore-build.sh`). **Daily releases (owner, 2026-11-24, reversing the weekly release of 2026-11-19):** `refresh-prices.yml`
+imports daily and every day's data commit carries the marker; that is the one build a day. Never put
 `[deploy]` in a subject on your own initiative. "Push to prod" means land on
-`main` and ride the next weekly release, unless the owner says it is urgent.
+`main` and ride the next daily release, unless the owner says it is urgent.
 Previews build only with `[preview]` in the subject, when the owner asks.
 
 ## No accounts, no database, no email

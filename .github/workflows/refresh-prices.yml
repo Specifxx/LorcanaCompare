@@ -1,8 +1,8 @@
 name: Refresh prices
 
 # The daily import: TCGCSV + stores + budgeted eBay → data/ → commit to main.
-# Weekly release (owner, 2026-11-19): only MONDAY's (UTC) data commit carries [deploy] in its SUBJECT, the
-# week's one production build; the other days' data rides it (scripts/vercel-ignore-build.sh). Scheduled after TCGCSV's
+# Daily release (owner, 2026-11-24, reversing the weekly release of 2026-11-19): every day's data commit carries
+# [deploy] in its SUBJECT, the day's one production build (scripts/vercel-ignore-build.sh still holds it to one per 12 h). Scheduled after TCGCSV's
 # ~20:00 UTC refresh would be ideal for TCGplayer, but the eBay run hour is set
 # per site so Lorcana, YGO and Gundam Compare never overlap on the shared
 # eBay app (SITE.ebay.runHourUtc) — keep this cron's hour equal to it.
@@ -75,7 +75,7 @@ jobs:
         run: |
           git fetch --quiet --depth=1 origin demand
           git show FETCH_HEAD:gsc-pages.json > data/public/search-demand.json.tmp && mv data/public/search-demand.json.tmp data/public/search-demand.json
-      - name: Commit data (Monday's commit is the weekly release)
+      - name: Commit data (each day's commit is the daily release)
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
@@ -85,8 +85,7 @@ jobs:
             echo "No data changes."
             exit 0
           fi
-          marker=""; note="No marker: it rides Monday's weekly release (owner, 2026-11-19)."
-          if [ "$(date -u +%u)" = "1" ]; then marker=" [deploy]"; note="Monday: the one scheduled production build a week (owner, 2026-11-19)."; fi
+          marker=" [deploy]"; note="The day's one scheduled production build (owner, 2026-11-24: as much price recency as possible)."
           git commit -m "data: daily prices $(date -u +%F)${marker}" -m "Written by refresh-prices.yml. ${note}"
           for i in 1 2 3 4; do
             git push origin HEAD:main && exit 0
