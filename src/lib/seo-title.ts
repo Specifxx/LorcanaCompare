@@ -34,16 +34,86 @@ export function setTitleCandidates(setName: string, cardCount: number, upcoming 
   ];
 }
 
-/** "<Card> <number> Price — <game> <set>", stepping down to the card and its number. */
-export function cardTitleCandidates(name: string, number: string | null, setName: string | null, sealed: boolean): string[] {
+/**
+ * "<Card> <number> Price: $X — <set>" when the card has a TCGplayer market price (2026-11-24, page scorecard Job D: card
+ * pages ranking 3rd to 9th with no clicks in 28 days; Gundam Compare's titles carry the price since 2026-11-10), stepping
+ * down to the card and its price, then the card without its number, then the old price-less ladder.
+ */
+export function cardTitleCandidates(name: string, number: string | null, setName: string | null, sealed: boolean, price: string | null = null): string[] {
   const g = SITE.gameShort;
   // Store names often carry the number already ("Jagd Doga (GD05-057)"): say it once.
   const bare = number ? name.replace(` (${number})`, "") : name;
   const head = number && !sealed && !bare.includes(number) ? `${bare} ${number}` : bare;
+  const named = setName && !bare.includes(setName);
   const out: string[] = [];
-  if (setName && !bare.includes(setName)) out.push(`${head} Price — ${g} ${setName}`, `${head} Price — ${setName}`);
+  if (price) {
+    if (named) out.push(`${head} Price: ${price} — ${g} ${setName}`, `${head} Price: ${price} — ${setName}`);
+    out.push(`${head} Price: ${price}`);
+    if (head !== bare) out.push(`${bare} Price: ${price}`);
+  }
+  if (named) out.push(`${head} Price — ${g} ${setName}`, `${head} Price — ${setName}`);
   out.push(`${head} Price — ${g}`, `${head} Price`, head);
   return out;
+}
+
+const IN_MARKET: Record<string, string> = { US: "in the US", UK: "in the UK", CA: "in Canada", AU: "in Australia", EU: "in Europe", SG: "in Singapore" };
+
+/**
+ * A card or sealed page's meta description (2026-11-24, page scorecard Job D; ported from Gundam Compare #247). The old
+ * one read "Mulan - Martial Arts Master (Enchanted) (Hyperia City, Enchanted) is worth about $99.52 today. Compare 53
+ * live prices from TCGplayer, eBay and Lorcana stores": the rarity twice and a count mixing eBay, TCGplayer and every
+ * market. It now leads with the cheapest in-stock STORE price, US first, else the first market with stock (named), and
+ * how many stores have it in stock there, then TCGplayer's market as the reference, then set and rarity (said once).
+ * Stores only in the lead: never eBay, TCGplayer, Amazon or a pre-order. Longest first; `firstThatFits` takes the
+ * first that fits.
+ */
+export function cardDescriptionCandidates(o: {
+  name: string;
+  number: string | null;
+  setName: string | null;
+  rarity: string | null;
+  sealed: boolean;
+  /** TCGplayer market price, formatted ("$99.52"). */
+  ref: string | null;
+  /** The cheapest in-stock store price and its market, formatted. */
+  lead: { price: string; market: string; inStockStores: number } | null;
+  /** Stores that list it at all (any market, in stock or not). */
+  stores: number;
+}): string[] {
+  const g = SITE.gameShort;
+  const bare = o.number ? o.name.replace(` (${o.number})`, "") : o.name;
+  const head = o.number && !o.sealed && !bare.includes(o.number) ? `${bare} ${o.number}` : bare;
+  // Say the rarity once: names already carry it ("Mulan - Martial Arts Master (Enchanted)").
+  const rarity = o.rarity && !bare.includes(`(${o.rarity})`) ? o.rarity : null;
+  const where = [o.setName, rarity].filter(Boolean).join(", ");
+  const what = o.sealed ? `${g} sealed product` : `${g} card`;
+  const about = where ? `${what} from ${where}` : what;
+  const n = (k: number, w: string) => `${k} ${w}${k === 1 ? "" : "s"}`;
+  const ref = o.ref ? `TCGplayer market ${o.ref}` : null;
+  const out: string[] = [];
+  if (o.lead) {
+    const lead = `${head} from ${o.lead.price} ${IN_MARKET[o.lead.market] ?? `in ${o.lead.market}`}, in stock at ${n(o.lead.inStockStores, "store")}`;
+    const refPart = ref ? `; ${ref}` : "";
+    out.push(
+      `${lead}${refPart}. ${about}, compared across ${n(o.stores, "store")} with price history.`,
+      `${lead}${refPart}. ${about}, with price history.`,
+      `${lead}${refPart}. ${about}.`,
+      `${lead}${refPart}.`,
+      `${lead}.`,
+    );
+  } else if (ref) {
+    const lead = `${head} price: ${ref}`;
+    const stock = o.stores > 0 ? `Sold out at the ${n(o.stores, "store")} we track` : "Not in stock at any store we track yet";
+    out.push(`${lead}. ${stock}; eBay listings and price history below. ${about}.`, `${lead}. ${stock}; eBay listings and price history below.`, `${lead}. ${about}.`, `${lead}.`);
+  } else {
+    out.push(`${head}: no TCGplayer market price yet. ${about}; store and eBay listings as they appear.`, `${head}: no TCGplayer market price yet. ${about}.`, `${head}: no TCGplayer market price yet.`);
+  }
+  return out;
+}
+
+/** The first description candidate that fits 160 characters (else the last); pages still pass it through `fitDescription`. */
+export function firstThatFits(candidates: string[], max = DESC_MAX): string {
+  return candidates.find((d) => d.length <= max) ?? candidates[candidates.length - 1];
 }
 
 // Meta descriptions (2026-11-07, Bing's "meta description too short" in the owner's SEO audit): search engines show

@@ -2699,3 +2699,16 @@ still under the 12-hour gate in `scripts/vercel-ignore-build.sh`), reversing the
 `production-deploy.yml`'s fallback runs daily and releases only if nothing has in 26 hours. The ops check "Live prices
 age" is red past 36 hours (was 8 days), and the home FAQ and card page say prices are published the same day. The amber
 CheckedAgo past 12 hours stays. Cost: about six extra builds a week per site, inside the $5–6 a day Vercel cap.
+
+## 2026-11-24: Card titles carry the price, snippets lead with the store price (page scorecard, Job D)
+
+The 23 Nov page scorecard's Lorcana fix list is mostly `/card/` pages ranking 3rd to 9th on Google with no clicks in
+28 days (Miguel Rivera Enchanted 65 impressions at 6.2, Ariel Enchanted 38 at 8.2, Judy Hopps Epic 36 at 3.7, Minnie
+Mouse Urban Visionary 15 at 2.6). Their titles had no price ("Mulan - Martial Arts Master (Enchanted) 234/204 Price") and
+the description said the rarity twice and counted eBay, TCGplayer and every market as "live prices". Ported from Gundam
+Compare (#247, and its 2026-11-10 price titles): the title is "<card> <number> Price: $X — <set>" with TCGplayer's market,
+stepping down to the card without its number before it drops the price; the description leads with the cheapest
+in-stock store price, US first, else the first market with stock (named), how many stores have it there, then
+TCGplayer's market and the set and rarity (once). Stores only in the lead, never eBay, TCGplayer, Amazon or a pre-order.
+`cardTitleCandidates` / `cardDescriptionCandidates` in `lib/seo-title.ts`, pinned by `tests/seo-title.test.ts`. Engine
+change, synced to Cyberpunk Compare. Read `/card/` CTR from ~2 Dec (realistically ~7 Dec, after recrawl).
