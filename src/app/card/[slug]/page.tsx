@@ -174,7 +174,7 @@ export default function CardPage({ params }: { params: { slug: string } }) {
             <h2>Is {name} worth it?</h2>
             <p>
               {name} {ref ? `sells for about ${money(ref)} on TCGplayer` : "has no TCGplayer market price yet"}
-              {e.change30d != null ? `, ${e.change30d >= 0 ? "up" : "down"} ${Math.abs(e.change30d)}% over 30 days` : ""}. {usOffers.length ? `The cheapest in-stock US listing we track is ${money(usOffers[0].cents, usOffers[0].currency)}.` : ""} Prices from {SITE.stores.length} stores, TCGplayer and eBay are read every day and published weekly; the line above says when these were checked.
+              {e.change30d != null ? `, ${e.change30d >= 0 ? "up" : "down"} ${Math.abs(e.change30d)}% over 30 days` : ""}. {usOffers.length ? `The cheapest in-stock US listing we track is ${money(usOffers[0].cents, usOffers[0].currency)}.` : ""} Prices from {SITE.stores.length} stores, TCGplayer and eBay are read and published every day; the line above says when these were checked.
             </p>
           </section>
         </div>
