@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 import Link from "@/components/Link";
 import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
-import { deals, meta, storeDealsIn, type Deal } from "@/lib/data";
-import { money } from "@/lib/format";
-import { shortName } from "@/lib/names";
-import { sourceNameServer } from "@/lib/sources";
-import { blackFriday, cyberMonday, EVENT_NAME, holidayFaq, longDate, seasonYear, splitDeals, type HolidayEvent } from "@/lib/black-friday";
+import { meta } from "@/lib/data";
+import { SaleDeals } from "@/components/SaleDeals";
+import { SaleNav } from "@/components/SaleNav";
+import { saleDealRows } from "@/lib/sale-deals-data";
+import { blackFriday, cyberMonday, EVENT_NAME, holidayFaq, longDate, seasonYear, type HolidayEvent } from "@/lib/black-friday";
 import { listRegions } from "@/lib/sale-seasons";
 import { FamilyCluster } from "@/components/FamilyCluster";
 import { fitDescription } from "@/lib/seo-title";
-import { ADJ, IN, UnderStores } from "@/components/SaleSeasonPage";
+import { IN } from "@/components/SaleSeasonPage";
 import { postsAbout } from "@/lib/posts";
 import type { Market } from "@/lib/site-types";
 
@@ -48,7 +48,6 @@ export function HolidayDealsPage({ event }: { event: HolidayEvent }) {
   const year = seasonYear(now);
   const bf = blackFriday(year);
   const cm = cyberMonday(year);
-  const { sealed, cards } = splitDeals(deals(400).filter((d) => d.offer.source !== "ebay" && d.offer.source !== "amazon"));
   const asOf = meta()?.updatedAt
     ? new Date(meta()!.updatedAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })
     : null;
@@ -59,35 +58,49 @@ export function HolidayDealsPage({ event }: { event: HolidayEvent }) {
   // The blog's Black Friday guides, linked from the hub so the two are crawled together (2026-11-07).
   const guides = postsAbout(["Black Friday", "Cyber Monday"]).slice(0, 3);
   const sister = event === "black-friday" ? { href: "/cyber-monday", label: "Cyber Monday deals" } : { href: "/black-friday", label: "Black Friday deals" };
+  const page = event;
+  // ONE deal list (owner's review, 2026-11-24): the cheapest in-stock store price per product and country, with its saving under
+  // TCGplayer's market price (US) and under the middle of the stores (every country); lib/sale-deals*.ts, components/SaleDeals.tsx.
+  const rows = saleDealRows(page);
+  const us = rows.filter((r) => r.market === "US");
+  const best = Math.max(0, ...us.map((r) => Math.max(r.tcg?.pct ?? 0, r.median?.pct ?? 0)));
 
   return (
-    <article className="flex max-w-4xl flex-col gap-8">
-      <header className="flex flex-col gap-2">
+    <article className="flex max-w-5xl flex-col gap-6">
+      <header className="flex flex-col gap-1">
         <h1 className="page-title">{SITE.gameShort} {EVENT_NAME[event]} deals {year}</h1>
         <p className="page-lede">
-          {event === "black-friday" ? <>Black Friday is {longDate(bf)} and Cyber Monday is {longDate(cm)} {year}.{" "}</> : <>Cyber Monday is {longDate(cm)} {year}, the Monday after Black Friday ({longDate(bf)}).{" "}</>}
-          {before ? "Stores often start their sales earlier. " : ""}
-          Below is everything {SITE.stores.length} stores sell under TCGplayer&apos;s market price right now, in stock, rebuilt from each day&apos;s prices
-          {asOf ? ` (last updated ${asOf})` : ""}. Bookmark it: the same page updates every day through the sales.
+          {us.length ? `${us.length} US deals today, up to ${best}% off` : "Store prices under the going price"}, from {SITE.stores.length} stores{asOf ? `, updated ${asOf}` : ""}.
+          {event === "black-friday" ? ` Black Friday is ${longDate(bf)}, Cyber Monday ${longDate(cm)}.` : ` Cyber Monday is ${longDate(cm)}.`}
+          {before ? " Stores often start their sales early." : ""}{" "}
+          <a href="#how-we-calculate" className="link">How we calculate</a>
         </p>
+        <p className="text-xs text-muted">Store buttons and eBay links are paid links: we may earn a commission, at no cost to you.</p>
       </header>
 
-      <Section title="Sealed product under TCGplayer today" rows={sealed} empty="No sealed product is under TCGplayer's market price in a US store today." />
-      <Section title="Cards under TCGplayer today" rows={cards} empty="No card worth $5 or more is under TCGplayer's market price in a US store today." />
+      <SaleNav
+        page={page}
+        items={[
+          { id: "deals", label: "Deals" },
+          { id: "how-we-calculate", label: "How we calculate" },
+          { id: "questions", label: "Questions" },
+        ]}
+      />
 
-      {others.map((m) => (
-        <section key={m} id={m.toLowerCase()} className="flex scroll-mt-20 flex-col gap-4">
-          <h2 className="sec-title">{EVENT_NAME[event]} deals in {ADJ[m]} stores</h2>
-          <UnderStores title={`Sealed product under other ${ADJ[m]} stores`} rows={storeDealsIn(m, 12, "sealed")} m={m} />
-          <UnderStores title={`Cards under other ${ADJ[m]} stores`} rows={storeDealsIn(m, 12, "card")} m={m} />
-        </section>
-      ))}
+      <section id="deals" aria-labelledby="deals-h" className="scroll-mt-28">
+        <h2 id="deals-h" className="sr-only">{EVENT_NAME[event]} deals</h2>
+        {rows.length ? (
+          <SaleDeals rows={rows} siteKey={SITE.key} discordHref={SITE.discordInvite ?? null} page={page} email={!!SITE.priceAlerts} />
+        ) : (
+          <p className="text-sm text-muted">No product is under TCGplayer&apos;s market price or the other stores&apos; middle price today. This fills in as stores cut prices.</p>
+        )}
+      </section>
 
       <FamilyCluster cluster="cards" kind="deal" />
-      <section className="card-surface flex flex-col gap-2 p-4 text-sm">
-        <h2 className="sec-title">How to read this</h2>
-        <p>Each US row is the cheapest in-stock US store price we found (stores only, never eBay or Amazon), 8% to 60% under TCGplayer&apos;s market price, for products worth $5 or more. Item prices before shipping, in US dollars on both sides.{others.length ? " Every other country's rows are its own stores, at least 10% under the middle price of three or more stores there, in its own currency, never converted." : ""}</p>
-        <p>We only see what a store asks when we read its prices, so a sale can start or end between updates. Always check the price on the store&apos;s page before you buy.</p>
+      <section id="how-we-calculate" className="card-surface flex scroll-mt-28 flex-col gap-2 p-4 text-sm">
+        <h2 className="sec-title">How we calculate</h2>
+        <p>Each row is the cheapest in-stock store price we found for that product in that country (stores only, never eBay or Amazon), and both savings are measured against that one price. &ldquo;Under TCGplayer&rdquo; is 8% to 60% under TCGplayer&apos;s market price, for US products worth $5 or more, in US dollars on both sides.{others.length ? " \u201cUnder other stores today\u201d is at least 10% under the middle price of three or more stores in the same country, in its own currency, never converted." : ""}</p>
+        <p>We only see what a store asks when we read its prices, so a sale can start or end between reads; a row read more than 12 hours ago says so. Shipping is the store&apos;s own where we have read it. Always check the price on the store&apos;s page before you buy.</p>
         <p>
           <Link className="link" href={sister.href}>{sister.label} →</Link> · <Link className="link" href="/tools/deal-finder">Deal Finder, with filters →</Link> ·{" "}
           <Link className="link" href="/price-report">Monthly price report →</Link> · <Link className="link" href="/sealed">Every sealed product →</Link>
@@ -99,7 +112,7 @@ export function HolidayDealsPage({ event }: { event: HolidayEvent }) {
         ))}
       </section>
 
-      <section className="flex flex-col gap-3">
+      <section id="questions" className="flex scroll-mt-28 flex-col gap-3">
         <h2 className="sec-title">{EVENT_NAME[event]} {year}: questions</h2>
         {faq.map((f) => (
           <div key={f.q} className="text-sm">
@@ -111,34 +124,3 @@ export function HolidayDealsPage({ event }: { event: HolidayEvent }) {
     </article>
   );
 }
-
-function Section({ title, rows, empty }: { title: string; rows: Deal[]; empty: string }) {
-  return (
-    <section className="flex flex-col gap-2">
-      <h2 className="sec-title">{title}</h2>
-      {!rows.length ? (
-        <p className="text-sm text-muted">{empty}</p>
-      ) : (
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[520px] text-left text-sm">
-            <thead className="text-xs uppercase text-muted">
-              <tr><th className="py-1 pr-3">Product</th><th className="py-1 pr-3 text-right">TCGplayer market</th><th className="py-1 pr-3 text-right">Store price</th><th className="py-1 pr-3">Store</th><th className="py-1 text-right">Under market</th></tr>
-            </thead>
-            <tbody>
-              {rows.map((d) => (
-                <tr key={d.p.id} className="border-t border-ink-800">
-                  <td className="py-1.5 pr-3"><Link className="hover:underline" href={`/card/${d.p.slug}`}>{shortName(d.p.name)}</Link></td>
-                  <td className="py-1.5 pr-3 text-right tabular-nums">{money(d.market)}</td>
-                  <td className="py-1.5 pr-3 text-right tabular-nums font-semibold">{money(d.offer.cents, d.offer.currency)}</td>
-                  <td className="py-1.5 pr-3">{sourceNameServer(d.offer)}</td>
-                  <td className="py-1.5 text-right tabular-nums text-up">{d.saving}%</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-    </section>
-  );
-}
-
