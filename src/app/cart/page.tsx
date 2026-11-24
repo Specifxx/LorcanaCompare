@@ -8,7 +8,7 @@ import { fitDescription } from "@/lib/seo-title";
 export const dynamic = "force-static";
 
 export const metadata: Metadata = {
-  title: "Your cart",
+  title: "Your shortlist",
   description: fitDescription("The store prices you saved, grouped by store, with one checkout button per store."),
   // Personal page: never indexed, never in the sitemap. Not disallowed in robots.txt,
   // so Google can see the noindex.
@@ -19,9 +19,9 @@ export const metadata: Metadata = {
 export default function CartPage() {
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-6 sm:py-10">
-      <h1 className="page-title">Your cart</h1>
+      <h1 className="page-title">Your shortlist</h1>
       <p className="page-lede">
-        Add store prices from any card or product page, then check out store by store. Your cart stays in this browser.
+        Add store prices from any card or product page, then buy store by store on each store&apos;s own site (we sell nothing). Your shortlist stays in this browser.
       </p>
       <CartListView />
     </div>

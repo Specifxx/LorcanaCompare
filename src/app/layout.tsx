@@ -21,7 +21,8 @@ import { DEFAULT_MODE, SEARCH_BOOT_SCRIPT, THEME_BOOT_SCRIPT } from "@/lib/theme
 import { CHRISTMAS_FESTIVE_LAYER, SEASON_BOOT_SCRIPT } from "@/lib/season";
 import { Header } from "@/components/Header";
 import { holidayNav } from "@/lib/holiday-nav";
-import { HolidayStrip } from "@/components/HolidayStrip";
+import { HolidayStrip, holidayStripOn } from "@/components/HolidayStrip";
+import { ImageRescue } from "@/components/ImageRescue";
 import { Footer } from "@/components/Footer";
 import { PreorderStrip } from "@/components/PreorderStrip";
 import { PrefsProvider } from "@/components/ClientPrefs";
@@ -102,8 +103,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <SideNav groups={navGroups({ history: historyOn(), sale: holidayNav(), shop: shopNav().groups })} />
           <div className="lg:pl-[var(--sidenav-w)]">
             <Header />
-            <HolidayStrip />
-            <PreorderStrip />
+            {/* One promo line at most (owner, 2026-11-23 UX review, P0 6): the sale line while it runs, else the pre-order line. */}
+            {holidayStripOn() ? <HolidayStrip /> : <PreorderStrip />}
             <main className="mx-auto max-w-7xl px-4 py-6">
               {SITE.priceAlerts && <SinceLastVisit />}
               {children}
@@ -121,6 +122,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Analytics />
         <BuyClickTracker />
         <ReturnNudge />
+        <ImageRescue />
         <LeaveNudge />
         <ShareArrival />
         <AdFreeSync />

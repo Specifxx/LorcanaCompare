@@ -36,6 +36,18 @@ async function main() {
       const r = await fetch(site, { signal: AbortSignal.timeout(20000) });
       return r.ok ? { status: "ok", detail: `${r.status}` } : { status: "fail", detail: `HTTP ${r.status}` };
     }),
+    // How old the prices on the LIVE site are (owner, 2026-11-23 UX review, P0 2: "every page said checked 30 hours ago").
+    // The import runs daily but the site releases weekly (owner, 2026-11-19), so the live prices are up to a week old by design
+    // and every page says how old (CheckedAgo, amber past 12 hours). Red when a release was missed: over 8 days.
+    check("Live prices age", async () => {
+      if (!live) return { status: "warn", detail: "SITE_URL repository variable not set — live checks skipped" };
+      const r = await fetch(`${site}/prices.json`, { signal: AbortSignal.timeout(20000) });
+      if (!r.ok) return { status: "warn", detail: `prices.json HTTP ${r.status}` };
+      const at = Date.parse(((await r.json()) as { generatedAt?: string }).generatedAt ?? "");
+      if (!Number.isFinite(at)) return { status: "warn", detail: "prices.json has no generatedAt" };
+      const h = (Date.now() - at) / 3_600_000;
+      return h <= 8 * 24 ? { status: "ok", detail: `live prices ${h.toFixed(0)}h old (weekly release)` } : { status: "fail", detail: `live prices are ${(h / 24).toFixed(1)} days old — the weekly release was missed` };
+    }),
     check("A card page", async () => {
       if (!live) return { status: "warn", detail: "SITE_URL repository variable not set — live checks skipped" };
       const r = await fetch(`${site}/cards`, { signal: AbortSignal.timeout(20000) });

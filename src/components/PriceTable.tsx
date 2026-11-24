@@ -104,7 +104,17 @@ export function PriceTable({ offers, fx, productId, page, compact = false, maxRo
   // Out-of-stock rows show when asked, or when nothing is in stock at all.
   const unfold = showOut || live.length === 0;
   // Owner, 2026-11-17 (final): eBay first, then TCGplayer, then Amazon (priced), all above the stores; the pinned rows keep that order.
-  const byPrice = (list: Offer[]) => list;
+  // Stores first, marketplaces below (owner, 2026-11-23 UX review, P1 10: "lead with the best-price store and move marketplaces to a
+  // labelled block below"): on the full page the store rows lead, cheapest first, and eBay, TCGplayer and Amazon follow under one
+  // "Marketplaces · Ad" line. This reverses the 2026-11-17 pinned-at-top order for the product page only; the quick view keeps it.
+  // A marketplace that IS the best price still leads the table: the best price always comes first.
+  const below = !compact && !maxRows && live.some((o) => !pinned.includes(o));
+  const lead = below && cheapest && pinned.includes(cheapest) ? cheapest : null;
+  const market$ = (o: Offer) => pinned.includes(o) && o !== lead;
+  const byPrice = (list: Offer[]) =>
+    below
+      ? [...(lead ? [lead] : []), ...list.filter((o) => live.includes(o) && !pinned.includes(o)), ...list.filter(market$), ...list.filter((o) => !live.includes(o) && !pinned.includes(o))]
+      : list;
   const uncapped = byPrice(compact ? rows.slice(0, 6) : unfold ? rows : rows.filter((o) => live.includes(o)));
   const shown = maxRows ? uncapped.slice(0, maxRows) : uncapped;
   const moreRows = maxRows ? uncapped.length - shown.length + (compact || unfold ? 0 : outOfStock.length) : 0;
@@ -166,7 +176,17 @@ export function PriceTable({ offers, fx, productId, page, compact = false, maxRo
   const fetchRowsAt = (i: number) => fetchRow.filter((f) => fetchAt(f.r.priceCents) === i).map((f) => f.node);
   // Amazon is the second row, right under eBay (first when there is no eBay row).
   // Amazon is the row right under the last pinned row (eBay, then TCGplayer), first when there is none.
-  const amazonAfter = shown.reduce((at, o, i) => (pinned.includes(o) ? i : at), -1);
+  const lastStore = shown.reduce((at, o, i) => (!market$(o) && live.includes(o) ? i : at), -1);
+  const amazonAfter = below ? shown.reduce((at, o, i) => (market$(o) ? i : at), amazonRow ? lastStore : -1) : shown.reduce((at, o, i) => (pinned.includes(o) ? i : at), -1);
+  // The one label row over the marketplaces block: before the first pinned row, else before Amazon alone.
+  const firstPinned = shown.findIndex(market$);
+  const marketsLabel = below && (firstPinned >= 0 || amazonRow) ? (
+    <tr className="border-t border-line bg-raised" data-marketplaces>
+      <td colSpan={4} className="px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-muted">
+        Marketplaces <span className="ad-pill ml-1 normal-case">Ad</span>
+      </td>
+    </tr>
+  ) : null;
   return (
     <div id={tableId ?? undefined} className="overflow-hidden rounded-xl border border-ink-700/60">
       {picker}
@@ -188,6 +208,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false, maxRo
             const loud = best && treatment.loud;
             return (
               <Fragment key={i}>
+                {below && i === firstPinned && marketsLabel}
                 <tr className={`border-t border-ink-800 ${loud ? "bg-buy/10" : ""} ${o.inStock ? "" : "opacity-60"} ${best && inStock.length > 1 ? PIN_OUTLINE.cheapest : o.source === "ebay" && pinned.includes(o) ? PIN_OUTLINE.ebay : ""}`}>
                   <td className="px-3 py-2.5">
                     <span className="font-medium text-fg">{sourceName(o)}</span>
@@ -227,6 +248,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false, maxRo
                     </span>
                   </td>
                 </tr>
+                {i === amazonAfter && firstPinned < 0 && marketsLabel}
                 {i === amazonAfter && amazonRow}
                 {fetchRowsAt(i)}
               </Fragment>

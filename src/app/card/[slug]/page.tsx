@@ -153,25 +153,28 @@ export default function CardPage({ params }: { params: { slug: string } }) {
             {SITE.priceAlerts && <WatchPrice site={SITE.key} productId={p.id} prices={lowestByMarket(e.offers)} />}
             {SITE.priceAlerts && <SeenPrice productId={p.id} prices={lowestByMarket(e.offers)} />}
           </header>
-          <section>
+          {/* Jump links (owner, 2026-11-23 UX review, P1 13: a 9,500px product page needs anchors). Plain links, in the server HTML. */}
+          <nav aria-label="On this page" className="no-scrollbar -mt-2 flex gap-2 overflow-x-auto text-xs"><a href="#prices" className="chip">Prices</a><a href="#history" className="chip">History</a><a href="#facts" className="chip">Facts</a></nav>
+          <section id="prices" className="scroll-mt-24">
             <div className="mb-2 flex flex-wrap items-baseline justify-between gap-x-4">
               <h2 className="sec-title">Compare prices</h2>
               <CheckedAgo at={m?.updatedAt} />
             </div>
-            <div className="mb-3"><EbayCallout offers={e.offers} productId={p.id} query={`${SITE.ebay.query} ${name} ${p.number ?? ""}`.trim()} /></div>
             <PriceTable offers={e.offers} fx={m?.fx ?? { USD: 1 }} productId={p.id} page="card" amazon={amazon} fetchTcg={fetchTcg} image={p.image ? imageAt(p.image, "200w") : null} product={`${name}${p.number ? ` ${p.number}` : ""}`} />
+            {/* The eBay call-out sits under the stores, not above the cheapest one (owner, 2026-11-23 UX review, P1 10). */}
+            <div className="mt-3"><EbayCallout offers={e.offers} productId={p.id} query={`${SITE.ebay.query} ${name} ${p.number ?? ""}`.trim()} /></div>
             {SITE.priceAlerts && <PriceAlert site={SITE.key} productId={p.id} prices={lowestByMarket(e.offers)} />}
           </section>
           <AdSlot slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_CARD} />
-          <section className="card-surface p-4">
+          <section id="history" className="scroll-mt-24 card-surface p-4">
             <h2 className="mb-2 text-lg font-bold">Price history</h2>
             <PriceHistory tcg={series} lows={storeLowsOf(p)} fx={m?.fx} through={historyThrough()} days={365} />
           </section>
-          <section className="prose-site max-w-none text-sm">
+          <section id="facts" className="scroll-mt-24 prose-site max-w-none text-sm">
             <h2>Is {name} worth it?</h2>
             <p>
               {name} {ref ? `sells for about ${money(ref)} on TCGplayer` : "has no TCGplayer market price yet"}
-              {e.change30d != null ? `, ${e.change30d >= 0 ? "up" : "down"} ${Math.abs(e.change30d)}% over 30 days` : ""}. {usOffers.length ? `The cheapest in-stock US listing we track is ${money(usOffers[0].cents, usOffers[0].currency)}.` : ""} Prices from {SITE.stores.length} stores, TCGplayer and eBay are checked every day.
+              {e.change30d != null ? `, ${e.change30d >= 0 ? "up" : "down"} ${Math.abs(e.change30d)}% over 30 days` : ""}. {usOffers.length ? `The cheapest in-stock US listing we track is ${money(usOffers[0].cents, usOffers[0].currency)}.` : ""} Prices from {SITE.stores.length} stores, TCGplayer and eBay are read every day and published weekly; the line above says when these were checked.
             </p>
           </section>
         </div>

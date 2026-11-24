@@ -3,6 +3,7 @@
 // TCGplayer links for that product); when the visitor comes back to the tab, the "on" arm sees a small dismissible card with those two links.
 import { useEffect, useState } from "react";
 import { track } from "@vercel/analytics";
+import { claimPrompt, visitorBusy, watchTyping } from "@/lib/visitor-busy";
 import { SITE } from "@/site.config";
 import {
   NUDGE_ARM_KEY, NUDGE_STATE_KEY, isStoreClick, nudgeEligible, nudgeHref, nudgeShows, parseGo, pickArm, pickPaidLinks,
@@ -33,6 +34,7 @@ export function ReturnNudge() {
   const [view, setView] = useState<View | null>(null);
 
   useEffect(() => {
+    watchTyping();
     let hiddenAt = 0;
     const onClick = (e: MouseEvent) => {
       const a = (e.target as Element | null)?.closest?.("a[href^='/go?']") as HTMLAnchorElement | null;
@@ -54,7 +56,7 @@ export function ReturnNudge() {
       const now = Date.now();
       const state = {
         arm: arm(), clickedAt: st.t, now, awayMs: hiddenAt ? now - hiddenAt : 0, shownBefore: !!st.shown,
-        blocked: !!document.querySelector("[data-rate-card]"),
+        blocked: !!document.querySelector("[data-rate-card]") || visitorBusy(),
         hasLinks: !!(st.e || st.g),
       };
       hiddenAt = 0;
@@ -62,7 +64,7 @@ export function ReturnNudge() {
       write({ ...st, shown: true }); // one eligible return a session, whichever arm
       const props = { arm: state.arm, retailer_key: st.s, product: st.p, site: SITE.key, away_s: Math.round(state.awayMs / 1000) };
       track("nudge_eligible", props);
-      if (nudgeShows(state)) {
+      if (nudgeShows(state) && claimPrompt("return")) {
         track("nudge_shown", props);
         setView({ store: NAMES[st.s] ?? "that store", e: st.e ? nudgeHref(st.e) : undefined, g: st.g ? nudgeHref(st.g) : undefined });
       }

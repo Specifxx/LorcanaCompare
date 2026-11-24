@@ -2657,3 +2657,36 @@ Lorcana Compare and Cyberpunk Compare together (YGO Compare and TCG Prices carry
   store's shipping was read. The sparkline is the country's cheapest in-stock store price per day (`data/store-lows`), 30 days.
 - Clicks go through `/go` with `from=<page>_list` (and `_list_ebay`); `bf_section` counts each section's first view, `bf_filter`
   each filter used. The alerts bar after the fifth row: email (the weekly list), Discord, Telegram.
+
+## 2026-11-24: The owner's UX review, ported from DexCompare (no interrupting prompts, honest price age, sort and filter, typo search, one promo line, stores first, Shortlist)
+
+The owner reviewed DexCompare on 2026-11-23 and asked for the fixes site-wide, urgently (DexCompare DECISIONS.md, "The owner's UX
+review", P0 to P2). What fits this site:
+
+- **No interrupting prompts (P0 1).** The rating card, the return nudge and the leave nudge ask `visitorBusy()` (`lib/visitor-busy.ts`:
+  a focused text field or a key in the last 5 s) at the moment they would open, and take the visit's ONE prompt slot
+  (`claimPrompt`, sessionStorage `prompt-slot`): a second self-opening card in the same visit stands down. Pinned by
+  `tests/ux-review.test.ts`.
+- **Honest price age (P0 2).** The import runs daily but the site releases weekly (owner, 2026-11-19), so the live prices are up to a
+  week old by design. "Prices checked …" turns amber past 12 hours and says stores may have changed since; the FAQ and the card page
+  say "read every day, published weekly" instead of "updated every day". The ops monitor's new "Live prices age" check reads the live
+  `/prices.json` and fails red past 8 days (a missed weekly release); the daily import keeps its 30-hour check. A 12-hour alert as
+  DexCompare has would be red every day on a weekly-release site; daily releases again are the owner's call (cost, 2026-11-19).
+- **Sort and filter on every listing (P0 3)** of 8+ products (`GridControls`, `lib/grid-sort.ts`): recommended (the page's own
+  order), price both ways, % under TCGplayer (the cheapest in-stock US store against TCGplayer's market), newest set; set, price band
+  and in stock only. Browser only: the server HTML keeps one order (P0 4), and the ads stay under the grid.
+- **Typo-tolerant search (P0 5).** `/api/search` drops a word of the game's own name that stops every match, then swaps each word the
+  catalogue does not know for its nearest catalogue word (`lib/fuzzy.ts`: 1 edit for 4-6 letters, 2 for 7+, a swap counts once), and
+  says "Showing results for …". "BB" means booster box. Nothing at all: the most widely stocked sealed products, labelled as popular,
+  never a dead end. `search_zero` and `search_fixed` events record it (item 24).
+- **One promo line above the title (P0 6).** The sale line OR the pre-order line, never both, and the sale line closes with ✕ for 7 days.
+- **Stores first, marketplaces below (P1 10)** on the product page: the store rows lead, cheapest first, and eBay, TCGplayer and Amazon
+  follow under one "Marketplaces · Ad" line; a marketplace that IS the best price still leads. The eBay call-out moved under the table. This reverses the 2026-11-17 pinned-at-top order
+  for the product page only; the quick view keeps it.
+- **One primary action per row (P1 11):** the thumbs are hidden on phones. **The cart is the Shortlist (P1 12):** every label says
+  Shortlist / Save, and the drawer says "Prices you saved. We sell nothing: you buy at each store on its own site." every time; the
+  empty one points to today's deals (P2 18).
+- **Jump links (P1 13)** on the product page: Prices, History, Facts. **One discount label (P1 8):** the home page's deal rows say
+  "% under TCGplayer" with the definition on hover. **Reliable images (P1 15):** a failed image is tried once more after 1.5 s, then
+  hidden behind its plate (`ImageRescue`). **Accessibility (P2 21):** a visible focus ring everywhere and a reduced-motion catch-all.
+- Not done here: delivered price by default (P1 9: per-store shipping is not in this site's data), visual set logos (P2 17).

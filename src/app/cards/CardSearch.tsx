@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { track } from "@vercel/analytics";
 import { FamilySearch } from "@/components/FamilySearch";
 import { SearchPlaceholderTiles } from "./SearchSkeleton";
 
@@ -9,14 +10,26 @@ interface Hit { slug: string; href?: string; name: string; set: string; image: s
 export function CardSearch() {
   const q = useSearchParams().get("q") ?? "";
   const [hits, setHits] = useState<Hit[] | null>(null);
+  const [fixed, setFixed] = useState<string | null>(null);
+  const [popular, setPopular] = useState<Hit[]>([]);
   useEffect(() => {
     if (!q) return setHits(null);
-    fetch(`/api/search?q=${encodeURIComponent(q)}&limit=60`).then((r) => r.json()).then((d: { hits: Hit[] }) => setHits(d.hits));
+    fetch(`/api/search?q=${encodeURIComponent(q)}&limit=60`).then((r) => r.json()).then((d: { hits: Hit[]; fixed?: string | null; popular?: boolean }) => {
+      setHits(d.popular ? [] : d.hits);
+      setPopular(d.popular ? d.hits : []);
+      setFixed(d.fixed ?? null);
+      // What the next round of changes is driven by (owner's review, item 24): searches that found nothing, or only after a fix.
+      try {
+        if (d.popular || !d.hits.length) track("search_zero", { q: q.trim().toLowerCase().slice(0, 60) });
+        else if (d.fixed) track("search_fixed", { q: q.trim().toLowerCase().slice(0, 60), fixed: d.fixed });
+      } catch {}
+    });
   }, [q]);
   if (!q) return null;
   return (
     <section className="mt-8" aria-live="polite">
       <h2 className="mb-3 sec-title">Results for “{q}”</h2>
+      {fixed && hits && hits.length > 0 && <p className="-mt-2 mb-3 text-sm text-muted">Showing results for “<b className="text-fg">{fixed}</b>”.</p>}
       {hits?.length === 0 && (
         // A friendly dead end (2026-11-14): what to try, then the main ways in.
         // As tall as the row of placeholder tiles it replaces, so the page below does not jump up.
@@ -28,6 +41,16 @@ export function CardSearch() {
             <a className="btn-ghost" href="/sealed">Sealed products</a>
             <a className="btn-ghost" href="/blog">Guides</a>
           </p>
+          {popular.length > 0 && (
+            <>
+              <p className="mt-4 text-sm font-semibold">Popular right now</p>
+              <p className="mt-2 flex flex-wrap gap-2">
+                {popular.slice(0, 6).map((h) => (
+                  <a key={h.href ?? h.slug} className="btn-ghost" href={h.href ?? `/card/${h.slug}`}>{h.name} · {h.price}</a>
+                ))}
+              </p>
+            </>
+          )}
         </div>
       )}
       <div className="tile-grid grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">

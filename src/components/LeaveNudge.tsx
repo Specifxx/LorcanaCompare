@@ -10,6 +10,7 @@ import {
   LEAVE_NUDGE_ON, LEAVE_ARM_KEY, LEAVE_LAST_KEY, LEAVE_PHONE_DWELL_MS, LEAVE_SESSION_KEY, leaveEligible, leaveHref, leaveShows, pageProduct,
 } from "@/lib/leave-nudge";
 import { pickArm } from "@/lib/return-nudge";
+import { claimPrompt, visitorBusy, watchTyping } from "@/lib/visitor-busy";
 
 interface View { e?: string; g?: string }
 
@@ -45,6 +46,7 @@ export function LeaveNudge() {
   const [view, setView] = useState<View | null>(null);
 
   useEffect(() => {
+    watchTyping();
     const start = Date.now();
     let scrolled = false;
     let done = false;
@@ -64,7 +66,7 @@ export function LeaveNudge() {
       const state = {
         arm: arm(), trigger, dwellMs: Date.now() - start, scrolled,
         boughtThisSession: sess === "bought", shownThisSession: sess === "shown",
-        lastShownAt: lastShown(), now: Date.now(), blocked: blocked(), hasLinks: !!(prod && (prod.ebay || prod.tcg)),
+        lastShownAt: lastShown(), now: Date.now(), blocked: blocked() || visitorBusy(), hasLinks: !!(prod && (prod.ebay || prod.tcg)),
       };
       if (!leaveEligible(state) || !prod) return;
       done = true;
@@ -72,7 +74,7 @@ export function LeaveNudge() {
       try { localStorage.setItem(LEAVE_LAST_KEY, String(Date.now())); } catch {}
       const props = { arm: state.arm, trigger, product: prod.p, site: SITE.key, dwell_s: Math.round(state.dwellMs / 1000) };
       track("leave_eligible", props);
-      if (LEAVE_NUDGE_ON && leaveShows(state)) {
+      if (LEAVE_NUDGE_ON && leaveShows(state) && claimPrompt("leave")) {
         track("leave_shown", props);
         setView({ e: prod.ebay ? leaveHref(prod.ebay) : undefined, g: prod.tcg ? leaveHref(prod.tcg) : undefined });
       }

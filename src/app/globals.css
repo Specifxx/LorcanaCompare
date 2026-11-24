@@ -643,3 +643,28 @@ html[data-adfree] [data-ad] { display: none !important; }
 html[data-nav] .nav-line { opacity: 1; animation: nav-line 2.4s cubic-bezier(0.1, 0.7, 0.2, 1) 120ms both; }
 @keyframes nav-line { from { transform: scaleX(0); } to { transform: scaleX(0.92); } }
 @media (prefers-reduced-motion: reduce) { html[data-nav] .nav-line { animation: none; transform: none; } }
+
+/* ---- The owner's UX review, 2026-11-23 (DECISIONS.md) ---- */
+/* P1 11, one primary action per row: the thumbs give way on phones, where "View deal" and Save are enough. */
+@media (max-width: 639px) {
+  [data-store-vote] { display: none !important; }
+}
+/* P2 21, accessibility baseline: a visible focus ring on every control reached by keyboard. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--focus-ring, #2563eb);
+  outline-offset: 2px;
+}
+/* P2 21: reduced motion means none, festive lights included. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+/* P1 15, reliable images: a failed picture leaves its plate, never a broken-image icon (ImageRescue.tsx). */
+img[data-img-failed] { visibility: hidden; }
+
+/* The listing sort and filter bar's fields (GridControls.tsx). */
+.grid-ctl { @apply min-h-10 rounded-lg border border-ink-700 bg-ink-900 px-2 text-sm text-fg; }

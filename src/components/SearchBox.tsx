@@ -8,6 +8,9 @@ interface Hit { slug: string; href?: string; name: string; set: string; image: s
 export function SearchBox({ big = false, placeholder }: { big?: boolean; placeholder?: string }) {
   const [q, setQ] = useState("");
   const [hits, setHits] = useState<Hit[]>([]);
+  // "Showing results for …" after a typo, and "popular instead" when nothing matched (owner, 2026-11-23 UX review, P0 5).
+  const [fixed, setFixed] = useState<string | null>(null);
+  const [popular, setPopular] = useState(false);
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const t = useRef<ReturnType<typeof setTimeout>>();
@@ -18,7 +21,10 @@ export function SearchBox({ big = false, placeholder }: { big?: boolean; placeho
       try {
         // Lower-cased so "Dark Magician" and "dark magician" share one CDN entry.
         const r = await fetch(`/api/search?q=${encodeURIComponent(q.trim().toLowerCase())}`);
-        setHits(((await r.json()) as { hits: Hit[] }).hits);
+        const d = (await r.json()) as { hits: Hit[]; fixed?: string | null; popular?: boolean };
+        setHits(d.hits);
+        setFixed(d.fixed ?? null);
+        setPopular(!!d.popular);
         setOpen(true);
       } catch {}
     }, 250);
@@ -45,6 +51,11 @@ export function SearchBox({ big = false, placeholder }: { big?: boolean; placeho
       />
       {open && hits.length > 0 && (
         <ul className="absolute z-50 mt-1 max-h-96 w-full overflow-auto rounded-lg border border-ink-700 bg-ink-900 shadow-xl">
+          {(fixed || popular) && (
+            <li role="presentation" className="px-3 pb-1 pt-2 text-xs text-muted">
+              {popular ? <>Nothing matches &ldquo;{q.trim()}&rdquo;. Popular right now:</> : <>Showing results for &ldquo;<b className="text-fg">{fixed}</b>&rdquo;</>}
+            </li>
+          )}
           {hits.map((h) => (
             <li key={h.href ?? h.slug}>
               <a href={h.href ?? `/card/${h.slug}`} className="flex items-center gap-3 px-3 py-2 hover:bg-ink-800">

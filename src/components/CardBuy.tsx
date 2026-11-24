@@ -128,11 +128,18 @@ export function CardStickyBuyBar({ offers, productId }: { offers: Offer[]; produ
  *  around it is cached for hours; the exact time is in the tooltip. */
 export function CheckedAgo({ at }: { at: string | null | undefined }) {
   const [text, setText] = useState<string | null>(null);
-  useEffect(() => setText(ago(at)), [at]);
+  const [old, setOld] = useState(false);
+  useEffect(() => {
+    setText(ago(at));
+    // Honest staleness (owner, 2026-11-23 UX review, P0 2): past 12 hours the line turns amber and says prices may have moved.
+    setOld(!!at && Date.now() - Date.parse(at) > STALE_AFTER_MS);
+  }, [at]);
   if (!at) return null;
   return (
-    <span className="text-xs text-muted" title={new Date(at).toUTCString()} suppressHydrationWarning>
+    <span className={`text-xs ${old ? "font-semibold text-amber-600" : "text-muted"}`} title={new Date(at).toUTCString()} suppressHydrationWarning>
       Prices checked {text ?? new Date(at).toISOString().slice(0, 10)}
+      {old ? " · stores may have changed since, check the store's own page" : ""}
     </span>
   );
 }
+export const STALE_AFTER_MS = 12 * 3_600_000;
