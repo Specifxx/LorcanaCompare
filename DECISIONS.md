@@ -2712,3 +2712,11 @@ in-stock store price, US first, else the first market with stock (named), how ma
 TCGplayer's market and the set and rarity (once). Stores only in the lead, never eBay, TCGplayer, Amazon or a pre-order.
 `cardTitleCandidates` / `cardDescriptionCandidates` in `lib/seo-title.ts`, pinned by `tests/seo-title.test.ts`. Engine
 change, synced to Cyberpunk Compare. Read `/card/` CTR from ~2 Dec (realistically ~7 Dec, after recrawl).
+
+## 2026-11-25 — Fiverr usability review, ported from TCG Prices
+
+A paid tester's think-aloud on TCG Prices (tcgcompare DECISIONS.md, 2026-11-25) asked whether we compare every store or only the
+ones that pay us, and found the product page's top too wordy. Ported here: under the price table, "Every store we track is
+listed, whether it pays us or not, in price order" linked to /methodology; "I own this" (its hint now a tooltip) and "Share deal"
+(was "Share this deal with your group chat") in one row; a long one-word store name wraps instead of pushing the price table
+past a phone's edge. Cart and watch wording wait for their A/B verdicts.
