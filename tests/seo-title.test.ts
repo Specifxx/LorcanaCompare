@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { SITE } from "@/site.config";
-import { DESC_MAX, DESC_MIN, TITLE_MAX, cardDescriptionCandidates, cardTitleCandidates, firstThatFits, fitDescription, fitTitle, setTitleCandidates } from "@/lib/seo-title";
+import { DESC_MAX, DESC_MIN, TITLE_MAX, cardDescriptionCandidates, cardTitleCandidates, firstThatFits, fitDescription, fitTitle, setTitleCandidates, hubTitleCandidates, hubDescriptionCandidates } from "@/lib/seo-title";
 
 test("fitTitle keeps the brand when it fits and drops it before the words", () => {
   assert.equal(fitTitle(["Short"]).absolute, `Short | ${SITE.name}`);
@@ -75,4 +75,18 @@ test("card description names another market when only it has stock; without stoc
   const none = fitDescription(firstThatFits(cardDescriptionCandidates({ name: "New Card", number: "1/204", setName: null, rarity: null, sealed: false, ref: null, lead: null, stores: 0 })));
   assert.match(none, /no TCGplayer market price yet/);
   for (const s of [ca, sold, none]) assert.ok(s.length <= DESC_MAX, s);
+});
+
+test("an attribute hub's title gives the count and the top price; its description the range and the top card", () => {
+  const t = fitTitle(hubTitleCandidates("Big Hero 6 Lorcana cards", 24, "$45.10")).absolute;
+  assert.ok(t.startsWith("Big Hero 6 Lorcana cards: All 24 + Prices (Top $45.10)"), t);
+  assert.ok(t.length <= TITLE_MAX, t);
+  const long = fitTitle(hubTitleCandidates("Who Framed Roger Rabbit and Friends Lorcana cards", 312, "$1,204")).absolute;
+  assert.ok(long.length <= TITLE_MAX || long === "Who Framed Roger Rabbit and Friends Lorcana cards", long);
+  assert.match(fitTitle(hubTitleCandidates("Toy Story Lorcana cards", 30, null)).absolute, /^Toy Story Lorcana cards: All 30 \+ Prices/);
+  const d = fitDescription(firstThatFits(hubDescriptionCandidates({ label: "Big Hero 6", count: 24, low: "$0.12", high: "$45.10", topName: "Baymax - Armored Companion (Enchanted)", over10: 3 })));
+  assert.ok(d.includes("from $0.12 to $45.10") && d.includes("Baymax - Armored Companion (Enchanted) at $45.10"), d);
+  assert.ok(d.length >= DESC_MIN && d.length <= DESC_MAX, d);
+  const bare = fitDescription(firstThatFits(hubDescriptionCandidates({ label: "Monsters, Inc.", count: 15, low: null, high: null, topName: null, over10: 0 })));
+  assert.ok(bare.length >= DESC_MIN && bare.length <= DESC_MAX, bare);
 });

@@ -150,3 +150,27 @@ export function fitDescription(base: string, tails = descriptionTails()): string
   if (stop + 1 >= DESC_MIN) return out.slice(0, stop + 1);
   return `${out.slice(0, DESC_MAX - 1).replace(/[\s,;:—–-]+\S*$/, "")}…`;
 }
+
+/**
+ * An attribute hub's title (/cards/<facet>/<slug>, 2026-11-25, page scorecard Job D): "/cards/franchise/big-hero-6" sat
+ * at position 7.3 with 20 impressions and no click under "Big Hero 6 Lorcana cards: prices, most valuable first", a title
+ * that said nothing a searcher could not guess. It now says how many cards and what the most valuable is worth, as the
+ * set pages' "All 120 Cards + Prices" does. Longest first; `fitTitle` takes the first that fits.
+ */
+export function hubTitleCandidates(name: string, count: number, top: string | null): string[] {
+  const out: string[] = [];
+  if (top) out.push(`${name}: All ${count} + Prices (Top ${top})`);
+  out.push(`${name}: All ${count} + Prices`, `${name}: prices, most valuable first`, `${name}: prices`, name);
+  return out;
+}
+
+/** An attribute hub's description: the count, the price range and the most valuable card with its price, from TCGplayer. */
+export function hubDescriptionCandidates(o: { label: string; count: number; low: string | null; high: string | null; topName: string | null; over10: number }): string[] {
+  const g = SITE.game;
+  const range = o.low && o.high ? `, from ${o.low} to ${o.high}` : "";
+  const lead = `All ${o.count} ${o.label} ${g} cards by TCGplayer market price${range}.`;
+  const top = o.topName && o.high ? ` Most valuable: ${o.topName} at ${o.high}.` : "";
+  const over = o.over10 ? ` ${o.over10} are worth $10 or more.` : "";
+  const tail = " Compare every store and eBay, updated daily.";
+  return [`${lead}${top}${over}${tail}`, `${lead}${top}${tail}`, `${lead}${top}`, `${lead}${tail}`, lead];
+}

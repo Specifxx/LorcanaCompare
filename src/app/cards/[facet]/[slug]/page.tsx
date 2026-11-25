@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "@/components/Link";
-import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
 import { refCents, setById } from "@/lib/data";
 import { money } from "@/lib/format";
@@ -10,7 +9,7 @@ import { attrFacet, attrFacets, attrHub, attrHubTitle } from "@/lib/hubs";
 import { ChipList } from "@/components/ChipList";
 import { TileGrid } from "@/components/ProductTile";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { fitTitle, fitDescription } from "@/lib/seo-title";
+import { fitTitle, fitDescription, firstThatFits, hubTitleCandidates, hubDescriptionCandidates } from "@/lib/seo-title";
 
 // One attribute hub (SITE.cardHubs): every card of one colour, type or
 // franchise, most valuable first. Cached on first visit, never prerendered.
@@ -21,9 +20,15 @@ export function generateMetadata({ params }: { params: { facet: string; slug: st
   const h = attrHub(params.facet, params.slug);
   if (!f || !h) return {};
   const name = attrHubTitle(f.cfg, h.label);
+  // Count, price range and the most valuable card (page scorecard 2026-11-23): items are most valuable first.
+  const priced = h.items.filter((p) => refCents(p.id) != null);
+  const top = priced[0];
+  const high = top ? money(refCents(top.id)) : null;
+  const low = priced.length > 1 ? money(refCents(priced[priced.length - 1].id)) : null;
+  const over10 = priced.filter((p) => (refCents(p.id) ?? 0) >= 1000).length;
   return {
-    title: fitTitle([`${name}: prices, most valuable first`, `${name}: prices`, name]),
-    description: fitDescription(`All ${h.items.length} ${h.label} ${SITE.game} cards ranked by TCGplayer market price, with the cheapest store and eBay listing for each. Updated daily.`),
+    title: fitTitle(hubTitleCandidates(name, h.items.length, high)),
+    description: fitDescription(firstThatFits(hubDescriptionCandidates({ label: h.label, count: h.items.length, low, high, topName: top ? shortName(top.name) : null, over10 }))),
     ...canon(`/cards/${f.cfg.facet}/${h.slug}`),
   };
 }
