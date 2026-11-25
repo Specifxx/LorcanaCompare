@@ -1041,3 +1041,29 @@ img[data-img-failed] { visibility: hidden; }
   94% { opacity: 0.7; transform: translate(-3px, 1px); }
   95% { opacity: 0; transform: none; }
 }
+
+/* ── The phone's home page, tidied (owner, 2026-11-26: "there's just too much going on, especially for mobile phone"). On a phone
+   the page is one path: the headline and its one bold line, the most popular products on the first screen, the sealed shelf,
+   three deals. What repeats is hidden below 640px: the gift pill while the sale strip under the header is showing (one promo a
+   page), the hero's sentence, each shelf's note, the Black Friday line above the deals (the strip already says it) and the deals
+   after the third. The same HTML at every width: nothing leaves the page for a crawler or a desktop, no URL, heading or JSON-LD
+   changes, and no ad moves. Hooks: `home-tidy` (the page), `home-more` (what a phone leaves out), `home-head`, `home-deals`.
+   DECISIONS.md, 2026-11-26. ── */
+@media (max-width: 639px) {
+  .home-tidy .home-more,
+  .home-tidy .sealed-hero > div:first-child > div > p,
+  .home-tidy .home-deals > :nth-child(n + 4) {
+    display: none;
+  }
+  /* One promo a page: the strip under the header, while it shows (its close button sets display: none on it). */
+  :root body:has([data-holiday-strip]:not([style*="display: none"])) .home-tidy .hero-band .xmas-pill-row {
+    display: none;
+  }
+  .home-tidy {
+    gap: 2.25rem;
+  }
+  /* A shelf's title and its "all" link share a line where they fit, instead of the link taking a row of its own. */
+  .home-tidy .home-head > div {
+    flex-basis: 11rem;
+  }
+}
