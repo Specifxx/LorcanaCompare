@@ -56,3 +56,10 @@ test("the look's colours come from SITE.look, and the light theme's read as text
     assert.ok(contrast([+m[1], +m[2], +m[3]], [255, 255, 255]) >= 4.5, `${m[0]} on white`);
   }
 });
+
+// 2026-11-26: a merge once dropped one closing brace above the lively block and every check still passed, while the
+// build could not compile the stylesheet. The whole file's braces must balance.
+test("globals.css has balanced braces", () => {
+  const bare = css.replace(/\/\*[\s\S]*?\*\//g, "");
+  assert.equal(bare.split("{").length, bare.split("}").length);
+});
