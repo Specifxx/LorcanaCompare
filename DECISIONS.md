@@ -2728,3 +2728,18 @@ said the card was sold out. `basketUsable` (`lib/tools.ts`) keeps an offer in Be
 pre-order, and from a store whose last good read (`meta.stores[key].at`, which a failed read leaves at its last success) is under
 `BASKET_MAX_AGE_H` (48h). Card pages keep showing a store's carried rows as before; only the plan that tells someone to buy now
 drops them. eBay and TCGplayer rows come from their own passes and are not store reads. `tests/basket-usable.test.ts`.
+
+## 2026-11-25: The home banners mid-page, and a TCGplayer column in the empty right side of a very wide window (owner)
+
+The owner, 2026-11-25, on a desktop: "Why are the display ads at the very bottom of the site? … there's so much space on the left and the
+right side of the website." (YGO Compare #267 and the other card sites.)
+
+- **Home page:** the eBay and TCGplayer banner pair moves from the foot of the page to right after Today's top deals (the products the
+  visitor came for), before the reviews, guides and FAQ. Never under the hero. Card, set and list pages keep it under their own content.
+- **Gutter column** (`components/GutterAds.tsx`, `.gutter-ads` in globals.css; engine code, the same in Lorcana and Cyberpunk Compare):
+  the left of a desktop page is the menu, so ONE labelled TCGplayer column goes in the empty right-hand gutter, from 1800px wide (the
+  first width with room right of the 15rem menu and the 1280px page). It sits absolutely inside `<main>`, just past the page's right
+  edge (14px clear), with a sticky card under the header, so it never covers or narrows the page, the header or the footer. Browser only
+  (CLS 0), the same CDN-held `/api/rails` answer the banners read, labelled Ad, rel sponsored through /go under `gutter-tcg`, never
+  Amazon or eBay, never for ad-free members or on the ad-free pages. Its tiles start after the banner's four.
+- **Read:** gutter-tcg clicks per 100 desktop visitors; if desktop store buy clicks per visitor fall 10%, the column goes.

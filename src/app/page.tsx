@@ -203,6 +203,10 @@ export default function Home() {
       )}
 
 
+      {/* The ad banners mid-page (owner, 2026-11-25: they sat at the very foot of the page): after the products and deals the visitor came
+          for, before the reviews, guides and questions; never under the hero (2026-11-19 quality pass). */}
+      <InlineAds page="home" />
+
       {/* The site's own star score and approved reviews (owner, 2026-11-03), loaded in the browser; nothing until there is a rating. */}
       <SiteReviews />
 
@@ -230,8 +234,6 @@ export default function Home() {
           </details>
         ))}
       </section>
-      {/* Ads sit below the page's own content, never above it (2026-11-19, core-update quality pass). */}
-      <InlineAds page="home" />
       <p className="sr-only">{products().length} products tracked</p>
     </div>
   );
