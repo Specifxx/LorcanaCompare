@@ -211,7 +211,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false, maxRo
                 {below && i === firstPinned && marketsLabel}
                 <tr className={`border-t border-ink-800 ${loud ? "bg-buy/10" : ""} ${o.inStock ? "" : "opacity-60"} ${best && inStock.length > 1 ? PIN_OUTLINE.cheapest : o.source === "ebay" && pinned.includes(o) ? PIN_OUTLINE.ebay : ""}`}>
                   <td className="px-3 py-2.5">
-                    <span className="font-medium text-fg">{sourceName(o)}</span>
+                    <span className="font-medium text-fg [overflow-wrap:anywhere]">{sourceName(o)}</span>
                     <StoreVote url={o.url} name={sourceName(o)} className="ml-2 text-muted" />
                     {/* Phones: the cart list's add button as a line under the store, where the row has no width to spare. */}
                     {o.inStock && (
