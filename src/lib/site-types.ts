@@ -205,6 +205,15 @@ export interface SiteConfig {
     /** The light page colour, for the browser bar when defaultMode is "light". */
     pageLight?: string;
   };
+  /** The lively look (owner, 2026-11-26; globals.css "The lively look", components/HeroArt.tsx). Off unless set: the plain look.
+   *  `art` picks the home hero's own-drawn art ("orbit": fine rings, six gems and sparkles over a slow swirl of colour;
+   *  "grid": a perspective grid horizon, a reticle and HUD brackets). `lights` are the three colours of the page's light
+   *  (the shine first), `hues` the six accents the tiles take in turn. Hex colours; the light theme's deeper versions are derived. */
+  look?: {
+    art: "orbit" | "grid";
+    lights: [string, string, string];
+    hues: [string, string, string, string, string, string];
+  };
   halloween: { headline: string; blurb: string };
   /** The Christmas line at the top of the home hero (1 November to Boxing Day): a short headline and the rest of the sentence, to /sealed. */
   christmas: { headline: string; blurb: string };
