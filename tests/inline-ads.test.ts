@@ -45,10 +45,27 @@ test("one block per page, in the page's content and never in the layout or the q
   const card = read("src/app/card/[slug]/page.tsx");
   assert.ok(card.indexOf("<InlineAds") > card.indexOf("<PriceTable"), "below the price table (2026-11-19, core-update quality pass)");
   const home = read("src/app/page.tsx");
-  assert.ok(home.indexOf("<InlineAds") > home.indexOf("Frequently asked questions"), "below the page's own content, never under the hero");
+  // Mid-page since 2026-11-25 (owner: the ads sat at the very foot of the page): after the products and deals, before the questions.
+  assert.ok(home.indexOf("<InlineAds") > home.indexOf("Today's top deals"), "after the products and deals, never under the hero");
+  assert.ok(home.indexOf("<InlineAds") < home.indexOf("Frequently asked questions"), "before the questions");
 });
 
-test("no rail is left: no fixed column, no CSS for one, the dock stays", () => {
+test("the gutter column (owner, 2026-11-25): right of the page only, wide windows only, never in the server HTML", async () => {
+  const { GUTTER_MIN, pastBanner } = await import("../src/components/GutterAds");
+  assert.equal(GUTTER_MIN, 1800);
+  assert.deepEqual(pastBanner([1, 2, 3, 4, 5, 6, 7, 8, 9]), [5, 6, 7, 8, 9], "after the banner's four");
+  assert.deepEqual(pastBanner([1, 2, 3, 4, 5]), [1, 2, 3, 4, 5]);
+  const g = read("src/components/GutterAds.tsx");
+  assert.match(g, /matchMedia\(`\(min-width: \$\{GUTTER_MIN\}px\)`\)/);
+  assert.match(g, /data-ad /);
+  assert.match(g, /"gutter-tcg"/);
+  assert.doesNotMatch(g, /source: "(ebay|amazon)"/, "TCGplayer only");
+  const css = read("src/app/globals.css");
+  assert.match(css, /\.gutter-ads \{[^}]*left: calc\(100% - 2px\)/, "just past the page's right edge, never over it");
+  assert.match(read("src/app/layout.tsx"), /<main className="relative [^"]*">[\s\S]*<AdRouteGate><GutterAds \/><\/AdRouteGate>\s*<\/main>/);
+});
+
+test("no old rail is left: no fixed column, no CSS for one, the dock stays", () => {
   assert.equal(fs.existsSync("src/components/SideAds.tsx"), false);
   assert.doesNotMatch(read("src/app/globals.css"), /side-rail|calc\(100% - 320px\)/);
   assert.match(read("src/app/layout.tsx"), /<PhoneDockAds \/>/);

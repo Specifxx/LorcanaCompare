@@ -656,3 +656,35 @@ img[data-img-failed] { visibility: hidden; }
 
 /* The listing sort and filter bar's fields (GridControls.tsx). */
 .grid-ctl { @apply min-h-10 rounded-lg border border-ink-700 bg-ink-900 px-2 text-sm text-fg; }
+
+/* The gutter column (components/GutterAds.tsx, owner 2026-11-25): one slim labelled TCGplayer column in the empty right side of a wide
+   window. It sits absolutely inside <main> (relative), just past the page's right edge (14px clear of the content), so it starts under
+   the header, ends where the content ends and never covers the page or the footer; its card is sticky under the header. Its width is the
+   gutter right of the menu (15rem) and the 1280px page, less its margins (about 110px at 1800px, at most 180px). Mounted only from
+   1800px (GUTTER_MIN). */
+.gutter-ads {
+  position: absolute;
+  top: 24px;
+  bottom: 24px;
+  left: calc(100% - 2px);
+  width: min(180px, calc((100vw - var(--sidenav-w) - 1280px) / 2 - 24px));
+  z-index: 10;
+}
+.gutter-card {
+  position: sticky;
+  top: 88px;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 150px);
+  padding: 10px;
+}
+.gutter-list {
+  display: grid;
+  gap: 12px;
+  min-height: 0;
+  flex: 1 1 auto;
+  margin-top: 8px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
