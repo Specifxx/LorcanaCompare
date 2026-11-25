@@ -687,6 +687,7 @@ img[data-img-failed] { visibility: hidden; }
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-width: thin;
+}
 
 /* ── The lively look (owner, 2026-11-26: "so dull … people aren't going to be like, wow, I found this really cool site … we want
    it to be a very nice experience … oh, look, these sites are amazing"). A page that glows instead of a flat slab, art of our
