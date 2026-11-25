@@ -2798,3 +2798,21 @@ and the light theme's look colours at 4.5:1 or better on white.
 Engine change, the same files in Cyberpunk Compare (which sets `art: "grid"` and its neons). `engine.json` lists two
 repos (this one and `cyberpunkcompare`); BandaiCompare left the engine on 2026-11-08 and was not touched. Before/after
 pictures: `redesign/2026-11-26-lorcana-lively/` in the project files.
+
+## 2026-11-25: Best Basket adds the cheapest split with shipping, its plan for Premium
+
+The owner (2026-11-25): Best Basket "on all the sites as premium". The free tool keeps everything it had: the cheapest price
+of each card and one-store orders before postage. On top of that, the answer now carries the cheapest way to buy the whole
+list WITH each store's shipping, split across stores only when that is cheaper (`lib/basket-split.ts`). It uses RiftCompare's
+solver unchanged (`lib/basket-optimize.ts`), the same port as DexCompare, MTG Compare, YGO Compare and TCG Prices.
+
+- **Shipping is borrowed, never guessed.** DexCompare and MTG Compare measure each Shopify shop's checkout every week, and a
+  shop's postage does not depend on the game. `scripts/borrow-shipping.ts` (in `refresh-prices.yml`, never fatal) copies those
+  measurements onto our stores in `data/shipping/borrowed.json`. A store is matched by host AND market, never by name. A store
+  nobody measured is left out of the split and counted, never priced at zero. The ops monitor's "Best Basket shipping" check
+  watches the file's age and coverage.
+- **Rows:** the free tool's own rule (`basketUsable`: in stock, not a pre-order, from a store read in the last 48 hours), in this
+  market only, and stores only, never TCGplayer, eBay or Amazon.
+- **Free vs Premium:** everyone sees the delivered total and the saving. `/api/basket` returns the store-by-store plan (`/go`
+  buy links, each store's shipping, the one-store order) only when RiftCompare's sister-premium status says the token is
+  Premium right now. It is withheld in the response, not hidden with CSS.
