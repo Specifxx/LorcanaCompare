@@ -1,7 +1,7 @@
 {
  "v": 1,
  "site": "lorcana",
- "generatedAt": "2026-11-24T17:55:56.087Z",
+ "generatedAt": "2026-11-25T17:23:36.970Z",
  "links": {
   "US": {
    "deals": "https://www.lorcanacompare.com/black-friday",
@@ -19,9 +19,9 @@
    "currency": "USD",
    "store": "Red Raccoon Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/652709_200w.jpg",
-   "refCents": 11348,
+   "refCents": 11184,
    "refLabel": "TCGplayer market price",
-   "savingPct": 56
+   "savingPct": 55
   },
   {
    "kind": "deal",
@@ -33,7 +33,7 @@
    "currency": "USD",
    "store": "Minted TCG",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/723336_200w.jpg",
-   "refCents": 29572,
+   "refCents": 29405,
    "refLabel": "TCGplayer market price",
    "savingPct": 51
   },
@@ -47,7 +47,7 @@
    "currency": "USD",
    "store": "Digital Heroes",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/690389_200w.jpg",
-   "refCents": 6373,
+   "refCents": 6354,
    "refLabel": "TCGplayer market price",
    "savingPct": 45
   },
@@ -61,7 +61,7 @@
    "currency": "USD",
    "store": "Lazarus Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/723343_200w.jpg",
-   "refCents": 11275,
+   "refCents": 11331,
    "refLabel": "TCGplayer market price",
    "savingPct": 34
   },
@@ -75,7 +75,7 @@
    "currency": "USD",
    "store": "Red Raccoon Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/543859_200w.jpg",
-   "refCents": 13047,
+   "refCents": 13098,
    "refLabel": "TCGplayer market price",
    "savingPct": 31
   },
@@ -89,7 +89,7 @@
    "currency": "USD",
    "store": "Red Raccoon Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/690384_200w.jpg",
-   "refCents": 17384,
+   "refCents": 17446,
    "refLabel": "TCGplayer market price",
    "savingPct": 17
   },
@@ -99,10 +99,10 @@
    "region": "US",
    "title": "Into the Inkdark Booster Box",
    "url": "https://www.lorcanacompare.com/preorders/into-the-inkdark",
-   "cents": 14376,
+   "cents": 41988,
    "currency": "USD",
    "store": "Minted TCG",
-   "image": "https://tcgplayer-cdn.tcgplayer.com/product/723336_200w.jpg",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/723333_200w.jpg",
    "releaseDate": "2027-02-05"
   }
  ]
