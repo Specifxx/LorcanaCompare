@@ -15,6 +15,7 @@ import { shortName } from "@/lib/names";
 import { JsonLd } from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/site";
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { fitTitle, fitDescription } from "@/lib/seo-title";
 import { featuredSealed, preorderSetList, sealedHubs } from "@/lib/hubs";
 import { isPreorder, preorderPath } from "@/lib/preorders";
@@ -157,7 +158,8 @@ export default function Home() {
       {/* Most popular first, straight under the hero and the game tiles (owner, 2026-11-20). One sideways row on a phone. */}
       {popularItems.length > 0 && (
         <section className="sd shelf-phone">
-          <Header title={`Most popular ${SITE.gameShort} prices`} href="/cards" sub="What shoppers open and buy most right now, each with every store's price." all="All cards" />
+          {/* The weekly Hot 100 as words in the header (merch M21, 2026-11-25: /hot-100 was the site's most viewed page in the last 7 days and the home did not link it). */}
+          <Header title={`Most popular ${SITE.gameShort} prices`} href="/cards" sub={<>What shoppers open and buy most right now, each with every store&apos;s price. <Link href="/hot-100" className="link font-semibold">This week&apos;s Hot 100 →</Link></>} all="All cards" />
           <TileGrid items={popularItems} />
         </section>
       )}
@@ -235,7 +237,7 @@ export default function Home() {
   );
 }
 
-function Header({ title, href, sub, all = "See all" }: { title: string; href?: string; sub?: string; all?: string }) {
+function Header({ title, href, sub, all = "See all" }: { title: string; href?: string; sub?: ReactNode; all?: string }) {
   return (
     <div className="mb-4 flex flex-wrap items-end justify-between gap-x-4 gap-y-3">
       <div className="min-w-0 flex-1 basis-64">
