@@ -33,9 +33,20 @@ export function onBrand(hex: string): string {
   return contrast(dark, b) >= contrast([255, 255, 255], b) ? dark.join(" ") : "255 255 255";
 }
 
+/** The lively look's colours (SITE.look), as variables: --lv-a/b/c are the page's three lights, --lv-h1…6 the tiles' six hues.
+ *  The light theme takes each one deepened until it reads as text on its panels, like the brand. Nothing without SITE.look. */
+export function lookCss(): string {
+  const l = SITE.look;
+  if (!l) return "";
+  const names = ["a", "b", "c", "h1", "h2", "h3", "h4", "h5", "h6"];
+  const all = [...l.lights, ...l.hues];
+  const vars = (f: (hex: string) => string) => all.map((hex, i) => `--lv-${names[i]}:${f(hex)}`).join(";");
+  return `:root{${vars(rgb)}}html:root[data-theme="light"]{${vars(brandTextOnLight)}}`;
+}
+
 /** The dark-theme variables, from SITE.theme, plus the two brand colours the light theme needs. */
 export function themeCss(): string {
   const t = SITE.theme;
   const [i950, i900, i850, i800, i700, i600] = t.inkDark;
-  return `:root{--page-bg:${t.pageDark};--wordmark:${t.wordmarkGradient};--c-brand:${rgb(t.brand)};--c-brand-light:${rgb(t.brandLight)};--c-brand-dark:${rgb(t.brandDark)};--c-accent:${rgb(t.accent)};--c-on-brand:${onBrand(t.brand)};--c-ink-950:${rgb(i950)};--c-ink-900:${rgb(i900)};--c-ink-850:${rgb(i850)};--c-ink-800:${rgb(i800)};--c-ink-700:${rgb(i700)};--c-ink-600:${rgb(i600)};--c-fg:236 238 245;--c-muted:150 158 182;--font-sans:var(--font-inter),Inter,ui-sans-serif,system-ui;--font-display:${t.displayFont === "Plus Jakarta Sans" ? "var(--font-jakarta)," : ""}"${t.displayFont}",Georgia,serif}html:root[data-theme="light"]{--c-brand-light:${brandTextOnLight(t.brand)}}`;
+  return `:root{--page-bg:${t.pageDark};--wordmark:${t.wordmarkGradient};--c-brand:${rgb(t.brand)};--c-brand-light:${rgb(t.brandLight)};--c-brand-dark:${rgb(t.brandDark)};--c-accent:${rgb(t.accent)};--c-on-brand:${onBrand(t.brand)};--c-ink-950:${rgb(i950)};--c-ink-900:${rgb(i900)};--c-ink-850:${rgb(i850)};--c-ink-800:${rgb(i800)};--c-ink-700:${rgb(i700)};--c-ink-600:${rgb(i600)};--c-fg:236 238 245;--c-muted:150 158 182;--font-sans:var(--font-inter),Inter,ui-sans-serif,system-ui;--font-display:${t.displayFont === "Plus Jakarta Sans" ? "var(--font-jakarta)," : ""}"${t.displayFont}",Georgia,serif}html:root[data-theme="light"]{--c-brand-light:${brandTextOnLight(t.brand)}}${lookCss()}`;
 }

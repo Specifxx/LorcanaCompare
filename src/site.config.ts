@@ -93,6 +93,13 @@ export const SITE: SiteConfig = {
     wordmarkGradient: "linear-gradient(180deg, #f6dc9a 0%, #d9a441 55%, #b07d1f 100%)",
     displayFont: "Plus Jakarta Sans",
   },
+  // The lively look (owner, 2026-11-26): enchanted ink on a storybook night. Gold is the shine, amethyst and sapphire the
+  // other two lights; the tiles take the six inks in turn (amber, amethyst, emerald, ruby, sapphire, steel).
+  look: {
+    art: "orbit",
+    lights: ["#f0c46a", "#8b5cf6", "#3b82f6"],
+    hues: ["#f5b83d", "#b06ee8", "#34c77b", "#f0566a", "#4c9bff", "#a9b6c9"],
+  },
   halloween: {
     headline: "Ursula's Night: the ink runs dark until 31 October",
     blurb: "Spooky season on the Great Illuminary — find the cheapest Villain cards before the clock strikes midnight.",

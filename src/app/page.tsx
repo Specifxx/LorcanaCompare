@@ -5,6 +5,7 @@ import { SearchBox } from "@/components/SearchBox";
 import { MarketChooser } from "@/components/ClientPrefs";
 import { CreatorsBubble } from "@/components/creators/CreatorsBubble";
 import { HeroSparks } from "@/components/HeroSparks";
+import { HeroArt } from "@/components/HeroArt";
 import { ChristmasGifts } from "@/components/ChristmasGifts";
 import { TileGrid } from "@/components/ProductTile";
 import { byValue, deals, latestReleasedSet, meta, products } from "@/lib/data";
@@ -100,6 +101,8 @@ export default function Home() {
           creators bubble in its corner. `hero-bleed` (globals.css) breaks out of
           the page container; `hero-search` keeps the suggestions above what follows. */}
       <section className="hero-band hero-bleed relative -mt-6 flex flex-col items-center justify-center overflow-x-clip px-4 pb-6 pt-6 text-center sm:px-8 sm:pb-14 sm:pt-12">
+        {/* The lively look (2026-11-26): the site's own-drawn art behind the headline (SITE.look; decoration only). */}
+        <HeroArt />
         <HeroSparks />
         {/* Phone hero, 2026-11-19 (owner: "way too much going on in the mobile version of the home page"): the headline, the
             words and the link to every card. The header already has the search and the market, so the creators bubble, the
@@ -113,7 +116,7 @@ export default function Home() {
           <span className="text-fg">{SITE.wordmark[1]}</span>
         </p>
         <h1 className="hero-glow mx-auto mt-3 max-w-4xl font-display text-3xl font-black leading-[1.1] sm:text-5xl lg:text-6xl">
-          <span className="wordmark">{SITE.gameShort}</span> Card Prices
+          <span className="wordmark" data-text={SITE.gameShort}>{SITE.gameShort}</span> Card Prices
         </h1>
         <p className="mx-auto mt-4 max-w-3xl text-base text-muted sm:text-lg">
           <strong className="block text-fg">Buy {SITE.gameShort} cards at the best price</strong>
@@ -127,7 +130,7 @@ export default function Home() {
         {trending.length > 0 && (
           <div className="mx-auto mt-5 hidden w-full max-w-3xl sm:block">
             <p className="text-[11px] font-bold uppercase tracking-widest text-muted">Trending</p>
-            <ul className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-3">
+            <ul className="lv-tiles mt-2 grid grid-cols-2 gap-2 sm:grid-cols-3">
               {trending.map((p) => (
                 <li key={p.id}>
                   <Link href={`/card/${p.slug}`} className="block truncate rounded-xl border border-ink-700 bg-ink-900/70 px-3 py-2.5 text-sm text-fg/85 transition-colors hover:border-brand hover:text-fg">
