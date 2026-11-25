@@ -41,6 +41,7 @@ import { fitDescription } from "@/lib/seo-title";
 import { ReturnBeacon } from "@/components/ReturnBeacon";
 import { SinceLastVisit } from "@/components/SinceLastVisit";
 import { AdRouteGate } from "@/components/AdRouteGate";
+import { GutterAds } from "@/components/GutterAds";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -105,9 +106,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Header />
             {/* One promo line at most (owner, 2026-11-23 UX review, P0 6): the sale line while it runs, else the pre-order line. */}
             {holidayStripOn() ? <HolidayStrip /> : <PreorderStrip />}
-            <main className="mx-auto max-w-7xl px-4 py-6">
+            <main className="relative mx-auto max-w-7xl px-4 py-6">
               {SITE.priceAlerts && <SinceLastVisit />}
               {children}
+              {/* The gutter column (owner, 2026-11-25): a labelled TCGplayer column in the empty right side of a wide window (1800px+). */}
+              <AdRouteGate><GutterAds /></AdRouteGate>
             </main>
             <Footer />
           </div>
