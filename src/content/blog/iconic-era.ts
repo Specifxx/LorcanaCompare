@@ -54,8 +54,8 @@ export const post: Post = {
 {{toplist:24740:12}}
 <p>A booster box is {{price:706239}} at TCGplayer market; compare every store on the <a href="/card/disney-lorcana-hyperia-city-booster-box">Hyperia City booster box</a> page. Our <a href="/blog/hyperia-city-card-list-prices">Hyperia City price guide</a> follows the set day by day.</p>
 
-<h2>Where it goes next: Into the Inkdark, 5 February 2027</h2>
-<p><a href="/blog/into-the-inkdark-release-date-collector-boosters">Into the Inkdark</a>, Set 15, is dated 5 February 2027 and is already listed for pre-order. Based on the five Iconic-era sets so far, this is the pattern to expect, as a pattern rather than a prediction:</p>
+<h2>Where it goes next: Into the Inkdark, February 2027</h2>
+<p><a href="/blog/into-the-inkdark-release-date-collector-boosters">Into the Inkdark</a>, Set 15, is due in February 2027 (TCGplayer lists 5 February, ICv2's pre-order report 12 February) and is already listed for pre-order. Based on the five Iconic-era sets so far, this is the pattern to expect, as a pattern rather than a prediction:</p>
 <ol>
 <li><b>A master set of US$6,000 to 7,000 within a month of release</b>, with the two Iconics at US$1,200 to 2,000 each and the Enchanteds mostly between US$100 and 300.</li>
 <li><b>Pre-order prices for the Iconics will be the highest prices.</b> Every Iconic-era set's top card listed highest in its first two weeks and settled lower as boxes were opened.</li>
@@ -70,6 +70,6 @@ export const post: Post = {
     { q: "What is the most valuable Lorcana set?", a: "By the sum of TCGplayer market prices for one of every card, Fabled (August 2025): US$15,297 on 4 November 2026, led by Mickey Mouse – Brave Little Prince (Iconic). The next most valuable are Wilds Unknown, Winterspell and Attack of the Vine!, each around US$6,500 to 7,100." },
     { q: "Why are Lorcana sets worth more since Fabled?", a: "Fabled added the Epic and Iconic rarities above Enchanted. Each set since has two Iconics that are far rarer than Enchanteds and sell for US$1,200 to 3,900, so a set's master-set value went from US$1,100 to 3,500 in the Enchanted era to US$5,700 to 15,300 since." },
     { q: "Are older Lorcana sets going up in value?", a: "The First Chapter is the only early set with a four-figure card, and Fabled is the only Iconic-era set whose value has risen with age. Sets two to eight have stayed between US$1,100 and 3,500 at TCGplayer market; their Enchanteds have mostly held, not climbed." },
-    { q: "When is Into the Inkdark released?", a: "Set 15, Into the Inkdark, is dated 5 February 2027 and is listed for pre-order now." },
+    { q: "When is Into the Inkdark released?", a: "Set 15, Into the Inkdark, is due in February 2027: TCGplayer lists 5 February and ICv2's pre-order report gives 12 February. It is listed for pre-order now." },
   ],
 };
