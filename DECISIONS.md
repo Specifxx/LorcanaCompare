@@ -2729,6 +2729,12 @@ pre-order, and from a store whose last good read (`meta.stores[key].at`, which a
 `BASKET_MAX_AGE_H` (48h). Card pages keep showing a store's carried rows as before; only the plan that tells someone to buy now
 drops them. eBay and TCGplayer rows come from their own passes and are not store reads. `tests/basket-usable.test.ts`.
 
+## 2026-11-26: The header's string of Christmas lights is removed (owner)
+
+Owner, 2026-11-26: "I don't really like the Christmas lights on the very top." The string of lights hanging under the header
+(2026-11-20) is removed on every Compare site: the `.xmas-garland::after` rule is gone from the `xmas-logo` block in `globals.css`
+and the class is off the header. The Santa hat on the logo stays, and nothing else of the Christmas layer changes.
+
 ## 2026-11-25: The home banners mid-page, and a TCGplayer column in the empty right side of a very wide window (owner)
 
 The owner, 2026-11-25, on a desktop: "Why are the display ads at the very bottom of the site? … there's so much space on the left and the
