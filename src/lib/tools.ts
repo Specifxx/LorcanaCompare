@@ -113,11 +113,29 @@ export interface StorePlan {
   currency: string;
 }
 
+// Best Basket prices only what a buyer can order today (2026-11-25, ported from
+// Rift Compare after a member was sent to a sold-out card): in stock, not a
+// pre-order, and from a store whose last good read is under BASKET_MAX_AGE_H
+// old. A store whose read fails keeps its offers on card pages for a while
+// (meta.stores[key].at stays at its last success); a plan that tells someone to
+// go and buy does not use them. eBay and TCGplayer rows are refreshed by their
+// own passes and are not store reads.
+export const BASKET_MAX_AGE_H = 48;
+export function basketUsable(o: Offer, stores: Record<string, { at: string }> | undefined, now = Date.now()): boolean {
+  if (!o.inStock || o.preorder) return false;
+  if (o.source === "ebay" || o.source === "tcgplayer" || o.source === "amazon") return true;
+  const at = stores?.[o.source]?.at;
+  if (!at) return true; // a store with no status recorded yet: its offers are this run's
+  const t = Date.parse(at);
+  return !Number.isFinite(t) || now - t <= BASKET_MAX_AGE_H * 3_600_000;
+}
+
 /** Prices a list for one market: the cheapest in-stock offer per line (any
  *  source in that market, or US TCGplayer/eBay as the fallback), and every
  *  store's total for the lines it can fill. Postage is not included. */
-export function priceBasket(lines: { qty: number; id: number | null; query: string }[], market: Market) {
+export function priceBasket(lines: { qty: number; id: number | null; query: string }[], market: Market, now = Date.now()) {
   const fx = fxOf();
+  const storeStatus = meta()?.stores;
   const out: BasketLine[] = [];
   const stores = new Map<string, StorePlan>();
   for (const l of lines) {
@@ -126,7 +144,7 @@ export function priceBasket(lines: { qty: number; id: number | null; query: stri
       out.push({ qty: l.qty, query: l.query, product: null, cheapest: null });
       continue;
     }
-    const offers = priceOf(p.id).offers.filter((o) => o.inStock);
+    const offers = priceOf(p.id).offers.filter((o) => basketUsable(o, storeStatus, now));
     const local = offers.filter((o) => o.market === market);
     const pool = local.length ? local : offers.filter((o) => o.market === "US");
     const cheapest = pool.slice().sort((a, b) => toUsd(a, fx) - toUsd(b, fx))[0] ?? null;
