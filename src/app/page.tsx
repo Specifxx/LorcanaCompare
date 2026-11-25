@@ -85,7 +85,7 @@ export default function Home() {
     { q: `Is ${SITE.name} free?`, a: `Yes, completely, and you don't need an account. ${SITE.name} is paid for by affiliate commissions: when you buy through some links, the store may pay us a small fee at no cost to you.` },
   ];
   return (
-    <div className="flex flex-col gap-12">
+    <div className="home-tidy flex flex-col gap-12">
       <JsonLd data={{ "@context": "https://schema.org", "@type": "Organization", "@id": `${SITE_URL}/#org`, name: SITE.name, url: SITE_URL, logo: `${SITE_URL}/icon.svg` }} />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "WebSite", name: SITE.name, url: SITE_URL, publisher: { "@id": `${SITE_URL}/#org` }, potentialAction: { "@type": "SearchAction", target: `${SITE_URL}/cards?q={q}`, "query-input": "required name=q" } }} />
       {/* The products on this page, by their own URLs: the most popular, then the sealed shelf (SEO audit, 2026-11-03; 2026-11-20). */}
@@ -120,7 +120,8 @@ export default function Home() {
         </h1>
         <p className="mx-auto mt-4 max-w-3xl text-base text-muted sm:text-lg">
           <strong className="block text-fg">Buy {SITE.gameShort} cards at the best price</strong>
-          Price check any card or sealed product and find the cheapest place to buy: live prices from TCGplayer, eBay and {storeCount} stores in the US, UK, Canada, Australia and Europe, in your own currency, updated daily.
+          {/* The phone keeps the bold line; the sentence shows from sm up (home-tidy, globals.css; 2026-11-26). */}
+          <span className="home-more">Price check any card or sealed product and find the cheapest place to buy: live prices from TCGplayer, eBay and {storeCount} stores in the US, UK, Canada, Australia and Europe, in your own currency, updated daily.</span>
         </p>
         <div className="hero-search relative z-30 mx-auto mt-6 hidden w-full max-w-3xl sm:block"><SearchBox big /></div>
         <div className="hidden sm:block">
@@ -162,7 +163,7 @@ export default function Home() {
       {popularItems.length > 0 && (
         <section className="sd shelf-phone">
           {/* The weekly Hot 100 as words in the header (merch M21, 2026-11-25: /hot-100 was the site's most viewed page in the last 7 days and the home did not link it). */}
-          <Header title={`Most popular ${SITE.gameShort} prices`} href="/cards" sub={<>What shoppers open and buy most right now, each with every store&apos;s price. <Link href="/hot-100" className="link font-semibold">This week&apos;s Hot 100 →</Link></>} all="All cards" />
+          <Header title={`Most popular ${SITE.gameShort} prices`} href="/cards" sub={<><span className="home-more">What shoppers open and buy most right now, each with every store&apos;s price. </span><Link href="/hot-100" className="link font-semibold">This week&apos;s Hot 100 →</Link></>} all="All cards" />
           <TileGrid items={popularItems} />
         </section>
       )}
@@ -186,11 +187,11 @@ export default function Home() {
       {topDeals.length > 0 && (
         <section className="sd">
           <Header title="Today's top deals" href="/tools/deal-finder" sub="In-stock listings below TCGplayer market, refreshed daily." all="Browse all deals" />
-          {bfSeason(today) && <p className="mb-3 text-sm"><Link className="link" href="/black-friday">Black Friday deals</Link> · <Link className="link" href="/cyber-monday">Cyber Monday deals</Link>, updated daily →</p>}
+          {bfSeason(today) && <p className="home-more mb-3 text-sm"><Link className="link" href="/black-friday">Black Friday deals</Link> · <Link className="link" href="/cyber-monday">Cyber Monday deals</Link>, updated daily →</p>}
           {salesInSeason(CORE_SALES, today).map((s) => (
             <p key={s.slug} className="mb-3 text-sm"><Link className="link" href={`/${s.slug}`}>{s.linkLabel}, updated daily →</Link></p>
           ))}
-          <div className="sd-stagger grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="home-deals sd-stagger grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {topDeals.map((d) => (
               <Link key={`${d.p.id}${d.offer.source}`} href={`/card/${d.p.slug}`} className="card-surface flex min-w-0 items-center gap-3 p-3 transition hover:border-brand/60">
                 {d.p.image && <img src={d.p.image} alt={d.p.name} className="h-20 w-14 object-contain" loading="lazy" />}
@@ -244,10 +245,11 @@ export default function Home() {
 
 function Header({ title, href, sub, all = "See all" }: { title: string; href?: string; sub?: ReactNode; all?: string }) {
   return (
-    <div className="mb-4 flex flex-wrap items-end justify-between gap-x-4 gap-y-3">
+    <div className="home-head mb-4 flex flex-wrap items-end justify-between gap-x-4 gap-y-3">
       <div className="min-w-0 flex-1 basis-64">
         <h2 className="sec-title">{title}</h2>
-        {sub && <p className="mt-0.5 text-sm text-muted">{sub}</p>}
+        {/* A plain note is hidden on a phone (home-tidy); a note that carries a link keeps the link. */}
+        {sub && <p className={`${typeof sub === "string" ? "home-more " : ""}mt-0.5 text-sm text-muted`}>{sub}</p>}
       </div>
       {href && <Link href={href} className="btn-ghost shrink-0 px-3.5 py-1.5 text-xs sm:text-sm">{all} →</Link>}
     </div>
