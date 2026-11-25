@@ -88,7 +88,7 @@ const jakarta = localFont({
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${jakarta.variable}`} data-theme={DEFAULT_MODE} data-festive={CHRISTMAS_FESTIVE_LAYER ? "on" : undefined} suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${jakarta.variable}`} data-theme={DEFAULT_MODE} data-look={SITE.look?.art} data-festive={CHRISTMAS_FESTIVE_LAYER ? "on" : undefined} suppressHydrationWarning>
       <head>
         <style dangerouslySetInnerHTML={{ __html: themeCss() }} />
         <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT + SEASON_BOOT_SCRIPT + SEARCH_BOOT_SCRIPT + ADFREE_BOOT_SCRIPT }} />

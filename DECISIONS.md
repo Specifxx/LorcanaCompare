@@ -2750,6 +2750,55 @@ right side of the website." (YGO Compare #267 and the other card sites.)
   Amazon or eBay, never for ad-free members or on the ad-free pages. Its tiles start after the banner's four.
 - **Read:** gutter-tcg clicks per 100 desktop visitors; if desktop store buy clicks per visitor fall 10%, the column goes.
 
+## 2026-11-26: the lively look (enchanted ink on a storybook night: a hero that moves, cards that catch the light)
+
+The owner, on the engine sites: "so dull … people aren't going to be like, wow, I found this really cool site, you should
+check it out … we want it to be a very nice experience, because even though it doesn't increase the functionality, it's
+like, oh, look, these sites are amazing." YGO Compare got its lively look the same day (ygocompare #268); this is the same
+idea on this engine, in Lorcana's own identity, and Cyberpunk Compare gets it from the same engine files in its own.
+
+**Lorcana's look** (`SITE.look`: `art: "orbit"`): gold is the shine (`#f0c46a`), amethyst and sapphire the other two
+lights, and the six inks (amber, amethyst, emerald, ruby, sapphire, steel) are the six hues. Behind the home headline:
+fine gold rings turning slowly, a rosette of six plain circles as the filigree, six small gems (one per ink) on a ring,
+a few four-point sparkles that twinkle, and a slow blurred swirl of the six inks. "Lorcana" in the headline is written in
+gold foil with light running across it. Plain shapes of our own drawing only: no Disney or Ravensburger artwork,
+character, logo or card frame.
+
+- **The page glows**: three soft fixed lights behind every page (`html::before`; `body` is transparent over `<html>`'s page
+  colour), a thread of light under the header and over the footer, a little light in every card surface.
+- **The filled bits catch the light**: a product tile or card link gets a lit edge, a halo, a 4px lift and a band of light
+  across it on hover; the hero's six trending links each take one of the six hues with a small marker; section titles
+  (`.sec-title`) wear a marker and page titles (`.page-title`) end in a short bar of light; the hero search has a lit edge
+  that brightens on focus; the primary button has a sheen.
+- **The product page**: the photo stands in a turning ring of the three lights (`.lv-frame`, one wrapper `div` round the
+  same `img`) and the TCGplayer market price is written in foil (`.lv-price`, a class on the same `span`).
+
+**How one engine wears two looks.** Everything is in the engine and byte-identical in both repos; a site turns it on and
+colours it with ONE option, `SITE.look` in `src/site.config.ts` (`art`, three `lights`, six `hues`). `lib/theme-vars.ts`
+(`lookCss`, inside `themeCss`) writes them as `--lv-a/b/c` and `--lv-h1…6`, with deeper ones for the light theme (the same
+5:1 rule as the brand's text colour); `app/layout.tsx` writes `data-look="<art>"` on `<html>`; the block "The lively look"
+at the end of `globals.css` does the rest, every selector scoped `:where(:root[data-look])` so a site's own
+`src/content/site.css` still wins a tie, and a site without `SITE.look` is exactly as before. `components/HeroArt.tsx`
+draws the hero art for the chosen `art` ("orbit" or "grid": shapes, never a game's name).
+
+**What did not change.** No URL, title, description, heading text, heading outline or JSON-LD; no block added, removed or
+reordered; no prompt, pop-up or banner; no ad placement or ad style (the art keeps to the page's 80rem column, so the
+window's sides stay free); no price row, its order or which button is filled; no product in the hero. The markup changes
+are: `<HeroArt />` (aria-hidden, about 1.7 KB on "orbit", 0.8 KB on "grid"), `data-text` on the headline's word, the class
+`lv-tiles` on the trending list, the wrapper round the product photo and the class on the price. The existing canvas of
+motes (`HeroSparks`) and the Santa hat stay.
+
+**Rules it keeps.** CSS only: no image or `url(`, no canvas, no new script, font or dependency. Motion is transform,
+opacity and gradient position, slow, and every animation is inside `prefers-reduced-motion: no-preference`. Nothing
+decorative is in the flow (absolute, `pointer-events: none`), so nothing shifts. Checked at 390px (no sideways scroll),
+1440px and 1920px, dark and light. `tests/lively-look.test.ts` pins: no `url(`, every animation inside the motion block
+and only those three properties in a keyframe, `:where()` scoping, the art hidden from readers and inside the column,
+and the light theme's look colours at 4.5:1 or better on white.
+
+Engine change, the same files in Cyberpunk Compare (which sets `art: "grid"` and its neons). `engine.json` lists two
+repos (this one and `cyberpunkcompare`); BandaiCompare left the engine on 2026-11-08 and was not touched. Before/after
+pictures: `redesign/2026-11-26-lorcana-lively/` in the project files.
+
 ## 2026-11-25: Best Basket adds the cheapest split with shipping, its plan for Premium
 
 The owner (2026-11-25): Best Basket "on all the sites as premium". The free tool keeps everything it had: the cheapest price

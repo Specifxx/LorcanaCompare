@@ -118,7 +118,7 @@ table, .tile-grid, .tabular { font-variant-numeric: tabular-nums; }
 }
 /* The content sits above the canvas; the two absolute layers (the Christmas
    set and the creators bubble in the corner) keep their own position. */
-.hero-band > :not(.hero-sparks):not(.hero-corner) { position: relative; z-index: 1; }
+.hero-band > :not(.hero-sparks):not(.hero-corner):not(.hero-art) { position: relative; z-index: 1; }
 @media (min-width: 640px) {
   .hero-band > .hero-corner { position: absolute; }
 }
@@ -687,4 +687,356 @@ img[data-img-failed] { visibility: hidden; }
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-width: thin;
+
+/* ── The lively look (owner, 2026-11-26: "so dull … people aren't going to be like, wow, I found this really cool site … we want
+   it to be a very nice experience … oh, look, these sites are amazing"). A page that glows instead of a flat slab, art of our
+   own drawing turning slowly behind the home headline (components/HeroArt.tsx), a headline word that catches the light, a lit
+   search, tiles in six hues, cards that catch the light, a lit photo and price on the product page, and a thread of light on
+   the header and footer. ON only where SITE.look is set (app/layout.tsx writes data-look, lib/theme-vars.ts the colours:
+   --lv-a/b/c are the page's three lights, the shine first; --lv-h1…6 the tiles' hues; the light theme gets deeper ones).
+   What it does NOT change: the blocks of a page and their order, any URL, title or heading, where an ad sits or how it
+   looks, a price row, its order or its buttons. CSS only: transforms, opacity and gradients, no image, nothing in the flow,
+   and every animation sits inside prefers-reduced-motion: no-preference. Selectors are wrapped in :where() so a site's own
+   src/content/site.css still wins a tie. DECISIONS.md, 2026-11-26. ── */
+:where(:root[data-look]) { --lv-hi: color-mix(in srgb, rgb(var(--lv-a)) 42%, #fff); --lv-lo: color-mix(in srgb, rgb(var(--lv-a)) 72%, #000); }
+:where(:root[data-look][data-theme="light"]) { --lv-hi: color-mix(in srgb, rgb(var(--lv-a)) 78%, #fff); --lv-lo: rgb(var(--lv-a)); }
+
+/* The page's ground: three soft lights behind everything, fixed, so no page is a flat slab. The page colour stays on <html>. */
+:where(:root[data-look]) body { background: transparent; }
+:where(:root[data-look])::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(60rem 34rem at 18% -8%, rgb(var(--lv-b) / 0.2), transparent 70%),
+    radial-gradient(48rem 30rem at 98% 2%, rgb(var(--lv-a) / 0.08), transparent 70%),
+    radial-gradient(70rem 40rem at 55% 118%, rgb(var(--lv-c) / 0.13), transparent 70%);
+}
+:where(:root[data-look][data-theme="light"])::before {
+  background:
+    radial-gradient(60rem 34rem at 18% -8%, rgb(var(--lv-b) / 0.1), transparent 70%),
+    radial-gradient(48rem 30rem at 98% 2%, rgb(var(--lv-a) / 0.1), transparent 70%);
+}
+@media print { :where(:root[data-look])::before { display: none; } }
+
+/* The header ends, and the footer starts, with a thread of light; the rail takes a little of it too. */
+:where(:root[data-look]) header.sticky::before,
+:where(:root[data-look]) footer.border-t::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgb(var(--lv-a) / 0.8) 22%, rgb(var(--lv-b) / 0.8) 62%, rgb(var(--lv-c) / 0.6) 85%, transparent);
+}
+:where(:root[data-look]) header.sticky::before { bottom: -1px; }
+:where(:root[data-look]) footer.border-t { position: relative; }
+:where(:root[data-look]) footer.border-t::after { top: -1px; }
+:where(:root[data-look]) .sidenav { background-image: linear-gradient(180deg, rgb(var(--lv-b) / 0.1), transparent 22rem); }
+
+/* The home hero: deeper light, and the art behind the words. The art keeps to the page's column (80rem), never the window's
+   empty sides, never in the flow, never clickable. */
+:where(:root[data-look]) .hero-band {
+  background:
+    radial-gradient(60rem 26rem at 50% -22%, rgb(var(--lv-b) / 0.34), transparent 62%),
+    radial-gradient(34rem 18rem at 6% 108%, rgb(var(--lv-c) / 0.18), transparent 60%),
+    radial-gradient(34rem 18rem at 94% 108%, rgb(var(--lv-a) / 0.14), transparent 60%);
+}
+:where(:root[data-look][data-theme="light"]) .hero-band {
+  background:
+    radial-gradient(60rem 26rem at 50% -22%, rgb(var(--lv-b) / 0.16), transparent 62%),
+    radial-gradient(34rem 18rem at 94% 108%, rgb(var(--lv-a) / 0.12), transparent 60%);
+}
+.hero-art { position: absolute; top: 0; bottom: 0; left: 50%; width: min(100%, 80rem); transform: translateX(-50%); z-index: 0; overflow: clip; pointer-events: none; }
+.ha-svg {
+  position: absolute;
+  left: 50%;
+  top: clamp(-7rem, -4vw, -2rem);
+  width: min(46rem, 150vw);
+  height: auto;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  stroke: rgb(var(--lv-a));
+  stroke-width: 1.2;
+  --ha-o: 0.6;
+  opacity: var(--ha-o);
+  /* Quieter in the middle, where the words are; gone at the rim. */
+  -webkit-mask-image: radial-gradient(closest-side, rgb(0 0 0 / 0.5) 30%, #000 64%, transparent 100%);
+  mask-image: radial-gradient(closest-side, rgb(0 0 0 / 0.5) 30%, #000 64%, transparent 100%);
+}
+:where(:root[data-theme="light"]) .ha-svg { --ha-o: 0.34; }
+.ha-svg > g { transform-box: view-box; transform-origin: 300px 300px; }
+.ha-facet { fill: rgb(255 255 255 / 0.38); stroke: none; }
+.ha-orbit .ha-s3 { stroke-width: 0.9; }
+.ha-grid { --ha-o: 0.5; }
+.ha-grid .ha-s2 { stroke: rgb(var(--lv-b)); }
+.ha-grid .ha-s3 { stroke: rgb(var(--lv-c)); }
+.ha-grid .ha-s3 path { fill: rgb(var(--lv-a)); stroke: none; }
+.ha-svg :is(.ha-h1, .ha-h2, .ha-h3, .ha-h4, .ha-h5, .ha-h6) { stroke: var(--lv-hi); stroke-width: 1; }
+.ha-h1 { color: rgb(var(--lv-h1)); }
+.ha-h2 { color: rgb(var(--lv-h2)); }
+.ha-h3 { color: rgb(var(--lv-h3)); }
+.ha-h4 { color: rgb(var(--lv-h4)); }
+.ha-h5 { color: rgb(var(--lv-h5)); }
+.ha-h6 { color: rgb(var(--lv-h6)); }
+.ha-sparks use { fill: var(--lv-hi); stroke: none; transform-box: fill-box; transform-origin: 50% 50%; }
+.ha-sparks use:nth-child(2n) { transform: scale(0.6); }
+/* "orbit": a slow swirl of the six hues, blurred to a haze, round the rings. */
+.ha-ink {
+  position: absolute;
+  left: 50%;
+  top: clamp(-10rem, -6vw, -4rem);
+  width: min(54rem, 170vw);
+  aspect-ratio: 1;
+  margin-left: calc(min(54rem, 170vw) / -2);
+  border-radius: 50%;
+  background: conic-gradient(rgb(var(--lv-h1)), rgb(var(--lv-h2)), rgb(var(--lv-h5)), rgb(var(--lv-h3)), rgb(var(--lv-h4)), rgb(var(--lv-h6)), rgb(var(--lv-h1)));
+  filter: blur(56px);
+  opacity: 0.3;
+  -webkit-mask-image: radial-gradient(closest-side, transparent 30%, #000 62%, transparent 96%);
+  mask-image: radial-gradient(closest-side, transparent 30%, #000 62%, transparent 96%);
+}
+:where(:root[data-theme="light"]) .ha-ink { opacity: 0.13; }
+/* "grid": a floor of lines running to a horizon across the hero's foot, a band of light scanning down, four HUD brackets. */
+.ha-floor { position: absolute; left: 0; right: 0; bottom: 0; height: 34%; perspective: 300px; perspective-origin: 50% 75px; overflow: hidden; opacity: 0.65; }
+/* Both fade out at the column's sides, so a wide window sees no cut edge. */
+.ha-floor, .ha-scan { -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); }
+.ha-floor::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(var(--lv-c) / 0.8) 18%, rgb(var(--lv-a) / 0.8) 50%, rgb(var(--lv-b) / 0.8) 82%, transparent);
+  box-shadow: 0 0 22px 2px rgb(var(--lv-c) / 0.4);
+}
+.ha-floor > span {
+  position: absolute;
+  left: -80%;
+  right: -80%;
+  bottom: 0;
+  height: 700%;
+  /* Hinged at the hero's foot and tipped back 76 degrees: with the eye 75px under the horizon line (300px / tan 76°), the
+     floor's vanishing line is exactly the top of its box. */
+  transform-origin: 50% 100%;
+  transform: rotateX(76deg);
+  background:
+    linear-gradient(rgb(var(--lv-b) / 0.8) 1.5px, transparent 1.5px) 0 0 / 100% 48px,
+    linear-gradient(90deg, rgb(var(--lv-c) / 0.75) 1.5px, transparent 1.5px) 50% 0 / 48px 100%;
+  /* The far end fades into the horizon. */
+  -webkit-mask-image: linear-gradient(transparent 50%, #000 96%);
+  mask-image: linear-gradient(transparent 50%, #000 96%);
+}
+:where(:root[data-theme="light"]) .ha-floor { opacity: 0.3; }
+.ha-scan { position: absolute; inset: 0 0 auto; height: 5rem; background: linear-gradient(transparent, rgb(var(--lv-b) / 0.04)); border-bottom: 1px solid rgb(var(--lv-b) / 0.2); transform: translateY(-101%); }
+.ha-br { position: absolute; width: 2.75rem; height: 2.75rem; border: 2px solid rgb(var(--lv-a)); opacity: 0.8; }
+.ha-br-1 { top: 1rem; left: 1rem; border-right: 0; border-bottom: 0; }
+.ha-br-2 { top: 1rem; right: 1rem; border-left: 0; border-bottom: 0; border-color: rgb(var(--lv-b)); }
+.ha-br-3 { bottom: 1rem; left: 1rem; border-right: 0; border-top: 0; border-color: rgb(var(--lv-b)); }
+.ha-br-4 { bottom: 1rem; right: 1rem; border-left: 0; border-top: 0; border-color: rgb(var(--lv-c)); }
+/* On a phone the art sits behind running text, so it is fainter and smaller there. */
+@media (max-width: 639px) {
+  .ha-svg, .ha-grid { --ha-o: 0.3; top: -1rem; }
+  .ha-ink { opacity: 0.14; filter: blur(36px); }
+  .ha-floor { height: 26%; opacity: 0.4; }
+  .ha-br { width: 1.4rem; height: 1.4rem; top: 0.5rem; }
+  .ha-br-1, .ha-br-3 { left: 0.5rem; }
+  .ha-br-2, .ha-br-4 { right: 0.5rem; }
+  .ha-br-3, .ha-br-4 { top: auto; bottom: 0.5rem; }
+}
+
+/* The headline's key word. "orbit": written in foil, light running across it. "grid": two ghosts of it, in the other two
+   lights, that jump out of register for a blink (the copies are CSS content with empty alt text, so nothing is read twice). */
+:where(:root[data-look="orbit"]) .hero-glow .wordmark,
+:where(:root[data-look]) .lv-price {
+  background: linear-gradient(100deg, rgb(var(--lv-a)) 0%, var(--lv-hi) 18%, rgb(var(--lv-a)) 36%, var(--lv-lo) 52%, var(--lv-hi) 70%, rgb(var(--lv-a)) 100%) 0 0 / 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+:where(:root[data-look]) .hero-glow { text-shadow: 0 0 60px rgb(var(--lv-b) / 0.45); }
+:where(:root[data-look][data-theme="light"]) .hero-glow { text-shadow: none; }
+:where(:root[data-look="grid"]) .hero-glow .wordmark { position: relative; display: inline-block; }
+:where(:root[data-look="grid"]) .hero-glow .wordmark::before,
+:where(:root[data-look="grid"]) .hero-glow .wordmark::after {
+  content: attr(data-text) / "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: none;
+  text-shadow: none;
+  color: rgb(var(--lv-b));
+  -webkit-text-fill-color: currentColor;
+  clip-path: inset(6% 0 54% 0);
+}
+:where(:root[data-look="grid"]) .hero-glow .wordmark::after { color: rgb(var(--lv-c)); clip-path: inset(56% 0 8% 0); }
+
+/* The search: an edge that is always faintly lit, and lights up when it is used. */
+:where(:root[data-look]) .hero-search::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  border-radius: 14px;
+  background: linear-gradient(90deg, rgb(var(--lv-a) / 0.8), rgb(var(--lv-b) / 0.85), rgb(var(--lv-c) / 0.8), rgb(var(--lv-a) / 0.8)) 0 0 / 200% 100%;
+  filter: blur(11px);
+  opacity: 0.42;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+:where(:root[data-look]) .hero-search:focus-within::before { opacity: 0.85; }
+:where(:root[data-look][data-theme="light"]) .hero-search::before { opacity: 0.3; }
+:where(:root[data-look]) .hero-search input { border-color: rgb(var(--lv-a) / 0.5); }
+
+/* The hero's tiles (.lv-tiles), each in a hue of its own, with a small gem of it. */
+:where(:root[data-look]) .lv-tiles > li > a {
+  --h: var(--lv-a);
+  position: relative;
+  overflow: hidden;
+  border-color: rgb(var(--h) / 0.34);
+  background: linear-gradient(140deg, rgb(var(--h) / 0.17), rgb(var(--c-ink-900) / 0.72) 62%);
+}
+:where(:root[data-look]) .lv-tiles > li:nth-child(6n + 1) > a { --h: var(--lv-h1); }
+:where(:root[data-look]) .lv-tiles > li:nth-child(6n + 2) > a { --h: var(--lv-h2); }
+:where(:root[data-look]) .lv-tiles > li:nth-child(6n + 3) > a { --h: var(--lv-h3); }
+:where(:root[data-look]) .lv-tiles > li:nth-child(6n + 4) > a { --h: var(--lv-h4); }
+:where(:root[data-look]) .lv-tiles > li:nth-child(6n + 5) > a { --h: var(--lv-h5); }
+:where(:root[data-look]) .lv-tiles > li:nth-child(6n + 6) > a { --h: var(--lv-h6); }
+:where(:root[data-look]) .lv-tiles > li > a::before {
+  content: "";
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  margin-right: 0.55em;
+  vertical-align: 0.08em;
+  border-radius: 1.5px;
+  transform: rotate(45deg);
+  background: rgb(var(--h));
+  box-shadow: 0 0 10px rgb(var(--h) / 0.9);
+}
+:where(:root[data-look="grid"]) .lv-tiles > li > a::before { transform: none; border-radius: 0; }
+:where(:root[data-look]) .lv-tiles > li > a:hover {
+  border-color: rgb(var(--h) / 0.8);
+  background: linear-gradient(140deg, rgb(var(--h) / 0.28), rgb(var(--c-ink-900) / 0.9) 70%);
+  box-shadow: 0 14px 34px -14px rgb(var(--h) / 0.65);
+}
+
+/* Every card is a surface with a little light in it; a card that is a link catches the light when the pointer arrives:
+   a lit edge, a halo, and a band of light across it (transform only). */
+:where(:root[data-look]) .card-surface { background-image: linear-gradient(160deg, rgb(var(--lv-b) / 0.08), transparent 45%); }
+:where(:root[data-look]) a.card-surface { position: relative; box-shadow: 0 18px 40px -30px rgb(var(--lv-b) / 0.7); }
+/* A product tile's plate has a lamp over it. */
+:where(:root[data-look]) a.card-surface.group > div:first-child { background-image: radial-gradient(120% 70% at 50% 0%, rgb(var(--lv-b) / 0.2), transparent 70%); }
+:where(:root[data-look]) a.card-surface::after,
+:where(:root[data-look]) .lv-tiles > li > a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 34%, rgb(255 255 255 / 0.3) 47%, rgb(var(--lv-b) / 0.22) 53%, transparent 64%);
+  transform: translateX(-120%);
+}
+:where(:root[data-look]) a.card-surface:hover {
+  border-color: rgb(var(--lv-a) / 0.85);
+  box-shadow: 0 0 0 3px rgb(var(--lv-b) / 0.22), 0 24px 46px -22px rgb(var(--lv-b) / 0.75);
+}
+
+/* A section's title wears a small marker ("orbit": a gem; "grid": two slashes), and a page's title ends in a bar of light. */
+:where(:root[data-look]) .sec-title::before {
+  content: "";
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  margin-right: 0.5em;
+  vertical-align: 0.12em;
+  border-radius: 2px;
+  transform: rotate(45deg);
+  background: linear-gradient(135deg, var(--lv-hi), rgb(var(--lv-a)) 45%, rgb(var(--lv-b)));
+  box-shadow: 0 0 16px rgb(var(--lv-a) / 0.6);
+  text-shadow: none;
+}
+:where(:root[data-look="grid"]) .sec-title::before {
+  width: 0.62em;
+  height: 0.72em;
+  vertical-align: -0.04em;
+  border-radius: 0;
+  transform: skewX(-18deg);
+  background: linear-gradient(90deg, rgb(var(--lv-b)) 0 32%, transparent 32% 68%, rgb(var(--lv-c)) 68%);
+  box-shadow: none;
+}
+:where(:root[data-look]) .page-title::after {
+  content: "";
+  display: block;
+  width: 3.5rem;
+  height: 4px;
+  margin-top: 0.7rem;
+  border-radius: 4px;
+  background: linear-gradient(90deg, rgb(var(--lv-a)), rgb(var(--lv-b)), rgb(var(--lv-c)));
+}
+:where(:root[data-look="grid"]) .page-title::after { border-radius: 0; transform: skewX(-24deg); transform-origin: 0 100%; }
+
+/* The filled button has a little light on top and a glow under it (its colours, and so its contrast, are the theme's);
+   a quiet button warms when the pointer reaches it. Still one filled button a row. */
+:where(:root[data-look]) .btn-primary {
+  background-image: linear-gradient(180deg, rgb(255 255 255 / 0.26), transparent 55%);
+  box-shadow: 0 8px 22px -10px rgb(var(--c-brand) / 0.75), inset 0 0 0 1px rgb(255 255 255 / 0.14);
+}
+:where(:root[data-look]) .btn-ghost:hover { border-color: rgb(var(--lv-a) / 0.75); box-shadow: 0 8px 22px -12px rgb(var(--lv-a) / 0.7); }
+:where(:root[data-look]) .chip:hover { border-color: rgb(var(--lv-a) / 0.55); }
+
+/* The product page (app/card/[slug]/page.tsx): the photo stands in a ring of turning light, like a foil card tilted under a
+   lamp (.lv-frame: a turning wheel of the three lights behind a 3px gap), and the market price is written in foil (.lv-price). */
+.lv-frame { position: relative; isolation: isolate; overflow: hidden; }
+:where(:root[data-look]) .lv-frame { padding: 3px; border-radius: 15px; box-shadow: 0 30px 70px -30px rgb(var(--lv-b) / 0.85), 0 0 46px -14px rgb(var(--lv-a) / 0.5); }
+:where(:root[data-look="grid"]) .lv-frame, :where(:root[data-look="grid"]) .lv-frame > img { border-radius: 2px; }
+:where(:root[data-look]) .lv-frame::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  z-index: -1;
+  background: conic-gradient(rgb(var(--lv-a)), rgb(var(--lv-b)), rgb(var(--lv-c)), rgb(var(--lv-a)), rgb(var(--lv-b)), rgb(var(--lv-a)));
+}
+
+/* The motion. Slow, and only what a compositor moves: the rings turn, the sparkles twinkle, the floor runs, light crosses the
+   foil and a card the pointer has reached. All of it stays still for a visitor who asked for less motion. */
+@media screen and (prefers-reduced-motion: no-preference) {
+  .ha-svg .ha-s1 { animation: lv-spin 150s linear infinite; }
+  .ha-svg .ha-s2 { animation: lv-spin 100s linear infinite reverse; }
+  .ha-svg .ha-s3 { animation: lv-spin 64s linear infinite; }
+  .ha-svg { animation: lv-breathe 9s ease-in-out infinite alternate; }
+  .ha-sparks use { animation: lv-twinkle 4.6s ease-in-out infinite alternate; }
+  .ha-sparks use:nth-child(2n) { animation-duration: 3.4s; animation-delay: -1.2s; }
+  .ha-sparks use:nth-child(3n) { animation-duration: 5.8s; animation-delay: -2.6s; }
+  .ha-ink { animation: lv-spin 90s linear infinite; }
+  .ha-floor > span { animation: lv-floor 1.8s linear infinite; }
+  .ha-scan { animation: lv-scan 9s linear infinite; }
+  .ha-br { animation: lv-twinkle 3.2s steps(2, jump-none) infinite alternate; }
+  :where(:root[data-look="orbit"]) .hero-glow .wordmark,
+  :where(:root[data-look]) .lv-price { animation: lv-foil 7s ease-in-out infinite alternate; }
+  :where(:root[data-look="grid"]) .hero-glow .wordmark::before { animation: lv-glitch 6s steps(1) infinite; }
+  :where(:root[data-look="grid"]) .hero-glow .wordmark::after { animation: lv-glitch 6s steps(1) -0.12s infinite reverse; }
+  :where(:root[data-look]) .hero-search::before { animation: lv-foil 6s linear infinite alternate; }
+  :where(:root[data-look]) .lv-frame::before { animation: lv-spin 9s linear infinite; }
+  :where(:root[data-look]) a.card-surface { transition: transform 0.25s ease, border-color 0.15s ease, box-shadow 0.25s ease; }
+  :where(:root[data-look]) a.card-surface:hover { transform: translateY(-4px); }
+  :where(:root[data-look]) a.card-surface:hover::after,
+  :where(:root[data-look]) .lv-tiles > li > a:hover::after { transform: translateX(120%); transition: transform 0.75s ease-out; }
+}
+@keyframes lv-spin { to { transform: rotate(360deg); } }
+@keyframes lv-breathe { to { opacity: calc(var(--ha-o) * 1.35); } }
+@keyframes lv-twinkle { from { opacity: 0.25; } to { opacity: 1; } }
+@keyframes lv-foil { to { background-position: 100% 0; } }
+@keyframes lv-floor { from { transform: rotateX(76deg) translateY(-48px); } to { transform: rotateX(76deg) translateY(0); } }
+@keyframes lv-scan { to { transform: translateY(60rem); } }
+@keyframes lv-glitch {
+  0%, 100% { opacity: 0; transform: none; }
+  91% { opacity: 0.9; transform: translate(-6px, 0); }
+  92.5% { opacity: 0.9; transform: translate(5px, -1px) skewX(-12deg); }
+  94% { opacity: 0.7; transform: translate(-3px, 1px); }
+  95% { opacity: 0; transform: none; }
 }
