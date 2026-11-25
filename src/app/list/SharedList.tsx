@@ -4,6 +4,7 @@ import Link from "@/components/Link";
 import { useMarket } from "@/components/ClientPrefs";
 import { BasketResult, type Result } from "@/app/tools/best-basket/Basket";
 import { decodeList, encodeList } from "@/lib/share";
+import { readStored } from "@/lib/premium-member";
 
 export function SharedList() {
   const { market } = useMarket();
@@ -16,7 +17,7 @@ export function SharedList() {
     if (!ids) return;
     let live = true;
     setRes(null);
-    fetch("/api/basket", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ids, market }) })
+    fetch("/api/basket", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ids, market, token: readStored()?.t }) })
       .then((r) => (r.ok ? (r.json() as Promise<Result>) : Promise.reject()))
       .then((d) => live && setRes(d))
       .catch(() => live && setRes("error"));
