@@ -6,6 +6,7 @@ export const SET_POSTS: Post[] = [
     slug: "the-first-chapter-most-valuable-cards",
     title: "The First Chapter Most Valuable Cards: Lorcana Set 1",
     description: "The most valuable The First Chapter cards today, from live TCGplayer and store prices: the top 20, every Enchanted card and the booster box price.",
+    topSet: 22937,
     date: "2026-10-29",
     keywords: ["the first chapter most valuable cards", "the first chapter chase cards", "the first chapter card prices", "the first chapter enchanted cards", "the first chapter booster box price"],
     html: `
@@ -41,6 +42,7 @@ export const SET_POSTS: Post[] = [
     slug: "rise-of-the-floodborn-most-valuable-cards",
     title: "Rise of the Floodborn Most Valuable Cards: Lorcana Set 2",
     description: "The most valuable Rise of the Floodborn cards today, from live TCGplayer and store prices: the top 20, every Enchanted card and the booster box price.",
+    topSet: 23303,
     date: "2026-10-29",
     keywords: ["rise of the floodborn most valuable cards", "rise of the floodborn chase cards", "rise of the floodborn card prices", "rise of the floodborn enchanted cards", "rise of the floodborn booster box price"],
     html: `
@@ -76,6 +78,7 @@ export const SET_POSTS: Post[] = [
     slug: "into-the-inklands-most-valuable-cards",
     title: "Into the Inklands Most Valuable Cards: Lorcana Set 3",
     description: "The most valuable Into the Inklands cards today, from live TCGplayer and store prices: the top 20, every Enchanted card and the booster box price.",
+    topSet: 23367,
     date: "2026-10-29",
     keywords: ["into the inklands most valuable cards", "into the inklands chase cards", "into the inklands card prices", "into the inklands enchanted cards", "into the inklands booster box price"],
     html: `
@@ -111,6 +114,7 @@ export const SET_POSTS: Post[] = [
     slug: "ursulas-return-most-valuable-cards",
     title: "Ursula's Return Most Valuable Cards: Lorcana Set 4",
     description: "The most valuable Ursula's Return cards today, from live TCGplayer and store prices: the top 20, every Enchanted card and the booster box price.",
+    topSet: 23474,
     date: "2026-10-29",
     keywords: ["ursula's return most valuable cards", "ursula's return chase cards", "ursula's return card prices", "ursula's return enchanted cards", "ursula's return booster box price"],
     html: `
@@ -146,6 +150,7 @@ export const SET_POSTS: Post[] = [
     slug: "shimmering-skies-most-valuable-cards",
     title: "Shimmering Skies Most Valuable Cards: Lorcana Set 5",
     description: "The most valuable Shimmering Skies cards today, from live TCGplayer and store prices: the top 20, every Enchanted card and the booster box price.",
+    topSet: 23536,
     date: "2026-10-29",
     keywords: ["shimmering skies most valuable cards", "shimmering skies chase cards", "shimmering skies card prices", "shimmering skies enchanted cards", "shimmering skies booster box price"],
     html: `
@@ -181,6 +186,7 @@ export const SET_POSTS: Post[] = [
     slug: "azurite-sea-most-valuable-cards",
     title: "Azurite Sea Most Valuable Cards: Lorcana Set 6",
     description: "The most valuable Azurite Sea cards today, from live TCGplayer and store prices: the top 20, every Enchanted card and the booster box price.",
+    topSet: 23746,
     date: "2026-10-29",
     keywords: ["azurite sea most valuable cards", "azurite sea chase cards", "azurite sea card prices", "azurite sea enchanted cards", "azurite sea booster box price"],
     html: `
@@ -216,6 +222,7 @@ export const SET_POSTS: Post[] = [
     slug: "archazias-island-most-valuable-cards",
     title: "Archazia's Island Most Valuable Cards: Lorcana Set 7",
     description: "The most valuable Archazia's Island cards today, from live TCGplayer and store prices: the top 20, every Enchanted card and the booster box price.",
+    topSet: 24011,
     date: "2026-10-29",
     keywords: ["archazia's island most valuable cards", "archazia's island chase cards", "archazia's island card prices", "archazia's island enchanted cards", "archazia's island booster box price"],
     html: `
@@ -251,6 +258,7 @@ export const SET_POSTS: Post[] = [
     slug: "reign-of-jafar-most-valuable-cards",
     title: "Reign of Jafar Most Valuable Cards: Lorcana Set 8",
     description: "The most valuable Reign of Jafar cards today, from live TCGplayer and store prices: the top 20, every Enchanted card and the booster box price.",
+    topSet: 24258,
     date: "2026-10-29",
     keywords: ["reign of jafar most valuable cards", "reign of jafar chase cards", "reign of jafar card prices", "reign of jafar enchanted cards", "reign of jafar booster box price"],
     html: `
@@ -286,6 +294,7 @@ export const SET_POSTS: Post[] = [
     slug: "fabled-most-valuable-cards",
     title: "Fabled Most Valuable Cards: Lorcana Set 9",
     description: "The most valuable Fabled cards today, from live TCGplayer and store prices: the top 20, every Iconic and Enchanted card and the booster box price.",
+    topSet: 24348,
     date: "2026-10-29",
     keywords: ["fabled most valuable cards", "fabled chase cards", "fabled card prices", "fabled iconic cards", "fabled booster box price"],
     html: `
@@ -327,6 +336,7 @@ export const SET_POSTS: Post[] = [
     slug: "whispers-in-the-well-most-valuable-cards",
     title: "Whispers in the Well Most Valuable Cards: Lorcana Set 10",
     description: "The most valuable Whispers in the Well cards today from live prices: the top 20, the chase cards and the booster box price.",
+    topSet: 24414,
     date: "2026-10-29",
     keywords: ["whispers in the well most valuable cards", "whispers in the well chase cards", "whispers in the well card prices", "whispers in the well iconic cards", "whispers in the well booster box price"],
     html: `
@@ -368,6 +378,7 @@ export const SET_POSTS: Post[] = [
     slug: "winterspell-most-valuable-cards",
     title: "Winterspell Most Valuable Cards: Lorcana Set 11",
     description: "The most valuable Winterspell cards today, from live TCGplayer and store prices: the top 20, every Iconic and Enchanted card and the booster box price.",
+    topSet: 24500,
     date: "2026-10-29",
     keywords: ["winterspell most valuable cards", "winterspell chase cards", "winterspell card prices", "winterspell iconic cards", "winterspell booster box price"],
     html: `
@@ -409,6 +420,7 @@ export const SET_POSTS: Post[] = [
     slug: "wilds-unknown-most-valuable-cards",
     title: "Wilds Unknown Most Valuable Cards: Lorcana Set 12",
     description: "The most valuable Wilds Unknown cards today, from live TCGplayer and store prices: the top 20, every Iconic and Enchanted card and the booster box price.",
+    topSet: 24617,
     date: "2026-10-29",
     keywords: ["wilds unknown most valuable cards", "wilds unknown chase cards", "wilds unknown card prices", "wilds unknown iconic cards", "wilds unknown booster box price"],
     html: `
@@ -450,6 +462,7 @@ export const SET_POSTS: Post[] = [
     slug: "attack-of-the-vine-most-valuable-cards",
     title: "Attack of the Vine! Most Valuable Cards: Lorcana Set 13",
     description: "The most valuable Attack of the Vine! cards today from live prices: the top 20, the chase cards and the booster box price.",
+    topSet: 24666,
     date: "2026-10-29",
     keywords: ["attack of the vine! most valuable cards", "attack of the vine! chase cards", "attack of the vine! card prices", "attack of the vine! iconic cards", "attack of the vine! booster box price"],
     html: `
