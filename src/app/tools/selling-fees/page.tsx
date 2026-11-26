@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
 import { Fees } from "./Fees";
-import { fitDescription } from "@/lib/seo-title";
+import { fitDescription, fitTitle } from "@/lib/seo-title";
 
 export const revalidate = 86400;
 export const metadata: Metadata = {
-  title: `${SITE.gameShort} selling fee calculator — TCGplayer and eBay`,
-  description: fitDescription(`How much you keep when you sell a ${SITE.game} card on TCGplayer or eBay, after fees. Free calculator.`),
+  // Titled for the search (2026-11-26, page scorecard Job D: position 6.9, 15 impressions, no click; the old title ran
+  // past 60 characters). The description states the rates the calculator uses (Fees.tsx).
+  title: fitTitle([`${SITE.gameShort} Selling Fee Calculator: TCGplayer vs eBay`, `${SITE.gameShort} Selling Fee Calculator`]),
+  description: fitDescription(`What you keep selling a ${SITE.game} card on TCGplayer (10.75% + 2.5% payment + $0.30) or eBay (13.25% + $0.40), after fees. Free calculator.`),
   ...canon("/tools/selling-fees"),
 };
 
