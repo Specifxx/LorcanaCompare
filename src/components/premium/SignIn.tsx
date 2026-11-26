@@ -5,6 +5,7 @@ import { GOOGLE_CLIENT_ID, emailSignInLink, readStored, signInWithGoogle, untilL
 import { OAuthButtons } from "./OAuthButtons";
 import { SITE } from "@/site.config";
 import { usePremium } from "./usePremium";
+import { MemberRewards } from "@/components/account/MemberRewards";
 
 // /account: sign in ON this site (owner, 2026-11-19). "Continue with Google" (Google's own button where this site has its own Google client), or
 // Google and Discord through RiftCompare's sign-in; with its own client the ID token goes to RiftCompare's API, which checks it with Google and
@@ -41,28 +42,33 @@ function AccountHub() {
   if (v.status !== "member" && v.status !== "free") return null;
   const member = v.status === "member";
   return (
-    <div className="card-surface mx-auto max-w-md p-6 sm:p-8">
-      <h1 className="font-display text-3xl font-black">My account</h1>
-      <p className="mt-1 text-sm text-muted">
-        {v.info.who ? `Signed in as ${v.info.who}` : "Signed in"}
-        {member ? ` · Premium${untilLine(v.info.until) ? ` until ${untilLine(v.info.until)}` : ""}` : " · free account"}
-      </p>
-      <ul className="mt-6 grid gap-2">
-        <li><a href="/collection" className="btn-primary w-full justify-center">My collection</a></li>
-        <li><a href="/watches" className="btn-ghost w-full justify-center">My price alerts and watches</a></li>
-      </ul>
-      {member ? (
-        <p className="mt-6 text-sm"><a href="/premium" className="font-semibold underline">Premium and billing</a></p>
-      ) : (
-        <a href="/premium" className="mt-6 block rounded-xl bg-gradient-to-br from-[#2557c9] to-[#0f2a6b] p-4 text-white">
-          <span className="block text-xs font-bold uppercase tracking-widest text-amber-300">★ Premium · 14 days free</span>
-          <span className="mt-1 block text-sm">A year of collection history and a spreadsheet export, 200 price alerts and no banner ads. Start the free trial →</span>
-        </a>
-      )}
-      <button type="button" className="mt-6 text-sm text-muted underline" onClick={() => { writeStored(null); location.reload(); }}>
-        Sign out
-      </button>
-    </div>
+    <>
+      <div className="card-surface mx-auto max-w-md p-6 sm:p-8">
+        <h1 className="font-display text-3xl font-black">My account</h1>
+        <p className="mt-1 text-sm text-muted">
+          {v.info.who ? `Signed in as ${v.info.who}` : "Signed in"}
+          {member ? ` · Premium${untilLine(v.info.until) ? ` until ${untilLine(v.info.until)}` : ""}` : " · free account"}
+        </p>
+        <ul className="mt-6 grid gap-2">
+          <li><a href="/collection" className="btn-primary w-full justify-center">My collection</a></li>
+          <li><a href="/watches" className="btn-ghost w-full justify-center">My price alerts and watches</a></li>
+        </ul>
+        {member ? (
+          <p className="mt-6 text-sm"><a href="/premium" className="font-semibold underline">Premium and billing</a></p>
+        ) : (
+          <a href="/premium" className="mt-6 block rounded-xl bg-gradient-to-br from-[#2557c9] to-[#0f2a6b] p-4 text-white">
+            <span className="block text-xs font-bold uppercase tracking-widest text-amber-300">★ Premium · 14 days free</span>
+            <span className="mt-1 block text-sm">A year of collection history and a spreadsheet export, 200 price alerts and no banner ads. Start the free trial →</span>
+          </a>
+        )}
+        <button type="button" className="mt-6 text-sm text-muted underline" onClick={() => { writeStored(null); location.reload(); }}>
+          Sign out
+        </button>
+      </div>
+      <div className="mx-auto max-w-md">
+        <MemberRewards token={v.info.t} />
+      </div>
+    </>
   );
 }
 
