@@ -4,8 +4,9 @@
 import { NextResponse } from "next/server";
 import { bestMatch, parseLine } from "@/lib/lookup";
 import { priceBasket } from "@/lib/tools";
-import { productById } from "@/lib/data";
+import { productById, productBySlug } from "@/lib/data";
 import { decodeList } from "@/lib/share";
+import { readSlugs } from "@/lib/shortlist-basket";
 import { splitBasket } from "@/lib/basket-split";
 import { PREMIUM_SERVICE } from "@/lib/premium-member";
 import { SITE_URL } from "@/lib/site";
@@ -35,10 +36,15 @@ async function isPremium(token: unknown): Promise<boolean> {
 }
 
 export async function POST(req: Request) {
-  const { text, ids, market, token } = (await req.json().catch(() => ({}))) as { text?: string; ids?: string; market?: string; token?: unknown };
+  const { text, ids, slugs, market, token } = (await req.json().catch(() => ({}))) as { text?: string; ids?: string; slugs?: unknown; market?: string; token?: unknown };
   const m: Market = MARKETS.includes(market as Market) ? (market as Market) : "US";
-  const lines =
-    typeof ids === "string"
+  const shortlist = readSlugs(slugs);
+  const lines = shortlist
+    ? shortlist.map((l) => {
+        const p = productBySlug(l.slug);
+        return { qty: l.qty, id: p?.id ?? null, query: p?.name ?? l.slug };
+      })
+    : typeof ids === "string"
       ? decodeList(ids).map((l) => ({ qty: l.qty, id: l.id, query: productById(l.id)?.name ?? `#${l.id}` }))
       : String(text ?? "")
           .split(/\r?\n/)
