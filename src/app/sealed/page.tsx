@@ -6,6 +6,7 @@ import { byValue, products, setById } from "@/lib/data";
 import { SEALED_ORDER as ORDER, SEALED_PLURAL as PLURAL, sealedHref } from "@/lib/hubs";
 import Link from "@/components/Link";
 import { TileGrid } from "@/components/ProductTile";
+import { SealedSearch } from "@/components/SealedSearch";
 import { fitDescription } from "@/lib/seo-title";
 
 export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
@@ -24,6 +25,9 @@ export default function Sealed() {
       <header>
         <h1 className="page-title">{SITE.gameShort} booster box and sealed prices</h1>
         <p className="page-lede">Newest sets first within each type. Open any product to compare every store.</p>
+        <div className="mt-5">
+          <SealedSearch placeholder={`Search sealed: a set, a code or “booster box”`} />
+        </div>
       </header>
       {/* On a phone each type is one sideways row, like the home page's sealed shelf (2026-11-14); a grid from a tablet up. */}
       {groups.map((g) => (
