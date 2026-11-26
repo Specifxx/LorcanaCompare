@@ -1067,3 +1067,45 @@ img[data-img-failed] { visibility: hidden; }
     flex-basis: 11rem;
   }
 }
+
+/* empire-ds:start ─────────────────────────────────────────────────────────────────────────────────────────────────────────
+   The Empire design system, v1 (design agent, 2026-11-27; rules in the project's design-system/README.md). A visitor wrote in
+   that our sites read as "Claude slop". Game-agnostic: each site keeps its look's art (Lorcana's orbit, Cyberpunk's grid and
+   glitch) and its colours, and loses the generated-template tells: words and prices written in moving foil, a glow behind the
+   headline, three lights washed over every page, a soft-edged search, pill shapes everywhere. CSS only: no markup, words,
+   order or URL change. Unlayered and after every other rule, so it wins the ties it means to.
+   ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── */
+:root { --ds-radius: 10px; --ds-radius-sm: 6px; }
+/* One flat ground: no lights washed over every page. The hero's own art stays. */
+:root[data-look]::before { content: none; }
+/* The name and the headline's word in one solid colour; a price in ink. Never foil, never moving. */
+.wordmark,
+.hero-glow .wordmark {
+  background: none !important;
+  color: rgb(var(--c-brand)) !important;
+  -webkit-text-fill-color: currentColor !important;
+  animation: none !important;
+}
+:root[data-look] .hero-glow .wordmark { color: rgb(var(--lv-a)) !important; }
+:root[data-look] .lv-price {
+  background: none !important;
+  color: rgb(var(--c-fg, var(--c-ink-50, 240 240 240))) !important;
+  -webkit-text-fill-color: currentColor !important;
+  animation: none !important;
+}
+.hero-glow { text-shadow: none !important; letter-spacing: -0.035em; }
+.hero-band { background: none; }
+/* The search: a firm field, the brand edge only when it has focus. */
+.hero-search::before { content: none !important; }
+.hero-search input {
+  border-radius: var(--ds-radius);
+  border-width: 1.5px;
+  border-color: rgb(var(--c-fg, 240 240 240) / 0.28);
+  box-shadow: none;
+}
+.hero-search input:focus { border-color: rgb(var(--c-brand)); box-shadow: 0 0 0 3px rgb(var(--c-brand) / 0.2); }
+/* One radius for surfaces and buttons, a small one for marks. */
+.card-surface { border-radius: var(--ds-radius); }
+.btn { border-radius: var(--ds-radius); }
+.chip, .tag { border-radius: var(--ds-radius-sm); }
+/* empire-ds:end */

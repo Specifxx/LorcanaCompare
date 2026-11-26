@@ -7,7 +7,8 @@ import { contrast, lookCss } from "../src/lib/theme-vars";
 // The lively look (owner, 2026-11-26; DECISIONS.md): decoration only. These pin what keeps it that way.
 const css = readFileSync("src/app/globals.css", "utf8");
 const start = css.indexOf("── The lively look");
-const block = css.slice(start).replace(/\/\*[\s\S]*?\*\//g, "");
+const end = css.indexOf("empire-ds:start", start);
+const block = css.slice(start, end === -1 ? undefined : end).replace(/\/\*[\s\S]*?\*\//g, "");
 const art = readFileSync("src/components/HeroArt.tsx", "utf8");
 
 test("the lively look is the last block of globals.css, with no image and no font", () => {
