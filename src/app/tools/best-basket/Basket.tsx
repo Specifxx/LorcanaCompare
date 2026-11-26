@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { money } from "@/lib/format";
 import { goHref } from "@/lib/affiliate";
 import { sourceName } from "@/components/PriceTable";
@@ -11,6 +11,8 @@ import { SITE } from "@/site.config";
 import { readStored, trackPremium } from "@/lib/premium-member";
 import type { BasketAlternatives, BasketPlan, BasketStoreGroup } from "@/lib/basket-optimize";
 import type { SplitSummary } from "@/lib/basket-split";
+import { readCart } from "@/lib/cart-list";
+import { shortlistSlugs } from "@/lib/shortlist-basket";
 
 const SITE_GAME = SITE.gameShort;
 
@@ -29,6 +31,27 @@ export function Basket() {
   const [text, setText] = useState("");
   const [res, setRes] = useState<Result | null>(null);
   const [busy, setBusy] = useState(false);
+  const [fromShortlist, setFromShortlist] = useState(0);
+  // The shortlist, priced on arrival (and again when the market changes) until the visitor types a list of their own.
+  useEffect(() => {
+    const slugs = shortlistSlugs(readCart());
+    if (!slugs.length || text.trim()) return;
+    let live = true;
+    setBusy(true);
+    fetch("/api/basket", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ slugs, market, token: readStored()?.t }) })
+      .then((r) => r.json() as Promise<Result>)
+      .then((r) => {
+        if (!live) return;
+        setRes(r);
+        setFromShortlist(slugs.length);
+      })
+      .catch(() => {})
+      .finally(() => live && setBusy(false));
+    return () => {
+      live = false;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [market]);
   return (
     <div className="mt-5 grid gap-6 lg:grid-cols-[minmax(0,380px)_1fr]">
       <form
@@ -38,9 +61,15 @@ export function Basket() {
           setBusy(true);
           const r = await fetch("/api/basket", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ text, market, token: readStored()?.t }) });
           setRes((await r.json()) as Result);
+          setFromShortlist(0);
           setBusy(false);
         }}
       >
+        {fromShortlist > 0 && (
+          <p className="text-sm text-muted">
+            Your <a className="underline" href="/cart">shortlist</a> ({fromShortlist} product{fromShortlist === 1 ? "" : "s"}) is priced here. Paste a list below to price something else.
+          </p>
+        )}
         <textarea value={text} onChange={(e) => setText(e.target.value)} rows={16} placeholder={"4 Card Name\n2 Another Card\nThird Card x3"} className="rounded-lg border border-ink-700 bg-ink-900 p-3 font-mono text-sm" />
         <button className="btn-primary" disabled={busy || !text.trim()}>{busy ? "Pricing…" : `Price my list (${market})`}</button>
       </form>
