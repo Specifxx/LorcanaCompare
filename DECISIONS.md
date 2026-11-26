@@ -2843,3 +2843,12 @@ in scope. A shelf's title and its
 Engine change, the same two files (`src/app/page.tsx`, `src/app/globals.css`) in Cyberpunk Compare (4,350px to 3,699px there).
 
 **Read:** phone bounce (non-Reddit) and buy clickers per 100 on the home page, the week after release against the week before.
+
+## 2026-11-26 — EU store sweep: 104 eurozone shops for Lorcana
+
+Owner, 2026-11-26: "we need a much bigger European scene … we need all those stores in". Candidates were every eurozone
+shop the sister sites list plus the Riftbound retailer directory (`research/candidate-hosts-eu-2026-11-26.txt`).
+`scripts/probe-lorcana-stores.ts` (a Lorcana copy of the Cyberpunk probe, NOT an engine file, so `engine.json` is
+unchanged) ran on a GitHub runner (`probe-stores.yml`); shops with 3+ Lorcana products in their Lorcana collections were
+added to `src/content/stores.ts` as market EU. nerdbank.de was left out (same stock as spielewelt.de). The matcher
+still refuses foreign-language products, so Italian/German-only shops simply match nothing.
