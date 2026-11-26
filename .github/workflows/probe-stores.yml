@@ -1,0 +1,48 @@
+name: Probe stores
+
+# One-off research: which candidate stores sell Disney Lorcana through
+# Shopify (scripts/probe-lorcana-stores.ts). Read-only: it prints a stores.ts listing
+# in the log and uploads research/stores-probe.json; it commits nothing.
+
+on:
+  workflow_dispatch:
+    inputs:
+      tcgcsv:
+        description: "Also measure the TCGplayer catalogue (cards, prices, rarities)"
+        type: boolean
+        default: true
+      hosts:
+        description: "Candidate list to probe"
+        type: string
+        default: research/candidate-hosts.txt
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npx tsx scripts/probe-lorcana-stores.ts ${{ inputs.tcgcsv && '--tcgcsv' || '' }} --hosts "${{ inputs.hosts }}" | tee research/probe-run.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stores-probe
+          path: research/stores-probe.json
+          if-no-files-found: ignore
+      # A session branch keeps the result, so the listing can be read without the artifact.
+      - name: Keep the result on a claude/** branch
+        if: always() && startsWith(github.ref_name, 'claude/')
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898+github-actions[bot]@users.noreply.github.com"
+          git add -f research/*probe*.json research/probe-run.log || true
+          git commit -m "Research: store probe result (${{ github.run_id }})" || exit 0
+          git push origin HEAD:${{ github.ref_name }}
