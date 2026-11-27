@@ -18,20 +18,35 @@ export function fitTitle(candidates: string[], max = TITLE_MAX): { absolute: str
   return { absolute: candidates[candidates.length - 1] };
 }
 
-/** "Card List: All 120 Cards + Prices" for a set page, the phrase Rift Compare's set pages rank for. */
-export function setTitleCandidates(setName: string, cardCount: number, upcoming = false): string[] {
+/** "Card List: All 120 Cards + Prices" for a set page, the phrase Rift Compare's set pages rank for. `complete` false (an
+ *  older set the catalogue floor cut, `setListIsComplete`) says "Top 44 Cards" instead: "All 44" for a 204-card set is
+ *  untrue (2026-11-27, page scorecard: Ursula's Return at position 22). A long "Line: Name" set (Illumineer's Quest: The
+ *  Great Hunny Rescue) steps down to its own name with the game still in it before it drops the game or the prices. */
+export function setTitleCandidates(setName: string, cardCount: number, upcoming = false, complete = true): string[] {
   const g = SITE.gameShort;
-  const named = setName.toLowerCase().includes(g.toLowerCase()) ? setName : `${g} ${setName}`;
+  const withGame = (n: string) => (n.toLowerCase().includes(g.toLowerCase()) ? n : `${g} ${n}`);
+  const named = withGame(setName);
+  const short = setName.includes(": ") ? setName.slice(setName.indexOf(": ") + 2) : null;
+  const names = short ? [named, withGame(short)] : [named];
   // Spoiler season (Rift Compare's best non-brand searches, "riftbound legacy spoilers"): until release day a set with
   // revealed cards is titled for the spoiler search; release day turns it back into the card list at the same URL.
   if (upcoming && cardCount > 0)
-    return [`${named} Spoilers: ${cardCount} Cards Revealed + Prices`, `${named} Spoilers: ${cardCount} Cards Revealed`, `${setName} Spoilers: ${cardCount} Cards Revealed`, `${setName} Spoilers`];
+    return [...names.flatMap((n) => [`${n} Spoilers: ${cardCount} Cards Revealed + Prices`, `${n} Spoilers: ${cardCount} Cards Revealed`]), `${setName} Spoilers: ${cardCount} Cards Revealed`, `${setName} Spoilers`];
+  const counted = (n: string) => (complete ? `${n} Card List: All ${cardCount} Cards + Prices` : `${n} Card List & Prices: Top ${cardCount} Cards`);
+  // The full name first, with and without the count; then the short name; then without the game.
   return [
-    ...(cardCount > 0 ? [`${named} Card List: All ${cardCount} Cards + Prices`, `${setName} Card List: All ${cardCount} Cards + Prices`] : []),
-    `${named} Card List & Prices`,
+    ...names.flatMap((n) => [...(cardCount > 0 ? [counted(n)] : []), `${n} Card List & Prices`]),
+    ...(cardCount > 0 ? [counted(setName)] : []),
     `${setName} Card List & Prices`,
     `${setName} Card List`,
   ];
+}
+
+/** Whether a set page lists every card: always without a catalogue floor; with one, only for a set inside its
+ *  120-day window (lib/import/tcgcsv.ts `applyCatalogFloor`) or not out yet. */
+export function setListIsComplete(s: { upcoming?: boolean; releasedOn?: string | null }, now = Date.now()): boolean {
+  if (!SITE.catalogMinCardCents || s.upcoming) return true;
+  return !!s.releasedOn && now - new Date(s.releasedOn).getTime() < 120 * 86_400_000;
 }
 
 /**

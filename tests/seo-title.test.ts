@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { SITE } from "@/site.config";
-import { DESC_MAX, DESC_MIN, TITLE_MAX, cardDescriptionCandidates, cardTitleCandidates, firstThatFits, fitDescription, fitTitle, setTitleCandidates, hubTitleCandidates, hubDescriptionCandidates } from "@/lib/seo-title";
+import { DESC_MAX, DESC_MIN, TITLE_MAX, cardDescriptionCandidates, cardTitleCandidates, firstThatFits, fitDescription, fitTitle, setTitleCandidates, hubTitleCandidates, hubDescriptionCandidates, setListIsComplete } from "@/lib/seo-title";
 
 test("fitTitle keeps the brand when it fits and drops it before the words", () => {
   assert.equal(fitTitle(["Short"]).absolute, `Short | ${SITE.name}`);
@@ -28,6 +28,31 @@ test("every title fits in 60 characters when any candidate does", () => {
 test("a set page leads with the card list and its count", () => {
   assert.match(setTitleCandidates("First Set", 120)[0], /Card List: All 120 Cards \+ Prices$/);
   assert.ok(!setTitleCandidates("First Set", 0).some((t) => t.includes("All 0")));
+});
+
+// 2026-11-27 (page scorecard, Job D): "All 44 Cards" was untrue for a set the catalogue floor cut.
+test("a set the catalogue floor cut says Top, never All", () => {
+  const t = setTitleCandidates("Old Set", 44, false, false);
+  assert.ok(!t.some((x) => x.includes("All 44")), t.join(" / "));
+  assert.match(t[0], /Card List & Prices: Top 44 Cards$/);
+});
+
+test("a long Line: Name set keeps the game and the prices before dropping them", () => {
+  const t = fitTitle(setTitleCandidates("Illumineer's Quest: The Great Hunny Rescue", 43)).absolute;
+  assert.ok(t.length <= TITLE_MAX, t);
+  assert.ok(t.startsWith(SITE.gameShort), t);
+  assert.match(t, /The Great Hunny Rescue Card List & Prices/);
+  // A full name that fits is kept.
+  assert.match(fitTitle(setTitleCandidates("Quest: Deep Trouble", 6, false, false)).absolute, /Quest: Deep Trouble/);
+});
+
+test("a set list is complete without a floor, before release, or inside the 120-day window", () => {
+  const now = Date.parse("2026-11-27");
+  assert.equal(setListIsComplete({ upcoming: true }, now), true);
+  if (!SITE.catalogMinCardCents) return;
+  assert.equal(setListIsComplete({ releasedOn: "2026-10-23" }, now), true);
+  assert.equal(setListIsComplete({ releasedOn: "2024-05-17" }, now), false);
+  assert.equal(setListIsComplete({ releasedOn: null }, now), false);
 });
 
 test("llms.txt lists the main sections and every guide", async () => {

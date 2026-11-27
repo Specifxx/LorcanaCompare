@@ -2937,3 +2937,12 @@ is off by itself when the sale ends. Not on Compare Empire, KaeYoung or ScentCom
 Owner, 27 Nov: "make sure that users have a good experience … not too many pop-ups … the feedback pop-up on Rift Compare
 can be taken down a little because we already have enough feedback". The rate-us corner card never opens by itself any
 more (`AUTO_ASK = false`); a "Rate us" link still opens it. During Cyber Weekend the visit's one prompt goes to the sale card.
+
+## 2026-11-27 — Set titles say "Top N", not "All N", when the catalogue floor cut the set
+
+Page scorecard (23 Nov), Job D: Ursula's Return, D23 Promos and Disney100 Promos sit at Google positions 22 to 28, and
+Ursula's Return was titled "Card List: All 44 Cards" for a 204-card set: `catalogMinCardCents` leaves out cards under
+US$1 in every set older than 120 days. `setListIsComplete` (lib/seo-title.ts) mirrors that window; outside it the title
+reads "<set> Card List & Prices: Top 44 Cards", the description and lede say most cards under US$1 are left out. A long
+"Line: Name" set (Illumineer's Quest: The Great Hunny Rescue, position 14) now steps down to "Lorcana The Great Hunny
+Rescue Card List & Prices" instead of losing the game and the prices. Metadata and lede only; h1 and URLs unchanged.
