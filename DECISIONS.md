@@ -2946,3 +2946,5 @@ US$1 in every set older than 120 days. `setListIsComplete` (lib/seo-title.ts) mi
 reads "<set> Card List & Prices: Top 44 Cards", the description and lede say most cards under US$1 are left out. A long
 "Line: Name" set (Illumineer's Quest: The Great Hunny Rescue, position 14) now steps down to "Lorcana The Great Hunny
 Rescue Card List & Prices" instead of losing the game and the prices. Metadata and lede only; h1 and URLs unchanged.
+
+Released at 22:41 UTC: TCGplayer's sale card, owner asked for urgent releases.
