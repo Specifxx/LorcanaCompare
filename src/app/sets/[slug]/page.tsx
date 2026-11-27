@@ -14,7 +14,7 @@ import { shortName } from "@/lib/names";
 import { TileGrid } from "@/components/ProductTile";
 import { JsonLd } from "@/components/JsonLd";
 import { abs } from "@/lib/site";
-import { fitTitle, setTitleCandidates, fitDescription } from "@/lib/seo-title";
+import { fitTitle, setTitleCandidates, fitDescription, setListIsComplete } from "@/lib/seo-title";
 import { postsAbout } from "@/lib/posts";
 import { imageAt } from "@/lib/image";
 import { SealedQuickBuy } from "@/components/SealedQuickBuy";
@@ -31,12 +31,13 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   // List intent first, prices second, as on Rift Compare's set pages ("<set> card list" is the bigger query).
   const count = productsInSet(s.id).filter((p) => p.kind === "card").length;
   const spoilers = !!s.upcoming && count > 0;
-  const title = fitTitle(setTitleCandidates(s.name, count, spoilers));
+  const complete = setListIsComplete(s);
+  const title = fitTitle(setTitleCandidates(s.name, count, spoilers, complete));
   return {
     title,
     description: fitDescription(spoilers
       ? `Every ${s.name} card revealed so far (${count} and counting), with pre-order prices as stores list them${s.releasedOn ? `. Releases ${s.releasedOn}` : ""}. Updated daily as new spoilers land.`
-      : `${count > 0 ? `All ${count} ${s.name} cards` : `The ${s.name} card list`} with prices: the most valuable cards, every card's TCGplayer market price, and the cheapest store and eBay listings. Updated daily.`),
+      : `${count > 0 ? (complete ? `All ${count} ${s.name} cards` : `${count} ${s.name} cards (most under ${money(SITE.catalogMinCardCents ?? 0)} left out)`) : `The ${s.name} card list`} with prices: the most valuable cards, every card's TCGplayer market price, and the cheapest store and eBay listings. Updated daily.`),
     ...canon(`/sets/${s.slug}`),
     openGraph: { ...canon(`/sets/${s.slug}`).openGraph, title: title.absolute },
   };
@@ -87,7 +88,7 @@ export default function SetPage({ params }: { params: { slug: string } }) {
         <p className="text-xs uppercase tracking-wide text-brand-400">{s.upcoming ? "Upcoming" : "Released"} {s.releasedOn}</p>
         <h1 className="page-title">{s.upcoming && cards.length > 0 ? <>{s.name} spoilers: every card revealed so far</> : <>{s.name} card list &amp; prices</>}</h1>
         <ShareButton path={`/sets/${s.slug}`} name={`${s.name} prices`} medium="set" text={`${s.name}: every price compared on ${SITE.name}`} className="mt-3" />
-        <p className="page-lede">{cards.length} cards · one of each is worth {money(value)} at TCGplayer market · {sealed.length} sealed products.</p>
+        <p className="page-lede">{cards.length} cards{setListIsComplete(s) ? "" : ` (most under ${money(SITE.catalogMinCardCents ?? 0)} left out)`} · one of each is worth {money(value)} at TCGplayer market · {sealed.length} sealed products.</p>
         {preorderSetList().some((x) => x.id === s.id) && (
           <p className="mt-2"><Link className="link font-semibold" href={preorderPath(s)}>{isPreorder(s) ? `${s.name} pre-order prices at every store →` : `${s.name} booster box prices at every store →`}</Link></p>
         )}
