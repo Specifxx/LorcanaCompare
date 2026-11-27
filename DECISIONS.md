@@ -2871,3 +2871,11 @@ engine's `globals.css`, identical in Lorcana and Cyberpunk Compare, keeps each l
 the generated-template tells: the wordmark and headline word in moving foil (now one solid colour), prices in foil (now ink), the
 three lights washed over every page, the glow behind the headline, the soft search edge, pill radii (10px and 6px now). CSS
 only. `tests/lively-look.test.ts` reads the lively block up to the design block.
+
+## 2026-11-27 — Black Friday mode for one day (owner)
+
+Owner, 27 Nov: "for one day, have the site turn into Black Friday mode … advertising way more about products and links". For
+Black Friday in every time zone (00:00 UTC 27 Nov to 10:00 UTC 28 Nov, `lib/bf-mode.ts`) the promo line under the header becomes
+one bold Black Friday bar: the Black Friday deals page, and a labelled TCGplayer sale link (/go from=bf_mode). Same
+place as the line, in the server HTML, never a pop-up, fixed or floating; ✕ hides it for the visit. The browser re-reads the
+clock, so a cached page reverts on time with no build; the files can go after Cyber Monday.
