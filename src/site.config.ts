@@ -12,6 +12,7 @@ export const SITE: SiteConfig = {
   wordmark: ["LORCANA", "COMPARE"],
   game: "Disney Lorcana",
   gameShort: "Lorcana",
+  guideExamples: ["Elsa", "Stitch", "Booster Box"],
   domain: "lorcanacompare.com",
   tagline: "Compare Disney Lorcana card prices across every store",
   description:

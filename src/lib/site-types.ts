@@ -73,6 +73,8 @@ export interface SiteConfig {
   wordmark: [string, string];
   game: string;
   gameShort: string;
+  /** Three first searches Penny, the mascot under the home search, suggests (owner, 2026-11-27). Unset: no mascot. */
+  guideExamples?: string[];
   domain: string;
   /** Serve and link the bare domain (no `www.`); the default is www. */
   apexHost?: boolean;
