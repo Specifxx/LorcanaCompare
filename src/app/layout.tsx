@@ -63,14 +63,16 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = { themeColor: DEFAULT_MODE === "light" ? SITE.theme.pageLight ?? "#f4f5fa" : SITE.theme.pageDark, colorScheme: "dark light" };
 
-// Inter for text and Plus Jakarta Sans for headings (owner, 2026-11-03: the old game-styled display
+// Empire design v2 "Ledger" (2026-11-27): the files are Geist (words and headings) and Geist Mono (prices), OFL,
+// fonts/Geist-OFL.txt; the inter / jakarta names stay so SITE.theme.displayFont and themeCss() read unchanged.
+// Before it: Inter for text and Plus Jakarta Sans for headings (owner, 2026-11-03: the old game-styled display
 // fonts were "way too tacky"; every site names Plus Jakarta Sans in SITE.theme.displayFont). Both are
 // served from this site and preloaded (2026-11-19): the Google Fonts stylesheet they replace blocked
 // the first paint for about 2 s on a phone (Lighthouse mobile, live home). "optional" never swaps a
 // face in after the first paint, so text never shifts; the fallback is metric-matched. No AdSense
 // script (owner, 2026-11-18: AdSense is off).
 const inter = localFont({
-  src: "./fonts/Inter-latin.woff2",
+  src: "./fonts/Geist-Variable.woff2",
   weight: "100 900",
   style: "normal",
   display: "optional",
@@ -78,17 +80,26 @@ const inter = localFont({
   adjustFontFallback: "Arial",
 });
 const jakarta = localFont({
-  src: "./fonts/PlusJakartaSans-latin.woff2",
-  weight: "200 800",
+  src: "./fonts/Geist-Variable.woff2",
+  weight: "100 900",
   style: "normal",
   display: "optional",
   variable: "--font-jakarta",
   adjustFontFallback: "Arial",
 });
+const mono = localFont({
+  src: "./fonts/GeistMono-Variable.woff2",
+  weight: "100 900",
+  style: "normal",
+  display: "optional",
+  variable: "--font-mono",
+  preload: false,
+  adjustFontFallback: "Arial",
+});
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${jakarta.variable}`} data-theme={DEFAULT_MODE} data-look={SITE.look?.art} data-festive={CHRISTMAS_FESTIVE_LAYER ? "on" : undefined} suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${jakarta.variable} ${mono.variable}`} data-theme={DEFAULT_MODE} data-look={SITE.look?.art} data-festive={CHRISTMAS_FESTIVE_LAYER ? "on" : undefined} suppressHydrationWarning>
       <head>
         <style dangerouslySetInnerHTML={{ __html: themeCss() }} />
         <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT + SEASON_BOOT_SCRIPT + SEARCH_BOOT_SCRIPT + ADFREE_BOOT_SCRIPT }} />

@@ -1109,3 +1109,57 @@ img[data-img-failed] { visibility: hidden; }
 .btn { border-radius: var(--ds-radius); }
 .chip, .tag { border-radius: var(--ds-radius-sm); }
 /* empire-ds:end */
+
+/* empire-v2:start — "Ledger", the Empire design language v2 (2026-11-27; the project's design-system/README.md).
+   Owner (2026-11-27): rework the sites so they look state of the art and expert-designed, not vibe-coded. v1 (empire-ds,
+   above) took the template tells off; v2 gives every site of this engine a point of view, a price ledger: Geist for words
+   and headings, Geist Mono for every price, near-black neutral surfaces (each site's SITE.theme.inkDark), product photos on
+   one paper plate, mono table heads over hairline rows, the price in ink as the loudest thing on a tile, and nothing that
+   rises in on scroll. Each site keeps its brand colour for what you press and its look's art. Buy buttons keep their fill.
+   Game-agnostic, engine file: CSS only, no word, order, URL, heading or ranking change. */
+
+/* 1. Type: one family, tight display tracking. */
+body { font-feature-settings: "ss01", "cv11"; letter-spacing: -0.006em; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, .font-display, .page-title, .sec-title { letter-spacing: -0.03em; }
+.page-title, .sec-title { font-weight: 700 !important; }
+.tabular-nums, .font-mono { font-family: var(--font-mono), ui-monospace, monospace; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+
+/* 2. Surfaces: 12 / 8 / 6 radii, flat, a firmer edge on hover. */
+.card-surface { border-radius: 12px !important; box-shadow: none !important; }
+.btn { border-radius: 8px !important; }
+.chip { border-radius: 6px !important; }
+
+/* 3. Product photos: one paper plate, inset in the card, the photo multiplied onto it. */
+.card-surface > [class*="aspect-"].bg-ink-850 {
+  background: #f3f2ee !important;
+  margin: 6px 6px 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.card-surface > [class*="aspect-"].bg-ink-850 img { mix-blend-mode: multiply; }
+.group:hover .card-surface > [class*="aspect-"] img, .card-surface.group:hover img { transform: none !important; }
+
+/* 4. The price is the loudest thing on a tile: mono, in ink; the brand colour is kept for what you press. */
+.card-surface .font-bold.text-brand-400 {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 1.05rem;
+  font-weight: 600 !important;
+  letter-spacing: -0.02em;
+  color: rgb(var(--c-fg)) !important;
+}
+.card-surface .font-bold.text-brand-400 > span { font-family: var(--font-sans); letter-spacing: 0; }
+
+/* 5. Price tables: a ledger. Mono uppercase heads, hairline rows with a hover tint. */
+table thead th {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+table tbody tr { transition: background-color 120ms ease; }
+table tbody tr:hover { background: rgb(var(--c-ink-850) / 0.7); }
+
+/* 6. Motion: nothing rises in on scroll; every block is there on first paint. */
+.sd, .sd-stagger > * { animation: none !important; opacity: 1 !important; transform: none !important; }
+/* empire-v2:end */

@@ -88,8 +88,8 @@ export const SITE: SiteConfig = {
     brandLight: "#f0c46a",
     brandDark: "#a87717",
     accent: "#7c5cff",
-    pageDark: "#0a0b1a",
-    inkDark: ["#070815", "#0c0e22", "#11142d", "#171b3a", "#262b55", "#3a4078"],
+    pageDark: "#090a0c", // design v2 (2026-11-27): neutral near-black
+    inkDark: ["#090a0c", "#111215", "#181a1e", "#1f2126", "#2c2e35", "#3e4149"],
     wordmarkGradient: "linear-gradient(180deg, #f6dc9a 0%, #d9a441 55%, #b07d1f 100%)",
     displayFont: "Plus Jakarta Sans",
   },

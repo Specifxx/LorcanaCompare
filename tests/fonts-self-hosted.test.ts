@@ -10,10 +10,10 @@ test("the layout loads no third-party font stylesheet and no AdSense script", ()
   assert.doesNotMatch(layout, /fonts\.googleapis|fonts\.gstatic|googlesyndication|adsbygoogle/);
 });
 
-test("both faces are self-hosted through next/font with display optional", () => {
+test("all three faces (Geist words and headings, Geist Mono prices; design v2, 2026-11-27) are self-hosted through next/font with display optional", () => {
   assert.match(layout, /from "next\/font\/local"/);
-  assert.equal((layout.match(/display: "optional"/g) ?? []).length, 2);
-  for (const f of ["Inter-latin.woff2", "PlusJakartaSans-latin.woff2"]) {
+  assert.equal((layout.match(/display: "optional"/g) ?? []).length, 3);
+  for (const f of ["Geist-Variable.woff2", "GeistMono-Variable.woff2"]) {
     assert.ok(existsSync(new URL(`../src/app/fonts/${f}`, import.meta.url)), f);
   }
 });
