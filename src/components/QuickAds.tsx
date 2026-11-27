@@ -18,7 +18,7 @@ const LIMIT = 6;
 function Row({ brand, accent, all, tiles, tileHref, sub }: { brand: string; accent: string; all: string; tiles: AdTile[]; tileHref: (t: AdTile) => string; sub: string }) {
   return (
     <div className="flex min-w-0 items-stretch gap-2">
-      <a href={all} rel="sponsored nofollow noopener" target="_blank" className="flex w-14 shrink-0 flex-col items-center justify-center gap-1 rounded-md text-center" aria-label={`See all on ${brand}`}>
+      <a href={all} rel="sponsored nofollow noopener" target="_blank" className="flex w-16 shrink-0 flex-col items-center justify-center gap-1 rounded-md text-center" aria-label={`See all on ${brand}`}>
         <span className="text-[13px] font-black leading-none tracking-tight" style={{ color: accent }}>{brand}</span>
         <span className="text-[10px] font-bold text-muted">All →</span>
       </a>
