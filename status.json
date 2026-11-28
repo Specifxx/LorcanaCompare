@@ -1,0 +1,58 @@
+{
+ "v": 1,
+ "site": "www.lorcanacompare.com",
+ "at": "2026-11-28T08:22:12.700Z",
+ "overall": "warn",
+ "checks": [
+  {
+   "name": "Live site",
+   "status": "ok",
+   "detail": "200"
+  },
+  {
+   "name": "Live prices age",
+   "status": "ok",
+   "detail": "live prices 10h old (daily release)"
+  },
+  {
+   "name": "A card page",
+   "status": "ok",
+   "detail": "200"
+  },
+  {
+   "name": "Best Basket shipping",
+   "status": "ok",
+   "detail": "469 of 599 stores measured, 16h old"
+  },
+  {
+   "name": "Daily price import",
+   "status": "ok",
+   "detail": "15.7h old"
+  },
+  {
+   "name": "Store imports",
+   "status": "warn",
+   "detail": "cardhouse: 0 matched; mintcollectables: 0 matched; thecardcave: https://thecardcave.com.au/collections/lorcana/products.json?limit=250&page=1&country=AU: HTTP 401 ; envcollectible: 0 matched; nordiclegends: 0 matched; ashtcg: 0 matched; cardbinder: 0 matched; cardcollector: 0 matched; cardcorner: 0 matched; cartespokemon: 0 matched; derivegeek: 0 matched; dracaugames: 0 matched; dracaugamesx: 0 matched; fantasiacards: 0 matched; gamesalley: 0 matched; gamestimespoleto: 0 matched; glitchless: 0 matched; godofcards: 0 matched; kardsgreifswald: 0 matched; lairos: 0 matched; laliane: 0 matched; lespatioportboutique: 0 matched; lootboxjeux: 0 matched; loufoque: 0 matched; lemantcg: 0 matched; mabasso: 0 matched; manamecha: 0 matched; mytradingcards: 0 matched; primeprotector: store charges USD, but is configured for EU (EUR) — fix its market in src/content/stores.ts; poneglyphcards: 0 matched; ronintcg: 0 matched; tcgotakuyaes: 0 matched; thehouseofgames: 0 matched; superelfcards: 0 matched; tradehunter: 0 matched; vegastore: 0 matched; tradingcardsxxx: 0 matched; vegastorex: 0 matched; zillerstore: 0 matched; bentonville: 0 matched; laytongaming: https://laytongaming.com/collections/lorcana-online/products.json?limit=250&page=1&country=US: HTTP 401 ; redraccoongames: 0 matched; thegamecornergames: 0 matched"
+  },
+  {
+   "name": "eBay budget",
+   "status": "ok",
+   "detail": "1045/1150 calls on 2026-11-27, 616 eligible"
+  },
+  {
+   "name": "Family feed",
+   "status": "ok",
+   "detail": "7 items, 15.5h old; 9 sister feeds (rift, op, dex, mtg, gundam, ygo, cyberpunk, bandai, sealed)"
+  },
+  {
+   "name": "Amazon ASIN finder",
+   "status": "ok",
+   "detail": "AU: ok, 0 ASINs, 16h ago; CA: ok, 0 ASINs, 16h ago; EU: ok, 0 ASINs, 16h ago; UK: ok, 0 ASINs, 16h ago; US: ok, 40 ASINs, 16h ago"
+  },
+  {
+   "name": "Fetch TCG row",
+   "status": "ok",
+   "detail": "the Fetch TCG row is on /card/fru-fru-vip-guest"
+  }
+ ]
+}
